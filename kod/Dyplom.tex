@@ -725,8 +725,8 @@ Listing \thelstlisting: #1\hfill%\hfill%
 \newlength{\tmpfboxrule}
 \setlength{\tmpfboxrule}{\fboxrule}
 \setlength{\fboxsep}{2mm}
-\setlength{\fboxrule}{0mm} 
-%\setlength{\fboxrule}{0.1mm} %% INFO: Jeœli chcemy zobaczyæ ramkê, wystarczy odmarkowaæ tê linijkê
+\setlength{\fboxrule}{0mm}
+%\\setlength{\fboxrule}{0.1mm} %% INFO: Jeœli chcemy zobaczyæ ramkê, wystarczy odmarkowaæ tê linijkê
 \setlength{\unitlength}{1mm}
 \begin{picture}(0,0)
 \put(26,-124){\fbox{
@@ -782,16 +782,16 @@ Specjalnoœæ: & {\bfseries \@specjalnosc}\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Metadane dokumentu 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Szablon pracy dyplomowej in¿ynierskiej/magisterskiej, wersja 0.7}
-\titleShort{Szablon pracy dyplomowej ...}
-\titleEN{Engineering/master thesis template, version 0.7}
-\author{Imiê Nazwisko}
+\title{Aplikacja internetowa do gromadzenia i udostêpniania informacji o technologiach programistycznych}
+\titleShort{Aplikacja internetowa o technologiach programistycznych}
+\titleEN{A web application for gathering and sharing information about software development}
+\author{Kamil Dywan}
 \uczelnia{Politechnika Wroc³awska}
 \wydzial{Wydzia³ Informatyki i Telekomunikacji}
 \kierunek{Informatyka techniczna}
 \specjalnosc{In¿ynieria systemów informatycznych}
-\promotor{tytu³/stopieñ naukowy, Imiê Nazwisko}
-\date{WROC£AW, 2021}
+\promotor{dr in¿, Pawe³ Rogaliñski}
+\date{WROC£AW, 2022}
 
 % Ustawienie odstêpu od góry w nienumerowanych rozdzia³ach oraz wykazach:
 % Spis treœci, Spis tabel, Spis rysunków, Indeks rzeczowy
@@ -830,21 +830,6 @@ Specjalnoœæ: & {\bfseries \@specjalnosc}\\
 \pdfbookmark[0]{Tytu³}{Tytul.1}
 \maketitle
 \clearpage
-% INFO: Strona z licencj¹ CC zdefiniowana poni¿ej dotyczy tylko zredagowanej treœci. 
-%       Z samego szablon mo¿na korzystywaæ bez koniecznoœci cytowania jego autora.
-%       Podczas pisania pracy dyplomowej stronê tê mo¿na usun¹æ (a nawet nale¿y).
-\thispagestyle{empty}
-\mbox{}\vfill
-\noindent\begin{tabular}{@{}ll} Opracowa³: & Tomasz Kubik \texttt{<tomasz.kubik@pwr.edu.pl>}\\
- Data: & grudzieñ 2021 
- \end{tabular}\\[15mm]
-\noindent\includegraphics[width=3cm]{by-nc-sa}\newline
-{\normalfont 
-Tekst zawarty w niniejszym szablonie jest udostêpniany na licencji Creative Commons: \emph{Uznanie autorstwa -- U¿ycie niekomercyjne -- Na tych samych warunkach, 3.0 Polska}, Wroc³aw 2021. \\[2pt]
-Oznacza to, ¿e wszystkie przekazane treœci mo¿na kopiowaæ i  wykorzystywaæ do celów niekomercyjnych, a tak¿e tworzyæ na ich podstawie utwory zale¿ne pod warunkiem podania autora i~nazwy licencjodawcy oraz udzielania na utwory zale¿ne takiej samej licencji. Tekst licencji jest dostêpny pod adresem: \url{http://creativecommons.org/licenses/by-nc-sa/3.0/pl/}.\\[2pt]
-Podczas redakcji pracy dyplomowej stronê tê mo¿na usun¹æ. Licencja dotyczy bowiem zredagowanego opisu, a nie samego latexowego szablonu. Latexowy szablon mo¿na wykorzystywaæ bez wzmiankowania o jego autorze. 
-}
-\clearpage
 %\chapterstyle{noNumbered}
 \include{streszczenie} 
 \pagestyle{outer}
@@ -878,9 +863,6 @@ Podczas redakcji pracy dyplomowej stronê tê mo¿na usun¹æ. Licencja dotyczy bowie
 \chapterstyle{default}
 \include{rozdzial01}
 \include{rozdzial02}
-\include{rozdzial03}
-\include{rozdzial04}
-\include{rozdzial05}
 \include{rozdzial06}
 
 %\bibliographystyle{plalpha}
