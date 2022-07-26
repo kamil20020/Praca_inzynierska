@@ -244,7 +244,7 @@ TSWLatexianTemp*
 
 # generated if using elsarticle.cls
 *.spl
-Dyplom.pdf
+#Dyplom.pdf
 Dyplom.tcp
 
 
