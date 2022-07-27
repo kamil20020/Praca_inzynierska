@@ -136,7 +136,75 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 
 \chapter{Wymagania funkcjonalne}
 
+\begin{itemize}
+	\item System musi zapewniæ uwierzytelnianie oraz autoryzacjê w ramach 4 ról u¿ytkownika:
+		\begin{itemize}
+			\item Niezalogowany u¿ytkownik,
+			\item Zwyk³y u¿ytkownik,
+			\item Recenzent,
+			\item Administrator.
+		\end{itemize}
+	\item System musi zapewniæ rejestracjê u¿ytkownika
+		\begin{itemize}
+			\item Bêdzie mo¿na dokonaæ rejestracji konta zwyk³ego u¿ytkownika, recenzenta oraz administratora,
+			\item Rejestracja konta zwyk³ego u¿ytkownika bêdzie mog³a byæ wykonana przez u¿ytkownika samodzielnie, a w przypadku kont recenzenta oraz administratora, 
+						konta te bêd¹ mog³y byæ utworzone jedynie przez administratora.
+		\end{itemize}
+	\item System musi zapewniæ logowanie u¿ytkownika
+		\begin{itemize}
+			\item Logowanie bêdzie dostêpne dla zwyk³ego u¿ytkownika, recenzenta oraz administratora,
+			\item U¿ytkownik powinien w tym samym momencie móc korzystaæ jedynie z uprawnieñ w ramach jednej posiadanej i wybranej przez niego roli,
+			\item Podczas logowania i po logowaniu powinna byæ dostêpna mo¿liwoœæ wybrania jednej z posiadanych przez u¿ytkownika ról.
+		\end{itemize}
+	\item Wpisy
+		\begin{itemize}
+			\item System musi zapewniæ ka¿demu u¿ytkownikowi przegl¹danie wpisów,
+			\item System musi zapewniæ zwyk³emu u¿ytkownikowi dodawanie wpisów,
+			\item System musi zapewniæ zwyk³emu u¿ytkownikowi oraz administratorowi edytowanie wpisów,
+			\item System musi zapewniæ zwyk³emu u¿ytkownikowi oraz administratorowi usuwanie wpisów,
+			\item System musi zapewniæ recenzentowi weryfikacjê i akceptacjê utworzonych i edytowanych wpisów,
+			\item System musi zapewniæ recenzentowi wycofywanie wpisów,
+			\item System musi zapewniæ zwyk³emu u¿ytkownikowi wysy³anie odwo³ania w sprawie nie zaakceptowanego utworzonego lub edytowanego przez siebie wpisu,
+			\item System musi zapewniæ recenzentowi wysy³anie odpowiedzi na odwo³anie u¿ytkownika w sprawie nie zaakceptowanego wpisu (utworzonego lub
+						edytowanego.
+		\end{itemize}
+	\item Opinie
+		\begin{itemize}
+			\item System musi zapewniæ ka¿demu u¿ytkownikowi przegl¹danie opinii o wpisach i technologiach,
+			\item System musi zapewniæ zwyk³emu u¿ytkownikowi dodawanie i edytowanie opinii o wpisach i technologiach,
+			\item System musi zapewniæ zwyk³emu u¿ytkownikowi oraz administratorowi usuwanie opinii o wpisach i technologiach.
+		\end{itemize}
+	\item System musi zapewniæ administratorowi przypisywanie i usuwanie u¿ytkownikom ról,
+	\item System musi zapewniæ ka¿demu u¿ytkownikowi kontakt tekstowy z administracj¹,
+	\item System musi zapewniæ administratorowi kontakt tekstowy z ka¿dym u¿ytkownikiem.
+\end{itemize}
+
 \chapter{Wymagania niefunkcjonalne}
+
+\begin{itemize}
+	\item Wymagania dotycz¹ce bezpieczeñstwa systemu
+		\begin{itemize}
+			\item U¿ytkownik o wybranej i posiadanej przez siebie roli bêdzie mia³ dostêp do systemu jedynie w zakresie uprawnieñ przypisanych do tej roli,
+			\item Dostêp do systemu w ramach kont zwyk³ego u¿ytkownika, recenzenta oraz administratora jest mo¿liwy jedynie po zalogowaniu siê na konto.
+		\end{itemize}
+	\item Wymagania dotycz¹ce liczby zasobów i obci¹¿enia systemu
+		\begin{itemize}
+			\item Liczba u¿ytkowników,
+			\item Liczba wpisów,
+			\item Liczba zalogowanych u¿ytkowników,
+			\item
+		\end{itemize}
+	\item Wykorzystywane technologie i narzêdzia
+		\begin{itemize}
+			\item Backend - \texttt{Spring Boot},
+			\item Frontend - \texttt{React} (g³ówny framework), \texttt{Typescript} (statyczne typowanie), \texttt{MUI} (biblioteka komponentów),
+			\item Baza danych 1 (g³ówna baza danych) - \texttt{PostgreSQL},
+			\item Baza danych 2 (baza danych przechowuj¹ca zawartoœci wpisów) - \texttt{MongoDB},
+			\item Warstwa bezpieczeñstwa (serwer uwierzytelniania i autoryzacji) - \texttt{Keycloak},
+			\item Dokumentacja - \texttt{LaTeX}.
+		\end{itemize}
+\end{itemize}
+
 
 \chapter{Diagram przypadków u¿ycia}
 
