@@ -93,7 +93,7 @@ Realizowany system jest serwisem webowym, który w du¿ym uogólnieniu mo¿na opisaæ
 
 Szczegó³ow¹ architekturê systemu dobrze opisuje rysunek~\ref{fig:architektura-systemu}
 
-\begin{figure}[b]
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=.8\linewidth]{rys02/architektura-systemu}
 	\caption{Architektura systemu}
@@ -146,30 +146,66 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 		\end{itemize}
 	\item System musi zapewniæ rejestracjê u¿ytkownika
 		\begin{itemize}
+			\item Podczas rejestracji u¿ytkownik bêdzie podawa³ nastêpuj¹ce informacje:
+				\begin{itemize}
+					\item Nazwa u¿ytkownika,
+					\item Imiê,
+					\item Nazwisko,
+					\item Adres e-mail,
+					\item (Opcjonalnie) Awatar,
+					\item Has³o.
+				\end{itemize}
 			\item Bêdzie mo¿na dokonaæ rejestracji konta zwyk³ego u¿ytkownika, recenzenta oraz administratora,
 			\item Rejestracja konta zwyk³ego u¿ytkownika bêdzie mog³a byæ wykonana przez u¿ytkownika samodzielnie, a w przypadku kont recenzenta oraz administratora, 
 						konta te bêd¹ mog³y byæ utworzone jedynie przez administratora.
 		\end{itemize}
 	\item System musi zapewniæ logowanie u¿ytkownika
 		\begin{itemize}
+			\item Podczas logowania u¿ytkownik bêdzie wpisywa³ login lub e-mail oraz has³o,
 			\item Logowanie bêdzie dostêpne dla zwyk³ego u¿ytkownika, recenzenta oraz administratora,
 			\item U¿ytkownik powinien w tym samym momencie móc korzystaæ jedynie z uprawnieñ w ramach jednej posiadanej i wybranej przez niego roli,
 			\item Podczas logowania i po logowaniu powinna byæ dostêpna mo¿liwoœæ wybrania jednej z posiadanych przez u¿ytkownika ról.
 		\end{itemize}
+	\item System musi zapewniæ zwyk³emu u¿ytkownikowi, recenzentowi oraz administratorowi edycjê wszystkich swoich danych, które poda³ podczas rejestracji,
 	\item Wpisy
 		\begin{itemize}
-			\item System musi zapewniæ ka¿demu u¿ytkownikowi przegl¹danie wpisów,
+			\item Wpisy bêd¹ siê sk³adaæ z nastêpuj¹cych elementów:
+				\begin{itemize}
+					\item Tytu³ wpisu,
+					\item Autor wpisu,
+					\item Data utworzenia wpisu,
+					\item Data modyfikacji wpisu,
+					\item Kategoria technologii której dotyczy wpis,
+					\item Zastosowanie technologii której dotyczy wpis,
+					\item Autor lub autorzy technologii której dotyczy wpis,
+					\item Ikona przedstawiaj¹ca technologiê której dotyczy wpis,
+					\item Czêœæ g³ówna wpisu,
+					\item Zak³adka z opiniami o danym wpisie i technologii której wpis dotyczy.
+				\end{itemize}
+			\item System musi zapewniæ ka¿demu u¿ytkownikowi przegl¹danie wpisów, przy czym wyszukiwanie wpisów bêdzie mo¿liwe poprzez nastêpuj¹cych kryteriach:
+				\begin{itemize}
+					\item Tytu³ wpisu,
+					\item Popularnoœæ wpisu (iloœæ reakcji przy wpisach),
+					\item Autor wpisu,
+					\item Technologia,
+					\item Kategoria technologii,
+					\item Zastosowanie technologii,
+					\item Data powstania wpisu,
+					\item Data modyfikacji wpisu,
+					\item Ocena wpisu.
+				\end{itemize}
 			\item System musi zapewniæ zwyk³emu u¿ytkownikowi dodawanie wpisów,
 			\item System musi zapewniæ zwyk³emu u¿ytkownikowi oraz administratorowi edytowanie wpisów,
 			\item System musi zapewniæ zwyk³emu u¿ytkownikowi oraz administratorowi usuwanie wpisów,
 			\item System musi zapewniæ recenzentowi weryfikacjê i akceptacjê utworzonych i edytowanych wpisów,
-			\item System musi zapewniæ recenzentowi wycofywanie wpisów,
+			\item System musi zapewniæ recenzentowi oraz administratorowi wycofywanie wpisów,
 			\item System musi zapewniæ zwyk³emu u¿ytkownikowi wysy³anie odwo³ania w sprawie nie zaakceptowanego utworzonego lub edytowanego przez siebie wpisu,
 			\item System musi zapewniæ recenzentowi wysy³anie odpowiedzi na odwo³anie u¿ytkownika w sprawie nie zaakceptowanego wpisu (utworzonego lub
 						edytowanego.
 		\end{itemize}
 	\item Opinie
 		\begin{itemize}
+			\item Opinie odnoœnie wpisów oraz technologii bêd¹ siê sk³adaæ z oceny w postaci wartoœci od 1 do 5 oraz tekstowego komentarza,
 			\item System musi zapewniæ ka¿demu u¿ytkownikowi przegl¹danie opinii o wpisach i technologiach,
 			\item System musi zapewniæ zwyk³emu u¿ytkownikowi dodawanie i edytowanie opinii o wpisach i technologiach,
 			\item System musi zapewniæ zwyk³emu u¿ytkownikowi oraz administratorowi usuwanie opinii o wpisach i technologiach.
@@ -184,15 +220,19 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 \begin{itemize}
 	\item Wymagania dotycz¹ce bezpieczeñstwa systemu
 		\begin{itemize}
+			\item Konta recenzenta oraz administratora mog¹ byæ utworzonone jedynie przez administratora,
 			\item U¿ytkownik o wybranej i posiadanej przez siebie roli bêdzie mia³ dostêp do systemu jedynie w zakresie uprawnieñ przypisanych do tej roli,
-			\item Dostêp do systemu w ramach kont zwyk³ego u¿ytkownika, recenzenta oraz administratora jest mo¿liwy jedynie po zalogowaniu siê na konto.
+			\item Dostêp do systemu w ramach kont zwyk³ego u¿ytkownika, recenzenta oraz administratora jest mo¿liwy jedynie po zalogowaniu siê na konto,
+			\item Zwyk³y u¿ytkownik mo¿e edytowaæ i usuwaæ dane jedynie te, które zosta³y przez niego utworzone.
 		\end{itemize}
 	\item Wymagania dotycz¹ce liczby zasobów i obci¹¿enia systemu
 		\begin{itemize}
-			\item Liczba u¿ytkowników,
-			\item Liczba wpisów,
-			\item Liczba zalogowanych u¿ytkowników,
-			\item
+			\item Ca³kowita liczba u¿ytkowników - 200000,
+			\item Maksymalna liczba zalogowanych u¿ytkowników w jednym momencie - 50000,
+			\item Liczba wpisów - 600000,
+			\item Œredni rozmiar wpisu - 20 KB,
+			\item Œrednia liczba zapytañ na sekundê - 1000,
+			\item 
 		\end{itemize}
 	\item Wykorzystywane technologie i narzêdzia
 		\begin{itemize}
@@ -207,5 +247,38 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 
 
 \chapter{Diagram przypadków u¿ycia}
+
+Ca³y diagram przypadków u¿ycia systemu znajduje siê na rysunku~\ref{fig:diagram-przypadkow-uzycia}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia}
+	\caption{Ca³y diagram przypadkow uzycia}
+	\label{fig:diagram-przypadkow-uzycia}
+\end{figure}
+
+Z powodu dosyæ du¿ej z³o¿onoœci diagramu na rysunku~\ref{fig:diagram-przypadkow-uzycia}, dobrym pomys³em jest podzielenie tego diagramu na kilka mniejszych. Na rysunku~\ref{fig:diagram-przypadkow-uzycia-o-wpisach} jest przedstawiony diagram dotycz¹cy wpisów, na rysunku~\ref{fig:diagram-przypadkow-uzycia-o-wpisach} widnieje diagram dla opinii o wpisach i technologiach, a na rysunku~\ref{fig:ogolny-diagram-przypadkow-uzycia} jest diagram zawieraj¹cy resztê funkcjonalnoœci.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-o-wpisach}
+	\caption{Diagram przypadkow uzycia o wpisów}
+	\label{fig:diagram-przypadkow-uzycia-o-wpisach}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-o-opiniach}
+	\caption{Diagram przypadków u¿ycia dotycz¹cy opinii o wpisach i technologiach}
+	\label{fig:diagram-przypadkow-uzycia-o-opiniach}
+\end{figure}
+
+\begin{figure}[b]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/ogolny-diagram-przypadkow-uzycia}
+	\caption{Diagram przypadków u¿ycia zawieraj¹cy resztê funkcjonalnoœci}
+	\label{fig:ogolny-diagram-przypadkow-uzycia}
+\end{figure}
+
 
 
