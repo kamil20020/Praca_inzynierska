@@ -1,90 +1,3 @@
-\chapter{Rodzina/Podzia³ technologii}
-\section{Podzia³ technologii ze wzglêdu na ich architekturê}
-\begin{itemize}
-	\item Technologie informatyczne
-		\begin{itemize}
-			\item Jêzyk
-				\begin{itemize}
-					\item Programowania (np. Java, C++)
-						\begin{itemize}
-							\item Biblioteka (np. SFMl, SDL, OpenGL)
-							\item Framework (np. Spring, Spring Boot, React, Angular)
-						\end{itemize}
-					\item Znaczników (np. TeX, HTML, XML)
-					\item Zapytañ (bazy danych – np. SQL, GraphQL)
-						\begin{itemize}
-							\item Relacyjne (np. MySQL, Oracle Database, SQLLite)
-							\item Obiektowo-relacyjne (PostgreSQL)
-							\item NoSQL (MongoDB, Cassandra)
-						\end{itemize}
-				\end{itemize}
-		\end{itemize}
-	\item Œrodowisko uruchomieniowe
-		\begin{itemize}
-			\item System operacyjny (np. Windows, Linux)
-			\item Wysokopoziomowe (JVM, .NET, node.js)
-		\end{itemize}
-	\item Narzêdzia (oprogramowanie)
-		\begin{itemize}
-			\item System kontroli wersji (np. git)
-				\begin{itemize}
-					\item Serwisy hostuj¹ce gita (GitLab GitHub)
-				\end{itemize}
-			\item CI/CD (np. Jenkins, GitlLab CI)
-			\item Konteneryzacja (np. docker)
-			\item Orkiestracja (system do zarz¹dzania, organizacji i planowania zasobów systemu – np. Docker Compose, Kubernetes)
-		\end{itemize}
-\end{itemize}
-
-\section{Podzia³ technologii ze wzglêdu na ich zastosowania}
-\begin{itemize}
-	\item Technologiczne
-		\begin{itemize}
-			\item Architektura aplikacji
-				\begin{itemize}
-					\item Rozproszona
-					\item Scentralizowana
-				\end{itemize}
-			\item Warstwa/Rola w systemie
-				\begin{itemize}
-					\item Frontend
-					\item Backend
-					\item Baza danych
-				\end{itemize}
-			\item Typ aplikacji
-				\begin{itemize}
-					\item Webowa
-					\item Mobilna
-					\item Desktopowa
-				\end{itemize}
-		\end{itemize}
-	\item Poziom abstrakcji
-		\begin{itemize}
-			\item Wysoki
-			\item Niski
-		\end{itemize}
-	\item Dziedzina nauki
-		\begin{itemize}
-			\item Sztuczna inteligencja
-			\item Informatyka
-			\item Matematyka
-			\item Fizyka
-			\item Chemia
-			\item Biologia
-		\end{itemize}
-	\item Grupy odbiorców
-		\begin{itemize}
-			\item Naukowcy
-			\item Edukacja
-			\item Rz¹d
-			\item Administracja
-			\item Wojsko
-			\item Motoryzacja
-			\item Przemys³
-			\item Korporacja
-		\end{itemize}
-\end{itemize}
-
 \chapter{Architektura systemu}
 
 Realizowany system jest serwisem webowym, który w du¿ym uogólnieniu mo¿na opisaæ jako system typu klient-serwer. Klient (\texttt{Klient}) wysy³a ¿¹danie do serwera 
@@ -102,7 +15,7 @@ Szczegó³ow¹ architekturê systemu dobrze opisuje rysunek~\ref{fig:architektura-sy
 
 
 \section{Baza danych}
-Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. \texttt{Baza danych 1} jest g³ówn¹ baz¹ danych w systemie, a \texttt{Baza danych 2} jest dodatkow¹ baz¹ danych, która przechowuje informacje o zawartoœciach wpisów.
+Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. \texttt{Baza danych 1} jest g³ówn¹ baz¹ danych w systemie, a \texttt{Baza danych 2} jest dodatkow¹ baz¹ danych, która przechowuje informacje o zawartoœciach artyku³ów.
 
 \section{Aplikacja serwerowa - Backend}
 Backend jest odpowiedzialny za przyjmowanie ¿¹dañ od klienta, odpowiednie przetwarzanie tych ¿¹dañ, wykonywanie pewnych operacji na danych przechowywanych w bazie danych na podstawie otrzymanych danych od klienta i przekazywanie klientowi adekwatnej odpowiedzi. Warstwa ta jest w œcis³ym powi¹zaniu z warstw¹ bazy danych.
@@ -118,7 +31,7 @@ Klient mo¿e uzyskaæ token potrzebny do wysy³ania zapytañ do serwera aplikacji po
 Zastosowany serwer bezpieczeñstwa umo¿liwia równie¿ autoryzacjê u¿ytkowników w oparciu o ich role.
 
 \section{REST}
-Komunikacja w systemie miêdzy frontendem i backendem, frontendem i serwerem bezpieczeñstwa oraz backendem i serwerem bezpieczeñstwa odbywa siê za pomoc¹ \texttt{REST}. \texttt{REST} jest to sposób i format w jaki komunikuje siê klient z serwerem. Serwer udostêpnia klientowi punkty koñcowe (end-pointy), do których klient mo¿e wys³aæ ¿¹dania http przesy³aj¹c przy tym jakieœ dane np. tytu³ wyszukiwanego wpisu. W skrócie komunikacja REST odznacza siê nastêpuj¹cymi cechami:
+Komunikacja w systemie miêdzy frontendem i backendem, frontendem i serwerem bezpieczeñstwa oraz backendem i serwerem bezpieczeñstwa odbywa siê za pomoc¹ \texttt{REST}. \texttt{REST} jest to sposób i format w jaki komunikuje siê klient z serwerem. Serwer udostêpnia klientowi punkty koñcowe (end-pointy), do których klient mo¿e wys³aæ ¿¹dania http przesy³aj¹c przy tym jakieœ dane np. tytu³ wyszukiwanego artyku³u. W skrócie komunikacja REST odznacza siê nastêpuj¹cymi cechami:
 \begin{itemize}
 	\item bezstanowoœæ,
 	\item architektura klient-serwer,
@@ -136,83 +49,254 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 
 \chapter{Wymagania funkcjonalne}
 
+\section{Definicje}
 \begin{itemize}
-	\item System musi zapewniæ uwierzytelnianie oraz autoryzacjê w ramach 4 ról u¿ytkownika:
-		\begin{itemize}
-			\item Niezalogowany u¿ytkownik,
-			\item Zwyk³y u¿ytkownik,
-			\item Recenzent,
-			\item Administrator.
-		\end{itemize}
-	\item System musi zapewniæ rejestracjê u¿ytkownika
-		\begin{itemize}
-			\item Podczas rejestracji u¿ytkownik bêdzie podawa³ nastêpuj¹ce informacje:
+	\item Technologie - w tym przypadku s¹ one rozpatrywane jako technologie i narzêdzia wykorzystywane przez informatyków, a przede wszystkim 
+				przez programistów,
+	\item Rodzina technologii - podzia³ technologii na kategorie w postaci hierarchicznego drzewa. Mo¿na wyró¿niæ dwie wersje tego drzewa:
+		\begin{enumerate}
+			\item Podzia³ technologii ze wzglêdu na ich architekturê:
 				\begin{itemize}
-					\item Nazwa u¿ytkownika,
-					\item Imiê,
-					\item Nazwisko,
-					\item Adres e-mail,
-					\item (Opcjonalnie) Awatar,
-					\item Has³o.
+					\item Technologie informatyczne
+						\begin{itemize}
+							\item Jêzyk
+								\begin{itemize}
+									\item Programowania (np. Java, C++)
+										\begin{itemize}
+											\item Biblioteka (np. SFMl, SDL, OpenGL)
+											\item Framework (np. Spring, Spring Boot, React, Angular)
+										\end{itemize}
+									\item Znaczników (np. TeX, HTML, XML)
+									\item Zapytañ (bazy danych – np. SQL, GraphQL)
+										\begin{itemize}
+											\item Relacyjne (np. MySQL, Oracle Database, SQLLite)
+											\item Obiektowo-relacyjne (PostgreSQL)
+											\item NoSQL (MongoDB, Cassandra)
+										\end{itemize}
+								\end{itemize}
+						\end{itemize}
+					\item Œrodowisko uruchomieniowe
+						\begin{itemize}
+							\item System operacyjny (np. Windows, Linux)
+							\item Wysokopoziomowe (JVM, .NET, node.js)
+						\end{itemize}
+					\item Narzêdzia (oprogramowanie)
+						\begin{itemize}
+							\item System kontroli wersji (np. git)
+								\begin{itemize}
+									\item Serwisy hostuj¹ce gita (GitLab GitHub)
+								\end{itemize}
+							\item CI/CD (np. Jenkins, GitlLab CI)
+							\item Konteneryzacja (np. docker)
+							\item Orkiestracja (system do zarz¹dzania, organizacji i planowania zasobów systemu – np. Docker Compose, Kubernetes)
+						\end{itemize}
 				\end{itemize}
-			\item Bêdzie mo¿na dokonaæ rejestracji konta zwyk³ego u¿ytkownika, recenzenta oraz administratora,
-			\item Rejestracja konta zwyk³ego u¿ytkownika bêdzie mog³a byæ wykonana przez u¿ytkownika samodzielnie, a w przypadku kont recenzenta oraz administratora, 
-						konta te bêd¹ mog³y byæ utworzone jedynie przez administratora.
-		\end{itemize}
-	\item System musi zapewniæ logowanie u¿ytkownika
-		\begin{itemize}
-			\item Podczas logowania u¿ytkownik bêdzie wpisywa³ login lub e-mail oraz has³o,
-			\item Logowanie bêdzie dostêpne dla zwyk³ego u¿ytkownika, recenzenta oraz administratora,
-			\item U¿ytkownik powinien w tym samym momencie móc korzystaæ jedynie z uprawnieñ w ramach jednej posiadanej i wybranej przez niego roli,
-			\item Podczas logowania i po logowaniu powinna byæ dostêpna mo¿liwoœæ wybrania jednej z posiadanych przez u¿ytkownika ról.
-		\end{itemize}
-	\item System musi zapewniæ zwyk³emu u¿ytkownikowi, recenzentowi oraz administratorowi edycjê wszystkich swoich danych, które poda³ podczas rejestracji,
-	\item Wpisy
-		\begin{itemize}
-			\item Wpisy bêd¹ siê sk³adaæ z nastêpuj¹cych elementów:
+				\item Inne (w przypadku, gdy w bazie danych nie odnaleziono danej kategorii technologii ze wzglêdu na jej architekturê)
+			\item Podzia³ technologii ze wzglêdu na ich zastosowania:
 				\begin{itemize}
-					\item Tytu³ wpisu,
-					\item Autor wpisu,
-					\item Data utworzenia wpisu,
-					\item Data modyfikacji wpisu,
-					\item Kategoria technologii której dotyczy wpis,
-					\item Zastosowanie technologii której dotyczy wpis,
-					\item Autor lub autorzy technologii której dotyczy wpis,
-					\item Ikona przedstawiaj¹ca technologiê której dotyczy wpis,
-					\item Czêœæ g³ówna wpisu,
-					\item Zak³adka z opiniami o danym wpisie i technologii której wpis dotyczy.
+					\item Technologiczne
+						\begin{itemize}
+							\item Architektura aplikacji
+								\begin{itemize}
+									\item Rozproszona
+									\item Scentralizowana
+								\end{itemize}
+							\item Warstwa/Rola w systemie
+								\begin{itemize}
+									\item Frontend
+									\item Backend
+									\item Baza danych
+								\end{itemize}
+							\item Typ aplikacji
+								\begin{itemize}
+									\item Webowa
+									\item Mobilna
+									\item Desktopowa
+								\end{itemize}
+						\end{itemize}
+					\item Poziom abstrakcji
+						\begin{itemize}
+							\item Wysoki
+							\item Niski
+						\end{itemize}
+					\item Dziedzina nauki
+						\begin{itemize}
+							\item Sztuczna inteligencja
+							\item Informatyka
+							\item Matematyka
+							\item Fizyka
+							\item Chemia
+							\item Biologia
+						\end{itemize}
+					\item Grupy odbiorców
+						\begin{itemize}
+							\item Naukowcy
+							\item Edukacja
+							\item Rz¹d
+							\item Administracja
+							\item Wojsko
+							\item Motoryzacja
+							\item Przemys³
+							\item Korporacja
+						\end{itemize}
 				\end{itemize}
-			\item System musi zapewniæ ka¿demu u¿ytkownikowi przegl¹danie wpisów, przy czym wyszukiwanie wpisów bêdzie mo¿liwe poprzez nastêpuj¹cych kryteriach:
-				\begin{itemize}
-					\item Tytu³ wpisu,
-					\item Popularnoœæ wpisu (iloœæ reakcji przy wpisach),
-					\item Autor wpisu,
-					\item Technologia,
-					\item Kategoria technologii,
-					\item Zastosowanie technologii,
-					\item Data powstania wpisu,
-					\item Data modyfikacji wpisu,
-					\item Ocena wpisu.
-				\end{itemize}
-			\item System musi zapewniæ zwyk³emu u¿ytkownikowi dodawanie wpisów,
-			\item System musi zapewniæ zwyk³emu u¿ytkownikowi oraz administratorowi edytowanie wpisów,
-			\item System musi zapewniæ zwyk³emu u¿ytkownikowi oraz administratorowi usuwanie wpisów,
-			\item System musi zapewniæ recenzentowi weryfikacjê i akceptacjê utworzonych i edytowanych wpisów,
-			\item System musi zapewniæ recenzentowi oraz administratorowi wycofywanie wpisów,
-			\item System musi zapewniæ zwyk³emu u¿ytkownikowi wysy³anie odwo³ania w sprawie nie zaakceptowanego utworzonego lub edytowanego przez siebie wpisu,
-			\item System musi zapewniæ recenzentowi wysy³anie odpowiedzi na odwo³anie u¿ytkownika w sprawie nie zaakceptowanego wpisu (utworzonego lub
-						edytowanego.
-		\end{itemize}
-	\item Opinie
+		\end{enumerate}
+	\item Artyku³ - informacja o danej technologii stworzona przez zwyk³ego u¿ytkownika. 
+		Artyku³ bêdzie opisywany nastêpuj¹cymi atrybutami:
 		\begin{itemize}
-			\item Opinie odnoœnie wpisów oraz technologii bêd¹ siê sk³adaæ z oceny w postaci wartoœci od 1 do 5 oraz tekstowego komentarza,
-			\item System musi zapewniæ ka¿demu u¿ytkownikowi przegl¹danie opinii o wpisach i technologiach,
-			\item System musi zapewniæ zwyk³emu u¿ytkownikowi dodawanie i edytowanie opinii o wpisach i technologiach,
-			\item System musi zapewniæ zwyk³emu u¿ytkownikowi oraz administratorowi usuwanie opinii o wpisach i technologiach.
+			\item Tytu³ artyku³u,
+			\item Autor artyku³u,
+			\item Data utworzenia artyku³u,
+			\item Data modyfikacji artyku³u,
+			\item Kategoria technologii której dotyczy artyku³,
+			\item Zastosowanie technologii której dotyczy artyku³,
+			\item Autor lub autorzy technologii której dotyczy artyku³,
+			\item Ikona przedstawiaj¹ca technologiê której dotyczy artyku³,
+			\item Czêœæ g³ówna artyku³u,
+			\item Opinie o danym artykule oraz opinie o technologii której artyku³ dotyczy.
 		\end{itemize}
-	\item System musi zapewniæ administratorowi przypisywanie i usuwanie u¿ytkownikom ról,
-	\item System musi zapewniæ ka¿demu u¿ytkownikowi kontakt tekstowy z administracj¹,
-	\item System musi zapewniæ administratorowi kontakt tekstowy z ka¿dym u¿ytkownikiem.
+	\item Rola - grupa, do której przynale¿noœæ gwarantuje u¿ytkownikowi uprawnienia w ramach tej grupy. Bêdzie mo¿na wyró¿niæ w systemie nastêpuj¹ce role:
+		\begin{itemize}
+			\item Niezalogowany u¿ytkownik - przede wszystkim mo¿e przegl¹daæ artyku³y,
+			\item Zwyk³y u¿ytkownik - g³ównie przegl¹da i tworzy artyku³y oraz wystawia opinie o danych artyku³ach i technologiach,
+			\item Recenzent (ekspert od technologii) - jego g³ównymi zadaniami s¹ weryfikacja artyku³ów przed ich opublikowaniem w serwisie oraz zarz¹dzanie 	
+						rodzin¹ technologii,
+			\item Administrator (utrzymuje porz¹dek w serwisie) - przede wszystkim odpowiada za przydzielanie ról u¿ytkownikom i utrzymywanie porz¹dku w 
+						serwisie poprzez usuwanie niew³aœciwych treœci (np. wirusy lub spam).
+		\end{itemize}
+	\item Komentarz - tekstowa informacja zwrotna u¿ytkownika o danym artykule lub technologii.
+	\item Ocena technologii lub artyku³u - ocena wystawiona przez u¿ytkownika na temat technologii lub artyku³u w postaci gwiazdek bêd¹ca wartoœci¹ od 1 
+				do 5, przy czym 1 oznacza ocenê negatywn¹, a 5 ocenê pozytywn¹.
+	\item Opinia - oceniaj¹ca informacja zwrotna u¿ytkownika na temat danego artyku³u lub technologii zawieraj¹ca tekstowy komentarz oraz ocenê 
+				technologii lub artyku³u
+	\item Ocena opinii - ocena przyjmuj¹ca dwie wartoœci: ³apka w górê (ocena pozytywna) i ³apka w dó³ (ocena negatywna) wystawiana przez u¿ytkownika 
+				dotycz¹ca opinii o artykule lub opinii o technologii
+\end{itemize}
+				
+\section{Wymagania funkcjonalne poszczególnych ról u¿ytkowników}
+	\begin{itemize}
+		\item Niezalogowany u¿ytkownik
+			\begin{itemize}
+				\item System musi zapewniæ rejestracjê u¿ytkownika
+					\begin{itemize}
+						\item Podczas rejestracji u¿ytkownik bêdzie podawa³ nastêpuj¹ce informacje:
+							\begin{itemize}
+								\item Nazwa u¿ytkownika,
+								\item Imiê,
+								\item Nazwisko,
+								\item Adres e-mail,
+								\item (Opcjonalnie) Awatar,
+								\item Has³o.
+							\end{itemize}
+						\item Mo¿liwa jest rejestracja jedynie na konto zwyk³ego u¿ytkownika, a aby uzyskaæ uprawnienia recenzenta lub administratora, nale¿y 
+								  w tym celu skontaktowaæ siê z administratorem, który bêdzie w stanie nadaæ tak¹ rolê,
+					\end{itemize}
+				\item System musi zapewniæ logowanie u¿ytkownika
+					\begin{itemize}
+						\item Podczas logowania u¿ytkownik bêdzie wpisywa³ login lub e-mail oraz has³o,
+						\item U¿ytkownik bêdzie móg³ w tym samym momencie korzystaæ jedynie z uprawnieñ w ramach jednej posiadanej i wybranej przez niego roli,
+						\item Podczas logowania i po logowaniu powinna byæ dostêpna mo¿liwoœæ wybrania jednej z posiadanych przez u¿ytkownika ról.
+					\end{itemize}
+				\item System musi zapewniæ przegl¹danie artyku³ów, przy czym wyszukiwanie artyku³ów bêdzie mo¿liwe po nastêpuj¹cych kryteriach:
+					\begin{itemize}
+						\item Tytu³ artyku³u,
+						\item Popularnoœæ artyku³u (liczba opinii dotycz¹ca danego artyku³u),
+						\item Autor artyku³u,
+						\item Technologia,
+						\item Kategoria technologii,
+						\item Zastosowanie technologii,
+						\item Data powstania artyku³u,
+						\item Data modyfikacji artyku³u,
+						\item Œrednia ocen artyku³u.
+					\end{itemize}
+				\item System musi zapewniæ przegl¹danie komentarzy o artyku³ach,
+				\item System musi zapewniæ przegl¹danie opinii o artyku³ach i opinii o technologiach,
+				\item System musi zapewniæ kontakt tekstowy z administracj¹,
+			\end{itemize}
+		\item Zwyk³y u¿ytkownik
+			\begin{itemize}
+				\item System musi zapewniæ u¿ytkownikowi edycjê swoich danych,
+				\item System musi zapewniæ wylogowanie u¿ytkownika,
+				\item System musi zapewniæ przegl¹danie artyku³ów, przy czym ich wyszukiwanie bêdzie mo¿liwe po nastêpuj¹cych kryteriach:
+					\begin{itemize}
+						\item Tytu³ artyku³u,
+						\item Popularnoœæ artyku³u (liczba opinii dotycz¹ca danego artyku³u),
+						\item Autor artyku³u,
+						\item Technologia,
+						\item Kategoria technologii,
+						\item Zastosowanie technologii,
+						\item Data powstania artyku³u,
+						\item Data modyfikacji artyku³u,
+						\item Œrednia ocen artyku³u.
+					\end{itemize}
+				\item System musi zapewniæ dodawanie artyku³ów, przy czym aby artyku³ zosta³ opublikowany w serwisie, to musi ten artyku³ przejœæ pozytywnie 	
+							weryfikacjê przeprowadzan¹ przez recenzentów,
+				\item System musi zapewniæ u¿ytkownikowi edytowanie artyku³ów, przy czym aby zmieniony artyku³ zosta³ opublikowany w serwisie, to musi ten 
+							artyku³ przejœæ pozytywnie weryfikacjê przeprowadzan¹ przez recenzentów,
+				\item System musi zapewniæ u¿ytkownikowi usuwanie w³asnych artyku³ów,
+				\item System musi zapewniæ u¿ytkownikowi wys³anie odwo³ania w sprawie nie zaakceptowanego utworzonego lub edytowanego przez siebie artyku³u, 
+							przy czym u¿ytkownik mo¿e wys³aæ tylko jedno odwo³anie w przypadku danej iteracji weryfikacji artyku³u,
+				\item System musi zapewniæ przegl¹danie i dodawanie komentarzy o danym artykule,
+				\item System musi zapewniæ u¿ytkownikowi edytowanie i usuwanie w³asnych komentarzy o danym artykule,
+				\item System musi zapewniæ przegl¹danie opinii o artyku³ach i opinii o technologiach,
+				\item System musi zapewniæ dodawanie opinii o artyku³ach, których to artyku³ów u¿ytkownik nie jest autorem, przy czym u¿ytkownik mo¿e 
+							zostawiæ tylko jedn¹ opiniê dla danego artyku³u,
+				\item System musi zapewniæ dodawanie opinii o technologiach,
+				\item System musi zapewniæ u¿ytkownikowi edytowanie i usuwanie w³asnych opinii o artyku³ach i opinii o technologiach,
+				\item System musi zapewniæ dodawanie oceny opinii o artyku³ach i opinii o technologiach, przy czym u¿ytkownik mo¿e zostawiæ tylko jedn¹ ocenê 
+							dla danej opinii,
+				\item System musi zapewniæ u¿ytkownikowi usuwanie w³asnej oceny opinii o artykule i opinii o technologii,
+				\item System musi zapewniæ kontakt tekstowy z administracj¹,
+			\end{itemize}
+		\item Recenzent
+			\begin{itemize}
+				\item System musi zapewniæ u¿ytkownikowi edycjê swoich danych,
+				\item System musi zapewniæ wylogowanie u¿ytkownika,
+				\item System musi zapewniæ edycjê rodziny technologii,
+				\item System musi zapewniæ przegl¹danie artyku³ów, przy czym ich wyszukiwanie bêdzie mo¿liwe po nastêpuj¹cych kryteriach:
+					\begin{itemize}
+						\item Tytu³ artyku³u,
+						\item Popularnoœæ artyku³u (liczba opinii dotycz¹ca danego artyku³u),
+						\item Autor artyku³u,
+						\item Technologia,
+						\item Kategoria technologii,
+						\item Zastosowanie technologii,
+						\item Data powstania artyku³u,
+						\item Data modyfikacji artyku³u,
+						\item Œrednia ocen artyku³u.
+					\end{itemize}
+				\item System musi zapewniæ edycjê artyku³ów,
+				\item System musi zapewniæ weryfikacjê, a potem akceptacjê lub odrzucenie utworzonych i edytowanych artyku³ów przed ich publikacj¹ w serwisie,
+				\item System musi zapewniæ wycofanie danego artyku³u,
+				\item System musi zapewniæ wysy³anie odpowiedzi na odwo³anie u¿ytkownika w sprawie nie zaakceptowanego utworzonego lub
+							edytowanego artyku³u,
+				\item System musi zapewniæ przegl¹danie komentarzy o danym artykule,
+				\item System musi zapewniæ przegl¹danie opinii o artyku³ach i opinii o technologiach,
+				\item System musi zapewniæ kontakt tekstowy z administracj¹,
+			\end{itemize}
+		\item Administrator
+			\begin{itemize}
+				\item System musi zapewniæ u¿ytkownikowi edycjê swoich danych,
+				\item System musi zapewniæ wylogowanie u¿ytkownika,
+				\item System musi zapewniæ przegl¹danie artyku³ów, przy czym ich wyszukiwanie bêdzie mo¿liwe po nastêpuj¹cych kryteriach:
+					\begin{itemize}
+						\item Tytu³ artyku³u,
+						\item Popularnoœæ artyku³u (liczba opinii dotycz¹ca danego artyku³u),
+						\item Autor artyku³u,
+						\item Technologia,
+						\item Kategoria technologii,
+						\item Zastosowanie technologii,
+						\item Data powstania artyku³u,
+						\item Data modyfikacji artyku³u,
+						\item Œrednia ocen artyku³u.
+					\end{itemize}
+			\item System musi zapewniæ edytowanie i usuwanie artyku³ów,
+			\item System musi zapewniæ wycofanie danego artyku³u,
+			\item System musi zapewniæ przegl¹danie i usuwanie komentarzy o danym artykule,
+			\item System musi zapewniæ przegl¹danie i usuwanie opinii o artyku³ach i opinii o technologiach,
+			\item System musi zapewniæ przypisywanie i usuwanie u¿ytkownikom ról,
+			\item System musi zapewniæ kontakt tekstowy z ka¿dym u¿ytkownikiem.
+		\end{itemize}
 \end{itemize}
 
 \chapter{Wymagania niefunkcjonalne}
@@ -220,26 +304,44 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 \begin{itemize}
 	\item Wymagania dotycz¹ce bezpieczeñstwa systemu
 		\begin{itemize}
-			\item Konta recenzenta oraz administratora mog¹ byæ utworzonone jedynie przez administratora,
-			\item U¿ytkownik o wybranej i posiadanej przez siebie roli bêdzie mia³ dostêp do systemu jedynie w zakresie uprawnieñ przypisanych do tej roli,
-			\item Dostêp do systemu w ramach kont zwyk³ego u¿ytkownika, recenzenta oraz administratora jest mo¿liwy jedynie po zalogowaniu siê na konto,
-			\item Zwyk³y u¿ytkownik mo¿e edytowaæ i usuwaæ dane jedynie te, które zosta³y przez niego utworzone.
+			\item U¿ytkownik o posiadanej przez siebie roli bêdzie mia³ dostêp do systemu jedynie w zakresie uprawnieñ przypisanych do tej roli,
+			\item U¿ywanie zewnêtrznego serwera uwierzytelniaj¹cego i autoryzacyjnego,
+			\item U¿ywanie tokenu na okaziciela (ang.\ \emph{Bearer token}) przy wykonywaniu zapytañ do \texttt{Backendu},
+			\item Nieprzesy³anie has³a, jeœli nie jest to konieczne,
+			\item Tworzone has³a powinny spe³niaæ nastêpuj¹ce kryteria:
+				\begin{itemize}
+					\item Minimalna d³ugoœæ - 8,
+					\item Co najmniej jedna ma³a litera,
+					\item Co najmniej jedna du¿a litera,
+					\item Co najmniej jedna cyfra.
+				\end{itemize}
 		\end{itemize}
-	\item Wymagania dotycz¹ce liczby zasobów i obci¹¿enia systemu
-		\begin{itemize}
-			\item Ca³kowita liczba u¿ytkowników - 200000,
-			\item Maksymalna liczba zalogowanych u¿ytkowników w jednym momencie - 50000,
-			\item Liczba wpisów - 600000,
-			\item Œredni rozmiar wpisu - 20 KB,
-			\item Œrednia liczba zapytañ na sekundê - 1000,
-			\item 
-		\end{itemize}
+	\item Wymagania dotycz¹ce obci¹¿enia systemu
+		\begin{enumerate}
+			\item Ca³kowita liczba u¿ytkowników - 200000 (liczba przyjêta z góry),
+			\item Œredni dzienny czas spêdzania u¿ytkowników w serwisie - 1 godzina (liczba przyjêta z góry),
+			\item Œrednia liczba zalogowanych u¿ytkowników w jednym momencie - 8333 (1. / (24 / 2.)),
+			\item Liczba artyku³ów - 600000 (liczba przyjêta z góry),
+			\item Œredni rozmiar artyku³u - 8.2 KB (œrednia waga ikony technologii - 4.2 KB, œrednia waga zawartoœci artyku³u - 4 KB (sam tekst) - (przyjêto, 
+						¿e zostan¹ wziête pod uwagê najbardziej znacz¹ce dane)),
+			\item Œredni czas spêdzania u¿ytkownika na jednym artykule - 2 minuty
+			\item Œrednia liczba zapytañ do \texttt{Bazy danych 1} na minutê dla jednego u¿ytkownika - 2.5 (Za³o¿ono, ¿e u¿ytkownik œrednio spêdza 2 minuty 
+						na jednym artykule, a aby wyœwietliæ kolejny artyku³, to u¿ytkownik najczêœciej wpisuje tytu³ tego artyku³u, artyku³ jest nastêpnie 
+						wyszukiwany (1 zapytanie), a nastêpnie do wyœwietlenia otrzymanego artyku³u wywo³ywane s¹ 4 zapytania (zapytanie o podstawowe dane o 
+						artykule (tytu³, autor, itp.), zapytanie o komentarze oraz zapytanie o opinie o artykule, zapytanie o opinie o technologii), czyli ³¹cznie 5 
+						zapytañ co 2 minuty)
+			\item Œrednia liczba zapytañ do \texttt{Bazy danych 1} na sekundê - 347 (7. / 60 * 3.),
+			\item Œrednia liczba zapytañ do \texttt{Bazy danych 2} na minutê dla jednego u¿ytkownika - 0.5 (Za³o¿ono, ¿e u¿ytkownik œrednio spêdza 2 minuty na 
+						jednym artykule, a z powodu tego, ¿e w tej bazie danych przechowywane s¹ jedynie zawartoœci artyku³ów, zatem mo¿na uznaæ, ¿e co 2 minuty 
+						wywo³ywane jest 1 zapytanie)
+			\item Œrednia liczba zapytañ do \texttt{Bazy danych 2} na sekundê - 69 (9. / 60 * 3.),
+		\end{enumerate}
 	\item Wykorzystywane technologie i narzêdzia
 		\begin{itemize}
 			\item Backend - \texttt{Spring Boot},
 			\item Frontend - \texttt{React} (g³ówny framework), \texttt{Typescript} (statyczne typowanie), \texttt{MUI} (biblioteka komponentów),
 			\item Baza danych 1 (g³ówna baza danych) - \texttt{PostgreSQL},
-			\item Baza danych 2 (baza danych przechowuj¹ca zawartoœci wpisów) - \texttt{MongoDB},
+			\item Baza danych 2 (baza danych przechowuj¹ca zawartoœci artyku³ów) - \texttt{MongoDB},
 			\item Warstwa bezpieczeñstwa (serwer uwierzytelniania i autoryzacji) - \texttt{Keycloak},
 			\item Dokumentacja - \texttt{LaTeX}.
 		\end{itemize}
@@ -248,36 +350,35 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 
 \chapter{Diagram przypadków u¿ycia}
 
-Ca³y diagram przypadków u¿ycia systemu znajduje siê na rysunku~\ref{fig:diagram-przypadkow-uzycia}
+Z powody dosyæ du¿ej z³o¿onoœci systemu pod wzglêdem liczby wymagañ funkcjonalnych i liczby ról, podzielono diagram przypadków u¿ycia na poszczególne role.
+Na rysunku~\ref{fig:diagram-przypadkow-uzycia-niezalogowany-uzytkownik} jest przedstawiony diagram dotycz¹cy niezalogowanego u¿ytkownika, na rysunku~\ref{fig:diagram-przypadkow-uzycia-zwykly-uzytkownik} widnieje diagram dla zwyk³ego u¿ytkownika, na rysunku~\ref{fig:diagram-przypadkow-uzycia-recenzent} jest diagram zawieraj¹cy funkcjonalnoœci recenzenta, a na rysunku~\ref{fig:diagram-przypadkow-uzycia-administrator} jest przedstawiony diagram dotycz¹cy administatora.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia}
-	\caption{Ca³y diagram przypadkow uzycia}
-	\label{fig:diagram-przypadkow-uzycia}
-\end{figure}
-
-Z powodu dosyæ du¿ej z³o¿onoœci diagramu na rysunku~\ref{fig:diagram-przypadkow-uzycia}, dobrym pomys³em jest podzielenie tego diagramu na kilka mniejszych. Na rysunku~\ref{fig:diagram-przypadkow-uzycia-o-wpisach} jest przedstawiony diagram dotycz¹cy wpisów, na rysunku~\ref{fig:diagram-przypadkow-uzycia-o-wpisach} widnieje diagram dla opinii o wpisach i technologiach, a na rysunku~\ref{fig:ogolny-diagram-przypadkow-uzycia} jest diagram zawieraj¹cy resztê funkcjonalnoœci.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-o-wpisach}
-	\caption{Diagram przypadkow uzycia o wpisów}
-	\label{fig:diagram-przypadkow-uzycia-o-wpisach}
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-niezalogowany-uzytkownik}
+	\caption{Diagram przypadków u¿ycia dla niezalogowanego u¿ytkownika}
+	\label{fig:diagram-przypadkow-uzycia-niezalogowany-uzytkownik}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-o-opiniach}
-	\caption{Diagram przypadków u¿ycia dotycz¹cy opinii o wpisach i technologiach}
-	\label{fig:diagram-przypadkow-uzycia-o-opiniach}
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-zwykly-uzytkownik}
+	\caption{Diagram przypadków u¿ycia dla zwyk³ego u¿ytkownika}
+	\label{fig:diagram-przypadkow-uzycia-zwykly-uzytkownik}
 \end{figure}
 
-\begin{figure}[b]
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/ogolny-diagram-przypadkow-uzycia}
-	\caption{Diagram przypadków u¿ycia zawieraj¹cy resztê funkcjonalnoœci}
-	\label{fig:ogolny-diagram-przypadkow-uzycia}
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-recenzent}
+	\caption{Diagram przypadków u¿ycia dla recenzenta}
+	\label{fig:diagram-przypadkow-uzycia-recenzent}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-administrator}
+	\caption{Diagram przypadków u¿ycia dla administratora}
+	\label{fig:diagram-przypadkow-uzycia-administrator}
 \end{figure}
 
 

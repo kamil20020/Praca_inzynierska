@@ -416,12 +416,16 @@ Listing \thelstlisting: #1\hfill%\hfill%
 \usepackage{enumitem} % pakiet pozwalaj¹cy zarz¹dzaæ formatowaniem list wyliczeniowych
 \setlist{noitemsep,topsep=4pt,parsep=0pt,partopsep=4pt,leftmargin=*} % zadeklarowane parametry pozwalaj¹ uzyskaæ 'zwart¹' postaæ wypunktowania b¹dŸ wyliczenia
 \setenumerate{labelindent=0pt,itemindent=0pt,leftmargin=!,label=\arabic*.} % mo¿na zmieniæ \arabic na \alph, jeœli wyliczenia maj¹ byæ z literkami
-\setlistdepth{4} % definiujemy g³êbokoœæ zagnie¿d¿enia list wyliczeniowych do 4 poziomów
+\setlistdepth{8} % definiujemy g³êbokoœæ zagnie¿d¿enia list wyliczeniowych do 4 poziomów
 \setlist[itemize,1]{label=$\bullet$}  % definiujemy, jaki symbol ma byæ u¿yty w wyliczeniu na danym poziomie
 \setlist[itemize,2]{label=\normalfont\bfseries\textendash}
 \setlist[itemize,3]{label=$\ast$}
 \setlist[itemize,4]{label=$\cdot$}
-\renewlist{itemize}{itemize}{4}
+\setlist[itemize,5]{label=$\bullet$}
+\setlist[itemize,6]{label=\normalfont\bfseries\textendash}
+\setlist[itemize,7]{label=$\ast$}
+\setlist[itemize,8]{label=$\cdot$}
+\renewlist{itemize}{itemize}{8}
 
 %%%http://tex.stackexchange.com/questions/29322/how-to-make-enumerate-items-align-at-left-margin
 %\renewenvironment{enumerate}
