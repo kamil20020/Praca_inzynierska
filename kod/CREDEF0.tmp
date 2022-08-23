@@ -153,7 +153,7 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 	\item Artyku³ - informacja o danej technologii stworzona przez u¿ytkownika. 
 		Artyku³ bêdzie opisywany nastêpuj¹cymi atrybutami:
 		\begin{itemize}
-			\item Status (mo¿liwe wartoœci: ,
+			\item Status,
 			\item Tytu³,
 			\item Autor,
 			\item Data utworzenia,
@@ -168,11 +168,11 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 			\item Lista opinii o technologii,
 			\item Œrednia ocena z co najmniej 5-ciu opinii o artykule.
 		\end{itemize}
-		Artyku³y podlegaj¹ cyklowi ¿ycia, który jest przedstawiony na diagramie maszyny stanów~\ref{fig:cykl-zycia-artykulu}:
+		Dodatkowo artyku³y podlegaj¹ cyklowi ¿ycia, który jest przedstawiony na diagramie maszyny stanów~\ref{fig:cykl-zycia-artykulu}:
 		
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=\linewidth]{rys02/cykl-zycia-artykulu}
+			\includegraphics[width=.8\linewidth]{rys02/cykl-zycia-artykulu}
 			\caption{Cykl ¿ycia artyku³u}
 			\label{fig:cykl-zycia-artykulu}
 		\end{figure}
@@ -184,32 +184,28 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 			\item Administrator (utrzymuje porz¹dek w serwisie) - zarejestrowany i zalogowany u¿ytkownik, który otrzyma³ od administratora rolê administratora. Odpowiada on  
 						przede wszystkim za przydzielanie ról u¿ytkownikom, ustalanie listy technologii, w których dany recenzent jest ekspertem oraz utrzymywanie porz¹dku w serwisie 	
 						poprzez edytowanie i usuwanie niew³aœciwych treœci (np. wirusy lub spam),
-			\item U¿ytkownik - ka¿dy u¿ytkownik korzystaj¹cy z serwisu. Mo¿e on jedynie przegl¹daæ zasoby serwisu,
-			\item Niezalogowany u¿ytkownik - niezalogowany u¿ytkownik maj¹cy mo¿liwoœæ przegl¹dania zasobów serwisu oraz mo¿e siê zarejestrowaæ i zalogowaæ,
-			\item Zalogowany u¿ytkownik - ka¿dy zarejestrowany i zalogowany u¿ytkownik. Mo¿e on przede wszystkim przegl¹daæ i tworzyæ artyku³y oraz wystawiaæ opinie o 
-						artyku³ach i opinie technologiach.
+			\item Niezalogowany u¿ytkownik - niezalogowany u¿ytkownik maj¹cy jedynie mo¿liwoœæ przegl¹dania zasobów serwisu,
+			\item Zwyk³y u¿ytkownik - u¿ytkownik, który dokona³ rejestracji i zalogowa³ siê na swoje konto. Rolê tê otrzymuje ka¿dy u¿ytkownik, który dokona³ rejestracji. Mo¿e 
+						on przede wszystkim przegl¹daæ i tworzyæ artyku³y oraz wystawiaæ opinie o artyku³ach i opinie technologiach.
 			\item Recenzent (ekspert od technologii) - zarejestrowany i zalogowany u¿ytkownik, który otrzyma³ od administratora rolê recenzenta. Jego g³ównym zadaniem jest 
 						weryfikacja artyku³ów przed ich opublikowaniem w serwisie. Na podstawie utworzonej przez administratora listy technologii, w których dany recenzent jest 
-						ekspertem, przydzielane s¹ temu recenzentowi odpowiednie artyku³y do zrecenzowania (zweryfikowania). Innym uprawnieniem tego u¿ytkownika jest m.in. 
+						ekspertem, przydzielane s¹ temu recenzentowi odpowiednie artyku³y do zrecenzowania (zweryfikowania). Dodatkowym uprawnieniem tego u¿ytkownika jest m.in. 
 						zarz¹dzanie klasyfikacj¹ technologii.
 		\end{itemize}
 	\item Komentarz do artyku³u - tekstowa informacja zwrotna zwyk³ego u¿ytkownika o danym artykule,
 	\item Komentarz do technologii - tekstowa informacja zwrotna zwyk³ego u¿ytkownika o danej technologii,
 	\item Ocena artyku³u - ocena wystawiona przez zwyk³ego u¿ytkownika na temat danego artyku³u. Ocena ta jest w postaci gwiazdek bêd¹ca wartoœci¹ od 1 
-				do 5, przy czym wartoœæ 1 oznacza ocenê negatywn¹ i wskazuje, ¿e artyku³ posiada ra¿¹ce b³êdy i powinien zostaæ edytowany albo usuniêty, a wartoœæ 5 oznacza ocenê 
-				pozytywn¹ i wskazuje, ¿e artyku³ nie posiada ra¿¹cych b³êdów oraz informacje w nim zawarte s¹ niezwykle przydatne dla u¿ytkowników,
+				do 5, przy czym wartoœæ 1 oznacza ocenê negatywn¹, a 5 ocenê pozytywn¹,
 	\item Ocena technologii - ocena wystawiona przez zwyk³ego u¿ytkownika na temat danej technologii. Ocena ta jest w postaci gwiazdek bêd¹ca wartoœci¹ od 1 
-				do 5, przy czym wartoœæ 1 oznacza ocenê negatywn¹ i wskazuje, ¿e technologia zawiera du¿e b³êdy, jest niewydajna, jest trudna w u¿yciu lub nie ma 
-				zastosowañ, a 5 oznacza ocenê pozytywn¹ i wskazuje, ¿e technologia nie zawiera ra¿¹cych b³êdów, jest wydajna, jest niezbyt trudna w u¿yciu oraz ma wiele 
-				zastosowañ lub w przypadku w¹skiego zakresu zastosowañ, jest mocno konkurencyjna,
+				do 5, przy czym wartoœæ 1 oznacza ocenê negatywn¹, a 5 ocenê pozytywn¹,
 	\item Opinia o artykule - oceniaj¹ca informacja zwrotna zwyk³ego u¿ytkownika na temat danego artyku³u, która zawiera tekstowy komentarz oraz 
 				ocenê tego artyku³u,
 	\item Opinia o technologii - oceniaj¹ca informacja zwrotna zwyk³ego u¿ytkownika na temat danej technologii, która zawiera tekstowy komentarz oraz ocenê tej
 				technologii,
 	\item Akceptacja opinii o artykule - ocena wystawiona przez zwyk³ego u¿ytkownika dotycz¹ca opinii o artykule. Przyjmuje ona dwie wartoœci: ocena pozytywna (³apka w górê) 
-				oznaczaj¹ca, ¿e u¿ytkownik zgadza siê z opini¹ i ocena negatywna (³apka w dó³) oznaczaj¹ca, i¿ u¿ytkownik nie zgadza siê z opini¹,
+				i ocena negatywna (³apka w dó³),
 	\item Akceptacja opinii o technologii - ocena wystawiana przez zwyk³ego u¿ytkownika dotycz¹ca opinii o technologii. Przyjmuje ona dwie wartoœci: ocena pozytywna (³apka w 
-				górê) oznaczaj¹ca, ¿e u¿ytkownik zgadza siê z opini¹ i ocena negatywna (³apka w dó³) oznaczaj¹ca, i¿ u¿ytkownik nie zgadza siê z opini¹,	
+				górê) i ocena negatywna (³apka w dó³), 
 \end{itemize}
 				
 \section{Wymagania funkcjonalne poszczególnych ról u¿ytkowników}
@@ -239,16 +235,10 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyszukiwania artyku³ów po nastêpuj¹cych kryteriach:
 					\begin{itemize}
 						\item Tytu³,
+						\item Popularnoœæ (liczba opinii),
 						\item Autor,
 						\item Kategoria technologii,
-						\item Zastosowania technologii,
-						\item Dostawca technologii,
-						\item Zakres dat, w których mieœci siê data powstania,
-						\item Zakres dat, w których mieœci siê data modyfikacji,
-					\end{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ sortowania artyku³ów po nastêpuj¹cych wartoœciach:
-					\begin{itemize}
-						\item Popularnoœæ (liczba opinii),
+						\item Zastosowanie technologii,
 						\item Data powstania,
 						\item Data modyfikacji,
 						\item Œrednia ocena.
@@ -256,43 +246,23 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyœwietlenia zawartoœci artyku³u,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania komentarzy o artykule,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o artykule,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyszukiwania technologii po nastêpuj¹cych kryteriach:
-					\begin{itemize}
-						\item Nazwa
-						\item Kategoria,
-						\item Zastosowania,
-						\item Dostawca,
-						\item Zakres dat, w których mieœci siê data pierwszego wydania,
-						\item Zakres dat, w których mieœci siê data ostatniego wydania.
-					\end{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ sortowania technologii po nastêpuj¹cych wartoœciach:
-					\begin{itemize}
-						\item Popularnoœæ (liczba opinii),
-						\item Data pierwszego wydania,
-						\item Data ostatniego wydania,
-						\item Œrednia ocena.
-					\end{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyœwietlenia opisu technologii,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o technologii,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ kontaktu tekstowego z administracj¹,
 			\end{itemize}
 		\item Zwyk³y u¿ytkownik
 			\begin{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji swoich danych,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wylogowania siê,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zalogowania siê
-					\begin{itemize}
-						\item Podczas logowania u¿ytkownik bêdzie wpisywa³ login lub e-mail oraz has³o,
-						\item U¿ytkownik bêdzie móg³ w tym samym momencie korzystaæ jedynie z uprawnieñ w ramach jednej posiadanej i wybranej przez niego roli,
-						\item Podczas logowania i po zalogowaniu powinna byæ dostêpna dla u¿ytkownika mo¿liwoœæ wybrania jednej z posiadanych przez niego ról.
-					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyszukiwania artyku³ów po nastêpuj¹cych kryteriach:
 					\begin{itemize}
 						\item Tytu³,
+						\item Popularnoœæ (liczba opinii),
 						\item Autor,
 						\item Kategoria technologii,
-						\item Zastosowania technologii,
-						\item Zakres dat, w których mieœci siê data powstania,
-						\item Zakres dat, w których mieœci siê data modyfikacji,
+						\item Zastosowanie technologii,
+						\item Data powstania,
+						\item Data modyfikacji,
+						\item Œrednia ocena.
 					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyœwietlenia zawartoœci artyku³u,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodawania artyku³ów, przy czym aby artyku³ zosta³ opublikowany w serwisie, to artyku³ ten musi przejœæ 
@@ -305,80 +275,76 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edytowania w³asnych komentarzy o artykule
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania w³asnych komentarzy o artykule,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o artykule,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodania opinii o artykule którego nie jest autorem. U¿ytkownik bêdzie móg³ zostawiæ 
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodania opinii o artykule którego nie jest autorem. Dodatkowo u¿ytkownik bêdzie móg³ zostawiæ 
 							tylko jedn¹ opiniê dla danego artyku³u,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edytowania w³asnych opinii o artyku³ach,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania w³asnych opinii o artyku³ach,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o technologiach,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodawania opinii o technologiach. U¿ytkownik bêdzie móg³ zostawiæ tylko jedn¹ opiniê dotycz¹c¹ 
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodawania opinii o technologiach. Dodatkowo u¿ytkownik bêdzie móg³ zostawiæ tylko jedn¹ opiniê dotycz¹c¹ 
 							danej technologii,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edytowania w³asnych opinii o technologiach,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania w³asnych opinii o technologiach,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodania akceptacji opinii o artykule. U¿ytkownik bêdzie móg³ zostawiæ akceptacjê opinii, 
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodania akceptacji opinii o artykule. Dodatkowo u¿ytkownik bêdzie móg³ zostawiæ akceptacjê opinii, 
 							której nie jest autorem oraz bêdzie móg³ zostawiæ tylko jedn¹ akceptacjê dla danej opinii o artykule,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuniêcia w³asnej akceptacji opinii o artykule,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodania akceptacji opinii o technologii. U¿ytkownik bêdzie móg³ zostawiæ akceptacjê opinii, 
-							której nie jest autorem oraz bêdzie móg³ zostawiæ tylko jedn¹ akceptacjê dla danej opinii o technologii,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodania akceptacji opinii o technologii. Dodatkowo u¿ytkownik bêdzie móg³ zostawiæ akceptacjê opinii, 
+							której nie jest autorem oraz bêdzie móg³ zostawiæ tylko jedn¹ akceptacjê dla danej opinii o techn`ologii,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuniêcia w³asnej akceptacji opinii o technologii,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ kontaktu tekstowego z administracj¹,
 			\end{itemize}
 		\item Recenzent
 			\begin{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji swoich danych,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wylogowania siê,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji rodziny technologii,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zalogowania siê
-					\begin{itemize}
-						\item Podczas logowania u¿ytkownik bêdzie wpisywa³ login lub e-mail oraz has³o,
-						\item U¿ytkownik bêdzie móg³ w tym samym momencie korzystaæ jedynie z uprawnieñ w ramach jednej posiadanej i wybranej przez niego roli,
-						\item Podczas logowania i po zalogowaniu powinna byæ dostêpna dla u¿ytkownika mo¿liwoœæ wybrania jednej z posiadanych przez niego ról.
-					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyszukiwania artyku³ów po nastêpuj¹cych kryteriach:
 					\begin{itemize}
 						\item Tytu³,
+						\item Popularnoœæ (liczba opinii),
 						\item Autor,
 						\item Kategoria technologii,
-						\item Zastosowania technologii,
-						\item Zakres dat, w których mieœci siê data powstania,
-						\item Zakres dat, w których mieœci siê data modyfikacji,
+						\item Zastosowanie technologii,
+						\item Data powstania,
+						\item Data modyfikacji,
+						\item Œrednia ocena.
 					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyœwietlenia zawartoœci artyku³u,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ ustawienia swojej dostêpnoœci na ,,dostêpny'' albo ,,niedostêpny''. W przypadku ustawionej niedostêpnoœci 
-							nie bêd¹ takiemu recenzentowi przypisywane artyku³y do zweryfikowania.
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zmiany swojej dostêpnoœci na 'niedostêpny' w przypadku posiadaniu przez niego statusu 'dostêpny' oraz w 
+							przeciwnym razie zmiany dostêpnoœci na 'dostêpny'. W przypadku ustawionej niedostêpnoœci nie bêd¹ takiemu recenzentowi przypisywane artyku³y do 
+							zweryfikowania. 
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ weryfikacji artyku³ów
 					\begin{itemize}
 						\item Powinna byæ mo¿liwoœæ automatycznego przypisywania artyku³ów do zrecenzowania recenzentom na podstawie ich dostêpnoœci, posiadanych przez nich list 
-									technologii, w których s¹ ekspertami oraz liczby zrecenzowanych przez nich artyku³ów. W pierwszej kolejnoœci nie bêd¹ brani pod uwagê 
-									niedostêpni recenzenci, nastêpnie bêd¹ wybierani recenzenci, którzy s¹ ekspertami w jak najbardziej szczegó³owej technologii (np. 
-									Java jest bardziej szczegó³owa ni¿ jêzyki programowania), której dotyczy artyku³ oraz w trzeciej kolejnoœci bêd¹ wybierani recenzenci, którzy 
-									zrecenzowali najmniejsz¹ liczbê artyku³ów.
+									technologii, w których s¹ ekspertami oraz liczby zrecenzowanych przez nich artyku³ów. W pierwszym przypadku nie bêd¹ brani pod uwagê 
+									niedostêpni recenzenci, w drugim priorytetowo bêd¹ wybierani recenzenci, którzy s¹ ekspertami w jak najbardziej szczegó³owej technologii (np. 
+									Java jest bardziej szczegó³owa ni¿ jêzyki programowania), której dotyczy artyku³ oraz w trzecim przypadku bêd¹ wybierani recenzenci, którzy zrecenzowali 
+									najmniejsz¹ liczbê artyku³ów. Kryteria powinny byæ brane pod uwagê w kolejnoœci od pierwszego przypadku do trzeciego.
 						\item Weryfikacjê danego artyku³u bêdzie móg³ przeprowadziæ jedynie jeden recenzent,
 						\item Nastêpnie po przypisaniu artyku³u do zrecenzowania danemu recenzentowi, recenzent ten bêdzie mia³ tydzieñ na akceptacjê lub odrzucenie artyku³u. W 
 									przypadku przekroczenia terminu zostanie usuniête przypisanie artyku³u do weryfikacji i bêdzie to skutkowa³o ponownym przypisaniem artyku³u do 
-									weryfikacji innemu recenzentowi. Przy akceptacji artyku³u opcjonalne jest za³¹czenie wiadomoœci (np. drobne uwagi), ale przy odrzuceniu artyku³u 
-									za³¹czenie wiadomoœci jest obowi¹zkowe i powinna ona zawieraæ informacje o tym, dlaczego artyku³ zosta³ odrzucony.
+									weryfikacji. Przy akceptacji artyku³u opcjonalne jest za³¹czenie wiadomoœci (np. drobne uwagi), ale przy odrzuceniu artyku³u za³¹czenie 
+									wiadomoœci jest obowi¹zkowe i powinna ona zawieraæ informacje o tym, dlaczego artyku³ zosta³ odrzucony.
 					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o artykule,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o technologii,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ kontaktu tekstowego z administracj¹,
 			\end{itemize}
 		\item Administrator
 			\begin{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji swoich danych,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji danych innych u¿ytkowników,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wylogowania siê,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zalogowania siê
-					\begin{itemize}
-						\item Podczas logowania u¿ytkownik bêdzie wpisywa³ login lub e-mail oraz has³o,
-						\item U¿ytkownik bêdzie móg³ w tym samym momencie korzystaæ jedynie z uprawnieñ w ramach jednej posiadanej i wybranej przez niego roli,
-						\item Podczas logowania i po zalogowaniu powinna byæ dostêpna dla u¿ytkownika mo¿liwoœæ wybrania jednej z posiadanych przez niego ról.
-					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyszukiwania artyku³ów po nastêpuj¹cych kryteriach:
 					\begin{itemize}
 						\item Tytu³,
+						\item Popularnoœæ (liczba opinii),
 						\item Autor,
+						\item Technologia,
 						\item Kategoria technologii,
-						\item Zastosowania technologii,
-						\item Zakres dat, w których mieœci siê data powstania,
-						\item Zakres dat, w których mieœci siê data modyfikacji,
+						\item Zastosowanie technologii,
+						\item Data powstania,
+						\item Data modyfikacji,
+						\item Œrednia ocena.
 					\end{itemize}
 			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyœwietlenia zawartoœci artyku³u,
 			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edytowania artyku³ów,
@@ -391,6 +357,8 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o technologii,
 			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania opinii o technologii,
 			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przypisywania innym u¿ytkownikom ról,
+			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania innym u¿ytkownikom ról,
+			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ kontaktu tekstowego z ka¿dym u¿ytkownikiem.
 		\end{itemize}
 \end{itemize}
 
