@@ -179,11 +179,14 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 		
 		Diagram~\ref{fig:cykl-zycia-artykulu} przedstawia przejœcia do odpowiednich statusów artyku³u (zaokr¹glone prostok¹ty) w zale¿noœci od podjêtych przez u¿ytkowników 
 		dzia³añ.
-	\item Rola - zestaw uprawnieñ u¿ytkownika, które okreœlaj¹ jego zakres dostêpu do systemu oraz okreœlonych funkcji tego systemu. Mo¿liwe jest przypisanie danemu u¿ytkownikowi ról, co jest równoznaczne z uzyskaniem przez tego u¿ytkownika uprawnieñ zdefiniowanych w tych rolach. Bêdzie mo¿na wyró¿niæ w systemie nastêpuj¹ce role:
+	\item Rola - zestaw uprawnieñ u¿ytkownika, które okreœlaj¹ jego zakres dostêpu do systemu oraz okreœlonych funkcji tego systemu. Mo¿liwe jest przypisanie danemu 
+				u¿ytkownikowi ról, co jest równoznaczne z uzyskaniem przez tego u¿ytkownika uprawnieñ zdefiniowanych w tych rolach. Bêdzie mo¿na wyró¿niæ w systemie nastêpuj¹ce 
+				role:
 		\begin{itemize}
 			\item Administrator (utrzymuje porz¹dek w serwisie) - zarejestrowany i zalogowany u¿ytkownik, który otrzyma³ od administratora rolê administratora. Odpowiada on  
 						przede wszystkim za przydzielanie ról u¿ytkownikom, ustalanie listy technologii, w których dany recenzent jest ekspertem oraz utrzymywanie porz¹dku w serwisie 	
-						poprzez edytowanie i usuwanie niew³aœciwych treœci (np. wirusy lub spam),
+						poprzez edytowanie i usuwanie niew³aœciwych treœci (np. wirusy lub spam). Przy instalacji systemu powinno byæ tworzone jedno konto u¿ytkownika z rol¹ 
+						administratora, gdy¿ to w³aœnie administrator odpowiada za przydzielanie ról innym u¿ytkownikom.
 			\item U¿ytkownik - ka¿dy u¿ytkownik korzystaj¹cy z serwisu. Mo¿e on jedynie przegl¹daæ zasoby serwisu,
 			\item Niezalogowany u¿ytkownik - niezalogowany u¿ytkownik maj¹cy mo¿liwoœæ przegl¹dania zasobów serwisu oraz mo¿e siê zarejestrowaæ i zalogowaæ,
 			\item Zalogowany u¿ytkownik - ka¿dy zarejestrowany i zalogowany u¿ytkownik. Mo¿e on przede wszystkim przegl¹daæ i tworzyæ artyku³y oraz wystawiaæ opinie o 
@@ -201,7 +204,7 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 	\item Ocena technologii - ocena wystawiona przez zwyk³ego u¿ytkownika na temat danej technologii. Ocena ta jest w postaci gwiazdek bêd¹ca wartoœci¹ od 1 
 				do 5, przy czym wartoœæ 1 oznacza ocenê negatywn¹ i wskazuje, ¿e technologia zawiera du¿e b³êdy, jest niewydajna, jest trudna w u¿yciu lub nie ma 
 				zastosowañ, a 5 oznacza ocenê pozytywn¹ i wskazuje, ¿e technologia nie zawiera ra¿¹cych b³êdów, jest wydajna, jest niezbyt trudna w u¿yciu oraz ma wiele 
-				zastosowañ lub w przypadku w¹skiego zakresu zastosowañ, jest mocno konkurencyjna,
+				zastosowañ lub w przypadku w¹skiego zakresu zastosowañ, to technologia ta jest mocno konkurencyjna,
 	\item Opinia o artykule - oceniaj¹ca informacja zwrotna zwyk³ego u¿ytkownika na temat danego artyku³u, która zawiera tekstowy komentarz oraz 
 				ocenê tego artyku³u,
 	\item Opinia o technologii - oceniaj¹ca informacja zwrotna zwyk³ego u¿ytkownika na temat danej technologii, która zawiera tekstowy komentarz oraz ocenê tej
@@ -392,12 +395,6 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania opinii o technologii,
 			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przypisywania innym u¿ytkownikom ról,
 		\end{itemize}
-\end{itemize}
-
-\section{Dodatkowe wymagania funkcjonalne}
-\begin{itemize}
-	\item System musi zapewniæ, ¿e przy jego instalacji tworzony bêdzie jeden administrator,
-	\item System musi zapewniæ wewnêtrzn¹ pocztê, za pomoc¹ której u¿ytkownicy bêd¹ mogli siê komunikowaæ.
 \end{itemize}
 
 \chapter{Wymagania niefunkcjonalne}
