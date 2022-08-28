@@ -153,7 +153,7 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 	\item Artyku³ - informacja o danej technologii stworzona przez u¿ytkownika. 
 		Artyku³ bêdzie opisywany nastêpuj¹cymi atrybutami:
 		\begin{itemize}
-			\item Status (mo¿liwe wartoœci: ,
+			\item Status (mo¿liwe wartoœci: stworzony, weryfikowany, edytowany, odrzucony, opublikowany),
 			\item Tytu³,
 			\item Autor,
 			\item Data utworzenia,
@@ -190,55 +190,35 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 			\item U¿ytkownik - ka¿dy u¿ytkownik korzystaj¹cy z serwisu. Mo¿e on jedynie przegl¹daæ zasoby serwisu,
 			\item Niezalogowany u¿ytkownik - niezalogowany u¿ytkownik maj¹cy mo¿liwoœæ przegl¹dania zasobów serwisu oraz mo¿e siê zarejestrowaæ i zalogowaæ,
 			\item Zalogowany u¿ytkownik - ka¿dy zarejestrowany i zalogowany u¿ytkownik. Mo¿e on przede wszystkim przegl¹daæ i tworzyæ artyku³y oraz wystawiaæ opinie o 
-						artyku³ach i opinie technologiach.
+						artyku³ach i opinie o technologiach.
 			\item Recenzent (ekspert od technologii) - zarejestrowany i zalogowany u¿ytkownik, który otrzyma³ od administratora rolê recenzenta. Jego g³ównym zadaniem jest 
 						weryfikacja artyku³ów przed ich opublikowaniem w serwisie. Na podstawie utworzonej przez administratora listy technologii, w których dany recenzent jest 
 						ekspertem, przydzielane s¹ temu recenzentowi odpowiednie artyku³y do zrecenzowania (zweryfikowania). Innym uprawnieniem tego u¿ytkownika jest m.in. 
 						zarz¹dzanie klasyfikacj¹ technologii.
 		\end{itemize}
-	\item Komentarz do artyku³u - tekstowa informacja zwrotna zwyk³ego u¿ytkownika o danym artykule,
-	\item Komentarz do technologii - tekstowa informacja zwrotna zwyk³ego u¿ytkownika o danej technologii,
-	\item Ocena artyku³u - ocena wystawiona przez zwyk³ego u¿ytkownika na temat danego artyku³u. Ocena ta jest w postaci gwiazdek bêd¹ca wartoœci¹ od 1 
+	\item Komentarz do artyku³u - tekstowa informacja zwrotna zalogowanego u¿ytkownika o danym artykule,
+	\item Komentarz do technologii - tekstowa informacja zwrotna zalogowanego u¿ytkownika o danej technologii,
+	\item Ocena artyku³u - ocena wystawiona przez zalogowanego u¿ytkownika na temat danego artyku³u. Ocena ta jest w postaci gwiazdek bêd¹ca wartoœci¹ od 1 
 				do 5, przy czym wartoœæ 1 oznacza ocenê negatywn¹ i wskazuje, ¿e artyku³ posiada ra¿¹ce b³êdy i powinien zostaæ edytowany albo usuniêty, a wartoœæ 5 oznacza ocenê 
 				pozytywn¹ i wskazuje, ¿e artyku³ nie posiada ra¿¹cych b³êdów oraz informacje w nim zawarte s¹ niezwykle przydatne dla u¿ytkowników,
-	\item Ocena technologii - ocena wystawiona przez zwyk³ego u¿ytkownika na temat danej technologii. Ocena ta jest w postaci gwiazdek bêd¹ca wartoœci¹ od 1 
+	\item Ocena technologii - ocena wystawiona przez zalogowanego u¿ytkownika na temat danej technologii. Ocena ta jest w postaci gwiazdek bêd¹ca wartoœci¹ od 1 
 				do 5, przy czym wartoœæ 1 oznacza ocenê negatywn¹ i wskazuje, ¿e technologia zawiera du¿e b³êdy, jest niewydajna, jest trudna w u¿yciu lub nie ma 
 				zastosowañ, a 5 oznacza ocenê pozytywn¹ i wskazuje, ¿e technologia nie zawiera ra¿¹cych b³êdów, jest wydajna, jest niezbyt trudna w u¿yciu oraz ma wiele 
 				zastosowañ lub w przypadku w¹skiego zakresu zastosowañ, to technologia ta jest mocno konkurencyjna,
-	\item Opinia o artykule - oceniaj¹ca informacja zwrotna zwyk³ego u¿ytkownika na temat danego artyku³u, która zawiera tekstowy komentarz oraz 
+	\item Opinia o artykule - oceniaj¹ca informacja zwrotna zalogowanego u¿ytkownika na temat danego artyku³u, która zawiera tekstowy komentarz oraz 
 				ocenê tego artyku³u,
-	\item Opinia o technologii - oceniaj¹ca informacja zwrotna zwyk³ego u¿ytkownika na temat danej technologii, która zawiera tekstowy komentarz oraz ocenê tej
+	\item Opinia o technologii - oceniaj¹ca informacja zwrotna zalogowanego u¿ytkownika na temat danej technologii, która zawiera tekstowy komentarz oraz ocenê tej
 				technologii,
-	\item Akceptacja opinii o artykule - ocena wystawiona przez zwyk³ego u¿ytkownika dotycz¹ca opinii o artykule. Przyjmuje ona dwie wartoœci: ocena pozytywna (³apka w górê) 
-				oznaczaj¹ca, ¿e u¿ytkownik zgadza siê z opini¹ i ocena negatywna (³apka w dó³) oznaczaj¹ca, i¿ u¿ytkownik nie zgadza siê z opini¹,
-	\item Akceptacja opinii o technologii - ocena wystawiana przez zwyk³ego u¿ytkownika dotycz¹ca opinii o technologii. Przyjmuje ona dwie wartoœci: ocena pozytywna (³apka w 
-				górê) oznaczaj¹ca, ¿e u¿ytkownik zgadza siê z opini¹ i ocena negatywna (³apka w dó³) oznaczaj¹ca, i¿ u¿ytkownik nie zgadza siê z opini¹,	
+	\item Akceptacja opinii o artykule - ocena wystawiona przez zalogowanego u¿ytkownika dotycz¹ca opinii o artykule. Przyjmuje ona dwie wartoœci: ocena pozytywna (³apka w 
+				górê) oznaczaj¹ca, ¿e u¿ytkownik zgadza siê z opini¹ i ocena negatywna (³apka w dó³) oznaczaj¹ca, i¿ u¿ytkownik nie zgadza siê z opini¹,
+	\item Akceptacja opinii o technologii - ocena wystawiana przez zalogowanego u¿ytkownika dotycz¹ca opinii o technologii. Przyjmuje ona dwie wartoœci: ocena pozytywna (
+				³apka w górê) oznaczaj¹ca, ¿e u¿ytkownik zgadza siê z opini¹ i ocena negatywna (³apka w dó³) oznaczaj¹ca, i¿ u¿ytkownik nie zgadza siê z opini¹,	
 \end{itemize}
 				
 \section{Wymagania funkcjonalne poszczególnych ról u¿ytkowników}
 	\begin{itemize}
-		\item Niezalogowany u¿ytkownik
+		\item U¿ytkownik
 			\begin{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zarejestrowania siê
-					\begin{itemize}
-						\item Podczas rejestracji u¿ytkownik bêdzie podawa³ nastêpuj¹ce informacje:
-							\begin{itemize}
-								\item Nazwa u¿ytkownika,
-								\item Imiê,
-								\item Nazwisko,
-								\item Adres e-mail,
-								\item (Opcjonalnie) Awatar,
-								\item Has³o.
-							\end{itemize}
-						\item Mo¿liwa jest rejestracja jedynie na konto zwyk³ego u¿ytkownika, a aby uzyskaæ uprawnienia recenzenta lub administratora, nale¿y 
-								  w tym celu skontaktowaæ siê z administratorem, który bêdzie w stanie nadaæ tak¹ rolê,
-					\end{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zalogowania siê
-					\begin{itemize}
-						\item Podczas logowania u¿ytkownik bêdzie wpisywa³ login lub e-mail oraz has³o,
-						\item U¿ytkownik bêdzie móg³ w tym samym momencie korzystaæ jedynie z uprawnieñ w ramach jednej posiadanej i wybranej przez niego roli,
-						\item Podczas logowania i po zalogowaniu powinna byæ dostêpna dla u¿ytkownika mo¿liwoœæ wybrania jednej z posiadanych przez niego ról.
-					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyszukiwania artyku³ów po nastêpuj¹cych kryteriach:
 					\begin{itemize}
 						\item Tytu³,
@@ -276,75 +256,74 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 						\item Œrednia ocena.
 					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyœwietlenia opisu technologii,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania komentarzy o technologii,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o technologii,
 			\end{itemize}
-		\item Zwyk³y u¿ytkownik
+		\item Niezalogowany u¿ytkownik
 			\begin{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji swoich danych,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wylogowania siê,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zarejestrowania siê
+					\begin{itemize}
+						\item Podczas rejestracji u¿ytkownik bêdzie podawa³ nastêpuj¹ce informacje:
+							\begin{itemize}
+								\item Nazwa u¿ytkownika,
+								\item Imiê,
+								\item Nazwisko,
+								\item Adres e-mail,
+								\item (Opcjonalnie) Awatar,
+								\item Has³o.
+							\end{itemize}
+						\item Po rejestracji i zalogowaniu, u¿ytkownik uzyskuje uprawnienia zalogowanego u¿ytkownika, a aby uzyskaæ uprawnienia recenzenta lub administratora, nale¿y 
+								  w tym celu skontaktowaæ siê z administratorem, który bêdzie w stanie nadaæ tak¹ rolê,
+					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zalogowania siê
 					\begin{itemize}
 						\item Podczas logowania u¿ytkownik bêdzie wpisywa³ login lub e-mail oraz has³o,
 						\item U¿ytkownik bêdzie móg³ w tym samym momencie korzystaæ jedynie z uprawnieñ w ramach jednej posiadanej i wybranej przez niego roli,
 						\item Podczas logowania i po zalogowaniu powinna byæ dostêpna dla u¿ytkownika mo¿liwoœæ wybrania jednej z posiadanych przez niego ról.
 					\end{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyszukiwania artyku³ów po nastêpuj¹cych kryteriach:
+			\end{itemize}
+		\item Zalogowany u¿ytkownik
+			\begin{itemize}
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji swoich danych,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wylogowania siê,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zarz¹dzania w³asnymi artyku³ami w nastêpuj¹cym zakresie:
 					\begin{itemize}
-						\item Tytu³,
-						\item Autor,
-						\item Kategoria technologii,
-						\item Zastosowania technologii,
-						\item Zakres dat, w których mieœci siê data powstania,
-						\item Zakres dat, w których mieœci siê data modyfikacji,
+						\item Dodawanie artyku³ów, przy czym aby artyku³ zosta³ opublikowany w serwisie, to artyku³ ten musi przejœæ pozytywnie weryfikacjê przeprowadzan¹ 
+									przez recenzenta,
+						\item Edytowanie artyku³ów których u¿ytkownik jest autorem, przy czym aby zmieniony artyku³ zosta³ opublikowany w serwisie, to artyku³ ten musi przejœæ 
+									pozytywnie weryfikacjê przeprowadzan¹ przez recenzenta,
+						\item Usuwanie artyku³ów których u¿ytkownik jest autorem.
 					\end{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyœwietlenia zawartoœci artyku³u,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodawania artyku³ów, przy czym aby artyku³ zosta³ opublikowany w serwisie, to artyku³ ten musi przejœæ 
-							pozytywnie weryfikacjê przeprowadzan¹ przez recenzenta,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edytowania artyku³ów których jest autorem, przy czym aby zmieniony artyku³ zosta³ opublikowany w serwisie, 
-							to artyku³ ten musi przejœæ pozytywnie weryfikacjê przeprowadzan¹ przez recenzenta,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania artyku³ów których jest autorem,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania komentarzy o artykule,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodawania komentarzy o artykule,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edytowania w³asnych komentarzy o artykule
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania w³asnych komentarzy o artykule,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o artykule,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodania opinii o artykule którego nie jest autorem. U¿ytkownik bêdzie móg³ zostawiæ 
-							tylko jedn¹ opiniê dla danego artyku³u,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edytowania w³asnych opinii o artyku³ach,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania w³asnych opinii o artyku³ach,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o technologiach,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodawania opinii o technologiach. U¿ytkownik bêdzie móg³ zostawiæ tylko jedn¹ opiniê dotycz¹c¹ 
-							danej technologii,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edytowania w³asnych opinii o technologiach,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania w³asnych opinii o technologiach,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodania akceptacji opinii o artykule. U¿ytkownik bêdzie móg³ zostawiæ akceptacjê opinii, 
-							której nie jest autorem oraz bêdzie móg³ zostawiæ tylko jedn¹ akceptacjê dla danej opinii o artykule,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuniêcia w³asnej akceptacji opinii o artykule,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ dodania akceptacji opinii o technologii. U¿ytkownik bêdzie móg³ zostawiæ akceptacjê opinii, 
-							której nie jest autorem oraz bêdzie móg³ zostawiæ tylko jedn¹ akceptacjê dla danej opinii o technologii,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuniêcia w³asnej akceptacji opinii o technologii,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zarz¹dzania komentarzami o artykule w nastêpuj¹cym zakresie:
+					\begin{itemize}
+						\item Dodawanie komentarzy o artykule,
+						\item Edytowanie w³asnych komentarzy o artykule,
+						\item Usuwanie w³asnych komentarzy o artykule,
+						\item Usuwanie komentarzy o w³asnym artykule.
+					\end{itemize}
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zarz¹dzania opiniami o artyku³ach w nastêpuj¹cym zakresie:
+					\begin{itemize}
+						\item Dodanie opinii o artykule którego u¿ytkownik nie jest autorem. U¿ytkownik bêdzie móg³ zostawiæ tylko jedn¹ opiniê dla danego artyku³u,
+						\item Edytowanie w³asnych opinii o artyku³ach,
+						\item Usuwanie w³asnych opinii o artyku³ach,
+						\item Ukrywanie tekstu opinii o w³asnym artykule,
+						\item Dodanie akceptacji opinii o artykule. U¿ytkownik bêdzie móg³ zostawiæ akceptacjê opinii, 
+									której nie jest autorem oraz bêdzie móg³ zostawiæ tylko jedn¹ akceptacjê dla danej opinii o artykule,
+						\item Usuniêcie w³asnej akceptacji opinii o artykule.
+					\end{itemize}
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zarz¹dzania opiniami o technologiach w nastêpuj¹cym zakresie:
+					\begin{itemize}
+						\item Dodawanie opinii o technologiach. U¿ytkownik bêdzie móg³ zostawiæ tylko jedn¹ opiniê dotycz¹c¹ danej technologii
+						\item Edytowanie w³asnych opinii o technologiach,
+						\item Usuwanie w³asnych opinii o technologiach,
+						\item Dodanie akceptacji opinii o technologii. U¿ytkownik bêdzie móg³ zostawiæ akceptacjê opinii, 
+									której nie jest autorem oraz bêdzie móg³ zostawiæ tylko jedn¹ akceptacjê dla danej opinii o technologii,
+						\item Usuniêcie w³asnej akceptacji opinii o technologii.
+					\end{itemize}
 			\end{itemize}
 		\item Recenzent
 			\begin{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji swoich danych,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wylogowania siê,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji rodziny technologii,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zalogowania siê
-					\begin{itemize}
-						\item Podczas logowania u¿ytkownik bêdzie wpisywa³ login lub e-mail oraz has³o,
-						\item U¿ytkownik bêdzie móg³ w tym samym momencie korzystaæ jedynie z uprawnieñ w ramach jednej posiadanej i wybranej przez niego roli,
-						\item Podczas logowania i po zalogowaniu powinna byæ dostêpna dla u¿ytkownika mo¿liwoœæ wybrania jednej z posiadanych przez niego ról.
-					\end{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyszukiwania artyku³ów po nastêpuj¹cych kryteriach:
-					\begin{itemize}
-						\item Tytu³,
-						\item Autor,
-						\item Kategoria technologii,
-						\item Zastosowania technologii,
-						\item Zakres dat, w których mieœci siê data powstania,
-						\item Zakres dat, w których mieœci siê data modyfikacji,
-					\end{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyœwietlenia zawartoœci artyku³u,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ ustawienia swojej dostêpnoœci na ,,dostêpny'' albo ,,niedostêpny''. W przypadku ustawionej niedostêpnoœci 
 							nie bêd¹ takiemu recenzentowi przypisywane artyku³y do zweryfikowania.
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ weryfikacji artyku³ów
@@ -360,41 +339,22 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 									weryfikacji innemu recenzentowi. Przy akceptacji artyku³u opcjonalne jest za³¹czenie wiadomoœci (np. drobne uwagi), ale przy odrzuceniu artyku³u 
 									za³¹czenie wiadomoœci jest obowi¹zkowe i powinna ona zawieraæ informacje o tym, dlaczego artyku³ zosta³ odrzucony.
 					\end{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o artykule,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o technologii,
 			\end{itemize}
 		\item Administrator
 			\begin{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji swoich danych,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji danych innych u¿ytkowników,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wylogowania siê,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zalogowania siê
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zarz¹dzania artyku³ami w nastêpuj¹cym zakresie:
 					\begin{itemize}
-						\item Podczas logowania u¿ytkownik bêdzie wpisywa³ login lub e-mail oraz has³o,
-						\item U¿ytkownik bêdzie móg³ w tym samym momencie korzystaæ jedynie z uprawnieñ w ramach jednej posiadanej i wybranej przez niego roli,
-						\item Podczas logowania i po zalogowaniu powinna byæ dostêpna dla u¿ytkownika mo¿liwoœæ wybrania jednej z posiadanych przez niego ról.
+						\item	Mo¿liwoœæ edytowania artyku³ów,
+						\item Mo¿liwoœæ usuwania artyku³ów,
+						\item Mo¿liwoœæ wycofywania artyku³ów.
 					\end{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyszukiwania artyku³ów po nastêpuj¹cych kryteriach:
-					\begin{itemize}
-						\item Tytu³,
-						\item Autor,
-						\item Kategoria technologii,
-						\item Zastosowania technologii,
-						\item Zakres dat, w których mieœci siê data powstania,
-						\item Zakres dat, w których mieœci siê data modyfikacji,
-					\end{itemize}
-			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wyœwietlenia zawartoœci artyku³u,
-			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edytowania artyku³ów,
-			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania artyku³ów,
-			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wycofania danego artyku³u,
-			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania komentarzy o artykule,
-			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania komentarzy o artykule,
-			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o artykule,
-			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania opinii o artykule,
-			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przegl¹dania opinii o technologii,
-			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania opinii o technologii,
-			\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przypisywania innym u¿ytkownikom ról,
-		\end{itemize}
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania komentarzy o artykule,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania opinii o artykule,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania opinii o technologii,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ przypisywania innym u¿ytkownikom ról,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania przypisanych ról innych u¿ytkowników,
+			\end{itemize}
 \end{itemize}
 
 \chapter{Wymagania niefunkcjonalne}
@@ -450,15 +410,16 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 
 \section{Identyfikacja aktorów}
 \begin{itemize}
-	\item \texttt{Niezalogowany u¿ytkownik} - rola przypisywana ka¿demu u¿ytkownikowi, która charakteryzuje siê najmniejszymi uprawnieniami.
-	\item \texttt{Zwyk³y u¿ytkownik} - rola przypisywana ka¿demu u¿ytkownikowi, który dokona³ rejestracji i zalogowa³ siê do serwisu.
+	\item \texttt{U¿ytkownik} - rola przypisywana ka¿demu u¿ytkownikowi, która uprawnia go do przegl¹dania zasobów serwisu,
+	\item \texttt{Niezalogowany u¿ytkownik} - rola przypisywana ka¿demu niezalogowanemu u¿ytkownikowi, która go u¿ytkownika do rejestracji i logowania,
+	\item \texttt{Zalogowany u¿ytkownik} - rola przypisywana ka¿demu zalogowanemu u¿ytkownikowi, która uprawnia go do m.in. tworzenia artyku³ów, czy zostawiania komentarzy,
 	\item \texttt{Recenzent} - rola przypisywana u¿ytkownikom przez administratora, którzy bêd¹ siê zajmowaæ przede wszystkim weryfikacj¹ artyku³ów.
 	\item \texttt{Administrator} - rola przypisywana u¿ytkownikom przez administratora, którzy bêd¹ siê zajmowaæ przede wszystkim utrzymywaniem porz¹dku w serwisie. Rola ta 
 				charakteryzuje siê najwiêkszymi uprawnieniami.
 \end{itemize}
 
 \section{Diagramy przypadków u¿ycia}
-Zdecydowano siê na zastosowanie dziedziczenia miêdzy aktorami, gdy¿ zdefiniowane role charakteryzuj¹ siê tym, ¿e posiadaj¹ wiele wspólnych uprawnieñ (przypadków u¿ycia) i dzia³anie to pozwala na zmniejszenie z³o¿onoœci systemu pod wzglêdem implementacji. Dziedziczenie zosta³o przedstawione na rysunku~\ref{fig:dziedziczenie-aktorow}.
+Zdecydowano siê na zastosowanie dziedziczenia miêdzy aktorami, gdy¿ zdefiniowane role charakteryzuj¹ siê tym, ¿e posiadaj¹ wiele wspólnych uprawnieñ (przypadków u¿ycia) i dzia³anie to pozwala na zmniejszenie z³o¿onoœci systemu. Dziedziczenie zosta³o przedstawione na rysunku~\ref{fig:dziedziczenie-aktorow}.
 
 \begin{figure}[H]
 	\centering
@@ -467,20 +428,27 @@ Zdecydowano siê na zastosowanie dziedziczenia miêdzy aktorami, gdy¿ zdefiniowane
 	\label{fig:dziedziczenie-aktorow}
 \end{figure}
 
-Z powody dosyæ du¿ej z³o¿onoœci systemu pod wzglêdem liczby wymagañ funkcjonalnych i liczby ról, to dla zachowania czytelnoœci diagramu stworzono osobne diagramy dla ka¿dej roli. Na rysunku~\ref{fig:diagram-przypadkow-uzycia-niezalogowany-uzytkownik} jest przedstawiony diagram dotycz¹cy \texttt{niezalogowanego u¿ytkownika}, na rysunku~\ref{fig:diagram-przypadkow-uzycia-zwykly-uzytkownik} widnieje diagram dla \texttt{zwyk³ego u¿ytkownika}, na rysunku~\ref{fig:diagram-przypadkow-uzycia-recenzent} jest diagram zawieraj¹cy funkcjonalnoœci \texttt{recenzenta}, a na rysunku~\ref{fig:diagram-przypadkow-uzycia-administrator} jest przedstawiony diagram dotycz¹cy \texttt{administratora}.
+Z powody dosyæ du¿ej z³o¿onoœci systemu pod wzglêdem liczby wymagañ funkcjonalnych i liczby ról, to dla zachowania czytelnoœci diagramu, stworzono osobne diagramy dla ka¿dej roli. Na rysunku~\ref{fig:diagram-przypadkow-uzycia-uzytkownik} jest pokazany diagram dotycz¹cy \texttt{u¿ytkownika}~(ka¿dego u¿ytkownika), na rysunku~\ref{fig:diagram-przypadkow-uzycia-niezalogowany-uzytkownik} jest przedstawiony diagram dla \texttt{niezalogowanego u¿ytkownika}, na rysunku~\ref{fig:diagram-przypadkow-uzycia-zalogowany-uzytkownik} widnieje diagram dotycz¹cy \texttt{zalogowanego u¿ytkownika}, na rysunku~\ref{fig:diagram-przypadkow-uzycia-recenzent} jest diagram zawieraj¹cy funkcjonalnoœci \texttt{recenzenta}, a na rysunku~\ref{fig:diagram-przypadkow-uzycia-administrator} jest przedstawiony diagram dla \texttt{administratora}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-niezalogowany-uzytkownik}
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-uzytkownik}
+	\caption{Diagram przypadków u¿ycia dla ka¿dego u¿ytkownika}
+	\label{fig:diagram-przypadkow-uzycia-uzytkownik}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{rys02/diagram-przypadkow-uzycia-niezalogowany-uzytkownik}
 	\caption{Diagram przypadków u¿ycia dla niezalogowanego u¿ytkownika}
 	\label{fig:diagram-przypadkow-uzycia-niezalogowany-uzytkownik}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-zwykly-uzytkownik}
-	\caption{Diagram przypadków u¿ycia dla zwyk³ego u¿ytkownika}
-	\label{fig:diagram-przypadkow-uzycia-zwykly-uzytkownik}
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-zalogowany-uzytkownik}
+	\caption{Diagram przypadków u¿ycia dla zalogowanego u¿ytkownika}
+	\label{fig:diagram-przypadkow-uzycia-zalogowany-uzytkownik}
 \end{figure}
 
 \begin{figure}[H]
@@ -499,7 +467,7 @@ Z powody dosyæ du¿ej z³o¿onoœci systemu pod wzglêdem liczby wymagañ funkcjonalny
 
 \section{Opisy przypadków u¿ycia}
 
-Na podstawie stworzonych w poprzednim punkcie diagramów przypadków u¿ycia, zrobiono opisy ka¿dego przypadku u¿ycia. Opisy zawieraj¹ nastêpuj¹ce informacje:
+Dla ka¿dego przypadku u¿ycia zdefiniowanego w poprzednim punkcie, zrobiono szczegó³owe opisy, które sk³adaj¹ siê z nastêpuj¹cych informacji:
 \begin{itemize}
 	\item Nazwa,
 	\item Krótki opis,
@@ -510,18 +478,18 @@ Na podstawie stworzonych w poprzednim punkcie diagramów przypadków u¿ycia, zrobi
 	\item Alternatywne przebiegi.
 \end{itemize}
 
-Dodatkowo do ka¿dego przypadku u¿ycia zrobiono prototypy ekranu u¿ytkownika.
+Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby zaplanowaæ wygl¹d GUI serwisu oraz aby ³atwiej mo¿na by³o poj¹æ opisy przypadków u¿ycia.
 
-\begin{table}[htb] \small
+\begin{table}[htb]
 	\centering
 	\caption{Opis przypadku u¿ycia - rejestracja}
 	\label{tab:opis-przypadku-uzycia-rejestracja}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Rejestracja \\ \hline
-		Opis: & System zapewnia utworzenie konta w serwisie z uprawnieniami zwyk³ego u¿ytkownika \\ \hline
+		Opis: & Utworzenie konta w serwisie z uprawnieniami zwyk³ego u¿ytkownika \\ \hline
 		Aktorzy: & Niezalogowany u¿ytkownik \\ \hline
 		Warunki pocz¹tkowe: & Otwarta strona g³ówna (Rys) \\ \hline
-		Warunki koñcowe: & Za³o¿enie konta z uprawnieniami zwyk³ego u¿ytkownika oraz automatyczne zalogowanie u¿ytkownika na to konto w serwisie \\ \hline
+		Warunki koñcowe: & Za³o¿enie konta z uprawnieniami zwyk³ego u¿ytkownika \\ \hline
 		Przebieg: & 
 			\begin{enumerate}
 				\item U¿ytkownik klika przycisk ,,Rejestracja'',
@@ -532,8 +500,7 @@ Dodatkowo do ka¿dego przypadku u¿ycia zrobiono prototypy ekranu u¿ytkownika.
 				\item Po pozytywnej walidacji danych, aplikacja wyœwietla regulamin serwisu,
 				\item U¿ytkownik przegl¹da ca³y regulamin i go akceptuje poprzez klikniêcie w pole wyboru po lewej stronie od napisu ,,Akceptuje regulamin'' 
 							(Rys.~\ref{fig:prototyp-ui-akceptacja-regulaminu}),
-				\item Serwis tworzy nowo konto,
-				\item Aplikacja dokonuje automatycznego zalogowania zarejestrowanego u¿ytkownika.
+				\item Serwis tworzy nowo konto.
 			\end{enumerate}
 		\\ \hline
 		Alternatywny przebieg: &
@@ -557,6 +524,7 @@ Dodatkowo do ka¿dego przypadku u¿ycia zrobiono prototypy ekranu u¿ytkownika.
 				\item U¿ytkownik klika w pole wyboru po lewej stronie od napisu ,,Nie akceptuje regulaminu'' lub klika przycisk ,,X''
 				\item Powrót do strony g³ównej.
 			\end{enumerate}
+		\\ \hline
 	\end{tabularx}
 \end{table}
 
@@ -575,5 +543,67 @@ Dodatkowo do ka¿dego przypadku u¿ycia zrobiono prototypy ekranu u¿ytkownika.
 	\caption{Prototyp formularza z akceptacj¹ regulaminu}
 	\label{fig:prototyp-ui-akceptacja-regulaminu}
 \end{figure}
+
+\newpage
+
+\begin{table}[htb]
+	\centering
+	\caption{Opis przypadku u¿ycia - logowanie}
+	\label{tab:opis-przypadku-uzycia-logowanie}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Logowanie \\ \hline
+		Opis: & Zalogowanie siê u¿ytkownika \\ \hline
+		Aktorzy: & Niezalogowany u¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Otwarta strona g³ówna (Rys) \\ \hline
+		Warunki koñcowe: & Zalogowanie siê u¿ytkownika i uzyskanie przez niego dostêpu do funkcji serwisu adekwatnych do jego uprawnieñ  \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika przycisk ,,Logowanie'',
+				\item Aplikacja wyœwietla formularz do logowania (Rys.~\ref{fig:prototyp-ui-rejestracja}),
+				\item U¿ytkownik wype³nia pola w formularzu,
+				\item U¿ytkownik klika przycisk ,,Zaloguj'',
+				\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
+				\item Po pozytywnej walidacji danych, u¿ytkownik zostaje zalogowany do systemu i bêdzie móg³ korzystaæ z funkcji systemu w zakresie adekwatnym do jego uprawnieñ,
+			\end{enumerate}
+		\\ \hline
+		Alternatywny przebieg: &
+			U¿ytkownik anuluje logowanie
+			\begin{enumerate}[label=\arabic*a.]
+				\setcounter{enumi}{1}
+				\item U¿ytkownik klika przycisk ,,X'' lub klika w obszar poza formularzem,
+				\item Powrót do strony g³ównej.
+			\end{enumerate} \\ \hline
+		Alternatywny przebieg: &
+			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
+			\begin{enumerate}[label=\arabic*b.]
+				\setcounter{enumi}{1}
+				\item Aplikacja zmienia kolor obramowania pól które nie przesz³y walidacji na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
+				\item Powrót do punktu 2.
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\newpage
+
+\begin{table}[htb]
+	\centering
+	\caption{Opis przypadku u¿ycia - wylogowanie}
+	\label{tab:opis-przypadku-uzycia-wylogowanie}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Wylogowanie \\ \hline
+		Opis: & Wylogowanie siê u¿ytkownika \\ \hline
+		Aktorzy: & Zalogowany u¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Zalogowanie siê u¿ytkownika \\ \hline
+		Warunki koñcowe: & Wylogowanie u¿ytkownika z serwisu i   \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika przycisk ,,Wyloguj'',
+				\item Aplikacja wyœwietla komunikat o wylogowaniu i przekierowuje u¿ytkownika do strony g³ównej
+				\item Nastêpuje wylogowanie u¿ytkownika.
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
 
 
