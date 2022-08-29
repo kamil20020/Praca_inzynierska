@@ -480,7 +480,7 @@ Dla ka¿dego przypadku u¿ycia zdefiniowanego w poprzednim punkcie, zrobiono szcze
 
 Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby zaplanowaæ wygl¹d GUI serwisu oraz aby ³atwiej mo¿na by³o poj¹æ opisy przypadków u¿ycia.
 
-\begin{table}[htb]
+\begin{table}[H] \small
 	\centering
 	\caption{Opis przypadku u¿ycia - rejestracja}
 	\label{tab:opis-przypadku-uzycia-rejestracja}
@@ -488,11 +488,11 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	  Nazwa: & Rejestracja \\ \hline
 		Opis: & Utworzenie konta w serwisie z uprawnieniami zwyk³ego u¿ytkownika \\ \hline
 		Aktorzy: & Niezalogowany u¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Otwarta strona g³ówna (Rys) \\ \hline
+		Warunki pocz¹tkowe: & Niezalogowane konto \\ \hline
 		Warunki koñcowe: & Za³o¿enie konta z uprawnieniami zwyk³ego u¿ytkownika \\ \hline
 		Przebieg: & 
 			\begin{enumerate}
-				\item U¿ytkownik klika przycisk ,,Rejestracja'',
+				\item U¿ytkownik klika przycisk ,,Rejestracja'' na nag³ówku strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}),
 				\item Aplikacja wyœwietla formularz do rejestracji (Rys.~\ref{fig:prototyp-ui-rejestracja}),
 				\item U¿ytkownik wype³nia pola w formularzu,
 				\item U¿ytkownik klika przycisk ,,Zarejestruj'',
@@ -508,7 +508,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\begin{enumerate}[label=\arabic*a.]
 				\setcounter{enumi}{1}
 				\item U¿ytkownik klika przycisk ,,X'' lub klika w obszar poza formularzem,
-				\item Powrót do strony g³ównej.
+				\item Wy³¹czenie formularza.
 			\end{enumerate} \\ \hline
 		Alternatywny przebieg: &
 			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
@@ -522,31 +522,34 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\begin{enumerate}[label=\arabic*c.]
 				\setcounter{enumi}{5}
 				\item U¿ytkownik klika w pole wyboru po lewej stronie od napisu ,,Nie akceptuje regulaminu'' lub klika przycisk ,,X''
-				\item Powrót do strony g³ównej.
+				\item Wy³¹czenie formularza.
 			\end{enumerate}
 		\\ \hline
 	\end{tabularx}
 \end{table}
 
-\newpage
-
-\begin{figure}[htb]
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-rejestracja}
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-niezalogowany}
+	\caption{Prototyp nag³ówka strony dla niezalogowanego u¿ytkownika}
+	\label{fig:prototyp-ui-naglowek-niezalogowany}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-rejestracja}
 	\caption{Prototyp formularza rejestracji}
 	\label{fig:prototyp-ui-rejestracja}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-regulaminu}
 	\caption{Prototyp formularza z akceptacj¹ regulaminu}
 	\label{fig:prototyp-ui-akceptacja-regulaminu}
 \end{figure}
 
-\newpage
-
-\begin{table}[htb]
+\begin{table}[H] \small
 	\centering
 	\caption{Opis przypadku u¿ycia - logowanie}
 	\label{tab:opis-przypadku-uzycia-logowanie}
@@ -554,16 +557,17 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	  Nazwa: & Logowanie \\ \hline
 		Opis: & Zalogowanie siê u¿ytkownika \\ \hline
 		Aktorzy: & Niezalogowany u¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Otwarta strona g³ówna (Rys) \\ \hline
+		Warunki pocz¹tkowe: & Niezalogowane konto \\ \hline
 		Warunki koñcowe: & Zalogowanie siê u¿ytkownika i uzyskanie przez niego dostêpu do funkcji serwisu adekwatnych do jego uprawnieñ  \\ \hline
 		Przebieg: & 
 			\begin{enumerate}
-				\item U¿ytkownik klika przycisk ,,Logowanie'',
-				\item Aplikacja wyœwietla formularz do logowania (Rys.~\ref{fig:prototyp-ui-rejestracja}),
+				\item U¿ytkownik klika przycisk ,,Logowanie'' na nag³ówku strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}),
+				\item Aplikacja wyœwietla formularz do logowania (Rys.~\ref{fig:prototyp-ui-logowanie}),
 				\item U¿ytkownik wype³nia pola w formularzu,
 				\item U¿ytkownik klika przycisk ,,Zaloguj'',
 				\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
-				\item Po pozytywnej walidacji danych, u¿ytkownik zostaje zalogowany do systemu i bêdzie móg³ korzystaæ z funkcji systemu w zakresie adekwatnym do jego uprawnieñ,
+				\item Po pozytywnej walidacji danych, u¿ytkownik zostaje zalogowany do systemu i bêdzie móg³ korzystaæ z funkcji systemu w zakresie adekwatnym do jego uprawnieñ 
+							oraz zmienia siê wygl¹d nag³ówka strony na Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany}),
 			\end{enumerate}
 		\\ \hline
 		Alternatywny przebieg: &
@@ -571,7 +575,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\begin{enumerate}[label=\arabic*a.]
 				\setcounter{enumi}{1}
 				\item U¿ytkownik klika przycisk ,,X'' lub klika w obszar poza formularzem,
-				\item Powrót do strony g³ównej.
+				\item Wy³¹czenie formularza.
 			\end{enumerate} \\ \hline
 		Alternatywny przebieg: &
 			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
@@ -584,9 +588,21 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\end{tabularx}
 \end{table}
 
-\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-logowanie}
+	\caption{Prototyp formularza logowania}
+	\label{fig:prototyp-ui-logowanie}
+\end{figure}
 
-\begin{table}[htb]
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-zalogowany}
+	\caption{Prototyp nag³ówka strony dla zalogowanego u¿ytkownika}
+	\label{fig:prototyp-ui-naglowek-zalogowany}
+\end{figure}
+
+\begin{table}[H] \small
 	\centering
 	\caption{Opis przypadku u¿ycia - wylogowanie}
 	\label{tab:opis-przypadku-uzycia-wylogowanie}
@@ -598,12 +614,146 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		Warunki koñcowe: & Wylogowanie u¿ytkownika z serwisu i   \\ \hline
 		Przebieg: & 
 			\begin{enumerate}
-				\item U¿ytkownik klika przycisk ,,Wyloguj'',
-				\item Aplikacja wyœwietla komunikat o wylogowaniu i przekierowuje u¿ytkownika do strony g³ównej
-				\item Nastêpuje wylogowanie u¿ytkownika.
+				\item U¿ytkownik klika na swój awatar dostêpny na nag³ówku strony aby wyœwietliæ opcje dotycz¹ce konta (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty}),
+				\item U¿ytkownik klika przycisk ,,Wyloguj siê'',
+				\item Aplikacja wyœwietla komunikat o wylogowaniu
+				\item Nastêpuje wylogowanie u¿ytkownika oraz zmienia siê wygl¹d nag³ówka strony na Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}).
 			\end{enumerate}
 		\\ \hline
 	\end{tabularx}
 \end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-zalogowany-otwarty}
+	\caption{Prototyp nag³ówka strony dla zalogowanego u¿ytkownika z otwartymi opcjami dotycz¹cymi konta}
+	\label{fig:prototyp-ui-naglowek-zalogowany-otwarty}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - edycja swoich danych}
+	\label{tab:opis-przypadku-uzycia-edycja-swoich-danych}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Edycja swoich danych \\ \hline
+		Opis: & Edytowanie danych dotycz¹cych konta u¿ytkownika \\ \hline
+		Aktorzy: & Zalogowany u¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Zalogowanie siê u¿ytkownika \\ \hline
+		Warunki koñcowe: & Edytowanie danych u¿ytkownika zgodnie z wprowadzonymi przez tego u¿ytkownika zmianami \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika na swój awatar dostêpny na nag³ówku strony aby wyœwietliæ opcje dotycz¹ce konta (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty}),
+				\item U¿ytkownik klika przycisk ,,Dane u¿ytkownika'',
+				\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys~\ref{fig:prototyp-ui-dane-uzytkownika}),
+				\item U¿ytkownik klika przycisk ,,Edytuj dane'',
+				\item Serwis wyœwietla formularz edycji (Rys~\ref{fig:prototyp-ui-edycja-swoich-danych}),
+				\item U¿ytkownik zmienia dane w formularzu,
+				\item U¿ytkownik klika przycisk ,,Zapisz'',
+				\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
+				\item Po pozytywnej walidacji danych, aplikacja zmienia dane u¿ytkownika zgodnie z wprowadzonymi przez tego u¿ytkownika zmianami.
+			\end{enumerate}
+		\\ \hline
+		Alternatywny przebieg: &
+			U¿ytkownik anuluje edycjê danych
+			\begin{enumerate}[label=\arabic*a.]
+				\setcounter{enumi}{5}
+				\item U¿ytkownik klika przycisk ,,Anuluj'',
+				\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys~\ref{fig:prototyp-ui-dane-uzytkownika}).
+			\end{enumerate}
+		\\ \hline
+		Alternatywny przebieg: &
+			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
+			\begin{enumerate}[label=\arabic*b.]
+				\setcounter{enumi}{8}
+				\item Aplikacja zmienia kolor obramowania pól które nie przesz³y walidacji na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
+				\item Powrót do punktu 6.
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dane-uzytkownika}
+	\caption{Prototyp panelu z danymi u¿ytkownika}
+	\label{fig:prototyp-ui-dane-uzytkownika}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-edycja-swoich-danych}
+	\caption{Prototyp formularza edycji swoich danych}
+	\label{fig:prototyp-ui-edycja-swoich-danych}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - wyszukiwanie artyku³ów}
+	\label{tab:opis-przypadku-uzycia-wyszukiwanie-artykulow}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Wyszukiwanie artyku³ów \\ \hline
+		Opis: & Wyszukiwanie artyku³ów wed³ug podanych przez u¿ytkownika kryteriów i wyœwietlenie wyników tego wyszukiwania w postaci listy artyku³ów\\ \hline
+		Aktorzy: & U¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Brak \\ \hline
+		Warunki koñcowe: & Wyszukanie artyku³ów\\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika przycisk ,,Artyku³y'' znajduj¹cy siê w panelu nawigacji strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}),
+				\item Aplikacja wyœwietla widok zwi¹zany z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}),
+				\item U¿ytkownik uzupe³nia kryteria wyszukiwania (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow}),
+				\item U¿ytkownik klika przycisk ,,Szukaj'',
+				\item Serwis wyszukuje artyku³y i wyœwietla wyniki u¿ytkownikowi w postaci listy artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki})
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-artykulow-puste}
+	\caption{Prototyp wyszukiwania artyku³ów z pustymi kryteriami wyszukiwania}
+	\label{fig:prototyp-ui-wyszukiwanie-artykulow-puste}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-artykulow}
+	\caption{Prototyp wyszukiwania artyku³ów z podanymi kryteriami wyszukiwania}
+	\label{fig:prototyp-ui-wyszukiwanie-artykulow}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-artykulow-wyniki}
+	\caption{Prototyp wyszukiwania artyku³ów z podanymi kryteriami wyszukiwania oraz otrzymanymi artyku³ami}
+	\label{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - sortowanie artyku³ów}
+	\label{tab:opis-przypadku-uzycia-sortowanie-artykulow}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Sortowanie artyku³ów \\ \hline
+		Opis: & Posortowanie wyszukanych artyku³ów wed³ug opcji sortowania wybranej przez u¿ytkownika \\ \hline
+		Aktorzy: & U¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Wyszukanie artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}) \\ \hline
+		Warunki koñcowe: & Posortowanie artyku³ów \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika na rozsuwan¹ listê ,,Sortowanie'',
+				\item U¿ytkownik wybiera jedn¹ z opcji sortowania (Rys.~\ref{fig:prototyp-ui-sortowanie-artykulow-opcje}),
+				\item Aplikacja wyœwietla posortowane artyku³y wed³ug wybranej opcji sortowania.
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{rys02/prototypy-ui/prototyp-ui-sortowanie-artykulow-opcje}
+	\caption{Prototyp sortowania artyku³ów - dostêpne opcje sortowania}
+	\label{fig:prototyp-ui-sortowanie-artykulow-opcje}
+\end{figure}
 
 
