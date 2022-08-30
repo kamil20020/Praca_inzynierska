@@ -756,4 +756,110 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{fig:prototyp-ui-sortowanie-artykulow-opcje}
 \end{figure}
 
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - wyœwietlenie zawartoœci artyku³u}
+	\label{tab:opis-przypadku-uzycia-wyswietlenie-zawartosci-artykulu}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Wyœwietlenie zawartoœci artyku³u \\ \hline
+		Opis: & Wyœwietlenie zawartoœci artyku³u \\ \hline
+		Aktorzy: & U¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Wyszukanie artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}) \\ \hline
+		Warunki koñcowe: & Wyœwietlenie zawartoœci artyku³u \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika na jeden z wyszukanych artyku³ów,
+				\item Aplikacja wyœwietla zawartoœæ artyku³u (Rys.~\ref{fig:prototyp-ui-artykul}).
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-artykul}
+	\caption{Prototyp artyku³u}
+	\label{fig:prototyp-ui-artykul}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - zarz¹dzanie w³asnymi artyku³ami}
+	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasnymi-artykulami}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Zarz¹dzanie w³asnymi artyku³ami \\ \hline
+		Opis: & Dodawanie artyku³ów, edytowanie oraz usuwanie w³asnych artyku³ów \\ \hline
+		Aktorzy: & Zalogowany u¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Otwarta podstrona z wyszukiwaniem artyku³ów Wyszukanie artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}) \\ \hline
+		Warunki koñcowe: & Wyœwietlenie zawartoœci artyku³u \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika na jeden z wyszukanych artyku³ów,
+				\item Aplikacja wyœwietla zawartoœæ artyku³u (Rys.~\ref{fig:prototyp-ui-artykul}).
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - przegl¹danie komentarzy o artykule}
+	\label{tab:opis-przypadku-uzycia-wyswietlenie-zawartosci-artykulu}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Przegl¹danie komentarzy o artykule \\ \hline
+		Opis: & Wyœwietlenie komentarzy dotycz¹cych danego artyku³u \\ \hline
+		Aktorzy: & U¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Otwarty artyku³ (Rys.~\ref{fig:prototyp-ui-artykul}) \\ \hline
+		Warunki koñcowe: & Wyœwietlenie komentarzy dotycz¹cych danego artyku³u \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik przewija artyku³ na sam dó³,
+				\item Wyœwietlenie komentarzy o artykule (Rys.~\ref{fig:prototyp-ui-komentarze-o-artykule}).
+			\end{enumerate}
+		\\ \hline
+		Alternatywny przebieg: &
+			U¿ytkownik klika przycisk ,,Opinie'', lub ,,Opis technologii''
+			\begin{enumerate}[label=\arabic*a.]
+				\setcounter{enumi}{1}
+				\item U¿ytkownik klika przycisk ,,Komentarze'',
+				\item Przejœcie do punktu 2.
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-komentarze-o-artykule}
+	\caption{Prototyp listy komentarzy o artykule}
+	\label{fig:prototyp-ui-komentarze-o-artykule}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - przegl¹danie opinii o artykule}
+	\label{tab:opis-przypadku-uzycia-przegladanie-opinii-o-artykule}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Przegl¹danie opinii o artykule \\ \hline
+		Opis: & Wyœwietlenie opinii dotycz¹cych danego artyku³u \\ \hline
+		Aktorzy: & U¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Otwarty artyku³ (Rys.~\ref{fig:prototyp-ui-artykul}) \\ \hline
+		Warunki koñcowe: & Wyœwietlenie opinii dotycz¹cych danego artyku³u \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik przewija artyku³ na sam dó³,
+				\item U¿ytkownik klika przycisk ,,Opinie'',
+				\item Wyœwietlenie opinii o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule}).
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-opinie-o-artykule}
+	\caption{Prototyp listy opinii o artykule}
+	\label{fig:prototyp-ui-opinie-o-artykule}
+\end{figure}
+
 
