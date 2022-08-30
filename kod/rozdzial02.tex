@@ -299,14 +299,12 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 						\item Dodawanie komentarzy o artykule,
 						\item Edytowanie w³asnych komentarzy o artykule,
 						\item Usuwanie w³asnych komentarzy o artykule,
-						\item Usuwanie komentarzy o w³asnym artykule.
 					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zarz¹dzania opiniami o artyku³ach w nastêpuj¹cym zakresie:
 					\begin{itemize}
 						\item Dodanie opinii o artykule którego u¿ytkownik nie jest autorem. U¿ytkownik bêdzie móg³ zostawiæ tylko jedn¹ opiniê dla danego artyku³u,
 						\item Edytowanie w³asnych opinii o artyku³ach,
 						\item Usuwanie w³asnych opinii o artyku³ach,
-						\item Ukrywanie tekstu opinii o w³asnym artykule,
 						\item Dodanie akceptacji opinii o artykule. U¿ytkownik bêdzie móg³ zostawiæ akceptacjê opinii, 
 									której nie jest autorem oraz bêdzie móg³ zostawiæ tylko jedn¹ akceptacjê dla danej opinii o artykule,
 						\item Usuniêcie w³asnej akceptacji opinii o artykule.
@@ -782,24 +780,89 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{fig:prototyp-ui-artykul}
 \end{figure}
 
-\begin{table}[H] \small
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - zarz¹dzanie w³asnymi artyku³ami} \\
+	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasnymi-artykulami} \\
+	\hline
+	Nazwa: & Zarz¹dzanie w³asnymi artyku³ami \\ \hline
+	Opis: & Dodawanie artyku³ów, edytowanie oraz usuwanie w³asnych artyku³ów \\ \hline
+	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
+	Warunki pocz¹tkowe: & Otwarta podstrona z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}) \\ \hline
+	Warunki koñcowe: & Dodanie, edytowanie lub usuniêcie artyku³u \\ \hline
+	Przebieg: & 
+		Dodawanie artyku³u
+		\begin{enumerate}
+			\item U¿ytkownik klika przycisk ,,Dodaj artyku³'',
+			\item Aplikacja wyœwietla formularz do dodania artyku³u (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-artykulu}),
+			\item U¿ytkownik wype³nia wszystkie pola w formularzu
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Serwis przedstawia u¿ytkownikowi wygl¹d utworzonego artyku³u,
+			\item Aplikacja utworzy³a jest nowy artyku³ i artyku³ ten zostaje on przes³any do weryfikacji.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik nie uzupe³nia wszystkich pól formularza podczas dodawania artyku³u
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{4}
+			\item Aplikacja zmienia kolor obramowania pól które nie przesz³y walidacji na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie, 
+			\item Przejœcie do punktu 3.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		Edytowanie artyku³u
+		\begin{enumerate}[label=\arabic*b.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik klika jeden z wyszukanych artyku³ów,
+			\item U¿ytkownik klika przycisk ,,Edytuj'' (Rys.~\ref{fig:prototyp-ui-artykul}),
+			\item Aplikacja wyœwietla formularz do edycji artyku³u (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-artykulu})
+			\item U¿ytkownik wype³nia wszystkie pola w formularzu
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Aplikacja przedstawia u¿ytkownikowi wygl¹d utworzonego artyku³u 
+			\item Aplikacja utworzy³a zedytowany artyku³ oraz przypisa³a ten artyku³ do weryfikacji.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik nie uzupe³nia wszystkich pól formularza podczas edytowania artyku³u
+		\begin{enumerate}[label=\arabic*c.]
+			\setcounter{enumi}{4}
+			\item Aplikacja zmienia kolor obramowania pól które nie przesz³y walidacji na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie, 
+			\item Przejœcie do punktu 4.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		Usuniêcie artyku³u
+		\begin{enumerate}[label=\arabic*d.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik klika jeden z wyszukanych artyku³ów,
+			\item U¿ytkownik klika przycisk ,,Usuñ'' (Rys.~\ref{fig:prototyp-ui-artykul}),
+			\item Aplikacja formularz z potwierdzeniem usuniêcia artyku³u (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-artykulu})
+			\item U¿ytkownik klika przycisk ,,Tak'',
+			\item Serwis usuwa artyku³ i przekierowuje u¿ytkownika do strony z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki})
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		Anulowanie usuniêcia artyku³u
+		\begin{enumerate}[label=\arabic*e.]
+			\setcounter{enumi}{3}
+			\item U¿ytkownik klika przycisk ,,Nie'' albo w obszar poza formularzem,
+			\item Serwis przekierowuje u¿ytkownika do strony z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki})
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
+
+\begin{figure}[H]
 	\centering
-	\caption{Opis przypadku u¿ycia - zarz¹dzanie w³asnymi artyku³ami}
-	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasnymi-artykulami}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Zarz¹dzanie w³asnymi artyku³ami \\ \hline
-		Opis: & Dodawanie artyku³ów, edytowanie oraz usuwanie w³asnych artyku³ów \\ \hline
-		Aktorzy: & Zalogowany u¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Otwarta podstrona z wyszukiwaniem artyku³ów Wyszukanie artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}) \\ \hline
-		Warunki koñcowe: & Wyœwietlenie zawartoœci artyku³u \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item U¿ytkownik klika na jeden z wyszukanych artyku³ów,
-				\item Aplikacja wyœwietla zawartoœæ artyku³u (Rys.~\ref{fig:prototyp-ui-artykul}).
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-artykulu}
+	\caption{Prototyp formularza do dodania i edytowania artyku³u}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-artykulu}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-usuniecia-artykulu}
+	\caption{Prototyp potwierdzenia usuniêcia artyku³u}
+	\label{fig:prototyp-ui-akceptacja-usuniecia-artykulu}
+\end{figure}
 
 \begin{table}[H] \small
 	\centering
