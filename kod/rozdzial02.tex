@@ -298,7 +298,7 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 					\begin{itemize}
 						\item Dodawanie komentarzy o artykule,
 						\item Edytowanie w³asnych komentarzy o artykule,
-						\item Usuwanie w³asnych komentarzy o artykule,
+						\item Usuwanie w³asnych komentarzy o artykule.
 					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zarz¹dzania opiniami o artyku³ach w nastêpuj¹cym zakresie:
 					\begin{itemize}
@@ -308,6 +308,12 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 						\item Dodanie akceptacji opinii o artykule. U¿ytkownik bêdzie móg³ zostawiæ akceptacjê opinii, 
 									której nie jest autorem oraz bêdzie móg³ zostawiæ tylko jedn¹ akceptacjê dla danej opinii o artykule,
 						\item Usuniêcie w³asnej akceptacji opinii o artykule.
+					\end{itemize}
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zarz¹dzania komentarzami o technologii w nastêpuj¹cym zakresie:
+					\begin{itemize}
+						\item Dodawanie komentarzy o technologii,
+						\item Edytowanie w³asnych komentarzy o technologii,
+						\item Usuwanie w³asnych komentarzy o technologii.
 					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zarz¹dzania opiniami o technologiach w nastêpuj¹cym zakresie:
 					\begin{itemize}
@@ -512,7 +518,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
 			\begin{enumerate}[label=\arabic*b.]
 				\setcounter{enumi}{5}
-				\item Aplikacja zmienia kolor obramowania pól które nie przesz³y walidacji na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
+				\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
 				\item Powrót do punktu 3.
 			\end{enumerate}\\ \hline
 		Alternatywny przebieg: &
@@ -579,7 +585,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
 			\begin{enumerate}[label=\arabic*b.]
 				\setcounter{enumi}{5}
-				\item Aplikacja zmienia kolor obramowania pól które nie przesz³y walidacji na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
+				\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
 				\item Powrót do punktu 3.
 			\end{enumerate}
 		\\ \hline
@@ -663,7 +669,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
 			\begin{enumerate}[label=\arabic*b.]
 				\setcounter{enumi}{8}
-				\item Aplikacja zmienia kolor obramowania pól które nie przesz³y walidacji na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
+				\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
 				\item Powrót do punktu 6.
 			\end{enumerate}
 		\\ \hline
@@ -815,7 +821,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		U¿ytkownik nie uzupe³nia wszystkich pól formularza podczas dodawania artyku³u
 		\begin{enumerate}[label=\arabic*b.]
 			\setcounter{enumi}{5}
-			\item Aplikacja zmienia kolor obramowania pól które nie przesz³y walidacji na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie, 
+			\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie, 
 			\item Przejœcie do punktu 3.
 		\end{enumerate}
 	\\ \hline
@@ -837,7 +843,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
-		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem artyku³u, który chce zedytowaæ
+		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem artyku³u oraz chcia³by zedytowaæ ten artyku³
 		\begin{enumerate}[label=\arabic*ca.]
 			\setcounter{enumi}{3}
 			\item U¿ytkownik nie mo¿e zedytowaæ wybranego artyku³u (brak przycisku ,,Edytuj''), 
@@ -855,17 +861,14 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		U¿ytkownik nie uzupe³nia wszystkich pól formularza podczas edytowania artyku³u
 		\begin{enumerate}[label=\arabic*cc.]
 			\setcounter{enumi}{8}
-			\item Aplikacja zmienia kolor obramowania pól które nie przesz³y walidacji na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie, 
+			\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie, 
 			\item Przejœcie do punktu 6c.
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
 		Usuniêcie artyku³u
-		\begin{enumerate}[label=\arabic*g.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik wyszukuje artyku³y,
-			\item U¿ytkownik klika na jeden z wyszukanych artyku³ów,
-			\item Aplikacja wyœwietla zawartoœæ wybranego artyku³u (Rys.~\ref{fig:prototyp-ui-artykul}),
+		\begin{enumerate}[label=\arabic*cd.]
+			\setcounter{enumi}{3}
 			\item U¿ytkownik klika przycisk ,,Usuñ'',
 			\item Aplikacja wyœwietla komunikat z potwierdzeniem usuniêcia artyku³u (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-artykulu})
 			\item U¿ytkownik klika przycisk ,,Tak'',
@@ -875,14 +878,14 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\\ \hline
 	Alternatywny przebieg: &
 		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem artyku³u, który chce usun¹æ
-		\begin{enumerate}[label=\arabic*ga.]
+		\begin{enumerate}[label=\arabic*cda.]
 			\setcounter{enumi}{3}
 			\item U¿ytkownik nie mo¿e usun¹æ wybranego artyku³u (brak przycisku ,,Usuñ''),.
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
 		Anulowanie usuniêcia artyku³u
-		\begin{enumerate}[label=\arabic*gb.]
+		\begin{enumerate}[label=\arabic*cdb.]
 			\setcounter{enumi}{5}
 			\item U¿ytkownik klika przycisk ,,Nie'' albo w obszar poza formularzem,
 			\item U¿ytkownik zostaje przekierowany do strony z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}).
@@ -945,7 +948,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		U¿ytkownik nie uzupe³nia wszystkich pól formularza podczas edytowania artyku³u
 		\begin{enumerate}[label=\arabic*b.]
 			\setcounter{enumi}{7}
-			\item Aplikacja zmienia kolor obramowania pól które nie przesz³y walidacji na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie, 
+			\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie, 
 			\item Przejœcie do punktu 5.
 		\end{enumerate}
 	\\ \hline
@@ -1018,7 +1021,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	Opis: & Dodanie komentarzy do artyku³u, edytowanie oraz usuniêcie w³asnych komentarzy do artyku³u \\ \hline
 	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
 	Warunki pocz¹tkowe: & Otwarta zak³adka z komentarzami artyku³u (Rys.~\ref{fig:prototyp-ui-komentarze-o-artykule}) \\ \hline
-	Warunki koñcowe: & Dodanie, edytowanie lub usuniêcie komentarza \\ \hline
+	Warunki koñcowe: & Dodanie, edytowanie lub usuniêcie komentarza do artyku³u \\ \hline
 	Przebieg: & 
 		Dodanie komentarza
 		\begin{enumerate}
@@ -1027,7 +1030,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item U¿ytkownik dodaje tekst komentarza (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule}),
 			\item U¿ytkownik klika przycisk ,,Zapisz'',
 			\item Aplikacja sprawdza, czy u¿ytkownik poda³ tekst komentarza,
-			\item Po pozytywnej walidacji komentarza, aplikacja dodanie komentarz do artyku³u.
+			\item Po pozytywnej walidacji komentarza, aplikacja dodaje komentarz do artyku³u.
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
@@ -1057,11 +1060,11 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item U¿ytkownik edytuje tekst komentarza,
 			\item U¿ytkownik klika przycisk ,,Zapisz'',
 			\item Aplikacja sprawdza, czy u¿ytkownik poda³ tekst komentarza,
-			\item Po pozytywnej walidacji komentarza, aplikacja dodanie komentarz do artyku³u.
+			\item Po pozytywnej walidacji komentarza, aplikacja edytuje komentarz do artyku³u.
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
-		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem komentarza, który chce zedytowaæ lub usun¹æ
+		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem komentarza oraz chcia³by zedytowaæ lub usun¹æ ten komentarz
 		\begin{enumerate}[label=\arabic*ca.]
 			\setcounter{enumi}{0}
 			\item U¿ytkownik nie mo¿e zedytowaæ lub usun¹æ wybranego komentarza (brak menu komentarza - trzech kropek), 
@@ -1131,12 +1134,12 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	Opis: & Usuniêcie wybranego komentarza o artykule \\ \hline
 	Aktorzy: & Administrator \\ \hline
 	Warunki pocz¹tkowe: & Otwarta zak³adka z komentarzami artyku³u (Rys.~\ref{fig:prototyp-ui-komentarze-o-artykule-administrator}) \\ \hline
-	Warunki koñcowe: & Dodanie, edytowanie lub usuniêcie komentarza \\ \hline
+	Warunki koñcowe: & Usuniêcie komentarza do artyku³u \\ \hline
 	Przebieg: & 
 		\begin{enumerate}
 			\item U¿ytkownik klika trzy kropki przy jednym z komentarzy,
 			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranego komentarza
-			\item U¿ytkownik klika przycisk ,,Usuñ'' przy jednym z komentarzy,
+			\item U¿ytkownik klika przycisk ,,Usuñ'',
 			\item Aplikacja wyœwietla formularz z zapytaniem, czy komentarz powinien zostaæ usuniêty (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-komentarza}),
 			\item U¿ytkownik klika przycisk ,,Tak'',
 			\item Serwis usuwa komentarz.
@@ -1173,7 +1176,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\begin{enumerate}
 				\item U¿ytkownik przewija artyku³ na sam dó³,
 				\item U¿ytkownik klika przycisk ,,Opinie'',
-				\item Wyœwietlenie opinii o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule}).
+				\item Aplikacja wyœwietla opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule}).
 			\end{enumerate}
 		\\ \hline
 	\end{tabularx}
@@ -1184,6 +1187,274 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-opinie-o-artykule}
 	\caption{Prototyp listy opinii o artykule}
 	\label{fig:prototyp-ui-opinie-o-artykule}
+\end{figure}
+
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - zarz¹dzanie opiniami o artykule}
+	\label{tab:opis-przypadku-uzycia-zarzadzanie-opiniami-o-artykule} \\ \hline
+	Nazwa: & Zarz¹dzanie opiniami o artykule \\ \hline
+	Opis: & Dodanie opinii o artykule, edytowanie oraz usuniêcie w³asnej opinii do artyku³u \\ \hline
+	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
+	Warunki pocz¹tkowe: & Otwarta zak³adka z opiniami artyku³u (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule}) \\ \hline
+	Warunki koñcowe: & Dodanie, edytowanie, usuniêcie opinii o artykule, dodanie akceptacji lub usuniêcie akceptacji\\ \hline
+	Przebieg: & 
+		Dodanie opinii
+		\begin{enumerate}
+			\item U¿ytkownik klika przycisk ,,Dodaj opiniê'',
+			\item Aplikacja wyœwietla formularz do utworzenia opinii (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-artykule-puste}),
+			\item U¿ytkownik dodaje tekst opinii oraz wystawia ocenê (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-artykule}),
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Aplikacja sprawdza, czy u¿ytkownik poda³ tekst opinii oraz ocenê,
+			\item Po pozytywnej walidacji, aplikacja dodaje opiniê.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik jest autorem artyku³u
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik jest autorem artyku³u i zatem nie mo¿e wystawiæ do niego opinii (brak przycisku ,,Dodaj opiniê''),
+			\item Opinia nie zostaje dodana.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje tworzenie opinii
+		\begin{enumerate}[label=\arabic*b.]
+			\setcounter{enumi}{2}
+			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do tworzenia opinii,
+			\item Wy³¹czenie formularza do dodania opinii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik nie uzupe³nia wszystkich wymaganych pól formularza
+		\begin{enumerate}[label=\arabic*c.]
+			\setcounter{enumi}{5}
+			\item Aplikacja zmienia kolor obramowania nieuzupe³nionych pól na czerwono oraz wyœwietla pod tymi polami komunikat ,,Pole wymagane'',
+			\item Przejœcie do punktu 3.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny Przebieg: & 
+		Edytowanie opinii
+		\begin{enumerate}[label=\arabic*d.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik klika trzy kropki przy jednej z opinii,
+			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranej opinii
+			\item U¿ytkownik klika przycisk ,,Edytuj'',
+			\item Aplikacja wyœwietla formularz do edytowania opinii (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-artykule}),
+			\item U¿ytkownik edytuje opiniê,
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Aplikacja sprawdza, czy u¿ytkownik poda³ tekst opinii oraz ocenê,
+			\item Po pozytywnej walidacji, aplikacja edytuje opiniê.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem opinii oraz chcia³by zedytowaæ lub usun¹æ tê opiniê
+		\begin{enumerate}[label=\arabic*da.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik nie mo¿e zedytowaæ lub usun¹æ wybranej opinii (brak menu komentarza - trzech kropek), 
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje edytowanie opinii
+		\begin{enumerate}[label=\arabic*db.]
+			\setcounter{enumi}{4}
+			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do edytowania opinii,
+			\item Wy³¹czenie formularza do edytowania opinii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik nie uzupe³nia tekstu przy edytowaniu opinii
+		\begin{enumerate}[label=\arabic*dc.]
+			\setcounter{enumi}{7}
+			\item Aplikacja zmienia kolor obramowania nieuzupe³nionych pól na czerwono oraz wyœwietla pod tymi polami komunikat ,,Pole wymagane'',
+			\item Przejœcie do punktu 5d.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny Przebieg: & 
+		Usuniêcie opinii
+		\begin{enumerate}[label=\arabic*dd.]
+			\setcounter{enumi}{2}
+			\item U¿ytkownik klika przycisk ,,Usuñ'',
+			\item Aplikacja wyœwietla formularz z zapytaniem, czy opinia powinna zostaæ usuniêta (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-opinii}),
+			\item U¿ytkownik klika przycisk ,,Tak'',
+			\item Serwis usuwa komentarz.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje usuwanie opinii
+		\begin{enumerate}[label=\arabic*dda.]
+			\setcounter{enumi}{4}
+			\item U¿ytkownik klika przycisk ,,Nie'',
+			\item Opinia nie zostaje usuniêta.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik ustawia akceptacjê opinii (ustawiona ³apka jest koloru czarnego)
+		\begin{enumerate}[label=\arabic*e.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik nie jest autorem opinii,
+			\item U¿ytkownik klika kciuk w górê,
+			\item U¿ytkownik nie zostawi³ wczeœniej kciuka w górê przy danej opinii,
+			\item Aplikacja ustawia kciuk w górê dla opinii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik jest autorem opinii
+		\begin{enumerate}[label=\arabic*ea.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik nie mo¿e zostawiæ akceptacji w³asnej opinii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik zostawi³ wczeœniej kciuk w górê
+		\begin{enumerate}[label=\arabic*eb.]
+			\setcounter{enumi}{3}
+			\item Aplikacja usuwa kciuk w górê z opinii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik klika kciuk w dó³
+		\begin{enumerate}[label=\arabic*ec.]
+			\setcounter{enumi}{1}
+			\item U¿ytkownik klika kciuk w dó³,
+			\item U¿ytkownik nie zostawi³ wczeœniej kciuka w dó³,
+			\item Aplikacja ustawia kciuk w dó³ dla opinii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik zostawi³ wczeœniej kciuk w dó³
+		\begin{enumerate}[label=\arabic*ed.]
+			\setcounter{enumi}{3}
+			\item Aplikacja usuwa kciuk w dó³ z opinii.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-opinii-o-artykule-puste}
+	\caption{Prototyp pustego formularza do dodania lub edytowania opinii o artykule}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-artykule-puste}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-opinii-o-artykule}
+	\caption{Prototyp formularza do dodania lub edytowania opinii o artykule}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-artykule}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-usuniecia-opinii}
+	\caption{Prototyp potwierdzenia usuniêcia opinii}
+	\label{fig:prototyp-ui-akceptacja-usuniecia-opinii}
+\end{figure}
+
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - usuwanie opinii o artykule}
+	\label{tab:opis-opinii-uzycia-usuwanie-opinii-o-artykule} \\ \hline
+	Nazwa: & Usuwanie komentarzy o artykule \\ \hline
+	Opis: & Usuniêcie wybranej opinii o artykule \\ \hline
+	Aktorzy: & Administrator \\ \hline
+	Warunki pocz¹tkowe: & Otwarta zak³adka z opiniami o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule-administrator}) \\ \hline
+	Warunki koñcowe: & Usuniêcie opinii do artyku³u \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item U¿ytkownik klika trzy kropki przy jednej z opinii,
+			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranej opinii
+			\item U¿ytkownik klika przycisk ,,Usuñ'',
+			\item Aplikacja wyœwietla formularz z zapytaniem, czy opinia powinna zostaæ usuniêta (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-opinii}),
+			\item U¿ytkownik klika przycisk ,,Tak'',
+			\item Serwis usuwa opiniê.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje usuwanie opinii
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{4}
+			\item U¿ytkownik klika przycisk ,,Nie'',
+			\item Opinia nie zostaje usuniêta.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-opinie-o-artykule-administrator}
+	\caption{Prototyp listy opinii o artykule dla administratora}
+	\label{fig:prototyp-ui-opinie-o-artykule-administrator}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - wyszukiwanie technologii}
+	\label{tab:opis-przypadku-uzycia-wyszukiwanie-technologii}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Wyszukiwanie technologii \\ \hline
+		Opis: & Wyszukiwanie technologii wed³ug podanych przez u¿ytkownika kryteriów i wyœwietlenie wyników tego wyszukiwania w postaci listy technologii \\ \hline
+		Aktorzy: & U¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Brak \\ \hline
+		Warunki koñcowe: & Wyœwietlenie listy wyszukanych technologii \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika przycisk ,,Technologie'' znajduj¹cy siê w panelu nawigacji strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}),
+				\item Aplikacja wyœwietla widok zwi¹zany z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-technologii-puste}),
+				\item U¿ytkownik uzupe³nia kryteria wyszukiwania (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-technologii}),
+				\item U¿ytkownik klika przycisk ,,Szukaj'',
+				\item Serwis wyszukuje technologii,
+				\item Aplikacja wyœwietla listê wyszukanych technologii (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-technologii-wyniki}).
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-technologii-puste}
+	\caption{Prototyp wyszukiwania technologii z pustymi kryteriami wyszukiwania}
+	\label{fig:prototyp-ui-wyszukiwanie-technologii-puste}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-technologii}
+	\caption{Prototyp wyszukiwania technologii z podanymi kryteriami wyszukiwania}
+	\label{fig:prototyp-ui-wyszukiwanie-technologii}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-technologii-wyniki}
+	\caption{Prototyp wyszukiwania technologii z podanymi kryteriami wyszukiwania oraz wyszukanymi technologii}
+	\label{fig:prototyp-ui-wyszukiwanie-technologii-wyniki}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - sortowanie technologii}
+	\label{tab:opis-przypadku-uzycia-sortowanie-technologii}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Sortowanie technologii \\ \hline
+		Opis: & Posortowanie wyszukanych technologii wed³ug opcji sortowania wybranej przez u¿ytkownika oraz wyœwietlenie listy tych posortowanych technologii \\ \hline
+		Aktorzy: & U¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Wyszukanie technologii (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-technologii-wyniki}) \\ \hline
+		Warunki koñcowe: & Wyœwietlenie listy posortowanych technologii \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika na rozsuwan¹ listê ,,Sortowanie'',
+				\item U¿ytkownik wybiera jedn¹ z opcji sortowania (Rys.~\ref{fig:prototyp-ui-sortowanie-technologii-opcje}),
+				\item Aplikacja sortuje technologii wed³ug wybranej opcji sortowania,
+				\item Aplikacja wyœwietla listê posortowanych technologii.
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{rys02/prototypy-ui/prototyp-ui-sortowanie-technologii-opcje}
+	\caption{Prototyp sortowania technologii - dostêpne opcje sortowania}
+	\label{fig:prototyp-ui-sortowanie-technologii-opcje}
 \end{figure}
 
 
