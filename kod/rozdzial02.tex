@@ -60,6 +60,7 @@ W przypadku protoko³u \texttt{http} mo¿na wyró¿niæ 4 podstawowe typy ¿¹dañ:
 			\item Kategoria,
 			\item Zastosowania,
 			\item Lista opinii,
+			\item Œrednia ocena z co najmniej 5-ciu opinii,
 			\item Data pierwszego wydania (opcjonalne),
 			\item Data ostatniego wydania (opcjonalne).
 		\end{itemize}
@@ -692,6 +693,51 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 
 \begin{table}[H] \small
 	\centering
+	\caption{Opis przypadku u¿ycia - zmiana swojej dostêpnoœci}
+	\label{tab:opis-przypadku-uzycia-zmiana-swojej-dostepnosci}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Zmiana swojej dostêpnoœci \\ \hline
+		Opis: & Zmiana swojej dostêpnoœci w przypadku przypisywania artyku³ów do weryfikacji \\ \hline
+		Aktorzy: & Recenzent \\ \hline
+		Warunki pocz¹tkowe: & Zalogowanie siê u¿ytkownika \\ \hline
+		Warunki koñcowe: & Zmiana dostêpnoœci u¿ytkownika \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika na swój awatar dostêpny na nag³ówku strony aby wyœwietliæ opcje dotycz¹ce konta,
+				\item U¿ytkownik ma swoj¹ dostêpnoœæ ustawion¹ na ,,Dostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}),
+				\item U¿ytkownik klika przycisk ,,Dostêpny'',
+				\item Aplikacja zmienia dostêpnoœæ recenzenta na ,,Niedostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}), czyli takiemu 
+							recenzentowi nie bêd¹ przypisywane artyku³y do weryfikacji.
+			\end{enumerate}
+		\\ \hline
+		Alternatywny przebieg: & 
+			U¿ytkownik ma ustawion¹ swoj¹ dostêpnoœæ na ,,Niedostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent})
+			\begin{enumerate}[label=\arabic*a.]
+				\setcounter{enumi}{2}
+				\item U¿ytkownik klika przycisk ,,Niedostêpny'',
+				\item Aplikacja zmienia dostêpnoœæ recenzenta na ,,Dostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}), czyli takiemu 
+							recenzentowi bêd¹ teraz przypisywane artyku³y do weryfikacji.
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}
+	\caption{Prototyp nag³ówka strony dla dostêpnego recenzenta z otwartymi opcjami dotycz¹cymi konta}
+	\label{fig:prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}
+	\caption{Prototyp nag³ówka strony dla niedostêpnego recenzenta z otwartymi opcjami dotycz¹cymi konta}
+	\label{fig:prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
 	\caption{Opis przypadku u¿ycia - wyszukiwanie artyku³ów}
 	\label{tab:opis-przypadku-uzycia-wyszukiwanie-artykulow}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
@@ -983,7 +1029,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{table}[H] \small
 	\centering
 	\caption{Opis przypadku u¿ycia - przegl¹danie komentarzy o artykule}
-	\label{tab:opis-przypadku-uzycia-wyswietlenie-zawartosci-artykulu}
+	\label{tab:opis-przypadku-uzycia-przegl¹danie-komentarzy-o-artykule}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Przegl¹danie komentarzy o artykule \\ \hline
 		Opis: & Wyœwietlenie komentarzy dotycz¹cych danego artyku³u \\ \hline
@@ -1455,6 +1501,389 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\includegraphics[width=0.3\linewidth]{rys02/prototypy-ui/prototyp-ui-sortowanie-technologii-opcje}
 	\caption{Prototyp sortowania technologii - dostêpne opcje sortowania}
 	\label{fig:prototyp-ui-sortowanie-technologii-opcje}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - wyœwietlenie opisu technologii}
+	\label{tab:opis-przypadku-uzycia-wyswietlenie-opisu-technologii}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Wyœwietlenie opisu technologii \\ \hline
+		Opis: & Wyœwietlenie opisu technologii \\ \hline
+		Aktorzy: & U¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Brak \\ \hline
+		Warunki koñcowe: & Wyœwietlenie opisu technologii \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik wyszukuje technologie (Tab.~\ref{tab:opis-przypadku-uzycia-wyszukiwanie-technologii})
+				\item U¿ytkownik klika na jedn¹ z wyszukanych technologii,
+				\item Aplikacja wyœwietla opis technologii (Rys.~\ref{fig:prototyp-ui-technologia}).
+			\end{enumerate}
+		\\ \hline
+		Alternatywny przebieg: &
+			U¿ytkownik wyœwietla opis technologii poprzez artyku³
+			\begin{enumerate}[label=\arabic*a.]
+				\setcounter{enumi}{0}
+				\item U¿ytkownik wyszukuje artyku³ (Tab.~\ref{tab:opis-przypadku-uzycia-wyszukiwanie-artykulow}),
+				\item U¿ytkownik wyœwietla zawartoœæ artyku³u (Tab.~\ref{tab:opis-przypadku-uzycia-wyswietlenie-zawartosci-artykulu}),
+				\item U¿ytkownik klika przycisk ,,Opis technologii'',
+				\item Powrót do punktu 3.
+			\end{enumerate}
+	\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-technologia}
+	\caption{Prototyp technologii}
+	\label{fig:prototyp-ui-technologia}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - przegl¹danie komentarzy o technologii}
+	\label{tab:opis-przypadku-uzycia-przegl¹danie-komentarzy-o-technologii}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Przegl¹danie komentarzy o technologii \\ \hline
+		Opis: & Wyœwietlenie komentarzy dotycz¹cych danej technologii \\ \hline
+		Aktorzy: & U¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Otwarta technologia (Rys.~\ref{fig:prototyp-ui-technologia}) \\ \hline
+		Warunki koñcowe: & Wyœwietlenie komentarzy dotycz¹cych danej technologii \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item Serwis wyœwietla komentarze o technologii (Rys.~\ref{fig:prototyp-ui-komentarze-o-technologii}).
+			\end{enumerate}
+		\\ \hline
+		Alternatywny przebieg: &
+			U¿ytkownik klika przycisk ,,Opinie''
+			\begin{enumerate}[label=\arabic*a.]
+				\setcounter{enumi}{0}
+				\item U¿ytkownik klika przycisk ,,Komentarze'',
+				\item Przejœcie do punktu 0.
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-komentarze-o-technologii}
+	\caption{Prototyp listy komentarzy o technologii}
+	\label{fig:prototyp-ui-komentarze-o-technologii}
+\end{figure}
+
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - zarz¹dzanie komentarzami o technologii}
+	\label{tab:opis-przypadku-uzycia-zarzadzanie-komentarzami-o-technologii} \\ \hline
+	Nazwa: & Zarz¹dzanie komentarzami o technologii \\ \hline
+	Opis: & Dodanie komentarzy do technologii, edytowanie oraz usuniêcie w³asnych komentarzy do technologii \\ \hline
+	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
+	Warunki pocz¹tkowe: & Otwarta zak³adka z komentarzami do technologii (Rys.~\ref{fig:prototyp-ui-komentarze-o-technologii}) \\ \hline
+	Warunki koñcowe: & Dodanie, edytowanie lub usuniêcie komentarza do technologii \\ \hline
+	Przebieg: & 
+		Dodanie komentarza
+		\begin{enumerate}
+			\item U¿ytkownik klika przycisk ,,Dodaj komentarz'',
+			\item Aplikacja wyœwietla formularz do utworzenia komentarza (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii-puste}),
+			\item U¿ytkownik dodaje tekst komentarza (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii}),
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Aplikacja sprawdza, czy u¿ytkownik poda³ tekst komentarza,
+			\item Po pozytywnej walidacji komentarza, aplikacja dodaje komentarz do technologii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje tworzenie komentarza
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{2}
+			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do tworzenia komentarza,
+			\item Wy³¹czenie formularza do dodania komentarza.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik nie uzupe³nia tekstu przy tworzeniu komentarza
+		\begin{enumerate}[label=\arabic*b.]
+			\setcounter{enumi}{4}
+			\item Aplikacja wyœwietla u¿ytkownikowi informacje o tym, ¿e komentarz nie mo¿e byæ pusty,
+			\item Przejœcie do punktu 3.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny Przebieg: & 
+		Edytowanie komentarza
+		\begin{enumerate}[label=\arabic*c.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik klika trzy kropki przy jednym z komentarzy,
+			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranego komentarza
+			\item U¿ytkownik klika przycisk ,,Edytuj'',
+			\item Aplikacja wyœwietla formularz do edytowania komentarza (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii}),
+			\item U¿ytkownik edytuje tekst komentarza,
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Aplikacja sprawdza, czy u¿ytkownik poda³ tekst komentarza,
+			\item Po pozytywnej walidacji komentarza, aplikacja edytuje komentarz do technologii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem komentarza oraz chcia³by zedytowaæ lub usun¹æ ten komentarz
+		\begin{enumerate}[label=\arabic*ca.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik nie mo¿e zedytowaæ lub usun¹æ wybranego komentarza (brak menu komentarza - trzech kropek), 
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje edytowanie komentarza
+		\begin{enumerate}[label=\arabic*cb.]
+			\setcounter{enumi}{4}
+			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do edytowania komentarza,
+			\item Wy³¹czenie formularza do edytowania komentarza.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik nie uzupe³nia tekstu przy edytowaniu komentarza
+		\begin{enumerate}[label=\arabic*cc.]
+			\setcounter{enumi}{7}
+			\item Aplikacja wyœwietla u¿ytkownikowi informacje o tym, ¿e komentarz nie mo¿e byæ pusty,
+			\item Przejœcie do punktu 5c.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny Przebieg: & 
+		Usuniêcie komentarza
+		\begin{enumerate}[label=\arabic*cd.]
+			\setcounter{enumi}{2}
+			\item U¿ytkownik klika przycisk ,,Usuñ'' przy jednym z komentarzy,
+			\item Aplikacja wyœwietla formularz z zapytaniem, czy komentarz powinien zostaæ usuniêty (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-komentarza}),
+			\item U¿ytkownik klika przycisk ,,Tak'',
+			\item Serwis usuwa komentarz.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje usuwanie komentarza
+		\begin{enumerate}[label=\arabic*cda.]
+			\setcounter{enumi}{4}
+			\item U¿ytkownik klika przycisk ,,Nie'',
+			\item Komentarz nie zostaje usuniêty.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii-puste}
+	\caption{Prototyp pustego formularza do dodania lub edytowania komentarza o technologii}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii-puste}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii}
+	\caption{Prototyp formularza do dodania lub edytowania komentarza o technologii}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii}
+\end{figure}
+
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - usuwanie komentarzy o technologii}
+	\label{tab:opis-przypadku-uzycia-usuwanie-komentarzy-o-technologii} \\ \hline
+	Nazwa: & Usuwanie komentarzy o technologii \\ \hline
+	Opis: & Usuniêcie wybranego komentarza o technologii \\ \hline
+	Aktorzy: & Administrator \\ \hline
+	Warunki pocz¹tkowe: & Otwarta zak³adka z komentarzami o technologii (Rys.~\ref{fig:prototyp-ui-komentarze-o-technologii-administrator}) \\ \hline
+	Warunki koñcowe: & Usuniêcie komentarza do technologii \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item U¿ytkownik klika trzy kropki przy jednym z komentarzy,
+			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranego komentarza
+			\item U¿ytkownik klika przycisk ,,Usuñ'',
+			\item Aplikacja wyœwietla formularz z zapytaniem, czy komentarz powinien zostaæ usuniêty (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-komentarza}),
+			\item U¿ytkownik klika przycisk ,,Tak'',
+			\item Serwis usuwa komentarz.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje usuwanie komentarza
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{4}
+			\item U¿ytkownik klika przycisk ,,Nie'',
+			\item Komentarz nie zostaje usuniêty.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-komentarze-o-technologii-administrator}
+	\caption{Prototyp listy komentarzy o technologii dla administratora}
+	\label{fig:prototyp-ui-komentarze-o-technologii-administrator}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - przegl¹danie opinii o technologii}
+	\label{tab:opis-przypadku-uzycia-przegladanie-opinii-o-technologii}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Przegl¹danie opinii o technologii \\ \hline
+		Opis: & Wyœwietlenie opinii dotycz¹cych danej technologii \\ \hline
+		Aktorzy: & U¿ytkownik \\ \hline
+		Warunki pocz¹tkowe: & Otwarta technologia (Rys.~\ref{fig:prototyp-ui-technologia}) \\ \hline
+		Warunki koñcowe: & Wyœwietlenie opinii dotycz¹cych danej technologii \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika przycisk ,,Opinie'',
+				\item Aplikacja wyœwietla opinie o technologii (Rys.~\ref{fig:prototyp-ui-opinie-o-technologii}).
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-opinie-o-technologii}
+	\caption{Prototyp listy opinii o technologii}
+	\label{fig:prototyp-ui-opinie-o-technologii}
+\end{figure}
+
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - zarz¹dzanie opiniami o technologii}
+	\label{tab:opis-przypadku-uzycia-zarzadzanie-opiniami-o-technologii} \\ \hline
+	Nazwa: & Zarz¹dzanie opiniami o technologii \\ \hline
+	Opis: & Dodanie opinii o artykule, edytowanie oraz usuniêcie w³asnej opinii do technologii \\ \hline
+	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
+	Warunki pocz¹tkowe: & Otwarta zak³adka z opiniami do technologii (Rys.~\ref{fig:prototyp-ui-opinie-o-technologii}) \\ \hline
+	Warunki koñcowe: & Dodanie, edytowanie, usuniêcie opinii o technologii, dodanie akceptacji lub usuniêcie akceptacji\\ \hline
+	Przebieg: & 
+		Dodanie opinii
+		\begin{enumerate}
+			\item U¿ytkownik klika przycisk ,,Dodaj opiniê'',
+			\item Aplikacja wyœwietla formularz do utworzenia opinii (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-technologii-puste}),
+			\item U¿ytkownik dodaje tekst opinii oraz wystawia ocenê (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-technologii}),
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Aplikacja sprawdza, czy u¿ytkownik poda³ tekst opinii oraz ocenê,
+			\item Po pozytywnej walidacji, aplikacja dodaje opiniê.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje tworzenie opinii
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{2}
+			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do tworzenia opinii,
+			\item Wy³¹czenie formularza do dodania opinii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik nie uzupe³nia wszystkich wymaganych pól formularza
+		\begin{enumerate}[label=\arabic*b.]
+			\setcounter{enumi}{5}
+			\item Aplikacja zmienia kolor obramowania nieuzupe³nionych pól na czerwono oraz wyœwietla pod tymi polami komunikat ,,Pole wymagane'',
+			\item Przejœcie do punktu 3.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny Przebieg: & 
+		Edytowanie opinii
+		\begin{enumerate}[label=\arabic*c.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik klika trzy kropki przy jednej z opinii,
+			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranej opinii
+			\item U¿ytkownik klika przycisk ,,Edytuj'',
+			\item Aplikacja wyœwietla formularz do edytowania opinii (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-technologii}),
+			\item U¿ytkownik edytuje opiniê,
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Aplikacja sprawdza, czy u¿ytkownik poda³ tekst opinii oraz ocenê,
+			\item Po pozytywnej walidacji, aplikacja edytuje opiniê.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem opinii oraz chcia³by zedytowaæ lub usun¹æ tê opiniê
+		\begin{enumerate}[label=\arabic*ca.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik nie mo¿e zedytowaæ lub usun¹æ wybranej opinii (brak menu opinii - trzech kropek), 
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje edytowanie opinii
+		\begin{enumerate}[label=\arabic*cb.]
+			\setcounter{enumi}{4}
+			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do edytowania opinii,
+			\item Wy³¹czenie formularza do edytowania opinii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik nie uzupe³nia tekstu przy edytowaniu opinii
+		\begin{enumerate}[label=\arabic*cc.]
+			\setcounter{enumi}{7}
+			\item Aplikacja zmienia kolor obramowania nieuzupe³nionych pól na czerwono oraz wyœwietla pod tymi polami komunikat ,,Pole wymagane'',
+			\item Przejœcie do punktu 5d.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny Przebieg: & 
+		Usuniêcie opinii
+		\begin{enumerate}[label=\arabic*cd.]
+			\setcounter{enumi}{2}
+			\item U¿ytkownik klika przycisk ,,Usuñ'',
+			\item Aplikacja wyœwietla formularz z zapytaniem, czy opinia powinna zostaæ usuniêta (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-opinii}),
+			\item U¿ytkownik klika przycisk ,,Tak'',
+			\item Serwis usuwa opiniê.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje usuwanie opinii
+		\begin{enumerate}[label=\arabic*cda.]
+			\setcounter{enumi}{4}
+			\item U¿ytkownik klika przycisk ,,Nie'',
+			\item Opinia nie zostaje usuniêta.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik ustawia akceptacjê opinii (ustawiona ³apka jest koloru czarnego)
+		\begin{enumerate}[label=\arabic*d.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik nie jest autorem opinii,
+			\item U¿ytkownik klika kciuk w górê,
+			\item U¿ytkownik nie zostawi³ wczeœniej kciuka w górê przy danej opinii,
+			\item Aplikacja ustawia kciuk w górê dla opinii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik jest autorem opinii
+		\begin{enumerate}[label=\arabic*da.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik nie mo¿e zostawiæ akceptacji w³asnej opinii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik zostawi³ wczeœniej kciuk w górê
+		\begin{enumerate}[label=\arabic*db.]
+			\setcounter{enumi}{3}
+			\item Aplikacja usuwa kciuk w górê z opinii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik klika kciuk w dó³
+		\begin{enumerate}[label=\arabic*dc.]
+			\setcounter{enumi}{1}
+			\item U¿ytkownik klika kciuk w dó³,
+			\item U¿ytkownik nie zostawi³ wczeœniej kciuka w dó³,
+			\item Aplikacja ustawia kciuk w dó³ dla opinii.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik zostawi³ wczeœniej kciuk w dó³
+		\begin{enumerate}[label=\arabic*dd.]
+			\setcounter{enumi}{3}
+			\item Aplikacja usuwa kciuk w dó³ z opinii.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-opinii-o-technologii-puste}
+	\caption{Prototyp pustego formularza do dodania lub edytowania opinii o technologii}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-technologii-puste}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-opinii-o-technologii}
+	\caption{Prototyp formularza do dodania lub edytowania opinii o technologii}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-technologii}
 \end{figure}
 
 
