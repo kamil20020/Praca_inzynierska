@@ -1080,9 +1080,9 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-artykulu-puste}
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-artykulu-pusty}
 	\caption{Prototyp pustego formularza do dodania lub edytowania artyku³u}
-	\label{fig:prototyp-ui-dodawanie-edytowanie-artykulu-puste}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-artykulu-pusty}
 \end{figure}
 
 \begin{figure}[H]
@@ -1201,46 +1201,29 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		\begin{enumerate}
 			\item U¿ytkownik przegl¹da ca³y artyku³,
 			\item U¿ytkownik klika przycisk ,,Odrzuæ'' na dole strony,
-			\item Aplikacja wyœwietla formularz do odrzucenia artyku³u (Rys.~\ref{fig:prototyp-ui-odrzucenie-artykulu-puste}),
-			\item U¿ytkownik uzupe³nia uzasadnienie akceptacji artyku³u oraz ewentualnie daje wskazówki, co mo¿na by by³o poprawiæ w artykule 
-						(Rys.~\ref{fig:prototyp-ui-odrzucenie-artykulu-puste}),
+			\item Aplikacja wyœwietla formularz do odrzucenia artyku³u,
+			\item U¿ytkownik uzupe³nia uzasadnienie akceptacji artyku³u oraz ewentualnie daje wskazówki, co mo¿na by by³o poprawiæ w artykule,
 			\item U¿ytkownik klika przycisk ,,ZatwierdŸ'',
-			\item Serwis sprawdza, czy u¿ytkownik uzupe³ni³ pole tekstowe,
-			\item Po pozytywnej weryfikacji, artyku³ zostaje odrzucony.
+			\item Artyku³ zostaje odrzucony.
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
 		U¿ytkownik anuluje akceptacjê artyku³u
 		\begin{enumerate}[label=\arabic*a.]
 			\setcounter{enumi}{3}
-			\item Serwis wy³¹cza formularz do odrzucenia artyku³u.
+			\item Serwis wy³¹cza formularz do akceptacji artyku³u.
 		\end{enumerate}
 	\\ \hline
 	\end{tabularx}
 	Alternatywny przebieg: &
-		U¿ytkownik nie uzupe³ni³ pola tekstowego
-		\begin{enumerate}[label=\arabic*b.]
-			\setcounter{enumi}{6}
-			\item Serwis ustawia obramowanie nieuzupe³nionego pola tekstowego na czerwono oraz umieszcza pod tym polem komunikat o koniecznoœci jego uzupe³nienia,
-			\item Powrót do punktu 4.
+		U¿ytkownik anuluje akceptacjê artyku³u
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{3}
+			\item Serwis wy³¹cza formularz do akceptacji artyku³u.
 		\end{enumerate}
 	\\ \hline
 	\end{tabularx}
 \end{table}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu-puste}
-	\caption{Prototyp pustego formularza do odrzucenia artyku³u}
-	\label{fig:prototyp-ui-odrzucenie-artykulu-puste}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu}
-	\caption{Prototyp formularza do odrzucenia artyku³u}
-	\label{fig:prototyp-ui-odrzucenie-artykulu}
-\end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku u¿ycia - zarz¹dzanie artyku³ami} 
