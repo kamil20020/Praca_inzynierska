@@ -693,6 +693,145 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 
 \begin{table}[H] \small
 	\centering
+	\caption{Opis przypadku u¿ycia - edycja danych innych u¿ytkowników}
+	\label{tab:opis-przypadku-uzycia-edycja-danych-innych-uzytkownikow}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Edycja danych innych u¿ytkowników \\ \hline
+		Opis: & Edytowanie danych dotycz¹cych konta u¿ytkownika \\ \hline
+		Aktorzy: & Administrator \\ \hline
+		Warunki pocz¹tkowe: & Brak \\ \hline
+		Warunki koñcowe: & Edytowanie danych u¿ytkownika \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika na przycisk ,,Zarz¹dzanie u¿ytkownikami'' znajduj¹cy siê w menu g³ównym strony (Rys.~\ref{fig:prototyp-ui-naglowek-administrator}),
+				\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}),
+				\item U¿ytkownik klika przycisk ,,Edytuj dane'',
+				\item Serwis wyœwietla formularz edycji danych (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}),
+				\item U¿ytkownik zmienia dane w formularzu,
+				\item U¿ytkownik klika przycisk ,,Zapisz'',
+				\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
+				\item Po pozytywnej walidacji danych, aplikacja zmienia dane u¿ytkownika zgodnie z wprowadzonymi zmianami.
+			\end{enumerate}
+		\\ \hline
+		Alternatywny przebieg: &
+			U¿ytkownik anuluje edycjê danych
+			\begin{enumerate}[label=\arabic*a.]
+				\setcounter{enumi}{5}
+				\item U¿ytkownik klika przycisk ,,Anuluj'',
+				\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys.~\ref{fig:prototyp-ui-naglowek-administrator}).
+			\end{enumerate}
+		\\ \hline
+		Alternatywny przebieg: &
+			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
+			\begin{enumerate}[label=\arabic*b.]
+				\setcounter{enumi}{8}
+				\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
+				\item Powrót do punktu 5.
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-administrator}
+	\caption{Prototyp nag³ówka strony dla administratora}
+	\label{fig:prototyp-ui-naglowek-administrator}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}
+	\caption{Prototyp panelu z danymi innego u¿ytkownika}
+	\label{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}
+	\caption{Prototyp panelu z edycj¹ danych innego u¿ytkownika}
+	\label{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - przypisywanie u¿ytkownikom ról}
+	\label{tab:opis-przypadku-uzycia-przypisywanie-uzytkownikowi-rol}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Przypisywanie u¿ytkownikom ról \\ \hline
+		Opis: & Przypisywanie roli u¿ytkownikowi \\ \hline
+		Aktorzy: & Administrator \\ \hline
+		Warunki pocz¹tkowe: & Otwarte okno z zarz¹dzaniem danymi u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}) \\ \hline
+		Warunki koñcowe: & Przypisanie u¿ytkownikowi roli \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika na przycisk ,,Zarz¹dzanie rolami'',
+				\item Aplikacja wyœwietla panel do zarz¹dzania rolami u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-role}),
+				\item U¿ytkownik klika przycisk ,,Dodaj rolê'',
+				\item Serwis wyœwietla formularz do przypisania wybranemu u¿ytkownikowi nowej roli spoœród recenzenta i administratora 
+							(Rys~\ref{fig:prototyp-ui-przypisywanie-roli})
+				\item U¿ytkownik wybiera jedn¹ z dostêpnych ról,
+				\item Serwis wyœwietla formularz edycji danych (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}),
+				\item U¿ytkownik zmienia dane w formularzu,
+				\item U¿ytkownik klika przycisk ,,Zapisz'',
+				\item Serwis sprawdza, czy u¿ytkownik poda³ rolê,
+				\item Po pozytywnej walidacji danych, aplikacja przypisuje wybranemu u¿ytkownikowi rolê.
+			\end{enumerate}
+		\\ \hline
+		Alternatywny przebieg: &
+			U¿ytkownik anuluje przypisywanie roli
+			\begin{enumerate}[label=\arabic*a.]
+				\setcounter{enumi}{4}
+				\item U¿ytkownik klika przycisk ,,Anuluj'',
+				\item Aplikacja wy³¹cza formularz do przypisywania roli.
+			\end{enumerate}
+		\\ \hline
+		Alternatywny przebieg: &
+			U¿ytkownik nie poda³ roli
+			\begin{enumerate}[label=\arabic*b.]
+				\setcounter{enumi}{9}
+				\item Aplikacja ustawia kolor obramowania pola z wyborem roli na kolor czerwony oraz wyœwietla pod tym polem komunikat ,,Pole nie mo¿e byæ puste'',
+				\item Powrót do punktu 7.
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-zarzadzanie-uzytkownikami-role}
+	\caption{Prototyp panelu z zarz¹dzaniem rolami u¿ytkownika}
+	\label{fig:prototyp-ui-zarzadzanie-uzytkownikami-role}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-przypisywanie-roli}
+	\caption{Prototyp formularza z przypisywaniem u¿ytkownikowi roli}
+	\label{fig:prototyp-ui-przypisywanie-roli}
+\end{figure}
+
+\begin{table}[H] \small
+	\centering
+	\caption{Opis przypadku u¿ycia - usuwanie u¿ytkownikom ról}
+	\label{tab:opis-przypadku-uzycia-usuwanie-uzytkownikom-rol}
+	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
+	  Nazwa: & Usuwanie u¿ytkownikom ról \\ \hline
+		Opis: & Usuniêcie u¿ytkownikowi roli \\ \hline
+		Aktorzy: & Administrator \\ \hline
+		Warunki pocz¹tkowe: & Otwarte okno z zarz¹dzaniem rolami u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-role}) \\ \hline
+		Warunki koñcowe: & Usuniêcie roli u¿ytkownika \\ \hline
+		Przebieg: & 
+			\begin{enumerate}
+				\item U¿ytkownik klika przycisk ,,Usuñ'' przy jednej z ról,
+				\item Aplikacja usuwa innemu u¿ytkownikowi wybran¹ rolê.
+			\end{enumerate}
+		\\ \hline
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H] \small
+	\centering
 	\caption{Opis przypadku u¿ycia - zmiana swojej dostêpnoœci}
 	\label{tab:opis-przypadku-uzycia-zmiana-swojej-dostepnosci}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
