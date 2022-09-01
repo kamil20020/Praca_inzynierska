@@ -973,7 +973,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{fig:prototyp-ui-artykul}
 \end{figure}
 
-\begin{longtable}{| m{0.3\linewidth} | m{0.65\linewidth} |}
+\begin{longtable}{| m{0.3\linewidth} | m{0.64\linewidth} |}
 	\caption{Opis przypadku u¿ycia - zarz¹dzanie w³asnymi artyku³ami} 
 	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasnymi-artykulami}  \\ \hline
 	Nazwa: & Zarz¹dzanie w³asnymi artyku³ami \\ \hline
@@ -985,7 +985,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		Dodawanie artyku³u
 		\begin{enumerate}
 			\item U¿ytkownik klika przycisk ,,Dodaj artyku³'',
-			\item Aplikacja wyœwietla formularz do dodania artyku³u (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-artykulu-puste}),
+			\item Aplikacja wyœwietla formularz do dodania artyku³u (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-artykulu-pusty}),
 			\item U¿ytkownik wype³nia wszystkie pola w formularzu (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-artykulu})
 			\item U¿ytkownik klika przycisk ,,Zapisz'',
 			\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
@@ -1115,32 +1115,33 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item Serwis wyœwietla formularz do przeprowadzenia weryfikacji artyku³u (Rys.~\ref{fig:prototyp-ui-weryfikacja-artykulu}).
 		\end{enumerate}
 	\\ \hline
-\end{longtable}
+	\end{tabularx}
+\end{table}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-recenzent}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-recenzent}
 	\caption{Prototyp nag³owka strony dla recenzenta}
 	\label{fig:prototyp-ui-naglowek-recenzent}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-artykuly-weryfikowane}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-artykuly-weryfikowane}
 	\caption{Prototyp listy artyku³ów do weryfikacji}
 	\label{fig:prototyp-ui-artykuly-weryfikowane}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-weryfikacja-artykulu}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-weryfikacja-artykulu}
 	\caption{Prototyp weryfikacji artyku³u}
 	\label{fig:prototyp-ui-weryfikacja-artykulu}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku u¿ycia - akceptacja artyku³u} 
-	\label{tab:opis-przypadku-uzycia-akceptacja-artykulu}  \\ \hline
+	\label{tab:opis-przypadku-uzycia-akceptacja-artyku³u}  \\ \hline
 	Nazwa: & Akceptacja artyku³u \\ \hline
 	Opis: & Akceptacja artyku³u, aby artyku³ ten zosta³ opublikowany w serwisie \\ \hline
 	Aktorzy: & Recenzent \\ \hline
@@ -1171,25 +1172,26 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item Przejœcie do punktu 5.
 		\end{enumerate}
 	\\ \hline
-\end{longtable}
+	\end{tabularx}
+\end{table}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-artykulu-puste}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-artykulu-puste}
 	\caption{Prototyp pustego formularza do akceptacji artyku³u}
 	\label{fig:prototyp-ui-akceptacja-artykulu-puste}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-artykulu}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-artykulu}
 	\caption{Prototyp formularza do akceptacji artyku³u}
 	\label{fig:prototyp-ui-akceptacja-artykulu}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku u¿ycia - odrzucenie artyku³u}
-	\label{tab:opis-przypadku-uzycia-odrzucenie-artykulu}  \\ \hline
+	\caption{Opis przypadku u¿ycia - odrzucenie artyku³u} 
+	\label{tab:opis-przypadku-uzycia-odrzucenie-artyku³u}  \\ \hline
 	Nazwa: & Odrzucenie artyku³u \\ \hline
 	Opis: & Odrzucenie artyku³u, aby artyku³ ten nie zosta³ opublikowany w serwisie, gdy¿ wymaga on poprawek \\ \hline
 	Aktorzy: & Recenzent \\ \hline
@@ -1214,6 +1216,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item Serwis wy³¹cza formularz do odrzucenia artyku³u.
 		\end{enumerate}
 	\\ \hline
+	\end{tabularx}
 	Alternatywny przebieg: &
 		U¿ytkownik nie uzupe³ni³ pola tekstowego
 		\begin{enumerate}[label=\arabic*b.]
@@ -1222,18 +1225,19 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item Powrót do punktu 4.
 		\end{enumerate}
 	\\ \hline
-\end{longtable}
+	\end{tabularx}
+\end{table}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu-puste}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu-puste}
 	\caption{Prototyp pustego formularza do odrzucenia artyku³u}
 	\label{fig:prototyp-ui-odrzucenie-artykulu-puste}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu}
 	\caption{Prototyp formularza do odrzucenia artyku³u}
 	\label{fig:prototyp-ui-odrzucenie-artykulu}
 \end{figure}

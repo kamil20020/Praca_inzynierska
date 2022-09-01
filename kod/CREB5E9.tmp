@@ -973,110 +973,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{fig:prototyp-ui-artykul}
 \end{figure}
 
-\begin{longtable}{| m{0.3\linewidth} | m{0.65\linewidth} |}
-	\caption{Opis przypadku u¿ycia - zarz¹dzanie w³asnymi artyku³ami} 
-	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasnymi-artykulami}  \\ \hline
-	Nazwa: & Zarz¹dzanie w³asnymi artyku³ami \\ \hline
-	Opis: & Dodawanie artyku³ów, edytowanie oraz usuwanie w³asnych artyku³ów \\ \hline
-	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
-	Warunki pocz¹tkowe: & Otwarta podstrona z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}) \\ \hline
-	Warunki koñcowe: & Dodawanie, edytowanie lub usuniêcie artyku³u \\ \hline
-	Przebieg: & 
-		Dodawanie artyku³u
-		\begin{enumerate}
-			\item U¿ytkownik klika przycisk ,,Dodaj artyku³'',
-			\item Aplikacja wyœwietla formularz do dodania artyku³u (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-artykulu-puste}),
-			\item U¿ytkownik wype³nia wszystkie pola w formularzu (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-artykulu})
-			\item U¿ytkownik klika przycisk ,,Zapisz'',
-			\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
-			\item Po pozytywnej walidacji danych, aplikacja tworzy artyku³,
-			\item Serwis przesy³a artyku³ do weryfikacji,
-			\item Aplikacja wyœwietla u¿ytkownikowi wygl¹d utworzonego artyku³u.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik anuluje dodanie artyku³u
-		\begin{enumerate}[label=\arabic*a.]
-			\setcounter{enumi}{2}
-			\item U¿ytkownik klika przycisk ,,Anuluj'', 
-			\item U¿ytkownik zostaje przekierowany do strony z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}).
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik nie uzupe³nia wszystkich pól formularza podczas dodawania artyku³u
-		\begin{enumerate}[label=\arabic*b.]
-			\setcounter{enumi}{5}
-			\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie, 
-			\item Przejœcie do punktu 3.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		Edytowanie artyku³u
-		\begin{enumerate}[label=\arabic*c.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik wyszukuje artyku³y,
-			\item U¿ytkownik klika na jeden z wyszukanych artyku³ów,
-			\item Aplikacja wyœwietla zawartoœæ wybranego artyku³u (Rys.~\ref{fig:prototyp-ui-artykul}),
-			\item U¿ytkownik klika przycisk ,,Edytuj'',
-			\item Serwis wyœwietla formularz do edycji artyku³u (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-artykulu})
-			\item U¿ytkownik wype³nia wszystkie pola w formularzu
-			\item U¿ytkownik klika przycisk ,,Zapisz'',
-			\item Aplikacja przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
-			\item Po pozytywnej walidacji danych, aplikacja edytuje artyku³ wed³ug zmian wprowadzonych przez u¿ytkownika,
-			\item Serwis przesy³a artyku³ do weryfikacji,
-			\item Aplikacja przedstawia u¿ytkownikowi wygl¹d zmienionego artyku³u.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem artyku³u oraz chcia³by zedytowaæ ten artyku³
-		\begin{enumerate}[label=\arabic*ca.]
-			\setcounter{enumi}{3}
-			\item U¿ytkownik nie mo¿e zedytowaæ wybranego artyku³u (brak przycisku ,,Edytuj''), 
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik anuluje edytowanie artyku³u
-		\begin{enumerate}[label=\arabic*cb.]
-			\setcounter{enumi}{2}
-			\item U¿ytkownik klika przycisk ,,Anuluj'', 
-			\item U¿ytkownik zostaje przekierowany do strony z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}).
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik nie uzupe³nia wszystkich pól formularza podczas edytowania artyku³u
-		\begin{enumerate}[label=\arabic*cc.]
-			\setcounter{enumi}{8}
-			\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie, 
-			\item Przejœcie do punktu 6c.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		Usuniêcie artyku³u
-		\begin{enumerate}[label=\arabic*cd.]
-			\setcounter{enumi}{3}
-			\item U¿ytkownik klika przycisk ,,Usuñ'',
-			\item Aplikacja wyœwietla komunikat z potwierdzeniem usuniêcia artyku³u (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-artykulu})
-			\item U¿ytkownik klika przycisk ,,Tak'',
-			\item Serwis usuwa artyku³,
-			\item U¿ytkownik zostaje przekierowany do strony z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}).
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem artyku³u, który chce usun¹æ
-		\begin{enumerate}[label=\arabic*cda.]
-			\setcounter{enumi}{3}
-			\item U¿ytkownik nie mo¿e usun¹æ wybranego artyku³u (brak przycisku ,,Usuñ''),.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		Anulowanie usuniêcia artyku³u
-		\begin{enumerate}[label=\arabic*cdb.]
-			\setcounter{enumi}{5}
-			\item U¿ytkownik klika przycisk ,,Nie'' albo w obszar poza formularzem,
-			\item U¿ytkownik zostaje przekierowany do strony z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}).
-		\end{enumerate}
-	\\ \hline
-\end{longtable}
+
 
 \begin{figure}[H]
 	\centering
@@ -1115,32 +1012,33 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item Serwis wyœwietla formularz do przeprowadzenia weryfikacji artyku³u (Rys.~\ref{fig:prototyp-ui-weryfikacja-artykulu}).
 		\end{enumerate}
 	\\ \hline
-\end{longtable}
+	\end{tabularx}
+\end{table}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-recenzent}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-recenzent}
 	\caption{Prototyp nag³owka strony dla recenzenta}
 	\label{fig:prototyp-ui-naglowek-recenzent}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-artykuly-weryfikowane}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-artykuly-weryfikowane}
 	\caption{Prototyp listy artyku³ów do weryfikacji}
 	\label{fig:prototyp-ui-artykuly-weryfikowane}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-weryfikacja-artykulu}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-weryfikacja-artykulu}
 	\caption{Prototyp weryfikacji artyku³u}
 	\label{fig:prototyp-ui-weryfikacja-artykulu}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku u¿ycia - akceptacja artyku³u} 
-	\label{tab:opis-przypadku-uzycia-akceptacja-artykulu}  \\ \hline
+	\label{tab:opis-przypadku-uzycia-akceptacja-artyku³u}  \\ \hline
 	Nazwa: & Akceptacja artyku³u \\ \hline
 	Opis: & Akceptacja artyku³u, aby artyku³ ten zosta³ opublikowany w serwisie \\ \hline
 	Aktorzy: & Recenzent \\ \hline
@@ -1171,25 +1069,26 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item Przejœcie do punktu 5.
 		\end{enumerate}
 	\\ \hline
-\end{longtable}
+	\end{tabularx}
+\end{table}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-artykulu-puste}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-artykulu-puste}
 	\caption{Prototyp pustego formularza do akceptacji artyku³u}
 	\label{fig:prototyp-ui-akceptacja-artykulu-puste}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-artykulu}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-artykulu}
 	\caption{Prototyp formularza do akceptacji artyku³u}
 	\label{fig:prototyp-ui-akceptacja-artykulu}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku u¿ycia - odrzucenie artyku³u}
-	\label{tab:opis-przypadku-uzycia-odrzucenie-artykulu}  \\ \hline
+	\caption{Opis przypadku u¿ycia - odrzucenie artyku³u} 
+	\label{tab:opis-przypadku-uzycia-odrzucenie-artyku³u}  \\ \hline
 	Nazwa: & Odrzucenie artyku³u \\ \hline
 	Opis: & Odrzucenie artyku³u, aby artyku³ ten nie zosta³ opublikowany w serwisie, gdy¿ wymaga on poprawek \\ \hline
 	Aktorzy: & Recenzent \\ \hline
@@ -1214,6 +1113,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item Serwis wy³¹cza formularz do odrzucenia artyku³u.
 		\end{enumerate}
 	\\ \hline
+	\end{tabularx}
 	Alternatywny przebieg: &
 		U¿ytkownik nie uzupe³ni³ pola tekstowego
 		\begin{enumerate}[label=\arabic*b.]
@@ -1222,18 +1122,19 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item Powrót do punktu 4.
 		\end{enumerate}
 	\\ \hline
-\end{longtable}
+	\end{tabularx}
+\end{table}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu-puste}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu-puste}
 	\caption{Prototyp pustego formularza do odrzucenia artyku³u}
 	\label{fig:prototyp-ui-odrzucenie-artykulu-puste}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu}
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu}
 	\caption{Prototyp formularza do odrzucenia artyku³u}
 	\label{fig:prototyp-ui-odrzucenie-artykulu}
 \end{figure}
