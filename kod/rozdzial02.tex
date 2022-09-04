@@ -177,7 +177,7 @@ Zdefiniowano nastêpuj¹ce definicje:
 				
 \section{Wymagania funkcjonalne poszczególnych ról u¿ytkowników}
 	Po zdefiniowaniu potrzebnych definicji, mo¿na by³o ju¿ przyst¹piæ do okreœlenia wymagañ funkcjonalnych poszczególnych ról u¿ytkowników, które bêd¹ opisywa³y dostêpne
-	dla nich funkcje.
+	funkcje dla u¿ytkowników.
 	\newline
 	\newline
 	Zdefiniowano nastêpuj¹ce wymagania funkcjonalne:
@@ -375,6 +375,8 @@ Na podstawie celu oraz zakresu pracy zdefiniowano nastêpuj¹ce wymagania niefunkc
 
 \chapter{Diagramy przypadków u¿ycia}
 
+Na podstawie zdefiniowanych wczeœniej wymagañ funkcjonalnych, wykonano identyfikacjê aktorów oraz sporz¹dzono diagramy przypadków u¿ycia. Do stworzenia diagramów wykorzystano program \texttt{Visual Paradigm Standard}.
+
 \section{Identyfikacja aktorów}
 
 Na podstawie analizy wymagañ funkcjonalnych zdefiniowano nastêpuj¹cych aktorów:
@@ -395,16 +397,16 @@ Na podstawie analizy wymagañ funkcjonalnych zdefiniowano nastêpuj¹cych aktorów:
 \end{itemize}
 
 \section{Diagramy przypadków u¿ycia}
-Na podstawie zdefiniowanych wczeœniej wymagañ funkcjonalnych sporz¹dzono diagramy przypadków u¿ycia. Zdecydowano siê na zastosowanie dziedziczenia miêdzy aktorami, gdy¿ zdefiniowane role charakteryzuj¹ siê tym, ¿e posiadaj¹ wiele wspólnych uprawnieñ (przypadków u¿ycia) i dzia³anie to pozwala na zmniejszenie z³o¿onoœci systemu. Dziedziczenie zosta³o przedstawione na rysunku~\ref{fig:dziedziczenie-aktorow}.
+Na podstawie zdefiniowanych wczeœniej wymagañ funkcjonalnych oraz zidentyfikowanych aktorów, sporz¹dzono diagramy przypadków u¿ycia. Zdecydowano siê na zastosowanie dziedziczenia miêdzy aktorami, gdy¿ opracowane role charakteryzuj¹ siê tym, ¿e posiadaj¹ wiele wspólnych uprawnieñ (przypadków u¿ycia) i dzia³anie to pozwala na zmniejszenie z³o¿onoœci systemu. Dziedziczenie aktorów zosta³o przedstawione na rysunku~\ref{fig:dziedziczenie-aktorow}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{rys02/dziedziczenie-aktorow}
+	\includegraphics[width=\linewidth]{rys02/dziedziczenie-aktorow}
 	\caption{Dziedziczenie miêdzy aktorami}
 	\label{fig:dziedziczenie-aktorow}
 \end{figure}
 
-Z powody dosyæ du¿ej z³o¿onoœci systemu pod wzglêdem liczby wymagañ funkcjonalnych i liczby ról, to dla zachowania czytelnoœci diagramu, stworzono osobne diagramy dla ka¿dej roli. Na rysunku~\ref{fig:diagram-przypadkow-uzycia-uzytkownik} jest pokazany diagram dotycz¹cy \texttt{u¿ytkownika}~(ka¿dego u¿ytkownika), na rysunku~\ref{fig:diagram-przypadkow-uzycia-niezalogowany-uzytkownik} jest przedstawiony diagram dla \texttt{niezalogowanego u¿ytkownika}, na rysunku~\ref{fig:diagram-przypadkow-uzycia-zalogowany-uzytkownik} widnieje diagram dotycz¹cy \texttt{zalogowanego u¿ytkownika}, na rysunku~\ref{fig:diagram-przypadkow-uzycia-recenzent} jest diagram zawieraj¹cy funkcjonalnoœci \texttt{recenzenta}, a na rysunku~\ref{fig:diagram-przypadkow-uzycia-administrator} jest przedstawiony diagram dla \texttt{administratora}.
+Z powody dosyæ du¿ej z³o¿onoœci systemu pod wzglêdem liczby wymagañ funkcjonalnych i liczby ról, dla zachowania czytelnoœci, stworzono osobne diagramy dla ka¿dego aktora. Poni¿ej znajduj¹ siê diagramy przypadków u¿ycia dla poszczególnych aktorów. 
 
 \begin{figure}[H]
 	\centering
@@ -418,6 +420,34 @@ Z powody dosyæ du¿ej z³o¿onoœci systemu pod wzglêdem liczby wymagañ funkcjonalny
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-niezalogowany-uzytkownik}
 	\caption{Diagram przypadków u¿ycia dla niezalogowanego u¿ytkownika}
 	\label{fig:diagram-przypadkow-uzycia-niezalogowany-uzytkownik}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-autor-artykulu}
+	\caption{Diagram przypadków u¿ycia dla autora artyku³u}
+	\label{fig:diagram-przypadkow-uzycia-autor-artykulu}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-autor-komentarza-o-artykule}
+	\caption{Diagram przypadków u¿ycia dla autora komentarza o artykule}
+	\label{fig:diagram-przypadkow-uzycia-autor-komentarza-o-artykule}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-autor-opinii-o-artykule}
+	\caption{Diagram przypadków u¿ycia dla autora opinii o artykule}
+	\label{fig:diagram-przypadkow-uzycia-autor-opinii-o-artykule}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-autor-akceptacji-opinii-o-artykule}
+	\caption{Diagram przypadków u¿ycia dla autora akceptacji opinii artykule}
+	\label{fig:diagram-przypadkow-uzycia-autor-akceptacji-opinii-o-artykule}
 \end{figure}
 
 \begin{figure}[H]
@@ -439,6 +469,13 @@ Z powody dosyæ du¿ej z³o¿onoœci systemu pod wzglêdem liczby wymagañ funkcjonalny
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-administrator}
 	\caption{Diagram przypadków u¿ycia dla administratora}
 	\label{fig:diagram-przypadkow-uzycia-administrator}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{rys02/diagram-przypadkow-uzycia-system}
+	\caption{Diagram przypadków u¿ycia dla systemu}
+	\label{fig:diagram-przypadkow-uzycia-system}
 \end{figure}
 
 \section{Opisy przypadków u¿ycia}
@@ -1787,352 +1824,6 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-technologia}
 	\caption{Prototyp technologii}
 	\label{fig:prototyp-ui-technologia}
-\end{figure}
-
-\begin{table}[H] \small
-	\centering
-	\caption{Opis przypadku u¿ycia - przegl¹danie komentarzy o technologii}
-	\label{tab:opis-przypadku-uzycia-przegl¹danie-komentarzy-o-technologii}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Przegl¹danie komentarzy o technologii \\ \hline
-		Opis: & Wyœwietlenie komentarzy dotycz¹cych danej technologii \\ \hline
-		Aktorzy: & U¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Otwarta technologia (Rys.~\ref{fig:prototyp-ui-technologia}) \\ \hline
-		Warunki koñcowe: & Wyœwietlenie komentarzy dotycz¹cych danej technologii \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item Serwis wyœwietla komentarze o technologii (Rys.~\ref{fig:prototyp-ui-komentarze-o-technologii}).
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			U¿ytkownik klika przycisk ,,Opinie''
-			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{0}
-				\item U¿ytkownik klika przycisk ,,Komentarze'',
-				\item Przejœcie do punktu 0.
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-komentarze-o-technologii}
-	\caption{Prototyp listy komentarzy o technologii}
-	\label{fig:prototyp-ui-komentarze-o-technologii}
-\end{figure}
-
-\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku u¿ycia - zarz¹dzanie komentarzami o technologii}
-	\label{tab:opis-przypadku-uzycia-zarzadzanie-komentarzami-o-technologii} \\ \hline
-	Nazwa: & Zarz¹dzanie komentarzami o technologii \\ \hline
-	Opis: & Dodanie komentarzy do technologii, edytowanie oraz usuniêcie w³asnych komentarzy do technologii \\ \hline
-	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
-	Warunki pocz¹tkowe: & Otwarta zak³adka z komentarzami do technologii (Rys.~\ref{fig:prototyp-ui-komentarze-o-technologii}) \\ \hline
-	Warunki koñcowe: & Dodanie, edytowanie lub usuniêcie komentarza do technologii \\ \hline
-	Przebieg: & 
-		Dodanie komentarza
-		\begin{enumerate}
-			\item U¿ytkownik klika przycisk ,,Dodaj komentarz'',
-			\item Aplikacja wyœwietla formularz do utworzenia komentarza (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii-puste}),
-			\item U¿ytkownik dodaje tekst komentarza (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii}),
-			\item U¿ytkownik klika przycisk ,,Zapisz'',
-			\item Aplikacja sprawdza, czy u¿ytkownik poda³ tekst komentarza,
-			\item Po pozytywnej walidacji komentarza, aplikacja dodaje komentarz do technologii.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik anuluje tworzenie komentarza
-		\begin{enumerate}[label=\arabic*a.]
-			\setcounter{enumi}{2}
-			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do tworzenia komentarza,
-			\item Wy³¹czenie formularza do dodania komentarza.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik nie uzupe³nia tekstu przy tworzeniu komentarza
-		\begin{enumerate}[label=\arabic*b.]
-			\setcounter{enumi}{4}
-			\item Aplikacja wyœwietla u¿ytkownikowi informacje o tym, ¿e komentarz nie mo¿e byæ pusty,
-			\item Przejœcie do punktu 3.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny Przebieg: & 
-		Edytowanie komentarza
-		\begin{enumerate}[label=\arabic*c.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik klika trzy kropki przy jednym z komentarzy,
-			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranego komentarza
-			\item U¿ytkownik klika przycisk ,,Edytuj'',
-			\item Aplikacja wyœwietla formularz do edytowania komentarza (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii}),
-			\item U¿ytkownik edytuje tekst komentarza,
-			\item U¿ytkownik klika przycisk ,,Zapisz'',
-			\item Aplikacja sprawdza, czy u¿ytkownik poda³ tekst komentarza,
-			\item Po pozytywnej walidacji komentarza, aplikacja edytuje komentarz do technologii.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem komentarza oraz chcia³by zedytowaæ lub usun¹æ ten komentarz
-		\begin{enumerate}[label=\arabic*ca.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik nie mo¿e zedytowaæ lub usun¹æ wybranego komentarza (brak menu komentarza - trzech kropek), 
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik anuluje edytowanie komentarza
-		\begin{enumerate}[label=\arabic*cb.]
-			\setcounter{enumi}{4}
-			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do edytowania komentarza,
-			\item Wy³¹czenie formularza do edytowania komentarza.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik nie uzupe³nia tekstu przy edytowaniu komentarza
-		\begin{enumerate}[label=\arabic*cc.]
-			\setcounter{enumi}{7}
-			\item Aplikacja wyœwietla u¿ytkownikowi informacje o tym, ¿e komentarz nie mo¿e byæ pusty,
-			\item Przejœcie do punktu 5c.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny Przebieg: & 
-		Usuniêcie komentarza
-		\begin{enumerate}[label=\arabic*cd.]
-			\setcounter{enumi}{2}
-			\item U¿ytkownik klika przycisk ,,Usuñ'' przy jednym z komentarzy,
-			\item Aplikacja wyœwietla formularz z zapytaniem, czy komentarz powinien zostaæ usuniêty (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-komentarza}),
-			\item U¿ytkownik klika przycisk ,,Tak'',
-			\item Serwis usuwa komentarz.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik anuluje usuwanie komentarza
-		\begin{enumerate}[label=\arabic*cda.]
-			\setcounter{enumi}{4}
-			\item U¿ytkownik klika przycisk ,,Nie'',
-			\item Komentarz nie zostaje usuniêty.
-		\end{enumerate}
-	\\ \hline
-\end{longtable}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii-puste}
-	\caption{Prototyp pustego formularza do dodania lub edytowania komentarza o technologii}
-	\label{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii-puste}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii}
-	\caption{Prototyp formularza do dodania lub edytowania komentarza o technologii}
-	\label{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-technologii}
-\end{figure}
-
-\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku u¿ycia - usuwanie komentarzy o technologii}
-	\label{tab:opis-przypadku-uzycia-usuwanie-komentarzy-o-technologii} \\ \hline
-	Nazwa: & Usuwanie komentarzy o technologii \\ \hline
-	Opis: & Usuniêcie wybranego komentarza o technologii \\ \hline
-	Aktorzy: & Administrator \\ \hline
-	Warunki pocz¹tkowe: & Otwarta zak³adka z komentarzami o technologii (Rys.~\ref{fig:prototyp-ui-komentarze-o-technologii-administrator}) \\ \hline
-	Warunki koñcowe: & Usuniêcie komentarza do technologii \\ \hline
-	Przebieg: & 
-		\begin{enumerate}
-			\item U¿ytkownik klika trzy kropki przy jednym z komentarzy,
-			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranego komentarza
-			\item U¿ytkownik klika przycisk ,,Usuñ'',
-			\item Aplikacja wyœwietla formularz z zapytaniem, czy komentarz powinien zostaæ usuniêty (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-komentarza}),
-			\item U¿ytkownik klika przycisk ,,Tak'',
-			\item Serwis usuwa komentarz.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik anuluje usuwanie komentarza
-		\begin{enumerate}[label=\arabic*a.]
-			\setcounter{enumi}{4}
-			\item U¿ytkownik klika przycisk ,,Nie'',
-			\item Komentarz nie zostaje usuniêty.
-		\end{enumerate}
-	\\ \hline
-\end{longtable}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-komentarze-o-technologii-administrator}
-	\caption{Prototyp listy komentarzy o technologii dla administratora}
-	\label{fig:prototyp-ui-komentarze-o-technologii-administrator}
-\end{figure}
-
-\begin{table}[H] \small
-	\centering
-	\caption{Opis przypadku u¿ycia - przegl¹danie opinii o technologii}
-	\label{tab:opis-przypadku-uzycia-przegladanie-opinii-o-technologii}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Przegl¹danie opinii o technologii \\ \hline
-		Opis: & Wyœwietlenie opinii dotycz¹cych danej technologii \\ \hline
-		Aktorzy: & U¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Otwarta technologia (Rys.~\ref{fig:prototyp-ui-technologia}) \\ \hline
-		Warunki koñcowe: & Wyœwietlenie opinii dotycz¹cych danej technologii \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item U¿ytkownik klika przycisk ,,Opinie'',
-				\item Aplikacja wyœwietla opinie o technologii (Rys.~\ref{fig:prototyp-ui-opinie-o-technologii}).
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-opinie-o-technologii}
-	\caption{Prototyp listy opinii o technologii}
-	\label{fig:prototyp-ui-opinie-o-technologii}
-\end{figure}
-
-\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku u¿ycia - zarz¹dzanie opiniami o technologii}
-	\label{tab:opis-przypadku-uzycia-zarzadzanie-opiniami-o-technologii} \\ \hline
-	Nazwa: & Zarz¹dzanie opiniami o technologii \\ \hline
-	Opis: & Dodanie opinii o artykule, edytowanie oraz usuniêcie w³asnej opinii do technologii \\ \hline
-	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
-	Warunki pocz¹tkowe: & Otwarta zak³adka z opiniami do technologii (Rys.~\ref{fig:prototyp-ui-opinie-o-technologii}) \\ \hline
-	Warunki koñcowe: & Dodanie, edytowanie, usuniêcie opinii o technologii, dodanie akceptacji lub usuniêcie akceptacji\\ \hline
-	Przebieg: & 
-		Dodanie opinii
-		\begin{enumerate}
-			\item U¿ytkownik klika przycisk ,,Dodaj opiniê'',
-			\item Aplikacja wyœwietla formularz do utworzenia opinii (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-technologii-puste}),
-			\item U¿ytkownik dodaje tekst opinii oraz wystawia ocenê (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-technologii}),
-			\item U¿ytkownik klika przycisk ,,Zapisz'',
-			\item Aplikacja sprawdza, czy u¿ytkownik poda³ tekst opinii oraz ocenê,
-			\item Po pozytywnej walidacji, aplikacja dodaje opiniê.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik anuluje tworzenie opinii
-		\begin{enumerate}[label=\arabic*a.]
-			\setcounter{enumi}{2}
-			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do tworzenia opinii,
-			\item Wy³¹czenie formularza do dodania opinii.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik nie uzupe³nia wszystkich wymaganych pól formularza
-		\begin{enumerate}[label=\arabic*b.]
-			\setcounter{enumi}{5}
-			\item Aplikacja zmienia kolor obramowania nieuzupe³nionych pól na czerwono oraz wyœwietla pod tymi polami komunikat ,,Pole wymagane'',
-			\item Przejœcie do punktu 3.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny Przebieg: & 
-		Edytowanie opinii
-		\begin{enumerate}[label=\arabic*c.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik klika trzy kropki przy jednej z opinii,
-			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranej opinii
-			\item U¿ytkownik klika przycisk ,,Edytuj'',
-			\item Aplikacja wyœwietla formularz do edytowania opinii (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-technologii}),
-			\item U¿ytkownik edytuje opiniê,
-			\item U¿ytkownik klika przycisk ,,Zapisz'',
-			\item Aplikacja sprawdza, czy u¿ytkownik poda³ tekst opinii oraz ocenê,
-			\item Po pozytywnej walidacji, aplikacja edytuje opiniê.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem opinii oraz chcia³by zedytowaæ lub usun¹æ tê opiniê
-		\begin{enumerate}[label=\arabic*ca.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik nie mo¿e zedytowaæ lub usun¹æ wybranej opinii (brak menu opinii - trzech kropek), 
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik anuluje edytowanie opinii
-		\begin{enumerate}[label=\arabic*cb.]
-			\setcounter{enumi}{4}
-			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do edytowania opinii,
-			\item Wy³¹czenie formularza do edytowania opinii.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik nie uzupe³nia tekstu przy edytowaniu opinii
-		\begin{enumerate}[label=\arabic*cc.]
-			\setcounter{enumi}{7}
-			\item Aplikacja zmienia kolor obramowania nieuzupe³nionych pól na czerwono oraz wyœwietla pod tymi polami komunikat ,,Pole wymagane'',
-			\item Przejœcie do punktu 5d.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny Przebieg: & 
-		Usuniêcie opinii
-		\begin{enumerate}[label=\arabic*cd.]
-			\setcounter{enumi}{2}
-			\item U¿ytkownik klika przycisk ,,Usuñ'',
-			\item Aplikacja wyœwietla formularz z zapytaniem, czy opinia powinna zostaæ usuniêta (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-opinii}),
-			\item U¿ytkownik klika przycisk ,,Tak'',
-			\item Serwis usuwa opiniê.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik anuluje usuwanie opinii
-		\begin{enumerate}[label=\arabic*cda.]
-			\setcounter{enumi}{4}
-			\item U¿ytkownik klika przycisk ,,Nie'',
-			\item Opinia nie zostaje usuniêta.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik ustawia akceptacjê opinii (ustawiona ³apka jest koloru czarnego)
-		\begin{enumerate}[label=\arabic*d.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik nie jest autorem opinii,
-			\item U¿ytkownik klika kciuk w górê,
-			\item U¿ytkownik nie zostawi³ wczeœniej kciuka w górê przy danej opinii,
-			\item Aplikacja ustawia kciuk w górê dla opinii.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik jest autorem opinii
-		\begin{enumerate}[label=\arabic*da.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik nie mo¿e zostawiæ akceptacji w³asnej opinii.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik zostawi³ wczeœniej kciuk w górê
-		\begin{enumerate}[label=\arabic*db.]
-			\setcounter{enumi}{3}
-			\item Aplikacja usuwa kciuk w górê z opinii.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik klika kciuk w dó³
-		\begin{enumerate}[label=\arabic*dc.]
-			\setcounter{enumi}{1}
-			\item U¿ytkownik klika kciuk w dó³,
-			\item U¿ytkownik nie zostawi³ wczeœniej kciuka w dó³,
-			\item Aplikacja ustawia kciuk w dó³ dla opinii.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik zostawi³ wczeœniej kciuk w dó³
-		\begin{enumerate}[label=\arabic*dd.]
-			\setcounter{enumi}{3}
-			\item Aplikacja usuwa kciuk w dó³ z opinii.
-		\end{enumerate}
-	\\ \hline
-\end{longtable}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-opinii-o-technologii-puste}
-	\caption{Prototyp pustego formularza do dodania lub edytowania opinii o technologii}
-	\label{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-technologii-puste}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-opinii-o-technologii}
-	\caption{Prototyp formularza do dodania lub edytowania opinii o technologii}
-	\label{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-technologii}
 \end{figure}
 
 
