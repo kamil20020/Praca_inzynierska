@@ -65,12 +65,10 @@ Zdefiniowano nastêpuj¹ce definicje:
 			\item Dostawca (opcjonalne),
 			\item Ikona (opcjonalne),
 			\item Kategoria,
-			\item Zastosowania,
-			\item Lista opinii,
-			\item Œrednia ocena z co najmniej 5-ciu opinii,
 			\item Data pierwszego wydania (opcjonalne),
 			\item Data ostatniego wydania (opcjonalne),
-			\item Daty edycji oraz informacje o osobach, które dokona³y tych edycji.
+			\item Daty edycji,
+			\item Informacje o osobach, które dokona³y edycji.
 		\end{itemize}
 	\item Klasyfikacja technologii - hierarchiczny podzia³ technologii na kategorie ze wzglêdu na ich architekturê. Klasyfikacjê tê mo¿na przedstawiæ w postaci 
 				nastêpuj¹cego drzewa:
@@ -120,7 +118,6 @@ Zdefiniowano nastêpuj¹ce definicje:
 			\item Data modyfikacji,
 			\item Kategoria technologii wraz z ca³¹ hierarchiczna œcie¿k¹ prowadz¹ca do tej kategorii (np. dla Javy bêdzie to: 
 						Technologie Informatyczne / Jêzyk Programowania / Java),
-			\item Zastosowania technologii,
 			\item Dostawca technologii (opcjonalne),
 			\item Ikona technologii (opcjonalne),
 			\item Tekst artyku³u,
@@ -481,7 +478,7 @@ Z powody dosyæ du¿ej z³o¿onoœci systemu pod wzglêdem liczby wymagañ funkcjonalny
 Dla ka¿dego przypadku u¿ycia zdefiniowanego w poprzednim punkcie, zrobiono szczegó³owe opisy w postaci tabel, które sk³adaj¹ siê z nastêpuj¹cych informacji:
 \begin{itemize}
 	\item Nazwa,
-	\item Krótki opis,
+	\item Cel,
 	\item Wystêpuj¹cy aktorzy,
 	\item Warunki pocz¹tkowe,
 	\item Warunki koñcowe,
@@ -497,9 +494,9 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{tab:opis-przypadku-uzycia-rejestracja}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Rejestracja \\ \hline
-		Opis: & Utworzenie konta zwyk³ego u¿ytkownika\\ \hline
+		Cel: & Utworzenie konta zwyk³ego u¿ytkownika\\ \hline
 		Aktorzy: & Niezalogowany u¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Niezalogowane konto \\ \hline
+		Warunki pocz¹tkowe: & U¿ytkownik jest niezalogowany \\ \hline
 		Warunki koñcowe: & Za³o¿enie konta zwyk³ego u¿ytkownika \\ \hline
 		Przebieg: & 
 			\begin{enumerate}
@@ -517,7 +514,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		Alternatywny przebieg: &
 			U¿ytkownik anuluje rejestracjê
 			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{1}
+				\setcounter{enumi}{2}
 				\item U¿ytkownik klika przycisk ,,X'' lub klika w obszar poza formularzem,
 				\item Wy³¹czenie formularza.
 			\end{enumerate} \\ \hline
@@ -566,9 +563,9 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{tab:opis-przypadku-uzycia-logowanie}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Logowanie \\ \hline
-		Opis: & Zalogowanie siê u¿ytkownika \\ \hline
+		Cel: & Zalogowanie siê u¿ytkownika \\ \hline
 		Aktorzy: & Niezalogowany u¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Niezalogowane konto \\ \hline
+		Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
 		Warunki koñcowe: & Zalogowanie siê u¿ytkownika \\ \hline
 		Przebieg: & 
 			\begin{enumerate}
@@ -578,7 +575,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 				\item U¿ytkownik klika przycisk ,,Zaloguj'',
 				\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
 				\item Po pozytywnej walidacji danych, u¿ytkownik zostaje zalogowany do systemu i bêdzie móg³ korzystaæ z funkcji systemu w zakresie adekwatnym do jego uprawnieñ. 
-							Zmienia siê wygl¹d nag³ówka strony na Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany}),
+							Zmienia siê wygl¹d nag³ówka strony (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany}),
 			\end{enumerate}
 		\\ \hline
 		Alternatywny przebieg: &
@@ -596,6 +593,16 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 				\item Powrót do punktu 3.
 			\end{enumerate}
 		\\ \hline
+		Alternatywny przebieg: &
+			Has³o u¿ytkownika zosta³o zresetowane
+			\begin{enumerate}[label=\arabic*c.]
+				\setcounter{enumi}{6}
+				\item Aplikacja wyœwietla formularz do ustawienia has³a (Rys.~\ref{fig:prototyp-ui-ustawienie-hasla})
+				\item U¿ytkownik podaje has³o,
+				\item U¿ytkownik klika przycisk ,,Zapisz'',
+				\item Serwis sprawdza, czy podano has³o oraz jeœli podano, to czy jest ono zgodne z narzuconym rozmiarem i formatem,
+				\item Po pozytywnej walidacji has³a, has³o u¿ytkownika zostaje zmienione.
+			\end{enumerate} \\ \hline
 	\end{tabularx}
 \end{table}
 
@@ -613,15 +620,22 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{fig:prototyp-ui-naglowek-zalogowany}
 \end{figure}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-ustawienie-hasla}
+	\caption{Prototyp formularza do ustawienia has³a po jego zresetowaniu}
+	\label{fig:prototyp-ui-ustawienie-hasla}
+\end{figure}
+
 \begin{table}[H] \small
 	\centering
 	\caption{Opis przypadku u¿ycia - wylogowanie}
 	\label{tab:opis-przypadku-uzycia-wylogowanie}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Wylogowanie \\ \hline
-		Opis: & Wylogowanie siê u¿ytkownika \\ \hline
+		Cel: & Wylogowanie siê u¿ytkownika \\ \hline
 		Aktorzy: & Zalogowany u¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Zalogowanie siê u¿ytkownika \\ \hline
+		Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
 		Warunki koñcowe: & Wylogowanie u¿ytkownika z serwisu \\ \hline
 		Przebieg: & 
 			\begin{enumerate}
@@ -647,10 +661,10 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{tab:opis-przypadku-uzycia-edycja-swoich-danych}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Edycja swoich danych \\ \hline
-		Opis: & Edytowanie danych dotycz¹cych konta u¿ytkownika \\ \hline
+		Cel: & Zapisanie danych u¿ytkownika zgodnie z wprowadzonymi przez niego zmianami \\ \hline
 		Aktorzy: & Zalogowany u¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Zalogowanie siê u¿ytkownika \\ \hline
-		Warunki koñcowe: & Edytowanie danych u¿ytkownika zgodnie z wprowadzonymi przez tego u¿ytkownika zmianami \\ \hline
+		Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
+		Warunki koñcowe: & Zapisanie zmienionych danych u¿ytkownika \\ \hline
 		Przebieg: & 
 			\begin{enumerate}
 				\item U¿ytkownik klika na swój awatar dostêpny na nag³ówku strony aby wyœwietliæ opcje dotycz¹ce konta (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty}),
@@ -661,7 +675,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 				\item U¿ytkownik zmienia dane w formularzu,
 				\item U¿ytkownik klika przycisk ,,Zapisz'',
 				\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
-				\item Po pozytywnej walidacji danych, aplikacja zmienia dane u¿ytkownika zgodnie z wprowadzonymi zmianami.
+				\item Po pozytywnej walidacji danych, aplikacja zapisuje zmienione dane u¿ytkownika.
 			\end{enumerate}
 		\\ \hline
 		Alternatywny przebieg: &
@@ -703,36 +717,51 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{tab:opis-przypadku-uzycia-edycja-danych-innych-uzytkownikow}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Edycja danych innych u¿ytkowników \\ \hline
-		Opis: & Edytowanie danych dotycz¹cych konta u¿ytkownika \\ \hline
+		Opis: & Zapisanie danych innego u¿ytkownika zgodnie z wprowadzonymi zmianami \\ \hline
 		Aktorzy: & Administrator \\ \hline
-		Warunki pocz¹tkowe: & Brak \\ \hline
-		Warunki koñcowe: & Edytowanie danych u¿ytkownika \\ \hline
+		Warunki pocz¹tkowe: & U¿ytkownik posiadaj¹cy rolê administratora jest zalogowany \\ \hline
+		Warunki koñcowe: & Zapisanie zmienionych danych innego u¿ytkownika \\ \hline
 		Przebieg: & 
 			\begin{enumerate}
-				\item U¿ytkownik klika na przycisk ,,Zarz¹dzanie u¿ytkownikami'' znajduj¹cy siê w menu g³ównym strony (Rys.~\ref{fig:prototyp-ui-naglowek-administrator}),
-				\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}),
+				\item U¿ytkownik klika przycisk ,,Zarz¹dzanie u¿ytkownikami'' znajduj¹cy siê w menu g³ównym strony (Rys.~\ref{fig:prototyp-ui-naglowek-administrator}),
+				\item Aplikacja wyœwietla podstronê z wyszukiwark¹ u¿ytkowników (Rys~\ref{fig:prototyp-ui-wyszukiwanie-uzytkownikow-puste}),
+				\item U¿ytkownik wpisuje nazwê u¿ytkownika (np. kamil),
+				\item U¿ytkownik klika przycisk ,,Szukaj'',
+				\item Serwis wyszukuje u¿ytkowników,
+				\item Aplikacja wyœwietla listê wyszukanych u¿ytkowników (Rys~\ref{fig:prototyp-ui-wyszukiwanie-uzytkownikow})
+				\item U¿ytkownik klika na jednego z innych u¿ytkowników,
+				\item Aplikacja wyœwietla panel z danymi wybranego u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}),
 				\item U¿ytkownik klika przycisk ,,Edytuj dane'',
 				\item Serwis wyœwietla formularz edycji danych (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}),
 				\item U¿ytkownik zmienia dane w formularzu,
 				\item U¿ytkownik klika przycisk ,,Zapisz'',
 				\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
-				\item Po pozytywnej walidacji danych, aplikacja zmienia dane u¿ytkownika zgodnie z wprowadzonymi zmianami.
+				\item Po pozytywnej walidacji danych, aplikacja zapisuje zmienione dane innego u¿ytkownika.
+			\end{enumerate}
+		\\ \hline
+		Alternatywny przebieg: &
+			U¿ytkownik resetuje has³o innego u¿ytkownika
+			\begin{enumerate}[label=\arabic*a.]
+				\setcounter{enumi}{8}
+				\item U¿ytkownik klika przycisk ,,Reset has³a'',
+				\item Aplikacja zastêpuje has³o innego u¿ytkownika pustym ci¹giem znaków,
+				\item Powrót do punktu 8.
 			\end{enumerate}
 		\\ \hline
 		Alternatywny przebieg: &
 			U¿ytkownik anuluje edycjê danych
-			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{5}
+			\begin{enumerate}[label=\arabic*b.]
+				\setcounter{enumi}{10}
 				\item U¿ytkownik klika przycisk ,,Anuluj'',
 				\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys.~\ref{fig:prototyp-ui-naglowek-administrator}).
 			\end{enumerate}
 		\\ \hline
 		Alternatywny przebieg: &
 			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
-			\begin{enumerate}[label=\arabic*b.]
-				\setcounter{enumi}{8}
+			\begin{enumerate}[label=\arabic*c.]
+				\setcounter{enumi}{13}
 				\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
-				\item Powrót do punktu 5.
+				\item Powrót do punktu 11.
 			\end{enumerate}
 		\\ \hline
 	\end{tabularx}
@@ -743,6 +772,20 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-administrator}
 	\caption{Prototyp nag³ówka strony dla administratora}
 	\label{fig:prototyp-ui-naglowek-administrator}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-uzytkownikow-puste}
+	\caption{Prototyp pustej wyszukiwarki u¿ytkowników}
+	\label{fig:prototyp-ui-wyszukiwanie-uzytkownikow-puste}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-uzytkownikow}
+	\caption{Prototyp wyszukiwarki u¿ytkowników}
+	\label{fig:prototyp-ui-wyszukiwanie-uzytkownikow}
 \end{figure}
 
 \begin{figure}[H]
@@ -765,7 +808,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{tab:opis-przypadku-uzycia-przypisywanie-uzytkownikowi-rol}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Przypisywanie u¿ytkownikom ról \\ \hline
-		Opis: & Przypisywanie roli u¿ytkownikowi \\ \hline
+		Cel: & Przypisywanie roli u¿ytkownikowi \\ \hline
 		Aktorzy: & Administrator \\ \hline
 		Warunki pocz¹tkowe: & Otwarte okno z zarz¹dzaniem danymi u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}) \\ \hline
 		Warunki koñcowe: & Przypisanie u¿ytkownikowi roli \\ \hline
