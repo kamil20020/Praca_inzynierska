@@ -14,8 +14,7 @@ Szczegó³ow¹ architekturê systemu dobrze opisuje rysunek~\ref{fig:architektura-sy
 
 
 \section{Baza danych}
-Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. \texttt{Baza danych 1} jest g³ówn¹ baz¹ danych w systemie, a \texttt{Baza danych 2} jest dodatkow¹ baz¹ danych, która przechowuje informacje o zawartoœciach artyku³ów. Zdecydowano, ¿e \texttt{Baza danych 2} bêdzie odpowiedzialna za przechowywanie informacji o zawartoœciach artyku³ów, gdy¿ jest to baza nierelacyjna (NoSQL). Bazy te charakteryzuj¹ siê tym, ¿e mo¿na w swobodniejszy sposób (bez relacji) przechowywaæ dane, a w tym przypadku jest to po¿¹dane z powodu tego, ¿e artyku³ mo¿e zawieraæ rozdzia³y i podrozdzia³y. Nie zdecydowano siê na u¿ycie w projekcie tylko \texttt{Baza danych 2} (NoSQL),
-gdy¿ \texttt{Baza danych 1} jest baz¹ relacyjna, która pozwala na wiêksz¹ integralnoœæ danych ni¿ w przypadku baz nierelacyjnych, gdy¿ nale¿y na pocz¹tku zdefiniowaæ schemat. 
+Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. \texttt{Baza danych 1} jest g³ówn¹ baz¹ danych w systemie, a \texttt{Baza danych 2} jest dodatkow¹ baz¹ danych, która przechowuje informacje o zawartoœciach artyku³ów. Zdecydowano, ¿e \texttt{Baza danych 2} bêdzie odpowiedzialna za przechowywanie informacji o zawartoœciach artyku³ów, gdy¿ jest to baza nierelacyjna (NoSQL). Bazy nierelacyjne charakteryzuj¹ siê tym, ¿e mo¿na w swobodniejszy sposób (bez relacji) przechowywaæ dane, a w tym przypadku jest to po¿¹dane z powodu tego, ¿e artyku³ mo¿e zawieraæ rozdzia³y i podrozdzia³y. Nie zdecydowano siê na u¿ycie w projekcie tylko \texttt{Baza danych 2} (NoSQL), gdy¿ \texttt{Baza danych 1} jest baz¹ relacyjna (SQL), która pozwala na wiêksz¹ integralnoœæ danych ni¿ w przypadku baz nierelacyjnych, gdy¿ nale¿y na pocz¹tku zdefiniowaæ schemat, a w realizowanym systemie przewidziano wiele relacji. 
 
 \section{Aplikacja serwerowa - Backend}
 Backend jest odpowiedzialny za przyjmowanie ¿¹dañ od klienta, odpowiednie przetwarzanie tych ¿¹dañ, wykonywanie pewnych operacji na danych przechowywanych w bazie danych na podstawie otrzymanych danych od klienta i przekazywanie klientowi adekwatnej odpowiedzi. Warstwa ta jest w œcis³ym powi¹zaniu z warstw¹ bazy danych.
@@ -114,7 +113,7 @@ Zdefiniowano nastêpuj¹ce definicje:
 	\item Artyku³ - informacja o danej technologii stworzona przez u¿ytkownika. 
 		Artyku³ bêdzie opisywany nastêpuj¹cymi atrybutami:
 		\begin{itemize}
-			\item Status (mo¿liwe wartoœci: nowy, weryfikowany, edytowany, odrzucony, opublikowany),
+			\item Status (mo¿liwe wartoœci: nowy, przypisywany do weryfikacji, weryfikowany, przedawniona weryfikacja, odrzucony, opublikowany, zedytowany),
 			\item Tytu³,
 			\item Autor,
 			\item Data utworzenia,
@@ -313,8 +312,7 @@ Zdefiniowano nastêpuj¹ce definicje:
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zarz¹dzania artyku³ami w nastêpuj¹cym zakresie:
 					\begin{itemize}
 						\item	Edytowanie,
-						\item Usuwanie,
-						\item Wycofanie.
+						\item Usuwanie.
 					\end{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania komentarzy o artykule,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ usuwania opinii o artykule,
