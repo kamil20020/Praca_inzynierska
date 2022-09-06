@@ -273,7 +273,7 @@ Zdefiniowano nastêpuj¹ce definicje:
 			\end{itemize}
 		\item Zalogowany u¿ytkownik
 			\begin{itemize}
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji swoich danych,
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji w³asnych danych,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ zmiany has³a,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ wylogowania siê,
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ stworzenia artyku³u, przy czym aby artyku³ zosta³ opublikowany w serwisie, to artyku³ ten musi przejœæ 
@@ -287,7 +287,7 @@ Zdefiniowano nastêpuj¹ce definicje:
 		\item Recenzent
 			\begin{itemize}
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ edycji rodziny technologii,
-				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ ustawienia swojej dostêpnoœci na ,,dostêpny'' albo ,,niedostêpny''. W przypadku ustawionej niedostêpnoœci 
+				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ ustawienia w³asnej dostêpnoœci na ,,dostêpny'' albo ,,niedostêpny''. W przypadku ustawionej niedostêpnoœci 
 							nie bêd¹ takiemu recenzentowi przypisywane artyku³y do zweryfikowania.
 				\item System powinien zapewniæ u¿ytkownikowi mo¿liwoœæ weryfikacji artyku³ów
 					\begin{itemize}
@@ -536,21 +536,21 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-niezalogowany}
-	\caption{Prototyp nag³ówka strony dla niezalogowanego u¿ytkownika}
+	\caption{Nag³ówek strony niezalogowanego u¿ytkownika}
 	\label{fig:prototyp-ui-naglowek-niezalogowany}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-rejestracja}
-	\caption{Prototyp formularza rejestracji}
+	\caption{Formularz rejestracji}
 	\label{fig:prototyp-ui-rejestracja}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-regulaminu}
-	\caption{Prototyp formularza z akceptacj¹ regulaminu}
+	\caption{Formularz s³u¿acy do akceptacji regulaminu}
 	\label{fig:prototyp-ui-akceptacja-regulaminu}
 \end{figure}
 
@@ -610,21 +610,21 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-logowanie}
-	\caption{Prototyp formularza logowania}
+	\caption{Formularz logowania}
 	\label{fig:prototyp-ui-logowanie}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-zalogowany}
-	\caption{Prototyp nag³ówka strony dla zalogowanego u¿ytkownika}
+	\caption{Nag³ówek strony przyk³adowego zalogowanego u¿ytkownika}
 	\label{fig:prototyp-ui-naglowek-zalogowany}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-ustawienie-hasla}
-	\caption{Prototyp formularza do ustawienia has³a po jego zresetowaniu}
+	\caption{Formularz do ustawienia has³a po zresetowaniu has³a}
 	\label{fig:prototyp-ui-ustawienie-hasla}
 \end{figure}
 
@@ -649,14 +649,14 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-zalogowany-otwarty}
-	\caption{Prototyp nag³ówka strony dla zalogowanego u¿ytkownika z otwartymi opcjami dotycz¹cymi konta}
+	\caption{Nag³ówek strony przyk³adowego zalogowanego u¿ytkownika z otwartymi opcjami dotycz¹cymi konta}
 	\label{fig:prototyp-ui-naglowek-zalogowany-otwarty}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku u¿ycia - edycja swoich danych}
-	\label{tab:opis-przypadku-uzycia-edycja-swoich-danych} \\ \hline
-	Nazwa: & Edycja swoich danych \\ \hline
+	\caption{Opis przypadku u¿ycia - edycja w³asnych danych}
+	\label{tab:opis-przypadku-uzycia-edycja-wlasnych-danych} \\ \hline
+	Nazwa: & Edycja w³asnych danych \\ \hline
 	Cel: & Zapisanie danych u¿ytkownika zgodnie z wprowadzonymi przez niego zmianami \\ \hline
 	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
 	Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
@@ -667,7 +667,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item U¿ytkownik klika przycisk ,,Dane u¿ytkownika'',
 			\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys~\ref{fig:prototyp-ui-dane-uzytkownika}),
 			\item U¿ytkownik klika przycisk ,,Edytuj dane'',
-			\item Serwis wyœwietla formularz edycji danych (Rys~\ref{fig:prototyp-ui-edycja-swoich-danych}),
+			\item Serwis wyœwietla formularz edycji danych (Rys~\ref{fig:prototyp-ui-edycja-wlasnych-danych}),
 			\item U¿ytkownik zmienia dane w formularzu,
 			\item U¿ytkownik klika przycisk ,,Zapisz'',
 			\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
@@ -695,15 +695,15 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dane-uzytkownika}
-	\caption{Prototyp panelu z danymi u¿ytkownika}
+	\caption{Panel z danymi przyk³adowego u¿ytkownika}
 	\label{fig:prototyp-ui-dane-uzytkownika}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-edycja-swoich-danych}
-	\caption{Prototyp formularza edycji swoich danych}
-	\label{fig:prototyp-ui-edycja-swoich-danych}
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-edycja-wlasnych-danych}
+	\caption{Panel umo¿liwiaj¹cy edycjê w³asnych danych dla przyk³adowego u¿ytkownika}
+	\label{fig:prototyp-ui-edycja-wlasnych-danych}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |}
@@ -747,7 +747,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-zmiana-hasla}
-	\caption{Prototyp formularza zmiany has³a}
+	\caption{Formularz zmiany has³a}
 	\label{fig:prototyp-ui-zmiana-hasla}
 \end{figure}
 
@@ -807,35 +807,35 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-administrator}
-	\caption{Prototyp nag³ówka strony dla administratora}
+	\caption{Nag³ówek strony przyk³adowego administratora}
 	\label{fig:prototyp-ui-naglowek-administrator}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-uzytkownikow-puste}
-	\caption{Prototyp pustej wyszukiwarki u¿ytkowników}
+	\caption{Panel do wyszukiwania u¿ytkowników z pustymi kryteriami wyszukiwania}
 	\label{fig:prototyp-ui-wyszukiwanie-uzytkownikow-puste}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-uzytkownikow}
-	\caption{Prototyp wyszukiwarki u¿ytkowników}
+	\caption{Panel do wyszukiwania u¿ytkowników z przyk³adowymi danymi}
 	\label{fig:prototyp-ui-wyszukiwanie-uzytkownikow}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}
-	\caption{Prototyp panelu z danymi innego u¿ytkownika}
+	\caption{Panel z danymi przyk³adowego innego u¿ytkownika}
 	\label{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}
-	\caption{Prototyp panelu z edycj¹ danych innego u¿ytkownika}
+	\caption{Panel umo¿liwiaj¹cy edycjê danych przyk³adowego innego u¿ytkownika}
 	\label{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}
 \end{figure}
 
@@ -866,92 +866,133 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\\ \hline
 \end{longtable}
 
-\begin{table}[H] \small
-	\centering
-	\caption{Opis przypadku u¿ycia - zmiana swojej dostêpnoœci}
-	\label{tab:opis-przypadku-uzycia-zmiana-swojej-dostepnosci}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Zmiana swojej dostêpnoœci \\ \hline
-		Cel: & Zmiana swojej dostêpnoœci w przypadku przypisywania artyku³ów do weryfikacji \\ \hline
-		Aktorzy: & Recenzent \\ \hline
-		Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
-		Warunki koñcowe: & Zmiana dostêpnoœci u¿ytkownika \\ \hline
-		Przebieg: & 
-			U¿ytkownik ma swoj¹ dostêpnoœæ ustawion¹ na ,,Dostêpny''
-			\begin{enumerate}
-				\item U¿ytkownik klika na swój awatar dostêpny na nag³ówku strony aby wyœwietliæ opcje dotycz¹ce konta,
-				\item U¿ytkownik klika przycisk ,,Dostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}),
-				\item Aplikacja zmienia dostêpnoœæ recenzenta na ,,Niedostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}), czyli takiemu 
-							recenzentowi nie bêd¹ przypisywane artyku³y do weryfikacji.
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: & 
-			U¿ytkownik ma ustawion¹ swoj¹ dostêpnoœæ na ,,Niedostêpny''
-			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{1}
-				\item U¿ytkownik klika przycisk ,,Niedostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}),
-				\item Aplikacja zmienia dostêpnoœæ recenzenta na ,,Dostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}), czyli takiemu 
-							recenzentowi bêd¹ teraz przypisywane artyku³y do weryfikacji.
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - zmiana w³asnej dostêpnoœci}
+	\label{tab:opis-przypadku-uzycia-zmiana-wlasnej-dostepnosci} \\ \hline
+	Nazwa: & Zmiana w³asnej dostêpnoœci \\ \hline
+	Cel: & Zmiana w³asnej dostêpnoœci w przypadku przypisywania artyku³ów do weryfikacji \\ \hline
+	Aktorzy: & Recenzent \\ \hline
+	Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
+	Warunki koñcowe: & Zmiana dostêpnoœci u¿ytkownika \\ \hline
+	Przebieg: & 
+		U¿ytkownik ma w³asn¹ dostêpnoœæ ustawion¹ na ,,Dostêpny''
+		\begin{enumerate}
+			\item U¿ytkownik klika na swój awatar dostêpny na nag³ówku strony aby wyœwietliæ opcje dotycz¹ce konta,
+			\item U¿ytkownik klika przycisk ,,Dostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}),
+			\item Aplikacja wyœwietla formularz do ustawienia daty, do której u¿ytkownik bêdzie mia³ ustawion¹ niedostêpnoœæ 
+						(Rys.~\ref{fig:prototyp-ui-ustawienie-nieobecnosci-puste}),
+			\item U¿ytkownik klika na pole do wype³nienia daty,
+			\item Serwis wyœwietla formularz do wybrania daty (Rys.~\ref{fig:prototyp-ui-ustawienie-nieobecnosci-otwarte}),
+			\item U¿ytkownik wybiera datê (np. 06.09.2022),
+			\item Aplikacja wyœwietla ustawion¹ datê (Rys.~\ref{fig:prototyp-ui-ustawienie-nieobecnosci}),
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Serwis sprawdza, czy u¿ytkownik poda³ datê,
+			\item U¿ytkownik poda³ datê, zatem aplikacja zmienia dostêpnoœæ recenzenta na ,,Niedostêpny'' 
+						(Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}), co bêdzie skutkowa³o tym, ¿e takiemu recenzentowi nie bêd¹ przypisywane 
+						artyku³y do weryfikacji. Po up³yniêciu daty podanej przez u¿ytkownika, status obecnoœci tego u¿ytkownika zostanie automatycznie zmieniony na ,,Dostêpny''.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: & 
+		U¿ytkownik anuluje zmianê dostêpnoœci
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{3}
+			\item U¿ytkownik klika w ,,X'' w prawym górnym rogu lub kilka w obszar poza formularzem,
+			\item Aplikacja wy³¹cza formularz do zmiany dostêpnoœci.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: & 
+		U¿ytkownik nie poda³ daty
+		\begin{enumerate}[label=\arabic*b.]
+			\setcounter{enumi}{9}
+			\item Aplikacja zmienia kolor obramowania pola z podaniem daty na czerwono oraz wyœwietla pod tym polem komunikat ,,Pole wymagane'',
+			\item Powrót do punktu 4.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: & 
+		U¿ytkownik ma ustawion¹ w³asn¹ dostêpnoœæ na ,,Niedostêpny''
+		\begin{enumerate}[label=\arabic*c.]
+			\setcounter{enumi}{1}
+			\item U¿ytkownik klika przycisk ,,Niedostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}),
+			\item Aplikacja zmienia dostêpnoœæ recenzenta na ,,Dostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}), czyli takiemu 
+						recenzentowi bêd¹ teraz przypisywane artyku³y do weryfikacji.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}
-	\caption{Prototyp nag³ówka strony dla dostêpnego recenzenta z otwartymi opcjami dotycz¹cymi konta}
+	\caption{Nag³ówek strony przyk³adowego dostêpnego recenzenta z otwartymi opcjami dotycz¹cymi konta}
 	\label{fig:prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-ustawienie-nieobecnosci-puste}
+	\caption{Pusty formularz z ustawieniem daty, do której ma byæ ustawiona nieobecnoœæ u¿ytkownika}
+	\label{fig:prototyp-ui-ustawienie-nieobecnosci-puste}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-ustawienie-nieobecnosci-otwarte}
+	\caption{Formularz z ustawieniem daty, do której ma byæ ustawiona nieobecnoœæ u¿ytkownika razem z otwartym oknem wyboru daty}
+	\label{fig:prototyp-ui-ustawienie-nieobecnosci-otwarte}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-ustawienie-nieobecnosci}
+	\caption{Przyk³adowo wype³niony formularz z ustawieniem daty, do której ma byæ ustawiona nieobecnoœæ u¿ytkownika}
+	\label{fig:prototyp-ui-ustawienie-nieobecnosci}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}
-	\caption{Prototyp nag³ówka strony dla niedostêpnego recenzenta z otwartymi opcjami dotycz¹cymi konta}
+	\caption{Nag³ówek strony przyk³adowego niedostêpnego recenzenta z otwartymi opcjami dotycz¹cymi konta}
 	\label{fig:prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}
 \end{figure}
 
-\begin{table}[H] \small
-	\centering
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku u¿ycia - wyszukiwanie artyku³ów}
-	\label{tab:opis-przypadku-uzycia-wyszukiwanie-artykulow}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Wyszukiwanie artyku³ów \\ \hline
-		Opis: & Wyszukiwanie artyku³ów wed³ug podanych przez u¿ytkownika kryteriów i wyœwietlenie wyników tego wyszukiwania w postaci listy artyku³ów \\ \hline
-		Aktorzy: & U¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Brak \\ \hline
-		Warunki koñcowe: & Wyœwietlenie listy wyszukanych artyku³ów \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item U¿ytkownik klika przycisk ,,Artyku³y'' znajduj¹cy siê w panelu nawigacji strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}),
-				\item Aplikacja wyœwietla widok zwi¹zany z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}),
-				\item U¿ytkownik uzupe³nia kryteria wyszukiwania (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow}),
-				\item U¿ytkownik klika przycisk ,,Szukaj'',
-				\item Serwis wyszukuje artyku³y,
-				\item Aplikacja wyœwietla listê wyszukanych artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}).
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
+	\label{tab:opis-przypadku-uzycia-wyszukiwanie-artykulow} \\ \hline
+	Nazwa: & Wyszukiwanie artyku³ów \\ \hline
+	Cel: & Wyszukiwanie artyku³ów wed³ug podanych przez u¿ytkownika kryteriów i wyœwietlenie wyników tego wyszukiwania w postaci listy artyku³ów \\ \hline
+	Aktorzy: & U¿ytkownik \\ \hline
+	Warunki pocz¹tkowe: & Brak \\ \hline
+	Warunki koñcowe: & Wyœwietlenie listy wyszukanych artyku³ów \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item U¿ytkownik klika przycisk ,,Artyku³y'' znajduj¹cy siê w panelu nawigacji strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}),
+			\item Aplikacja wyœwietla widok zwi¹zany z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}),
+			\item U¿ytkownik uzupe³nia kryteria wyszukiwania (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow}),
+			\item U¿ytkownik klika przycisk ,,Szukaj'',
+			\item Serwis wyszukuje artyku³y,
+			\item Aplikacja wyœwietla listê wyszukanych artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}), przy czym w³asne artyku³y s¹ oznaczane 
+						niebieskim prostok¹tem.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-artykulow-puste}
-	\caption{Prototyp wyszukiwania artyku³ów z pustymi kryteriami wyszukiwania}
+	\caption{Panel do wyszukiwania artyku³ów z pustymi kryteriami wyszukiwania}
 	\label{fig:prototyp-ui-wyszukiwanie-artykulow-puste}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-artykulow}
-	\caption{Prototyp wyszukiwania artyku³ów z podanymi kryteriami wyszukiwania}
+	\caption{Panel do wyszukiwania artyku³ów z podanymi przyk³adowymi kryteriami wyszukiwania}
 	\label{fig:prototyp-ui-wyszukiwanie-artykulow}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-artykulow-wyniki}
-	\caption{Prototyp wyszukiwania artyku³ów z podanymi kryteriami wyszukiwania oraz wyszukanymi artyku³ami}
+	\caption{Panel do wyszukiwania artyku³ów z podanymi przyk³adowymi kryteriami wyszukiwania oraz przyk³adow¹ list¹ wyszukanych artyku³ów}
 	\label{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}
 \end{figure}
 
@@ -961,16 +1002,16 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{tab:opis-przypadku-uzycia-sortowanie-artykulow}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Sortowanie artyku³ów \\ \hline
-		Opis: & Posortowanie wyszukanych artyku³ów wed³ug opcji sortowania wybranej przez u¿ytkownika oraz wyœwietlenie listy tych posortowanych artyku³ów \\ \hline
+		Cel: & Posortowanie wyszukanych artyku³ów wed³ug opcji sortowania wybranej przez u¿ytkownika oraz wyœwietlenie listy posortowanych tych artyku³ów \\ \hline
 		Aktorzy: & U¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Wyszukanie artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}) \\ \hline
+		Warunki pocz¹tkowe: & Wyœwietlona lista wyszukanych artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}) \\ \hline
 		Warunki koñcowe: & Wyœwietlenie listy posortowanych artyku³ów \\ \hline
 		Przebieg: & 
 			\begin{enumerate}
 				\item U¿ytkownik klika na rozsuwan¹ listê ,,Sortowanie'',
 				\item U¿ytkownik wybiera jedn¹ z opcji sortowania (Rys.~\ref{fig:prototyp-ui-sortowanie-artykulow-opcje}),
 				\item Aplikacja sortuje artyku³y wed³ug wybranej opcji sortowania,
-				\item Aplikacja wyœwietla listê posortowanych artyku³ów.
+				\item Aplikacja wyœwietla listê posortowanych artyku³ów, przy czym w³asne artyku³y s¹ oznaczane niebieskim prostok¹tem.
 			\end{enumerate}
 		\\ \hline
 	\end{tabularx}
@@ -979,7 +1020,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.3\linewidth]{rys02/prototypy-ui/prototyp-ui-sortowanie-artykulow-opcje}
-	\caption{Prototyp sortowania artyku³ów - dostêpne opcje sortowania}
+	\caption{Dostêpne opcje sortowania artyku³ów}
 	\label{fig:prototyp-ui-sortowanie-artykulow-opcje}
 \end{figure}
 
@@ -989,14 +1030,14 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{tab:opis-przypadku-uzycia-wyswietlenie-zawartosci-artykulu}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Wyœwietlenie zawartoœci artyku³u \\ \hline
-		Opis: & Wyœwietlenie zawartoœci artyku³u \\ \hline
+		Cel: & Wyœwietlenie zawartoœci artyku³u \\ \hline
 		Aktorzy: & U¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Wyszukanie artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}) \\ \hline
+		Warunki pocz¹tkowe: & Wyœwietlona lista wyszukanych artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}) \\ \hline
 		Warunki koñcowe: & Wyœwietlenie zawartoœci artyku³u \\ \hline
 		Przebieg: & 
 			\begin{enumerate}
 				\item U¿ytkownik klika na jeden z wyszukanych artyku³ów,
-				\item Aplikacja wyœwietla zawartoœæ artyku³u (Rys.~\ref{fig:prototyp-ui-artykul}).
+				\item Aplikacja wyœwietla zawartoœæ artyku³u oraz komentarze dotycz¹ce tego artyku³u (Rys.~\ref{fig:prototyp-ui-artykul}).
 			\end{enumerate}
 		\\ \hline
 	\end{tabularx}
@@ -1005,18 +1046,18 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-artykul}
-	\caption{Prototyp artyku³u}
+	\caption{Panel z przyk³adow¹ zawartoœci¹ artyku³u}
 	\label{fig:prototyp-ui-artykul}
 \end{figure}
 
 \begin{longtable}{| m{0.3\linewidth} | m{0.65\linewidth} |}
-	\caption{Opis przypadku u¿ycia - zarz¹dzanie w³asnymi artyku³ami} 
-	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasnymi-artykulami}  \\ \hline
-	Nazwa: & Zarz¹dzanie w³asnymi artyku³ami \\ \hline
-	Opis: & Dodawanie artyku³ów, edytowanie oraz usuwanie w³asnych artyku³ów \\ \hline
+	\caption{Opis przypadku u¿ycia - utworzenie artyku³u} 
+	\label{tab:opis-przypadku-uzycia-utworzenie-artykulu}  \\ \hline
+	Nazwa: & Utworzenie artyku³u \\ \hline
+	Cel: & Utworzenie artyku³u i wyœwietlenie zawartoœci tego artyku³u \\ \hline
 	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
-	Warunki pocz¹tkowe: & Otwarta podstrona z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}) \\ \hline
-	Warunki koñcowe: & Dodawanie, edytowanie lub usuniêcie artyku³u \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlony panel do wyszukiwania artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}) \\ \hline
+	Warunki koñcowe: & Wyœwietlenie zawartoœci utworzonego artyku³u \\ \hline
 	Przebieg: & 
 		Dodawanie artyku³u
 		\begin{enumerate}
@@ -1046,16 +1087,39 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item Przejœcie do punktu 3.
 		\end{enumerate}
 	\\ \hline
-	Alternatywny przebieg: &
+\end{longtable}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-artykulu-puste}
+	\caption{Panel z pustym formularzem do dodania lub edytowania artyku³u}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-artykulu-puste}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-artykulu}
+	\caption{Panel z uzupe³nionym przyk³adowymi danymi formularzem do dodania lub edytowania artyku³u}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-artykulu}
+\end{figure}
+
+\begin{longtable}{| m{0.3\linewidth} | m{0.65\linewidth} |}
+	\caption{Opis przypadku u¿ycia - zarz¹dzanie w³asnym artyku³em} 
+	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasnym-artykulem}  \\ \hline
+	Nazwa: & Zarz¹dzanie w³asnym artyku³em \\ \hline
+	Cel: & Zmodyfikowanie lub usuniêcie w³asnego artyku³u \\ \hline
+	Aktorzy: & Autor artyku³u \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlony panel do wyszukiwania artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}) \\ \hline
+	Warunki koñcowe: & Zmodyfikowanie lub usuniêcie artyku³u \\ \hline
+	Przebieg: & 
 		Edytowanie artyku³u
-		\begin{enumerate}[label=\arabic*c.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik wyszukuje artyku³y,
+		\begin{enumerate}
+			\item U¿ytkownik wyszukuje artyku³y (Tab.~\ref{tab:opis-przypadku-uzycia-wyszukiwanie-artykulow}),
 			\item U¿ytkownik klika na jeden z wyszukanych artyku³ów,
 			\item Aplikacja wyœwietla zawartoœæ wybranego artyku³u (Rys.~\ref{fig:prototyp-ui-artykul}),
 			\item U¿ytkownik klika przycisk ,,Edytuj'',
-			\item Serwis wyœwietla formularz do edycji artyku³u (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-artykulu})
-			\item U¿ytkownik wype³nia wszystkie pola w formularzu
+			\item Serwis wyœwietla formularz do edycji artyku³u (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-artykulu}),
+			\item U¿ytkownik modyfikuje pola w formularzu,
 			\item U¿ytkownik klika przycisk ,,Zapisz'',
 			\item Aplikacja przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
 			\item Po pozytywnej walidacji danych, aplikacja edytuje artyku³ wed³ug zmian wprowadzonych przez u¿ytkownika,
@@ -1064,31 +1128,24 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
-		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem artyku³u oraz chcia³by zedytowaæ ten artyku³
-		\begin{enumerate}[label=\arabic*ca.]
-			\setcounter{enumi}{3}
-			\item U¿ytkownik nie mo¿e zedytowaæ wybranego artyku³u (brak przycisku ,,Edytuj''), 
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
 		U¿ytkownik anuluje edytowanie artyku³u
-		\begin{enumerate}[label=\arabic*cb.]
-			\setcounter{enumi}{2}
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{5}
 			\item U¿ytkownik klika przycisk ,,Anuluj'', 
 			\item U¿ytkownik zostaje przekierowany do strony z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}).
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
 		U¿ytkownik nie uzupe³nia wszystkich pól formularza podczas edytowania artyku³u
-		\begin{enumerate}[label=\arabic*cc.]
+		\begin{enumerate}[label=\arabic*b.]
 			\setcounter{enumi}{8}
 			\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie, 
-			\item Przejœcie do punktu 6c.
+			\item Przejœcie do punktu 6.
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
 		Usuniêcie artyku³u
-		\begin{enumerate}[label=\arabic*cd.]
+		\begin{enumerate}[label=\arabic*c.]
 			\setcounter{enumi}{3}
 			\item U¿ytkownik klika przycisk ,,Usuñ'',
 			\item Aplikacja wyœwietla komunikat z potwierdzeniem usuniêcia artyku³u (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-artykulu})
@@ -1098,15 +1155,8 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
-		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem artyku³u, który chce usun¹æ
-		\begin{enumerate}[label=\arabic*cda.]
-			\setcounter{enumi}{3}
-			\item U¿ytkownik nie mo¿e usun¹æ wybranego artyku³u (brak przycisku ,,Usuñ''),.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
 		Anulowanie usuniêcia artyku³u
-		\begin{enumerate}[label=\arabic*cdb.]
+		\begin{enumerate}[label=\arabic*ca.]
 			\setcounter{enumi}{5}
 			\item U¿ytkownik klika przycisk ,,Nie'' albo w obszar poza formularzem,
 			\item U¿ytkownik zostaje przekierowany do strony z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}).
@@ -1116,37 +1166,51 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-artykulu-puste}
-	\caption{Prototyp pustego formularza do dodania lub edytowania artyku³u}
-	\label{fig:prototyp-ui-dodawanie-edytowanie-artykulu-puste}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-artykulu}
-	\caption{Prototyp formularza do dodania lub edytowania artyku³u}
-	\label{fig:prototyp-ui-dodawanie-edytowanie-artykulu}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
 	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-usuniecia-artykulu}
-	\caption{Prototyp potwierdzenia usuniêcia artyku³u}
+	\caption{Formularz potwierdzenia usuniêcia artyku³u}
 	\label{fig:prototyp-ui-akceptacja-usuniecia-artykulu}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku u¿ycia - weryfikacja przypisanych artyku³ów} 
-	\label{tab:opis-przypadku-uzycia-weryfikacja-przypisanych-artykulow}  \\ \hline
-	Nazwa: & Weryfikacja przypisanych artykulow \\ \hline
-	Opis: & Wyœwietlenie artyku³u przypisanego do weryfikacji \\ \hline
+	\caption{Opis przypadku u¿ycia - wyœwietlenie listy przypisanych artyku³ów} 
+	\label{tab:opis-przypadku-uzycia-wyswietlenie-listy-przypisanych-artykulow}  \\ \hline
+	Nazwa: & Wyœwietlenie listy przypisanych artyku³ów \\ \hline
+	Cel: & Wyœwietlenie listy przypisanych artyku³ów recenzentowi do weryfikacji \\ \hline
 	Aktorzy: & Recenzent \\ \hline
-	Warunki pocz¹tkowe: & Brak \\ \hline
-	Warunki koñcowe: & Wyœwietlenie artyku³u przypisanego do weryfikacji \\ \hline
+	Warunki pocz¹tkowe: & U¿ytkownik bêd¹cy recenzentem jest zalogowany \\ \hline
+	Warunki koñcowe: & Wyœwietlenie listy przypisanych artyku³ów \\ \hline
 	Przebieg: & 
 		\begin{enumerate}
 			\item U¿ytkownik klika przycisk ,,Weryfikacja artyku³ów'' znajduj¹cy siê w menu g³ównym aplikacji (Rys.~\ref{fig:prototyp-ui-naglowek-recenzent}),
 			\item Aplikacja wyœwietla panel z list¹ przypisanych u¿ytkownikowi artyku³ów do weryfikacji (Rys.~\ref{fig:prototyp-ui-artykuly-weryfikowane}),
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-recenzent}
+	\caption{Nag³owek strony przyk³adowego recenzenta}
+	\label{fig:prototyp-ui-naglowek-recenzent}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-artykuly-weryfikowane}
+	\caption{Panel z przyk³adow¹ list¹ artyku³ów do weryfikacji}
+	\label{fig:prototyp-ui-artykuly-weryfikowane}
+\end{figure}
+
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - weryfikacja artyku³u} 
+	\label{tab:opis-przypadku-uzycia-weryfikacja-artykulu}  \\ \hline
+	Nazwa: & Weryfikacja przypisanych artykulów \\ \hline
+	Cel: & Wyœwietlenie panelu s³u¿¹cego do weryfikacji artyku³u \\ \hline
+	Aktorzy: & Recenzent \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlona lista przypisanych u¿ytkownikowi artyku³ów do weryfikacji (Rys.~\ref{fig:prototyp-ui-artykuly-weryfikowane}) \\ \hline
+	Warunki koñcowe: & Wyœwietlenie panelu s³u¿¹cego do weryfikacji artyku³u \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
 			\item U¿ytkownik klika na jeden z artyku³ów,
 			\item Serwis wyœwietla formularz do przeprowadzenia weryfikacji artyku³u (Rys.~\ref{fig:prototyp-ui-weryfikacja-artykulu}).
 		\end{enumerate}
@@ -1155,22 +1219,8 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-recenzent}
-	\caption{Prototyp nag³owka strony dla recenzenta}
-	\label{fig:prototyp-ui-naglowek-recenzent}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-artykuly-weryfikowane}
-	\caption{Prototyp listy artyku³ów do weryfikacji}
-	\label{fig:prototyp-ui-artykuly-weryfikowane}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-weryfikacja-artykulu}
-	\caption{Prototyp weryfikacji artyku³u}
+	\caption{Panel s³u¿¹cy do weryfikacji artyku³u}
 	\label{fig:prototyp-ui-weryfikacja-artykulu}
 \end{figure}
 
@@ -1178,9 +1228,9 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\caption{Opis przypadku u¿ycia - akceptacja artyku³u} 
 	\label{tab:opis-przypadku-uzycia-akceptacja-artykulu}  \\ \hline
 	Nazwa: & Akceptacja artyku³u \\ \hline
-	Opis: & Akceptacja artyku³u, aby artyku³ ten zosta³ opublikowany w serwisie \\ \hline
+	Cel: & Akceptacja artyku³u, co bêdzie skutkowa³o tym, ¿e artyku³ zostanie opublikowany w serwisie \\ \hline
 	Aktorzy: & Recenzent \\ \hline
-	Warunki pocz¹tkowe: & Otwarte okno z weryfikacj¹ artyku³u (Rys.~\ref{fig:prototyp-ui-weryfikacja-artykulu}) \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlony formularz s³u¿¹cy do weryfikacji artyku³u (Rys.~\ref{fig:prototyp-ui-weryfikacja-artykulu}) \\ \hline
 	Warunki koñcowe: & Akceptacja artyku³u \\ \hline
 	Przebieg: & 
 		\begin{enumerate}
@@ -1197,6 +1247,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		U¿ytkownik anuluje akceptacjê artyku³u
 		\begin{enumerate}[label=\arabic*a.]
 			\setcounter{enumi}{3}
+			\item U¿ytkownik klika przycisk ,,Anuluj'',
 			\item Serwis wy³¹cza formularz do akceptacji artyku³u.
 		\end{enumerate}
 	\\ \hline
@@ -1212,14 +1263,14 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-artykulu-puste}
-	\caption{Prototyp pustego formularza do akceptacji artyku³u}
+	\caption{Pusty formularz akceptacji artyku³u}
 	\label{fig:prototyp-ui-akceptacja-artykulu-puste}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-artykulu}
-	\caption{Prototyp formularza do akceptacji artyku³u}
+	\caption{Formularz akceptacji artyku³u z przyk³adow¹ informacj¹ zwrotn¹}
 	\label{fig:prototyp-ui-akceptacja-artykulu}
 \end{figure}
 
@@ -1227,17 +1278,16 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\caption{Opis przypadku u¿ycia - odrzucenie artyku³u}
 	\label{tab:opis-przypadku-uzycia-odrzucenie-artykulu}  \\ \hline
 	Nazwa: & Odrzucenie artyku³u \\ \hline
-	Opis: & Odrzucenie artyku³u, aby artyku³ ten nie zosta³ opublikowany w serwisie, gdy¿ wymaga on poprawek \\ \hline
+	Cel: & Odrzucenie artyku³u, co bêdzie skutkowa³o tym, ¿e artyku³ nie zostanie opublikowany w serwisie, gdy¿ wymaga poprawek \\ \hline
 	Aktorzy: & Recenzent \\ \hline
-	Warunki pocz¹tkowe: & Otwarte okno z weryfikacj¹ artyku³u  (Rys.~\ref{fig:prototyp-ui-weryfikacja-artykulu})\\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlony formularz s³u¿¹cy do weryfikacji artyku³u (Rys.~\ref{fig:prototyp-ui-weryfikacja-artykulu}) \\ \hline
 	Warunki koñcowe: & Odrzucenie artyku³u \\ \hline
 	Przebieg: & 
 		\begin{enumerate}
 			\item U¿ytkownik przegl¹da ca³y artyku³,
 			\item U¿ytkownik klika przycisk ,,Odrzuæ'' na dole strony,
 			\item Aplikacja wyœwietla formularz do odrzucenia artyku³u (Rys.~\ref{fig:prototyp-ui-odrzucenie-artykulu-puste}),
-			\item U¿ytkownik uzupe³nia uzasadnienie akceptacji artyku³u oraz ewentualnie daje wskazówki, co mo¿na by by³o poprawiæ w artykule 
-						(Rys.~\ref{fig:prototyp-ui-odrzucenie-artykulu-puste}),
+			\item U¿ytkownik uzupe³nia uzasadnienie odrzucenia artyku³u (Rys.~\ref{fig:prototyp-ui-odrzucenie-artykulu}),
 			\item U¿ytkownik klika przycisk ,,ZatwierdŸ'',
 			\item Serwis sprawdza, czy u¿ytkownik uzupe³ni³ pole tekstowe,
 			\item Po pozytywnej weryfikacji, artyku³ zostaje odrzucony.
@@ -1247,6 +1297,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		U¿ytkownik anuluje akceptacjê artyku³u
 		\begin{enumerate}[label=\arabic*a.]
 			\setcounter{enumi}{3}
+			\item U¿ytkownik klika przycisk ,,Anuluj'',
 			\item Serwis wy³¹cza formularz do odrzucenia artyku³u.
 		\end{enumerate}
 	\\ \hline
@@ -1263,14 +1314,14 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu-puste}
-	\caption{Prototyp pustego formularza do odrzucenia artyku³u}
+	\caption{Pusty formularz odrzucenia artyku³u}
 	\label{fig:prototyp-ui-odrzucenie-artykulu-puste}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu}
-	\caption{Prototyp formularza do odrzucenia artyku³u}
+	\caption{Formularz odrzucenia artyku³u z przyk³adow¹ informacj¹ zwrotn¹}
 	\label{fig:prototyp-ui-odrzucenie-artykulu}
 \end{figure}
 
@@ -1278,10 +1329,10 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\caption{Opis przypadku u¿ycia - zarz¹dzanie artyku³ami} 
 	\label{tab:opis-przypadku-uzycia-zarzadzanie-artykulami}  \\ \hline
 	Nazwa: & Zarz¹dzanie artyku³ami \\ \hline
-	Opis: & Dodawanie, edytowanie oraz usuwanie artyku³ów \\ \hline
+	Cel: & Modyfikacja lub usuniêcie artyku³u \\ \hline
 	Aktorzy: & Administrator \\ \hline
-	Warunki pocz¹tkowe: & Wyszukane artyku³y (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}) \\ \hline
-	Warunki koñcowe: & Edytowanie lub usuniêcie artyku³u \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlona lista z wyszukanymi artyku³ami (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}) \\ \hline
+	Warunki koñcowe: & Modyfikacja lub usuniêcie artyku³u \\ \hline
 	Przebieg: &
 		Edytowanie artyku³u
 		\begin{enumerate}
@@ -1299,7 +1350,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	Alternatywny przebieg: &
 		U¿ytkownik anuluje edytowanie artyku³u
 		\begin{enumerate}[label=\arabic*a.]
-			\setcounter{enumi}{3}
+			\setcounter{enumi}{4}
 			\item U¿ytkownik klika przycisk ,,Anuluj'', 
 			\item U¿ytkownik zostaje przekierowany do strony z wyszukiwaniem artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-puste}).
 		\end{enumerate}
@@ -1326,7 +1377,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	Alternatywny przebieg: &
 		Anulowanie usuniêcia artyku³u
 		\begin{enumerate}[label=\arabic*ca.]
-			\setcounter{enumi}{5}
+			\setcounter{enumi}{4}
 			\item U¿ytkownik klika przycisk ,,Nie'' albo w obszar poza formularzem,
 			\item Artyku³ nie zostaje usuniêty.
 		\end{enumerate}
@@ -1336,7 +1387,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-artykul-administrator}
-	\caption{Prototyp artyku³u dla administratora}
+	\caption{Panel z zawartoœci¹ przyk³adowego artyku³u widziany z perspektywy przyk³adowego administratora}
 	\label{fig:prototyp-ui-artykul-administrator}
 \end{figure}
 
@@ -1346,22 +1397,15 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{tab:opis-przypadku-uzycia-przegl¹danie-komentarzy-o-artykule}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Przegl¹danie komentarzy o artykule \\ \hline
-		Opis: & Wyœwietlenie komentarzy dotycz¹cych danego artyku³u \\ \hline
+		Cel: & Wyœwietlenie komentarzy dotycz¹cych danego artyku³u \\ \hline
 		Aktorzy: & U¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Otwarty artyku³ (Rys.~\ref{fig:prototyp-ui-artykul}) \\ \hline
+		Warunki pocz¹tkowe: & Wyœwietlona zawartoœæ artyku³u (Rys.~\ref{fig:prototyp-ui-artykul}) \\ \hline
 		Warunki koñcowe: & Wyœwietlenie komentarzy dotycz¹cych danego artyku³u \\ \hline
 		Przebieg: & 
 			\begin{enumerate}
 				\item U¿ytkownik przewija artyku³ na sam dó³,
-				\item Wyœwietlenie komentarzy o artykule (Rys.~\ref{fig:prototyp-ui-komentarze-o-artykule}).
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			U¿ytkownik klika przycisk ,,Opinie'', lub ,,Opis technologii''
-			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{1}
 				\item U¿ytkownik klika przycisk ,,Komentarze'',
-				\item Przejœcie do punktu 2.
+				\item Wyœwietlenie komentarzy o artykule (Rys.~\ref{fig:prototyp-ui-komentarze-o-artykule}).
 			\end{enumerate}
 		\\ \hline
 	\end{tabularx}
@@ -1370,18 +1414,18 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-komentarze-o-artykule}
-	\caption{Prototyp listy komentarzy o artykule}
+	\caption{Panel z przyk³adow¹ list¹ komentarzy o artykule}
 	\label{fig:prototyp-ui-komentarze-o-artykule}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku u¿ycia - zarz¹dzanie komentarzami o artykule}
-	\label{tab:opis-przypadku-uzycia-zarzadzanie-komentarzami-o-artykule} \\ \hline
-	Nazwa: & Zarz¹dzanie komentarzami o artykule \\ \hline
-	Opis: & Dodanie komentarzy do artyku³u, edytowanie oraz usuniêcie w³asnych komentarzy do artyku³u \\ \hline
+	\caption{Opis przypadku u¿ycia - dodanie komentarza o artykule}
+	\label{tab:opis-przypadku-uzycia-dodanie-komentarza-o-artykule} \\ \hline
+	Nazwa: & Dodanie komentarza o artykule \\ \hline
+	Cel: & Dodanie komentarza do artyku³u \\ \hline
 	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
-	Warunki pocz¹tkowe: & Otwarta zak³adka z komentarzami artyku³u (Rys.~\ref{fig:prototyp-ui-komentarze-o-artykule}) \\ \hline
-	Warunki koñcowe: & Dodanie, edytowanie lub usuniêcie komentarza do artyku³u \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlone komentarze o artykule (Rys.~\ref{fig:prototyp-ui-komentarze-o-artykule}) \\ \hline
+	Warunki koñcowe: & Dodanie komentarza do artyku³u \\ \hline
 	Przebieg: & 
 		Dodanie komentarza
 		\begin{enumerate}
@@ -1404,17 +1448,40 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	Alternatywny przebieg: &
 		U¿ytkownik nie uzupe³nia tekstu przy tworzeniu komentarza
 		\begin{enumerate}[label=\arabic*b.]
-			\setcounter{enumi}{4}
+			\setcounter{enumi}{5}
 			\item Aplikacja wyœwietla u¿ytkownikowi informacje o tym, ¿e komentarz nie mo¿e byæ pusty,
 			\item Przejœcie do punktu 3.
 		\end{enumerate}
 	\\ \hline
-	Alternatywny Przebieg: & 
+\end{longtable}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule-puste}
+	\caption{Pusty formularz dodania lub edytowania komentarza o artykule}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule-puste}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule}
+	\caption{Uzupe³niony przyk³adowym tekstem formularz dodania lub edytowania komentarza o artykule}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule}
+\end{figure}
+
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - zarz¹dzanie w³asnym komentarzem o artykule}
+	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasnym-komentarzem-o-artykule} \\ \hline
+	Nazwa: & Zarz¹dzanie w³asnym komentarzem o artykule \\ \hline
+	Cel: & Modyfikacja lub usuniêcie w³asnego komentarza do artyku³u \\ \hline
+	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlone komentarze o artykule (Rys.~\ref{fig:prototyp-ui-komentarze-o-artykule}) \\ \hline
+	Warunki koñcowe: & Modyfikacja lub usuniêcie komentarza do artyku³u \\ \hline
+	Przebieg: & 
 		Edytowanie komentarza
-		\begin{enumerate}[label=\arabic*c.]
-			\setcounter{enumi}{0}
+		\begin{enumerate}
 			\item U¿ytkownik klika trzy kropki przy jednym z komentarzy,
-			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranego komentarza
+			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranego komentarza (Rys.~\ref{fig:prototyp-ui-opcje-komentarza}),
 			\item U¿ytkownik klika przycisk ,,Edytuj'',
 			\item Aplikacja wyœwietla formularz do edytowania komentarza (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule}),
 			\item U¿ytkownik edytuje tekst komentarza,
@@ -1424,15 +1491,8 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
-		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem komentarza oraz chcia³by zedytowaæ lub usun¹æ ten komentarz
-		\begin{enumerate}[label=\arabic*ca.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik nie mo¿e zedytowaæ lub usun¹æ wybranego komentarza (brak menu komentarza - trzech kropek), 
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
 		U¿ytkownik anuluje edytowanie komentarza
-		\begin{enumerate}[label=\arabic*cb.]
+		\begin{enumerate}[label=\arabic*a.]
 			\setcounter{enumi}{4}
 			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do edytowania komentarza,
 			\item Wy³¹czenie formularza do edytowania komentarza.
@@ -1440,15 +1500,15 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\\ \hline
 	Alternatywny przebieg: &
 		U¿ytkownik nie uzupe³nia tekstu przy edytowaniu komentarza
-		\begin{enumerate}[label=\arabic*cc.]
+		\begin{enumerate}[label=\arabic*b.]
 			\setcounter{enumi}{7}
 			\item Aplikacja wyœwietla u¿ytkownikowi informacje o tym, ¿e komentarz nie mo¿e byæ pusty,
-			\item Przejœcie do punktu 5c.
+			\item Przejœcie do punktu 5.
 		\end{enumerate}
 	\\ \hline
 	Alternatywny Przebieg: & 
 		Usuniêcie komentarza
-		\begin{enumerate}[label=\arabic*cd.]
+		\begin{enumerate}[label=\arabic*c.]
 			\setcounter{enumi}{2}
 			\item U¿ytkownik klika przycisk ,,Usuñ'' przy jednym z komentarzy,
 			\item Aplikacja wyœwietla formularz z zapytaniem, czy komentarz powinien zostaæ usuniêty (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-komentarza}),
@@ -1458,7 +1518,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\\ \hline
 	Alternatywny przebieg: &
 		U¿ytkownik anuluje usuwanie komentarza
-		\begin{enumerate}[label=\arabic*cda.]
+		\begin{enumerate}[label=\arabic*ca.]
 			\setcounter{enumi}{4}
 			\item U¿ytkownik klika przycisk ,,Nie'',
 			\item Komentarz nie zostaje usuniêty.
@@ -1468,22 +1528,15 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule-puste}
-	\caption{Prototyp pustego formularza do dodania lub edytowania komentarza o artykule}
-	\label{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule-puste}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule}
-	\caption{Prototyp formularza do dodania lub edytowania komentarza o artykule}
-	\label{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule}
+	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-opcje-komentarza}
+	\caption{Dostêpne opcje do zarz¹dzania komentarzem}
+	\label{fig:prototyp-ui-opcje-komentarza}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-usuniecia-komentarza}
-	\caption{Prototyp potwierdzenia usuniêcia komentarza}
+	\caption{Formularz potwierdzenia usuniêcia komentarza}
 	\label{fig:prototyp-ui-akceptacja-usuniecia-komentarza}
 \end{figure}
 
@@ -1491,14 +1544,14 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\caption{Opis przypadku u¿ycia - usuwanie komentarzy o artykule}
 	\label{tab:opis-przypadku-uzycia-usuwanie-komentarzy-o-artykule} \\ \hline
 	Nazwa: & Usuwanie komentarzy o artykule \\ \hline
-	Opis: & Usuniêcie wybranego komentarza o artykule \\ \hline
+	Cel: & Usuniêcie wybranego komentarza o artykule \\ \hline
 	Aktorzy: & Administrator \\ \hline
-	Warunki pocz¹tkowe: & Otwarta zak³adka z komentarzami artyku³u (Rys.~\ref{fig:prototyp-ui-komentarze-o-artykule-administrator}) \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlone komentarze o artykule (Rys.~\ref{fig:prototyp-ui-komentarze-o-artykule-administrator}) \\ \hline
 	Warunki koñcowe: & Usuniêcie komentarza do artyku³u \\ \hline
 	Przebieg: & 
 		\begin{enumerate}
 			\item U¿ytkownik klika trzy kropki przy jednym z komentarzy,
-			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranego komentarza
+			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranego komentarza (Rys.~\ref{fig:prototyp-ui-opcje-komentarza}),
 			\item U¿ytkownik klika przycisk ,,Usuñ'',
 			\item Aplikacja wyœwietla formularz z zapytaniem, czy komentarz powinien zostaæ usuniêty (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-komentarza}),
 			\item U¿ytkownik klika przycisk ,,Tak'',
@@ -1518,45 +1571,42 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-komentarze-o-artykule-administrator}
-	\caption{Prototyp listy komentarzy o artykule dla administratora}
+	\caption{Przyk³adowa lista komentarzy o artykule dla przyk³adowego administratora}
 	\label{fig:prototyp-ui-komentarze-o-artykule-administrator}
 \end{figure}
 
-\begin{table}[H] \small
-	\centering
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku u¿ycia - przegl¹danie opinii o artykule}
-	\label{tab:opis-przypadku-uzycia-przegladanie-opinii-o-artykule}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Przegl¹danie opinii o artykule \\ \hline
-		Opis: & Wyœwietlenie opinii dotycz¹cych danego artyku³u \\ \hline
-		Aktorzy: & U¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & Otwarty artyku³ (Rys.~\ref{fig:prototyp-ui-artykul}) \\ \hline
-		Warunki koñcowe: & Wyœwietlenie opinii dotycz¹cych danego artyku³u \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item U¿ytkownik przewija artyku³ na sam dó³,
-				\item U¿ytkownik klika przycisk ,,Opinie'',
-				\item Aplikacja wyœwietla opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule}).
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
+	\label{tab:opis-przypadku-uzycia-przegladanie-opinii-o-artykule} \\ \hline
+	Nazwa: & Przegl¹danie opinii o artykule \\ \hline
+	Cel: & Wyœwietlenie opinii dotycz¹cych danego artyku³u \\ \hline
+	Aktorzy: & U¿ytkownik \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlona zawartoœæ artyku³u (Rys.~\ref{fig:prototyp-ui-artykul}) \\ \hline
+	Warunki koñcowe: & Wyœwietlenie opinii dotycz¹cych danego artyku³u \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item U¿ytkownik przewija artyku³ na sam dó³,
+			\item U¿ytkownik klika przycisk ,,Opinie'',
+			\item Aplikacja wyœwietla opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule}).
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-opinie-o-artykule}
-	\caption{Prototyp listy opinii o artykule}
+	\caption{Panel z przyk³adow¹ list¹ opinii o artykule}
 	\label{fig:prototyp-ui-opinie-o-artykule}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku u¿ycia - zarz¹dzanie opiniami o artykule}
-	\label{tab:opis-przypadku-uzycia-zarzadzanie-opiniami-o-artykule} \\ \hline
-	Nazwa: & Zarz¹dzanie opiniami o artykule \\ \hline
-	Opis: & Dodanie opinii o artykule, edytowanie oraz usuniêcie w³asnej opinii do artyku³u \\ \hline
-	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
-	Warunki pocz¹tkowe: & Otwarta zak³adka z opiniami artyku³u (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule}) \\ \hline
-	Warunki koñcowe: & Dodanie, edytowanie, usuniêcie opinii o artykule, dodanie akceptacji lub usuniêcie akceptacji\\ \hline
+	\caption{Opis przypadku u¿ycia - dodanie opinii o artykule}
+	\label{tab:opis-przypadku-uzycia-dodanie-opinii-o-artykule} \\ \hline
+	Nazwa: & Dodanie opinii o artykule \\ \hline
+	Cel: & Dodanie opinii o artykule \\ \hline
+	Aktorzy: & Zalogowany u¿ytkownik, który nie jest autorem artyku³u \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule-administrator}) \\ \hline
+	Warunki koñcowe: & Dodanie opinii o artykule\\ \hline
 	Przebieg: & 
 		Dodanie opinii
 		\begin{enumerate}
@@ -1569,16 +1619,8 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
-		U¿ytkownik jest autorem artyku³u
-		\begin{enumerate}[label=\arabic*a.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik jest autorem artyku³u i zatem nie mo¿e wystawiæ do niego opinii (brak przycisku ,,Dodaj opiniê''),
-			\item Opinia nie zostaje dodana.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
 		U¿ytkownik anuluje tworzenie opinii
-		\begin{enumerate}[label=\arabic*b.]
+		\begin{enumerate}[label=\arabic*a.]
 			\setcounter{enumi}{2}
 			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do tworzenia opinii,
 			\item Wy³¹czenie formularza do dodania opinii.
@@ -1586,16 +1628,39 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\\ \hline
 	Alternatywny przebieg: &
 		U¿ytkownik nie uzupe³nia wszystkich wymaganych pól formularza
-		\begin{enumerate}[label=\arabic*c.]
+		\begin{enumerate}[label=\arabic*b.]
 			\setcounter{enumi}{5}
 			\item Aplikacja zmienia kolor obramowania nieuzupe³nionych pól na czerwono oraz wyœwietla pod tymi polami komunikat ,,Pole wymagane'',
 			\item Przejœcie do punktu 3.
 		\end{enumerate}
 	\\ \hline
-	Alternatywny Przebieg: & 
+\end{longtable}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-opinii-o-artykule-puste}
+	\caption{Pusty formularza dodania lub edytowania opinii o artykule}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-artykule-puste}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-opinii-o-artykule}
+	\caption{Uzupe³niony przyk³adowymi danymi formularz dodania lub edytowania opinii o artykule}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-artykule}
+\end{figure}
+
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - zarz¹dzanie w³asn¹ opini¹ o artykule}
+	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasna-opinia-o-artykule} \\ \hline
+	Nazwa: & Zarz¹dzanie w³asn¹ opini¹ o artykule \\ \hline
+	Cel: & Modyfikacja lub usuniêcie w³asnej opinii do artyku³u \\ \hline
+	Aktorzy: & Autor opinii \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule-administrator}) \\ \hline
+	Warunki koñcowe: & Modyfikacja lub usuniêcie w³asnej opinii do artyku³u \\ \hline
+	Przebieg: & 
 		Edytowanie opinii
-		\begin{enumerate}[label=\arabic*d.]
-			\setcounter{enumi}{0}
+		\begin{enumerate}
 			\item U¿ytkownik klika trzy kropki przy jednej z opinii,
 			\item Aplikacja wyœwietla listê dzia³añ, które mog¹ zostaæ wykonane w ramach wybranej opinii
 			\item U¿ytkownik klika przycisk ,,Edytuj'',
@@ -1607,15 +1672,8 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
-		U¿ytkownik nieposiadaj¹cy uprawnieñ administratora nie jest autorem opinii oraz chcia³by zedytowaæ lub usun¹æ tê opiniê
-		\begin{enumerate}[label=\arabic*da.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik nie mo¿e zedytowaæ lub usun¹æ wybranej opinii (brak menu komentarza - trzech kropek), 
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
 		U¿ytkownik anuluje edytowanie opinii
-		\begin{enumerate}[label=\arabic*db.]
+		\begin{enumerate}[label=\arabic*a.]
 			\setcounter{enumi}{4}
 			\item U¿ytkownik klika przycisk ,,Anuluj'' na formularzu do edytowania opinii,
 			\item Wy³¹czenie formularza do edytowania opinii.
@@ -1623,90 +1681,36 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\\ \hline
 	Alternatywny przebieg: &
 		U¿ytkownik nie uzupe³nia tekstu przy edytowaniu opinii
-		\begin{enumerate}[label=\arabic*dc.]
+		\begin{enumerate}[label=\arabic*b.]
 			\setcounter{enumi}{7}
 			\item Aplikacja zmienia kolor obramowania nieuzupe³nionych pól na czerwono oraz wyœwietla pod tymi polami komunikat ,,Pole wymagane'',
-			\item Przejœcie do punktu 5d.
+			\item Przejœcie do punktu 5.
 		\end{enumerate}
 	\\ \hline
 	Alternatywny Przebieg: & 
 		Usuniêcie opinii
-		\begin{enumerate}[label=\arabic*dd.]
+		\begin{enumerate}[label=\arabic*c.]
 			\setcounter{enumi}{2}
 			\item U¿ytkownik klika przycisk ,,Usuñ'',
 			\item Aplikacja wyœwietla formularz z zapytaniem, czy opinia powinna zostaæ usuniêta (Rys.~\ref{fig:prototyp-ui-akceptacja-usuniecia-opinii}),
 			\item U¿ytkownik klika przycisk ,,Tak'',
-			\item Serwis usuwa komentarz.
+			\item Serwis usuwa opiniê.
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
 		U¿ytkownik anuluje usuwanie opinii
-		\begin{enumerate}[label=\arabic*dda.]
+		\begin{enumerate}[label=\arabic*ca.]
 			\setcounter{enumi}{4}
 			\item U¿ytkownik klika przycisk ,,Nie'',
 			\item Opinia nie zostaje usuniêta.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik ustawia akceptacjê opinii (ustawiona ³apka jest koloru czarnego)
-		\begin{enumerate}[label=\arabic*e.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik nie jest autorem opinii,
-			\item U¿ytkownik klika kciuk w górê,
-			\item U¿ytkownik nie zostawi³ wczeœniej kciuka w górê przy danej opinii,
-			\item Aplikacja ustawia kciuk w górê dla opinii.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik jest autorem opinii
-		\begin{enumerate}[label=\arabic*ea.]
-			\setcounter{enumi}{0}
-			\item U¿ytkownik nie mo¿e zostawiæ akceptacji w³asnej opinii.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik zostawi³ wczeœniej kciuk w górê
-		\begin{enumerate}[label=\arabic*eb.]
-			\setcounter{enumi}{3}
-			\item Aplikacja usuwa kciuk w górê z opinii.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik klika kciuk w dó³
-		\begin{enumerate}[label=\arabic*ec.]
-			\setcounter{enumi}{1}
-			\item U¿ytkownik klika kciuk w dó³,
-			\item U¿ytkownik nie zostawi³ wczeœniej kciuka w dó³,
-			\item Aplikacja ustawia kciuk w dó³ dla opinii.
-		\end{enumerate}
-	\\ \hline
-	Alternatywny przebieg: &
-		U¿ytkownik zostawi³ wczeœniej kciuk w dó³
-		\begin{enumerate}[label=\arabic*ed.]
-			\setcounter{enumi}{3}
-			\item Aplikacja usuwa kciuk w dó³ z opinii.
 		\end{enumerate}
 	\\ \hline
 \end{longtable}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-opinii-o-artykule-puste}
-	\caption{Prototyp pustego formularza do dodania lub edytowania opinii o artykule}
-	\label{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-artykule-puste}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-opinii-o-artykule}
-	\caption{Prototyp formularza do dodania lub edytowania opinii o artykule}
-	\label{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-artykule}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
 	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-usuniecia-opinii}
-	\caption{Prototyp potwierdzenia usuniêcia opinii}
+	\caption{Formularz potwierdzenia usuniêcia opinii}
 	\label{fig:prototyp-ui-akceptacja-usuniecia-opinii}
 \end{figure}
 
@@ -1714,9 +1718,9 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\caption{Opis przypadku u¿ycia - usuwanie opinii o artykule}
 	\label{tab:opis-opinii-uzycia-usuwanie-opinii-o-artykule} \\ \hline
 	Nazwa: & Usuwanie komentarzy o artykule \\ \hline
-	Opis: & Usuniêcie wybranej opinii o artykule \\ \hline
+	Cel: & Usuniêcie wybranej opinii o artykule \\ \hline
 	Aktorzy: & Administrator \\ \hline
-	Warunki pocz¹tkowe: & Otwarta zak³adka z opiniami o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule-administrator}) \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule-administrator}) \\ \hline
 	Warunki koñcowe: & Usuniêcie opinii do artyku³u \\ \hline
 	Przebieg: & 
 		\begin{enumerate}
@@ -1741,9 +1745,56 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-opinie-o-artykule-administrator}
-	\caption{Prototyp listy opinii o artykule dla administratora}
+	\caption{Panel z przyk³adow¹ list¹ opinii o artykule dla przyk³adowego administratora}
 	\label{fig:prototyp-ui-opinie-o-artykule-administrator}
 \end{figure}
+
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - dodanie akceptacji opinii o artykule}
+	\label{tab:opis-przypadku-uzycia-dodanie-akceptacji-opinii-o-artykule} \\ \hline
+	Nazwa: & Dodanie akceptacji opinii o artykule \\ \hline
+	Cel: & Dodanie akceptacji opinii o artykule \\ \hline
+	Aktorzy: & Zalogowany u¿ytkownik, który nie jest autorem opinii o artykule oraz autorem akceptacji opinii o artykule \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule-administrator}) \\ \hline
+	Warunki koñcowe: & Wyœwietlenie opinii z zaktualizowanym stanem akceptacji pozytywnych i negatywnych \\ \hline
+	Przebieg: & 
+		Dodanie kciuka w górê
+		\begin{enumerate}
+			\item U¿ytkownik klika przy jednej z opinii kciuk w górê,
+			\item Aplikacja zwiêksza o 1 liczbê pozytywnych akceptacji wybranej opinii,
+			\item Aplikacja zmienia kolor kciuka w górê na czarny,
+			\item Aplikacja wyœwietla opiniê z zaktualizowanym stanem akceptacji pozytywnych i negatywnych.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		Dodanie kciuka w dó³
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{0}
+			\item U¿ytkownik klika przy jednej z opinii kciuk w dó³,
+			\item Aplikacja zwiêksza o 1 liczbê negatywnych akceptacji wybranej opinii,
+			\item Aplikacja zmienia kolor kciuka w dó³ na czarny,
+			\item Aplikacja wyœwietla opiniê z zaktualizowanym stanem akceptacji pozytywnych i negatywnych.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
+
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - usuniêcie akceptacji opinii o artykule}
+	\label{tab:opis-przypadku-uzycia-usuniecie-akceptacji-opinii-o-artykule} \\ \hline
+	Nazwa: & Usuniêcie akceptacji opinii o artykule \\ \hline
+	Cel: & Usuniêcie akceptacji opinii o artykule \\ \hline
+	Aktorzy: & Autor akceptacji opinii o artykule \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule-administrator}) \\ \hline
+	Warunki koñcowe: & Wyœwietlenie opinii z zaktualizowanym stanem akceptacji pozytywnych i negatywnych \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item U¿ytkownik klika w czerwony znak ,,X'' przy akceptacjach wybranej opinii,
+			\item Aplikacja usuwa akceptacjê opinii,
+			\item Aplikacja zmienia kolor ustawionego kciuka na bia³y,
+			\item Aplikacja wyœwietla opiniê z zaktualizowanym stanem akceptacji pozytywnych i negatywnych.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \begin{table}[H] \small
 	\centering
