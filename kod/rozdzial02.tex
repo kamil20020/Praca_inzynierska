@@ -488,53 +488,50 @@ Dla ka¿dego przypadku u¿ycia zdefiniowanego w poprzednim punkcie, zrobiono szcze
 
 Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby zaplanowaæ wygl¹d interfejsu u¿ytkownika oraz aby ³atwiej mo¿na by³o poj¹æ opisy przypadków u¿ycia.
 
-\begin{table}[H] \small
-	\centering
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku u¿ycia - rejestracja}
-	\label{tab:opis-przypadku-uzycia-rejestracja}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Rejestracja \\ \hline
-		Cel: & Utworzenie konta zwyk³ego u¿ytkownika\\ \hline
-		Aktorzy: & Niezalogowany u¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & U¿ytkownik jest niezalogowany \\ \hline
-		Warunki koñcowe: & Za³o¿enie konta zwyk³ego u¿ytkownika \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item U¿ytkownik klika przycisk ,,Rejestracja'' na nag³ówku strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}),
-				\item Aplikacja wyœwietla formularz do rejestracji (Rys.~\ref{fig:prototyp-ui-rejestracja}),
-				\item U¿ytkownik wype³nia pola w formularzu,
-				\item U¿ytkownik klika przycisk ,,Zarejestruj'',
-				\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
-				\item Po pozytywnej walidacji danych, aplikacja wyœwietla regulamin serwisu,
-				\item U¿ytkownik przegl¹da ca³y regulamin i go akceptuje poprzez klikniêcie w pole wyboru ,,Akceptuje regulamin'' 
-							(Rys.~\ref{fig:prototyp-ui-akceptacja-regulaminu}),
-				\item Serwis tworzy nowo konto.
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			U¿ytkownik anuluje rejestracjê
-			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{2}
-				\item U¿ytkownik klika przycisk ,,X'' lub klika w obszar poza formularzem,
-				\item Wy³¹czenie formularza.
-			\end{enumerate} \\ \hline
-		Alternatywny przebieg: &
-			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
-			\begin{enumerate}[label=\arabic*b.]
-				\setcounter{enumi}{5}
-				\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
-				\item Powrót do punktu 3.
-			\end{enumerate}\\ \hline
-		Alternatywny przebieg: &
-			U¿ytkownik nie akceptuje regulaminu
-			\begin{enumerate}[label=\arabic*c.]
-				\setcounter{enumi}{6}
-				\item U¿ytkownik klika w pole wyboru po lewej stronie od napisu ,,Nie akceptuje regulaminu'' lub klika przycisk ,,X''
-				\item Wy³¹czenie formularza.
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
+	\label{tab:opis-przypadku-uzycia-rejestracja} \\ \hline
+	Nazwa: & Rejestracja \\ \hline
+	Cel: & Utworzenie konta zwyk³ego u¿ytkownika\\ \hline
+	Aktorzy: & Niezalogowany u¿ytkownik \\ \hline
+	Warunki pocz¹tkowe: & U¿ytkownik jest niezalogowany \\ \hline
+	Warunki koñcowe: & Za³o¿enie konta zwyk³ego u¿ytkownika \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item U¿ytkownik klika przycisk ,,Rejestracja'' na nag³ówku strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}),
+			\item Aplikacja wyœwietla formularz do rejestracji (Rys.~\ref{fig:prototyp-ui-rejestracja}),
+			\item U¿ytkownik wype³nia pola w formularzu,
+			\item U¿ytkownik klika przycisk ,,Zarejestruj'',
+			\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
+			\item Po pozytywnej walidacji danych, aplikacja wyœwietla regulamin serwisu,
+			\item U¿ytkownik przegl¹da ca³y regulamin i go akceptuje poprzez klikniêcie w pole wyboru ,,Akceptuje regulamin'' 
+						(Rys.~\ref{fig:prototyp-ui-akceptacja-regulaminu}),
+			\item Serwis tworzy nowo konto.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje rejestracjê
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{2}
+			\item U¿ytkownik klika przycisk ,,X'' lub klika w obszar poza formularzem,
+			\item Wy³¹czenie formularza.
+		\end{enumerate} \\ \hline
+	Alternatywny przebieg: &
+		Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
+		\begin{enumerate}[label=\arabic*b.]
+			\setcounter{enumi}{5}
+			\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
+			\item Powrót do punktu 3.
+		\end{enumerate}\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik nie akceptuje regulaminu
+		\begin{enumerate}[label=\arabic*c.]
+			\setcounter{enumi}{6}
+			\item U¿ytkownik klika w pole wyboru po lewej stronie od napisu ,,Nie akceptuje regulaminu'' lub klika przycisk ,,X''
+			\item Wy³¹czenie formularza.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \begin{figure}[H]
 	\centering
@@ -557,54 +554,58 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{fig:prototyp-ui-akceptacja-regulaminu}
 \end{figure}
 
-\begin{table}[H] \small
-	\centering
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku u¿ycia - logowanie}
-	\label{tab:opis-przypadku-uzycia-logowanie}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Logowanie \\ \hline
-		Cel: & Zalogowanie siê u¿ytkownika \\ \hline
-		Aktorzy: & Niezalogowany u¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
-		Warunki koñcowe: & Zalogowanie siê u¿ytkownika \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item U¿ytkownik klika przycisk ,,Logowanie'' na nag³ówku strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}),
-				\item Aplikacja wyœwietla formularz do logowania (Rys.~\ref{fig:prototyp-ui-logowanie}),
-				\item U¿ytkownik wype³nia pola w formularzu,
-				\item U¿ytkownik klika przycisk ,,Zaloguj'',
-				\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
-				\item Po pozytywnej walidacji danych, u¿ytkownik zostaje zalogowany do systemu i bêdzie móg³ korzystaæ z funkcji systemu w zakresie adekwatnym do jego uprawnieñ. 
-							Zmienia siê wygl¹d nag³ówka strony (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany}),
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			U¿ytkownik anuluje logowanie
-			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{2}
-				\item U¿ytkownik klika przycisk ,,X'' lub klika w obszar poza formularzem,
-				\item Wy³¹czenie formularza.
-			\end{enumerate} \\ \hline
-		Alternatywny przebieg: &
-			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
-			\begin{enumerate}[label=\arabic*b.]
-				\setcounter{enumi}{5}
-				\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
-				\item Powrót do punktu 3.
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			Has³o u¿ytkownika zosta³o zresetowane
-			\begin{enumerate}[label=\arabic*c.]
-				\setcounter{enumi}{6}
-				\item Aplikacja wyœwietla formularz do ustawienia has³a (Rys.~\ref{fig:prototyp-ui-ustawienie-hasla})
-				\item U¿ytkownik podaje has³o,
-				\item U¿ytkownik klika przycisk ,,Zapisz'',
-				\item Serwis sprawdza, czy podano has³o oraz jeœli podano, to czy jest ono zgodne z narzuconym rozmiarem i formatem,
-				\item Po pozytywnej walidacji has³a, has³o u¿ytkownika zostaje zmienione.
-			\end{enumerate} \\ \hline
-	\end{tabularx}
-\end{table}
+	\label{tab:opis-przypadku-uzycia-logowanie} \\ \hline
+	Nazwa: & Logowanie \\ \hline
+	Cel: & Zalogowanie siê u¿ytkownika \\ \hline
+	Aktorzy: & Niezalogowany u¿ytkownik \\ \hline
+	Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
+	Warunki koñcowe: & Zalogowanie siê u¿ytkownika \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item U¿ytkownik klika przycisk ,,Logowanie'' na nag³ówku strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}),
+			\item Aplikacja wyœwietla formularz do logowania (Rys.~\ref{fig:prototyp-ui-logowanie}),
+			\item U¿ytkownik wype³nia pola w formularzu,
+			\item U¿ytkownik klika przycisk ,,Zaloguj'',
+			\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
+			\item Po pozytywnej walidacji danych, u¿ytkownik zostaje zalogowany do systemu i bêdzie móg³ korzystaæ z funkcji systemu w zakresie adekwatnym do jego uprawnieñ. 
+						Zmienia siê wygl¹d nag³ówka strony (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany}),
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje logowanie
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{2}
+			\item U¿ytkownik klika przycisk ,,X'' lub klika w obszar poza formularzem,
+			\item Wy³¹czenie formularza.
+		\end{enumerate} \\ \hline
+	Alternatywny przebieg: &
+		Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
+		\begin{enumerate}[label=\arabic*b.]
+			\setcounter{enumi}{5}
+			\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
+			\item Powrót do punktu 3.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		Has³o u¿ytkownika zosta³o wczeœniej zresetowane (puste has³o)
+		\begin{enumerate}[label=\arabic*c.]
+			\setcounter{enumi}{6}
+			\item Aplikacja wyœwietla formularz do ustawienia has³a (Rys.~\ref{fig:prototyp-ui-ustawienie-hasla})
+			\item U¿ytkownik podaje has³o,
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Serwis sprawdza, czy podano has³o oraz jeœli podano, to czy jest ono zgodne z narzuconym rozmiarem i formatem,
+			\item Po pozytywnej walidacji has³a, has³o u¿ytkownika zostaje zmienione.
+		\end{enumerate} \\ \hline
+	Alternatywny przebieg: &
+		Wprowadzone has³o po resecie has³a nie przesz³o walidacji
+		\begin{enumerate}[label=\arabic*ca.]
+			\setcounter{enumi}{10}
+			\item Aplikacja zmienia kolor obramowania pola z has³em, na czerwono oraz wyœwietla pod tym polem adekwatny komunikat o b³êdzie
+			\item Powrót do punktu 8c,
+		\end{enumerate} \\ \hline
+\end{longtable}
 
 \begin{figure}[H]
 	\centering
@@ -627,26 +628,23 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{fig:prototyp-ui-ustawienie-hasla}
 \end{figure}
 
-\begin{table}[H] \small
-	\centering
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku u¿ycia - wylogowanie}
-	\label{tab:opis-przypadku-uzycia-wylogowanie}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Wylogowanie \\ \hline
-		Cel: & Wylogowanie siê u¿ytkownika \\ \hline
-		Aktorzy: & Zalogowany u¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
-		Warunki koñcowe: & Wylogowanie u¿ytkownika z serwisu \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item U¿ytkownik klika na swój awatar dostêpny na nag³ówku strony aby wyœwietliæ opcje dotycz¹ce konta (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty}),
-				\item U¿ytkownik klika przycisk ,,Wyloguj siê'',
-				\item Aplikacja wyœwietla komunikat o wylogowaniu siê,
-				\item Nastêpuje wylogowanie u¿ytkownika oraz zmienia siê wygl¹d nag³ówka strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}).
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
+	\label{tab:opis-przypadku-uzycia-wylogowanie} \\ \hline
+	Nazwa: & Wylogowanie \\ \hline
+	Cel: & Wylogowanie siê u¿ytkownika \\ \hline
+	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
+	Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
+	Warunki koñcowe: & Wylogowanie u¿ytkownika z serwisu \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item U¿ytkownik klika na swój awatar dostêpny na nag³ówku strony aby wyœwietliæ opcje dotycz¹ce konta (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty}),
+			\item U¿ytkownik klika przycisk ,,Wyloguj siê'',
+			\item Aplikacja wyœwietla komunikat o wylogowaniu siê,
+			\item Nastêpuje wylogowanie u¿ytkownika oraz zmienia siê wygl¹d nag³ówka strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}).
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \begin{figure}[H]
 	\centering
@@ -655,47 +653,44 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{fig:prototyp-ui-naglowek-zalogowany-otwarty}
 \end{figure}
 
-\begin{table}[H] \small
-	\centering
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku u¿ycia - edycja swoich danych}
-	\label{tab:opis-przypadku-uzycia-edycja-swoich-danych}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Edycja swoich danych \\ \hline
-		Cel: & Zapisanie danych u¿ytkownika zgodnie z wprowadzonymi przez niego zmianami \\ \hline
-		Aktorzy: & Zalogowany u¿ytkownik \\ \hline
-		Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
-		Warunki koñcowe: & Zapisanie zmienionych danych u¿ytkownika \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item U¿ytkownik klika na swój awatar dostêpny na nag³ówku strony aby wyœwietliæ opcje dotycz¹ce konta (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty}),
-				\item U¿ytkownik klika przycisk ,,Dane u¿ytkownika'',
-				\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys~\ref{fig:prototyp-ui-dane-uzytkownika}),
-				\item U¿ytkownik klika przycisk ,,Edytuj dane'',
-				\item Serwis wyœwietla formularz edycji danych (Rys~\ref{fig:prototyp-ui-edycja-swoich-danych}),
-				\item U¿ytkownik zmienia dane w formularzu,
-				\item U¿ytkownik klika przycisk ,,Zapisz'',
-				\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
-				\item Po pozytywnej walidacji danych, aplikacja zapisuje zmienione dane u¿ytkownika.
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			U¿ytkownik anuluje edycjê danych
-			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{5}
-				\item U¿ytkownik klika przycisk ,,Anuluj'',
-				\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys~\ref{fig:prototyp-ui-dane-uzytkownika}).
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
-			\begin{enumerate}[label=\arabic*b.]
-				\setcounter{enumi}{8}
-				\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
-				\item Powrót do punktu 6.
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
+	\label{tab:opis-przypadku-uzycia-edycja-swoich-danych} \\ \hline
+	Nazwa: & Edycja swoich danych \\ \hline
+	Cel: & Zapisanie danych u¿ytkownika zgodnie z wprowadzonymi przez niego zmianami \\ \hline
+	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
+	Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
+	Warunki koñcowe: & Zapisanie zmienionych danych u¿ytkownika \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item U¿ytkownik klika na swój awatar dostêpny na nag³ówku strony aby wyœwietliæ opcje dotycz¹ce konta (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty}),
+			\item U¿ytkownik klika przycisk ,,Dane u¿ytkownika'',
+			\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys~\ref{fig:prototyp-ui-dane-uzytkownika}),
+			\item U¿ytkownik klika przycisk ,,Edytuj dane'',
+			\item Serwis wyœwietla formularz edycji danych (Rys~\ref{fig:prototyp-ui-edycja-swoich-danych}),
+			\item U¿ytkownik zmienia dane w formularzu,
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
+			\item Po pozytywnej walidacji danych, aplikacja zapisuje zmienione dane u¿ytkownika.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje edycjê danych
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{5}
+			\item U¿ytkownik klika przycisk ,,Anuluj'',
+			\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys~\ref{fig:prototyp-ui-dane-uzytkownika}).
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
+		\begin{enumerate}[label=\arabic*b.]
+			\setcounter{enumi}{8}
+			\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
+			\item Powrót do punktu 6.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \begin{figure}[H]
 	\centering
@@ -711,61 +706,103 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{fig:prototyp-ui-edycja-swoich-danych}
 \end{figure}
 
-\begin{table}[H] \small
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |}
+	\caption{Opis przypadku u¿ycia - zmiana has³a}
+	\label{tab:opis-przypadku-uzycia-zmiana-hasla} \\ \hline
+	Nazwa: & Zmiana has³a \\ \hline
+	Cel: & Zmiana has³a zgodnie z wprowadzon¹ przez u¿ytkownika wartoœci¹ \\ \hline
+	Aktorzy: & Zalogowany u¿ytkownik \\ \hline
+	Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
+	Warunki koñcowe: & Zapisanie zmienionego has³a u¿ytkownika \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item U¿ytkownik klika na swój awatar dostêpny na nag³ówku strony aby wyœwietliæ opcje dotycz¹ce konta (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty}),
+			\item U¿ytkownik klika przycisk ,,Zmieñ has³o'',
+			\item Aplikacja wyœwietla formularz do zmiany has³a (Rys.~\ref{fig:prototyp-ui-zmiana-hasla})
+			\item U¿ytkownik podaje aktualne oraz nowe has³o,
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Serwis sprawdza, czy podano has³a, czy podane aktualne has³o jest prawid³owe oraz czy podane nowe has³o spe³nia wymagania pod wzglêdem narzuconego rozmiaru 
+						i formatu danych,
+			\item Po pozytywnej walidacji has³o u¿ytkownika zostaje zmienione.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje zmianê has³a
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{3}
+			\item U¿ytkownik klika przycisk ,,Anuluj'',
+			\item Aplikacja wy³¹cza formularz do zmiany has³a.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
+		\begin{enumerate}[label=\arabic*b.]
+			\setcounter{enumi}{6}
+			\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
+			\item Powrót do punktu 4.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
+
+\begin{figure}[H]
 	\centering
+	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-zmiana-hasla}
+	\caption{Prototyp formularza zmiany has³a}
+	\label{fig:prototyp-ui-zmiana-hasla}
+\end{figure}
+
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |}
 	\caption{Opis przypadku u¿ycia - edycja danych innych u¿ytkowników}
-	\label{tab:opis-przypadku-uzycia-edycja-danych-innych-uzytkownikow}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Edycja danych innych u¿ytkowników \\ \hline
-		Opis: & Zapisanie danych innego u¿ytkownika zgodnie z wprowadzonymi zmianami \\ \hline
-		Aktorzy: & Administrator \\ \hline
-		Warunki pocz¹tkowe: & U¿ytkownik posiadaj¹cy rolê administratora jest zalogowany \\ \hline
-		Warunki koñcowe: & Zapisanie zmienionych danych innego u¿ytkownika \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item U¿ytkownik klika przycisk ,,Zarz¹dzanie u¿ytkownikami'' znajduj¹cy siê w menu g³ównym strony (Rys.~\ref{fig:prototyp-ui-naglowek-administrator}),
-				\item Aplikacja wyœwietla podstronê z wyszukiwark¹ u¿ytkowników (Rys~\ref{fig:prototyp-ui-wyszukiwanie-uzytkownikow-puste}),
-				\item U¿ytkownik wpisuje nazwê u¿ytkownika (np. kamil),
-				\item U¿ytkownik klika przycisk ,,Szukaj'',
-				\item Serwis wyszukuje u¿ytkowników,
-				\item Aplikacja wyœwietla listê wyszukanych u¿ytkowników (Rys~\ref{fig:prototyp-ui-wyszukiwanie-uzytkownikow})
-				\item U¿ytkownik klika na jednego z innych u¿ytkowników,
-				\item Aplikacja wyœwietla panel z danymi wybranego u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}),
-				\item U¿ytkownik klika przycisk ,,Edytuj dane'',
-				\item Serwis wyœwietla formularz edycji danych (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}),
-				\item U¿ytkownik zmienia dane w formularzu,
-				\item U¿ytkownik klika przycisk ,,Zapisz'',
-				\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
-				\item Po pozytywnej walidacji danych, aplikacja zapisuje zmienione dane innego u¿ytkownika.
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			U¿ytkownik resetuje has³o innego u¿ytkownika
-			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{8}
-				\item U¿ytkownik klika przycisk ,,Reset has³a'',
-				\item Aplikacja zastêpuje has³o innego u¿ytkownika pustym ci¹giem znaków,
-				\item Powrót do punktu 8.
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			U¿ytkownik anuluje edycjê danych
-			\begin{enumerate}[label=\arabic*b.]
-				\setcounter{enumi}{10}
-				\item U¿ytkownik klika przycisk ,,Anuluj'',
-				\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys.~\ref{fig:prototyp-ui-naglowek-administrator}).
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
-			\begin{enumerate}[label=\arabic*c.]
-				\setcounter{enumi}{13}
-				\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
-				\item Powrót do punktu 11.
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
+	\label{tab:opis-przypadku-uzycia-edycja-danych-innych-uzytkownikow} \\ \hline
+	Nazwa: & Edycja danych innych u¿ytkowników \\ \hline
+	Opis: & Zapisanie danych innego u¿ytkownika zgodnie z wprowadzonymi zmianami \\ \hline
+	Aktorzy: & Administrator \\ \hline
+	Warunki pocz¹tkowe: & U¿ytkownik posiadaj¹cy rolê administratora jest zalogowany \\ \hline
+	Warunki koñcowe: & Zapisanie zmienionych danych innego u¿ytkownika \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item U¿ytkownik klika przycisk ,,Zarz¹dzanie u¿ytkownikami'' znajduj¹cy siê w menu g³ównym strony (Rys.~\ref{fig:prototyp-ui-naglowek-administrator}),
+			\item Aplikacja wyœwietla podstronê z wyszukiwark¹ u¿ytkowników (Rys~\ref{fig:prototyp-ui-wyszukiwanie-uzytkownikow-puste}),
+			\item U¿ytkownik wpisuje nazwê u¿ytkownika (np. kamil),
+			\item U¿ytkownik klika przycisk ,,Szukaj'',
+			\item Serwis wyszukuje u¿ytkowników,
+			\item Aplikacja wyœwietla listê wyszukanych u¿ytkowników (Rys~\ref{fig:prototyp-ui-wyszukiwanie-uzytkownikow})
+			\item U¿ytkownik klika na jednego z innych u¿ytkowników,
+			\item Aplikacja wyœwietla panel z danymi wybranego u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}),
+			\item U¿ytkownik klika przycisk ,,Edytuj dane'',
+			\item Serwis wyœwietla formularz edycji danych (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}),
+			\item U¿ytkownik zmienia dane w formularzu,
+			\item U¿ytkownik klika przycisk ,,Zapisz'',
+			\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
+			\item Po pozytywnej walidacji danych, aplikacja zapisuje zmienione dane innego u¿ytkownika.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik resetuje has³o innego u¿ytkownika
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{8}
+			\item U¿ytkownik klika przycisk ,,Reset has³a'',
+			\item Aplikacja zastêpuje has³o innego u¿ytkownika pustym ci¹giem znaków,
+			\item Powrót do punktu 8.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		U¿ytkownik anuluje edycjê danych
+		\begin{enumerate}[label=\arabic*b.]
+			\setcounter{enumi}{10}
+			\item U¿ytkownik klika przycisk ,,Anuluj'',
+			\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys.~\ref{fig:prototyp-ui-naglowek-administrator}).
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		Wprowadzone przez u¿ytkownika dane nie przesz³y walidacji
+		\begin{enumerate}[label=\arabic*c.]
+			\setcounter{enumi}{13}
+			\item Aplikacja zmienia kolor obramowania pól, które nie przesz³y walidacji, na czerwono oraz wyœwietla pod tymi polami adekwatny komunikat o b³êdzie,
+			\item Powrót do punktu 11.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \begin{figure}[H]
 	\centering
@@ -802,82 +839,32 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}
 \end{figure}
 
-\begin{table}[H] \small
-	\centering
-	\caption{Opis przypadku u¿ycia - przypisywanie u¿ytkownikom ról}
-	\label{tab:opis-przypadku-uzycia-przypisywanie-uzytkownikowi-rol}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Przypisywanie u¿ytkownikom ról \\ \hline
-		Cel: & Przypisywanie roli u¿ytkownikowi \\ \hline
-		Aktorzy: & Administrator \\ \hline
-		Warunki pocz¹tkowe: & Otwarte okno z zarz¹dzaniem danymi u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}) \\ \hline
-		Warunki koñcowe: & Przypisanie u¿ytkownikowi roli \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item U¿ytkownik klika na przycisk ,,Zarz¹dzanie rolami'',
-				\item Aplikacja wyœwietla panel do zarz¹dzania rolami u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-role}),
-				\item U¿ytkownik klika przycisk ,,Dodaj rolê'',
-				\item Serwis wyœwietla formularz do przypisania wybranemu u¿ytkownikowi nowej roli spoœród recenzenta i administratora 
-							(Rys~\ref{fig:prototyp-ui-przypisywanie-roli})
-				\item U¿ytkownik wybiera jedn¹ z dostêpnych ról,
-				\item Serwis wyœwietla formularz edycji danych (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}),
-				\item U¿ytkownik zmienia dane w formularzu,
-				\item U¿ytkownik klika przycisk ,,Zapisz'',
-				\item Serwis sprawdza, czy u¿ytkownik poda³ rolê,
-				\item Po pozytywnej walidacji danych, aplikacja przypisuje wybranemu u¿ytkownikowi rolê.
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			U¿ytkownik anuluje przypisywanie roli
-			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{4}
-				\item U¿ytkownik klika przycisk ,,Anuluj'',
-				\item Aplikacja wy³¹cza formularz do przypisywania roli.
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			U¿ytkownik nie poda³ roli
-			\begin{enumerate}[label=\arabic*b.]
-				\setcounter{enumi}{9}
-				\item Aplikacja ustawia kolor obramowania pola z wyborem roli na kolor czerwony oraz wyœwietla pod tym polem komunikat ,,Pole nie mo¿e byæ puste'',
-				\item Powrót do punktu 7.
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-zarzadzanie-uzytkownikami-role}
-	\caption{Prototyp panelu z zarz¹dzaniem rolami u¿ytkownika}
-	\label{fig:prototyp-ui-zarzadzanie-uzytkownikami-role}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-przypisywanie-roli}
-	\caption{Prototyp formularza z przypisywaniem u¿ytkownikowi roli}
-	\label{fig:prototyp-ui-przypisywanie-roli}
-\end{figure}
-
-\begin{table}[H] \small
-	\centering
-	\caption{Opis przypadku u¿ycia - usuwanie u¿ytkownikom ról}
-	\label{tab:opis-przypadku-uzycia-usuwanie-uzytkownikom-rol}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Usuwanie u¿ytkownikom ról \\ \hline
-		Opis: & Usuniêcie u¿ytkownikowi roli \\ \hline
-		Aktorzy: & Administrator \\ \hline
-		Warunki pocz¹tkowe: & Otwarte okno z zarz¹dzaniem rolami u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-role}) \\ \hline
-		Warunki koñcowe: & Usuniêcie roli u¿ytkownika \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item U¿ytkownik klika przycisk ,,Usuñ'' przy jednej z ról,
-				\item Aplikacja usuwa innemu u¿ytkownikowi wybran¹ rolê.
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - zarz¹dzanie rolami u¿ytkownika}
+	\label{tab:opis-przypadku-uzycia-zarzadzanie-rolami-uzytkownika} \\ \hline
+	Nazwa: & Zarz¹dzanie rolami innego u¿ytkownika \\ \hline
+	Cel: & Zmiana przypisanych ról innego u¿ytkownika \\ \hline
+	Aktorzy: & Administrator \\ \hline
+	Warunki pocz¹tkowe: & Wyœwietlony panel z danymi innego u¿ytkownika (Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}) \\ \hline
+	Warunki koñcowe: & Zmiana przypisanych ról innego u¿ytkownika \\ \hline
+	Przebieg: &
+		Inny u¿ytkownik posiada wybran¹ rolê (np. Recenent na Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych})
+		\begin{enumerate}
+			\item U¿ytkownik klika na pole wyboru po prawej stronie od wybranej roli (jeœli przy roli jest zaznaczone pole wyboru, to oznacza to, ¿e inny u¿ytkownik ma przypisan¹
+						tak¹ rolê, a jeœli pole wyboru bêdzie puste, to oznacza, ¿e inny u¿ytkownik nie posiada takiej roli),
+			\item Pole wyboru staje siê puste,
+			\item Aplikacja usuwa przypisanie roli innego u¿ytkownika.
+		\end{enumerate}
+	\\ \hline
+	Alternatywny przebieg: &
+		Inny u¿ytkownik nie posiada wybranej roli (np. Administrator na Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych})
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{1}
+			\item Pole wyboru zostaje zaznaczone
+			\item Aplikacja przypisuje wybran¹ rolê innemu u¿ytkownikowi.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \begin{table}[H] \small
 	\centering
@@ -885,24 +872,24 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{tab:opis-przypadku-uzycia-zmiana-swojej-dostepnosci}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Zmiana swojej dostêpnoœci \\ \hline
-		Opis: & Zmiana swojej dostêpnoœci w przypadku przypisywania artyku³ów do weryfikacji \\ \hline
+		Cel: & Zmiana swojej dostêpnoœci w przypadku przypisywania artyku³ów do weryfikacji \\ \hline
 		Aktorzy: & Recenzent \\ \hline
-		Warunki pocz¹tkowe: & Zalogowanie siê u¿ytkownika \\ \hline
+		Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
 		Warunki koñcowe: & Zmiana dostêpnoœci u¿ytkownika \\ \hline
 		Przebieg: & 
+			U¿ytkownik ma swoj¹ dostêpnoœæ ustawion¹ na ,,Dostêpny''
 			\begin{enumerate}
 				\item U¿ytkownik klika na swój awatar dostêpny na nag³ówku strony aby wyœwietliæ opcje dotycz¹ce konta,
-				\item U¿ytkownik ma swoj¹ dostêpnoœæ ustawion¹ na ,,Dostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}),
-				\item U¿ytkownik klika przycisk ,,Dostêpny'',
+				\item U¿ytkownik klika przycisk ,,Dostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}),
 				\item Aplikacja zmienia dostêpnoœæ recenzenta na ,,Niedostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}), czyli takiemu 
 							recenzentowi nie bêd¹ przypisywane artyku³y do weryfikacji.
 			\end{enumerate}
 		\\ \hline
 		Alternatywny przebieg: & 
-			U¿ytkownik ma ustawion¹ swoj¹ dostêpnoœæ na ,,Niedostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent})
+			U¿ytkownik ma ustawion¹ swoj¹ dostêpnoœæ na ,,Niedostêpny''
 			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{2}
-				\item U¿ytkownik klika przycisk ,,Niedostêpny'',
+				\setcounter{enumi}{1}
+				\item U¿ytkownik klika przycisk ,,Niedostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}),
 				\item Aplikacja zmienia dostêpnoœæ recenzenta na ,,Dostêpny'' (Rys.~\ref{fig:prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}), czyli takiemu 
 							recenzentowi bêd¹ teraz przypisywane artyku³y do weryfikacji.
 			\end{enumerate}
