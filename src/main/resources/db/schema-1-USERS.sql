@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS USERS (
+    user_id SERIAL NOT NULL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    firstname VARCHAR(50) NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    email VARCHAR(80) NOT NULL,
+    avatar bytea
+);
