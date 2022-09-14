@@ -1,13 +1,14 @@
-package pl.edu.pwr.technologieprogramistyczne;
+package pl.edu.pwr.programming_technologies;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TechnologieProgramistyczneApplication {
+public class App {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TechnologieProgramistyczneApplication.class, args);
+
+		SpringApplication.run(App.class, args);
 	}
 
 }
