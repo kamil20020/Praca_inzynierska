@@ -14,7 +14,7 @@ Szczegó³ow¹ architekturê systemu dobrze opisuje rysunek~\ref{fig:architektura-sy
 
 
 \section{Baza danych}
-Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. \texttt{Baza danych 1} jest g³ówn¹ baz¹ danych w systemie, a \texttt{Baza danych 2} jest dodatkow¹ baz¹ danych, która przechowuje informacje o zawartoœciach artyku³ów. Zdecydowano, ¿e \texttt{Baza danych 2} bêdzie odpowiedzialna za przechowywanie informacji o zawartoœciach artyku³ów, gdy¿ jest to baza nierelacyjna (NoSQL). Bazy nierelacyjne charakteryzuj¹ siê tym, ¿e mo¿na w swobodniejszy sposób (bez relacji) przechowywaæ dane, a w tym przypadku jest to po¿¹dane z powodu tego, ¿e artyku³ mo¿e zawieraæ rozdzia³y i podrozdzia³y. Nie zdecydowano siê na u¿ycie w projekcie tylko \texttt{Baza danych 2} (NoSQL), gdy¿ \texttt{Baza danych 1} jest baz¹ relacyjna (SQL), która pozwala na wiêksz¹ integralnoœæ danych ni¿ w przypadku baz nierelacyjnych, gdy¿ nale¿y na pocz¹tku zdefiniowaæ schemat, a w realizowanym systemie przewidziano wiele relacji. 
+Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. \texttt{Baza danych 1} jest g³ówn¹ baz¹ danych w systemie, a \texttt{Baza danych 2} jest dodatkow¹ baz¹ danych, która przechowuje informacje o zawartoœciach artyku³ów. Zdecydowano, ¿e \texttt{Baza danych 2} bêdzie odpowiedzialna za przechowywanie informacji o zawartoœciach artyku³ów, gdy¿ jest to baza nierelacyjna (NoSQL). Bazy nierelacyjne charakteryzuj¹ siê tym, ¿e mo¿na w swobodniejszy sposób (bez relacji) przechowywaæ dane, a w tym przypadku jest to po¿¹dane z powodu tego, ¿e artyku³ mo¿e zawieraæ rozdzia³y i podrozdzia³y. Nie zdecydowano siê na u¿ycie w projekcie tylko \texttt{Baza danych 2} (NoSQL), gdy¿ \texttt{Baza danych 1} jest baz¹ obiektowo-relacyjn¹ (SQL), która pozwala na wiêksz¹ integralnoœæ danych ni¿ w przypadku baz nierelacyjnych, gdy¿ nale¿y na pocz¹tku zdefiniowaæ schemat oraz mo¿na utworzyæ relacje miêdzy tabeli, a w realizowanym systemie przewidziano wiele relacji. Zdecydowano siê na obiektowoœæ \texttt{Baza danych 1}, gdy¿ upraszcza ona pracê z kilkoma wykorzystywanymi narzêdziami (np. Jav'owy framework Hibernate), które wykorzystuj¹ obiektowoœæ.
 
 \section{Aplikacja serwerowa - Backend}
 Backend jest odpowiedzialny za przyjmowanie ¿¹dañ od klienta, odpowiednie przetwarzanie tych ¿¹dañ, wykonywanie pewnych operacji na danych przechowywanych w bazie danych na podstawie otrzymanych danych od klienta i przekazywanie klientowi adekwatnej odpowiedzi. Warstwa ta jest w œcis³ym powi¹zaniu z warstw¹ bazy danych.
@@ -302,6 +302,25 @@ Zdefiniowano nastêpuj¹ce definicje:
 					\end{itemize}
 			\end{itemize}
 		\item \texttt{Administrator} powinien mieæ mo¿liwoœæ:
+			\begin{itemize}
+				\item Edycji danych innych u¿ytkowników,
+				\item Zarz¹dzania artyku³ami w nastêpuj¹cym zakresie:
+					\begin{itemize}
+						\item	Edytowanie,
+						\item Usuwanie.
+					\end{itemize}
+				\item Usuwania komentarzy o artykule,
+				\item Usuwania opinii o artykule,
+				\item Przypisywania innym u¿ytkownikom ról,
+				\item Usuwania przypisanych ról innych u¿ytkowników,
+				\item Wyszukiwania technologii spoœród listy technologii, w których recenzent jest ekspertem,
+				\item Zarz¹dzania listami technologii, w których recenzenci s¹ ekspertami. Administrator powinien mieæ mo¿liwoœæ:
+					\begin{itemize}
+						\item	Dodawania technologii,
+						\item Usuwania technologii.
+					\end{itemize}
+			\end{itemize}
+		\item \texttt{System} powinien mieæ mo¿liwoœæ:
 			\begin{itemize}
 				\item Edycji danych innych u¿ytkowników,
 				\item Zarz¹dzania artyku³ami w nastêpuj¹cym zakresie:
@@ -1033,8 +1052,9 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item U¿ytkownik wype³nia wszystkie pola w formularzu (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-artykulu})
 			\item U¿ytkownik klika przycisk ,,Zapisz'',
 			\item Serwis przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
-			\item Po pozytywnej walidacji danych, aplikacja tworzy artyku³,
-			\item Serwis przesy³a artyku³ do weryfikacji,
+			\item Po pozytywnej walidacji danych, aplikacja zapisuje stan artyku³u,
+			\item U¿ytkownik klika przycisk ,,Wyœlij do weryfikacji'',
+			\item Serwis przesy³a artyku³ do weryfikacji (zapisuje artyku³ w kolejce artyku³ów, do których maj¹ byæ przydzieleni recenzenci),
 			\item Aplikacja wyœwietla u¿ytkownikowi wygl¹d utworzonego artyku³u.
 		\end{enumerate}
 	\\ \hline
@@ -1082,8 +1102,9 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item U¿ytkownik modyfikuje pola w formularzu,
 			\item U¿ytkownik klika przycisk ,,Zapisz'',
 			\item Aplikacja przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
-			\item Po pozytywnej walidacji danych, aplikacja edytuje artyku³ wed³ug zmian wprowadzonych przez u¿ytkownika,
-			\item Serwis przesy³a artyku³ do weryfikacji,
+			\item Po pozytywnej walidacji danych, aplikacja zapisuje stan edytowanego artyku³u,
+			\item U¿ytkownik klika przycisk ,,Wyœlij do weryfikacji'',
+			\item Serwis przesy³a artyku³ do weryfikacji (zapisuje artyku³ w kolejce artyku³ów, do których maj¹ byæ przydzieleni recenzenci),
 			\item Aplikacja przedstawia u¿ytkownikowi wygl¹d zmienionego artyku³u.
 		\end{enumerate}
 	\\ \hline
@@ -1278,7 +1299,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 			\item Aplikacja wyœwietla zawartoœæ wybranego artyku³u (Rys.~\ref{fig:prototyp-ui-artykul-administrator}),
 			\item U¿ytkownik klika przycisk ,,Edytuj'',
 			\item Serwis wyœwietla formularz do edycji artyku³u (Rys.~\ref{fig:prototyp-ui-dodawanie-edytowanie-artykulu})
-			\item U¿ytkownik wype³nia wszystkie pola w formularzu
+			\item U¿ytkownik wype³nia wszystkie pola w formularzu,
 			\item U¿ytkownik klika przycisk ,,Zapisz'',
 			\item Aplikacja przeprowadza walidacjê danych pod wzglêdem wymaganych pól oraz narzuconych rozmiarów i formatów danych,
 			\item Po pozytywnej walidacji danych, aplikacja edytuje artyku³ wed³ug zmian wprowadzonych przez u¿ytkownika,
@@ -1902,6 +1923,23 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
+	\caption{Opis przypadku u¿ycia - wyszukiwanie artyku³ów z przeterminowan¹ weryfikacj¹}
+	\label{tab:opis-przypadku-uzycia-wyszukiwanie-artykulow-z-przeterminowana-weryfikacja} \\ \hline
+	Nazwa: & Wyszukiwanie artyku³ów z przeterminowan¹ weryfikacj¹ \\ \hline
+	Cel: & Wyszukanie artyku³ów z przeterminowan¹ weryfikacj¹ \\ \hline
+	Aktorzy: & System \\ \hline
+	Warunki pocz¹tkowe: & Minê³a godzina od ostatniego wyszukania artyku³ów z przeterminowan¹ weryfikacj¹  \\ \hline
+	Warunki koñcowe: & Zwrócenie artyku³ów z przeterminowan¹ weryfikacj¹ \\ \hline
+	Przebieg: &
+		\begin{enumerate}
+			\item Sprawdzenie artyku³ów, które artyku³y maj¹ przedawnion¹ weryfikacjê,
+			\item Zapisanie artyku³ów z przedawnion¹ weryfikacj¹ do kolejki artyku³ów do weryfikacji (jeœli nie s¹ jeszcze w tej kolejce),
+			\item Zwrócenie artyku³ów znajduj¹cych siê w kolejce artyku³ów do weryfikacji.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
+
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku u¿ycia - przypisanie recenzentowi artyku³u do weryfikacji}
 	\label{tab:opis-przypadku-uzycia-przypisanie-recenzentowi-artykulu-do-weryfikacji} \\ \hline
 	Nazwa: & Przypisanie recenzentowi artyku³u do weryfikacji \\ \hline
@@ -1923,7 +1961,16 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		Nie ma dostêpnych recenzentów
 		\begin{enumerate}[label=\arabic*a.]
 			\setcounter{enumi}{0}
-			\item System sprawdza co godzinê, czy jest dostêpny recenzent i jeœli jest to powrót do punktu 1.
+			\item System zapisuje artyku³ do kolejki artyku³ów do weryfikacji,
+			\item System czeka 1 godzinê na pojawienie siê co najmniej 1 dostêpnego recenzenta,
+			\item Nie ma dalej dostêpnych recenzentów.
+		\end{enumerate}
+	\\ \hline	
+	Alternatywny przebieg: &
+		Pojawi³ siê dostêpny recenzent
+		\begin{enumerate}[label=\arabic*aa.]
+			\setcounter{enumi}{2}
+			\item Powrót do punktu 1.
 		\end{enumerate}
 	\\ \hline
 \end{longtable}
@@ -1939,20 +1986,9 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		Warunki pocz¹tkowe: & Zalogowany u¿ytkownik utworzy³ artyku³ lub autor artyku³u dokona³ modyfikacji istniej¹cego artyku³u \\ \hline
 		Warunki koñcowe: & Przypisanie wybranemu recenzentowi artyku³u do weryfikacji lub oczekiwanie na dostêpnego recenzenta \\ \hline
 		Przebieg: &
-			Jest przynajmniej jeden dostêpny recenzent
 			\begin{enumerate}
-				\item Min¹³ termin weryfikacji artyku³u,
-				\item Przypisanie innemu recenzentowi artyku³u do weryfikacji (Artyku³y s¹ przypisywane recenzentom na podstawie ich dostêpnoœci, posiadanych przez nich list 
-							technologii, w których s¹ ekspertami oraz liczby zrecenzowanych przez nich artyku³ów. W pierwszej kolejnoœci nie bêd¹ brani pod uwagê niedostêpni 		
-							recenzenci, nastêpnie bêd¹ wybierani recenzenci, którzy s¹ ekspertami w jak najbardziej szczegó³owej technologii (np. Java jest bardziej szczegó³owa ni¿ 
-							jêzyki programowania), której dotyczy artyku³ oraz w trzeciej kolejnoœci bêd¹ wybierani recenzenci, którzy zrecenzowali najmniejsz¹ liczbê artyku³ów),
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			Nie ma dostêpnych recenzentów
-			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{0}
-				\item System sprawdza co godzinê, czy jest dostêpny recenzent i jeœli jest to powrót do punktu 1.
+				\item Mija termin weryfikacji artyku³u,
+				\item Przypisanie artyku³u do weryfikacji innemu recenzentowi (Tab~\ref{tab:opis-przypadku-uzycia-przypisanie-recenzentowi-artykulu-do-weryfikacji}).
 			\end{enumerate}
 		\\ \hline
 		\end{tabularx}
@@ -2010,7 +2046,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		Alternatywny przebieg: &
 			U¿ytkownik anuluje dodanie technologii
 			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{1}
+				\setcounter{enumi}{2}
 				\item U¿ytkownik klika przycisk ,,Anuluj'' lub klika w obszar poza formularzem,
 				\item Wy³¹czenie formularza dodania technologii.
 			\end{enumerate}
@@ -2041,6 +2077,148 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\caption{Formularz przypisania technologii do recenzenta}
 	\label{fig:prototyp-ui-przypisanie-technologii}
 \end{figure}
+
+\section{Projekt baz danych}
+Na podstawie zdefiniowanych wymagañ funkcjonalnych oraz szczegó³owych opisów przypadków u¿ycia, zaprojektowano diagram zwi¹zków encji (ERD) dla obiektowo-relacyjnej 
+bazy~(\texttt{Baza danych 1}) oraz utworzono schemat danych dla bazy nierelacyjnej~(\texttt{Baza danych 2}). Diagram ERD dla~(\texttt{Baza danych 1}) przedstawiono na 
+rysunku~\ref{fig:diagram-erd-baza-danych-1}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys02/schemat-baza-danych-1}
+	\caption{Diagram ERD dla \texttt{Baza danych 1}}
+	\label{fig:schemat-baza-danych-1}
+\end{figure}
+
+Poni¿ej znajduje siê kod Ÿród³owy dla schematu danych w postaci formatu JSON dla bazy nierelacyjnej~(\texttt{Baza danych 2}) opartej na dokumentach.
+
+\begin{lstlisting}[style=json-style, caption=Schemat danych dla nierelacyjnej bazy~\texttt{Baza danych 2}, label=lst:schemat-danych-baza-danych-2]
+{
+   "$jsonSchema":{
+      "bsonType":"object",
+      "title":"article",
+      "required":[
+         "author_id",
+         "technology_category_id",
+         "title",
+         "content",
+         "status",
+         "creationDate",
+         "modificationDate"
+      ],
+      "properties":{
+         "_id":{
+            "bsonType":"objectId"
+         },
+         "author_id":{
+            "bsonType":"int"
+         },
+         "technology_category_id":{
+            "bsonType":"int"
+         },
+         "title":{
+            "bsonType":"string"
+         },
+         "content":{
+            "bsonType":"string"
+         },
+         "status":{
+            "bsonType":"string",
+            "enum":[
+               "new",
+               "assigning_to_verification",
+               "verification",
+               "expired_verification",
+               "refused",
+               "published",
+               "editing"
+            ]
+         },
+         "creationDate":{
+            "bsonType":"timestamp"
+         },
+         "modificationDate":{
+            "bsonType":"timestamp"
+         },
+         "comments":{
+            "bsonType":"array",
+            "items":{
+               "bsonType":"object",
+               "properties":{
+                  "_id":{
+                     "bsonType":"objectId"
+                  },
+                  "author_id":{
+                     "bsonType":"int"
+                  },
+                  "content":{
+                     "bsonType":"string"
+                  },
+                  "creationDate":{
+                     "bsonType":"timestamp"
+                  },
+                  "modificationDate":{
+                     "bsonType":"timestamp"
+                  },
+                  "parentCommentId":{
+                     "bsonType":"objectId"
+                  }
+               }
+            }
+         },
+         "opinions":{
+            "bsonType":"array",
+            "items":{
+               "bsonType":"object",
+               "properties":{
+                  "_id":{
+                     "bsonType":"objectId"
+                  },
+                  "author_id":{
+                     "bsonType":"int"
+                  },
+                  "rating":{
+                     "bsonType":"int",
+                     "minimum":1,
+                     "maximum":5
+                  },
+                  "content":{
+                     "bsonType":"string"
+                  },
+                  "creationDate":{
+                     "bsonType":"timestamp"
+                  },
+                  "modificationDate":{
+                     "bsonType":"timestamp"
+                  },
+                  "acceptances":{
+                     "bsonType":"array",
+                     "items":{
+                        "bsonType":"object",
+                        "properties":{
+                           "_id":{
+                              "bsonType":"objectId"
+                           },
+                           "author_id":{
+                              "bsonType":"int"
+                           },
+                           "value":{
+                              "bsonType":"int",
+                              "enum":[
+                                 -1,
+                                 1
+                              ]
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+}
+\end{lstlisting}
 
 
 
