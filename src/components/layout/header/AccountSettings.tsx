@@ -3,6 +3,7 @@ import { Stack } from "@mui/system";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../redux/slices/keycloakSlice";
+import { setNotificationMessage, setNotificationStatus } from "../../../redux/slices/notificationSlice";
 
 const AccountSettings = () => {
 
@@ -20,6 +21,9 @@ const AccountSettings = () => {
 
     const handleLogout = () => {
         dispatch(logout())
+        
+        dispatch(setNotificationMessage('Wylogowano pomyślnie'))
+        dispatch(setNotificationStatus(true))
     }
 
     return (

@@ -12,6 +12,7 @@ import Header from "./components/layout/header/Header";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AppBar } from "@mui/material";
 import axios from "axios";
+import Notification from "./components/common/Notification";
 
 const theme = createTheme({
   typography: {
@@ -39,29 +40,20 @@ const theme = createTheme({
 
 function App() {
   return (
-    <ReactKeycloakProvider
-      authClient={keycloak}
-      onTokens={({token}) => {
-        console.log(token)
-        axios.defaults.headers.common = {
-          'Authorization': `Bearer ${token}`
-        }
-      }}
-    >
-      <React.StrictMode>
-        <BrowserRouter>
-          <ThemeProvider theme={theme}>
-            <AppBar position="static">
-              <Header/>
-              <NavBar/>
-            </AppBar>
-            <Routes>
-              <Route path="/" element={<Home />} />
-            </Routes>
-          </ThemeProvider>
-        </BrowserRouter>
-      </React.StrictMode>
-    </ReactKeycloakProvider>
+    <React.StrictMode>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <AppBar position="static">
+            <Header/>
+            <NavBar/>
+          </AppBar>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+          <Notification/>
+        </ThemeProvider>
+      </BrowserRouter>
+    </React.StrictMode>
   );
 }
 

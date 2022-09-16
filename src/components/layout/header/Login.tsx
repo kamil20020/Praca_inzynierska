@@ -1,11 +1,11 @@
-﻿import { Button, FormControl, FormHelperText, Grid, Input, InputLabel, OutlinedInput, TextField } from "@mui/material";
+﻿import { Button, FormControl, FormHelperText, Grid, Hidden, Input, InputLabel, OutlinedInput, TextField } from "@mui/material";
 import { Stack } from "@mui/system";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import keycloak from "../../../keycloak/Keycloak";
+import React, { useEffect } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import KeycloakService from "../../../keycloak/KeycloakService";
-import { setAccessToken, setRefreshToken } from "../../../redux/slices/keycloakSlice";
-import { RootState } from "../../../redux/store";
+import { keycloakSlice, logout, setAccessToken, setRefreshToken } from "../../../redux/slices/keycloakSlice";
+import { setNotificationMessage, setNotificationStatus } from "../../../redux/slices/notificationSlice";
+import { RootState, store } from "../../../redux/store";
 import XCloeasableDialog from "../../common/XCloeasableDialog";
 
 interface FormFields {
@@ -16,7 +16,7 @@ interface FormFields {
 const Login = () => {
 
     const keycloak = useSelector((state: RootState) => state.keycloak)
-    const keycloakDispatch = useDispatch()
+    const dispatch = useDispatch()
 
     const [form, setForm] = React.useState<FormFields>({
         username_email: '',
@@ -32,8 +32,45 @@ const Login = () => {
             const accessTokenExpiresIn = data.expires_in
             const refreshToken = data.refresh_token
             const refreshTokenExpiresIn = data.refresh_expires_in
-            keycloakDispatch(setAccessToken({token: accessToken, expires_in: accessTokenExpiresIn}))
-            keycloakDispatch(setRefreshToken({token: refreshToken, expires_in: refreshTokenExpiresIn}))
+            dispatch(setAccessToken({token: accessToken, expires_in: accessTokenExpiresIn}))
+            dispatch(setRefreshToken({token: refreshToken, expires_in: refreshTokenExpiresIn}))
+
+            dispatch(setNotificationMessage('Zalogowano pomyślnie'))
+            dispatch(setNotificationStatus(true))
+            console.log('C')
+
+            const handleTokensExpiring = () => {
+
+                console.log('D')
+
+                setTimeout(() => {
+                    console.log('A')
+                    if(!keycloak.authenticated){
+                        dispatch(logout())
+                    }
+                    console.log('B')
+                    KeycloakService.getAccessTokenOnRefreshToken(keycloak.refresh_token as string)
+                    .then((response) => {
+                        const data = response.data
+                        const accessToken = data.access_token
+                        const accessTokenExpiresIn = data.expires_in
+                        const refreshToken = data.refresh_token
+                        const refreshTokenExpiresIn = data.refresh_expires_in
+                        dispatch(setAccessToken({token: accessToken, expires_in: accessTokenExpiresIn}))
+                        dispatch(setRefreshToken({token: refreshToken, expires_in: refreshTokenExpiresIn}))
+                        handleTokensExpiring()
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+                }, accessTokenExpiresIn*1000)
+
+                setTimeout(() => {
+                    dispatch(logout())
+                }, refreshTokenExpiresIn*1000)
+            }
+
+            handleTokensExpiring()
         })
         .catch((error) => {
             console.log(error)
@@ -51,6 +88,7 @@ const Login = () => {
                         direction="column"
                         alignItems="center"
                     >
+                        <div >{keycloak.authenticated}</div>
                         <Grid item xs={6}>
                             <FormControl>
                                 <OutlinedInput 

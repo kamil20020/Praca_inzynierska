@@ -1,4 +1,5 @@
-﻿import { useKeycloak } from "@react-keycloak/web";
+﻿import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 type PrivateRouteProps = {
     children: React.ReactNode;
@@ -6,7 +7,7 @@ type PrivateRouteProps = {
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
 
-    const {keycloak} = useKeycloak();
+    const keycloak = useSelector((state: RootState) => state.keycloak);
     const isLoggedIn = keycloak.authenticated
 
     return isLoggedIn ? children : null
