@@ -4,8 +4,9 @@ import React, { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import KeycloakService from "../../../keycloak/KeycloakService";
 import { keycloakSlice, logout, setAccessToken, setRefreshToken } from "../../../redux/slices/keycloakSlice";
-import { setNotificationMessage, setNotificationStatus } from "../../../redux/slices/notificationSlice";
+import { setNotificationMessage, setNotificationStatus, setNotificationType } from "../../../redux/slices/notificationSlice";
 import { RootState, store } from "../../../redux/store";
+import FormValidator from "../../../services/FormValidator";
 import XCloeasableDialog from "../../common/XCloeasableDialog";
 
 interface FormFields {
@@ -23,7 +24,57 @@ const Login = () => {
         password: ''
     })
 
+    const [errors, setErrors] = React.useState<FormFields>({
+        username_email: '',
+        password: ''
+    })
+
+    const validateForm = () => {
+
+        let success = true
+
+        let newErrorsState = {...errors}
+
+        if(!FormValidator.checkIfIsRequired(form.username_email)){
+            newErrorsState.username_email = FormValidator.requiredMessage
+            success = false
+        }
+
+        if(!FormValidator.checkIfIsRequired(form.password)){
+            newErrorsState.password = FormValidator.requiredMessage
+            success = false
+        }
+        else if(!FormValidator.checkMinLength(form.password, 8)){
+            newErrorsState.password = FormValidator.minLengthMessage
+            success = false
+        }
+        else if(!FormValidator.checkContainsSmallLetter(form.password)){
+            newErrorsState.password = FormValidator.smallLetterMessage
+            success = false
+        }
+        else if(!FormValidator.checkContainsUpperLetter(form.password)){
+            newErrorsState.password = FormValidator.upperLetterMessage
+            success = false
+        }
+        else if(!FormValidator.checkContainsDigit(form.password)){
+            newErrorsState.password = FormValidator.digitMessage
+            success = false
+        }
+
+        setErrors(newErrorsState)
+
+        return success
+    }
+
+    const onFieldChange = (field: string, event: any) => {
+        setForm({...form, [field]: event.target.value})
+        setErrors({...errors, [field]: ''})
+    }
+
     const handleSubmit = () => {
+
+        if(!validateForm())
+            return
 
         KeycloakService.login(form)
         .then((response: any) => {
@@ -36,12 +87,11 @@ const Login = () => {
             dispatch(setRefreshToken({token: refreshToken, expires_in: refreshTokenExpiresIn}))
 
             dispatch(setNotificationMessage('Zalogowano pomyślnie'))
+            dispatch(setNotificationType('success'))
             dispatch(setNotificationStatus(true))
             console.log('C')
 
             const handleTokensExpiring = () => {
-
-                console.log('D')
 
                 setTimeout(() => {
                     console.log('A')
@@ -74,6 +124,11 @@ const Login = () => {
         })
         .catch((error) => {
             console.log(error)
+            if(error.response.status == 401){
+                dispatch(setNotificationMessage('Login/e-mail lub hasło są niepoprawne'))
+                dispatch(setNotificationType('error'))
+                dispatch(setNotificationStatus(true))
+            }
         })
     }
 
@@ -88,16 +143,17 @@ const Login = () => {
                         direction="column"
                         alignItems="center"
                     >
-                        <div >{keycloak.authenticated}</div>
                         <Grid item xs={6}>
                             <FormControl>
                                 <OutlinedInput 
                                     id="login-email" 
                                     placeholder="Login lub E-mail"
                                     color="secondary"
-                                    onChange={(event: any) => setForm({...form, username_email: event.target.value})} 
+                                    value={form.username_email}
+                                    error={errors.username_email != ''}
+                                    onChange={(event: any) => onFieldChange('username_email', event)} 
                                 />
-                                <FormHelperText> </FormHelperText>
+                                <FormHelperText error>{errors.username_email + ' '}</FormHelperText>
                             </FormControl>
                         </Grid>
                         <Grid item xs={6}>
@@ -107,9 +163,11 @@ const Login = () => {
                                     placeholder="Hasło"
                                     color="secondary"
                                     type="password"
-                                    onChange={(event: any) => setForm({...form, password: event.target.value})} 
+                                    value={form.password}
+                                    error={errors.password != ''}
+                                    onChange={(event: any) => onFieldChange('password', event)} 
                                 />
-                                <FormHelperText> </FormHelperText>
+                                <FormHelperText error>{errors.password + ' '}</FormHelperText>
                             </FormControl>
                         </Grid>
                         <Grid item xs={6}>

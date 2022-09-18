@@ -1,14 +1,19 @@
 ﻿import axios from "axios";
 import keycloak from "./Keycloak"
 
-export interface Credentials {
+export interface LoginCredentials {
     username_email: string,
+    password: string
+}
+
+export interface RegisterCredentials {
+    username: string,
     password: string
 }
 
 class KeycloakService {
 
-    login(credentials: Credentials){
+    login(credentials: LoginCredentials){
 
         const body = new URLSearchParams({
             client_id: keycloak.clientId as string,
@@ -95,7 +100,7 @@ class KeycloakService {
         return axios.post(`${keycloak.url}/realms/master/protocol/openid-connect/logout`, body, header)
     }
 
-    register = (user: Object) => {
+    register = (user: RegisterCredentials) => {
 
         return new Promise((resolve, reject) => {
             this.adminAuth()
@@ -110,20 +115,17 @@ class KeycloakService {
                     }
                 }
 
-                user = {
-                    username: 'adam9',
-                    credentials: [
-                        {
+                const userData = {
+                    username: user.username,
+                    credentials: [{
                             type: "password",
-                            value: 'nowak',
+                            value: user.password,
                             temporary: false
-                        }
-                    ]
+                    }],
+                    enabled: true
                 }
-                
-                const body = {...user, enabled: true}
 
-                axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users`, body, header)
+                axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users`, userData, header)
                 .then((response) => {
                     this.adminUnAuth(accessToken, refreshToken)
                     resolve('Accept')

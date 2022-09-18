@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import XCloeasableDialog from "../../common/XCloeasableDialog";
 import CustomAvatar from "../../common/CustomAvatar";
 import KeycloakService from "../../../keycloak/KeycloakService";
-import { setNotificationMessage, setNotificationStatus } from "../../../redux/slices/notificationSlice";
+import { setNotificationMessage, setNotificationStatus, setNotificationType } from "../../../redux/slices/notificationSlice";
+import FormValidator from "../../../services/FormValidator";
 
 interface FormFields {
     username: string,
@@ -32,20 +33,110 @@ const Register = () => {
         avatar: null
     })
 
+    const [errors, setErrors] = React.useState<FormFields>({
+        username: '',
+        nickname: '',
+        firstname: '',
+        surname: '',
+        email: '',
+        password: '',
+        repeatedPassword: ''
+    })
+
     const [close, setClose] = React.useState<boolean>(false)
 
     const dispatch = useDispatch()
 
+    const validateForm = () => {
+
+        let success = true
+
+        let newErrorsState = {...errors}
+
+        if(!FormValidator.checkIfIsRequired(form.username)){
+            newErrorsState.username = FormValidator.requiredMessage
+            success = false
+        }
+
+        if(!FormValidator.checkIfIsRequired(form.nickname)){
+            newErrorsState.nickname = FormValidator.requiredMessage
+            success = false
+        }
+
+        if(!FormValidator.checkIfIsRequired(form.firstname)){
+            newErrorsState.firstname = FormValidator.requiredMessage
+            success = false
+        }
+        
+        if(!FormValidator.checkIfIsRequired(form.surname)){
+            newErrorsState.surname = FormValidator.requiredMessage
+            success = false
+        }
+
+        if(!FormValidator.checkIfIsRequired(form.email)){
+            newErrorsState.email = FormValidator.requiredMessage
+            success = false
+        }
+        else if(!FormValidator.checkEmail(form.email)){
+            newErrorsState.email = FormValidator.emailMessage
+            success = false
+        }
+
+        if(!FormValidator.checkIfIsRequired(form.password)){
+            newErrorsState.password = FormValidator.requiredMessage
+            success = false
+        }
+        else if(!FormValidator.checkMinLength(form.password, 8)){
+            newErrorsState.password = FormValidator.minLengthMessage
+            success = false
+        }
+        else if(!FormValidator.checkContainsSmallLetter(form.password)){
+            newErrorsState.password = FormValidator.smallLetterMessage
+            success = false
+        }
+        else if(!FormValidator.checkContainsUpperLetter(form.password)){
+            newErrorsState.password = FormValidator.upperLetterMessage
+            success = false
+        }
+        else if(!FormValidator.checkContainsDigit(form.password)){
+            newErrorsState.password = FormValidator.digitMessage
+            success = false
+        }
+
+        if(form.password !== form.repeatedPassword){
+            newErrorsState.repeatedPassword = "Hasła nie są identyczne"
+            success = false
+        }
+
+        setErrors(newErrorsState)
+
+        return success
+    }
+
+    const onFieldChange = (field: string, event: any) => {
+        setForm({...form, [field]: event.target.value})
+        setErrors({...errors, [field]: ''})
+    }
+
     const handleSubmit = () => {
 
-        KeycloakService.register({})
+        if(!validateForm())
+            return
+
+        KeycloakService.register({username: form.username, password: form.password})
         .then(() => {
-            dispatch(setNotificationMessage('Zarejestrowano pomyślnie'))
+            dispatch(setNotificationMessage('Pomyślnie utworzono konto'))
+            dispatch(setNotificationType('success'))
             dispatch(setNotificationStatus(true))
             setClose(true)
         })
         .catch((error) => {
             console.log(error)
+            if(error.response.status == 409){
+                dispatch(setNotificationMessage('Istnieje już konto o takiej nazwie użytkownika'))
+                dispatch(setNotificationType('error'))
+                dispatch(setNotificationStatus(true))
+            }
         })
     }
 
@@ -67,9 +158,11 @@ const Register = () => {
                                     id="username" 
                                     placeholder="Nazwa użytkownika"
                                     color="secondary"
-                                    onChange={(event: any) => setForm({...form, username: event.target.value})} 
+                                    value={form.username}
+                                    error={errors.username != ''}
+                                    onChange={(event: any) => onFieldChange('username', event)} 
                                 />
-                                <FormHelperText> </FormHelperText>
+                                <FormHelperText error>{errors.username + ' '}</FormHelperText>
                             </FormControl>
                         </Grid>
                         <Grid item xs={6}>
@@ -78,9 +171,11 @@ const Register = () => {
                                     id="nickname" 
                                     placeholder="Pseudonim"
                                     color="secondary"
-                                    onChange={(event: any) => setForm({...form, nickname: event.target.value})} 
+                                    value={form.nickname}
+                                    error={errors.nickname != ''}
+                                    onChange={(event: any) => onFieldChange('nickname', event)} 
                                 />
-                                <FormHelperText> </FormHelperText>
+                                <FormHelperText error>{errors.nickname + ' '}</FormHelperText>
                             </FormControl>
                         </Grid>
                         <Grid item xs={6}>
@@ -89,9 +184,11 @@ const Register = () => {
                                     id="firstname" 
                                     placeholder="Imię"
                                     color="secondary"
-                                    onChange={(event: any) => setForm({...form, firstname: event.target.value})} 
+                                    value={form.firstname}
+                                    error={errors.firstname != ''}
+                                    onChange={(event: any) => onFieldChange('firstname', event)} 
                                 />
-                                <FormHelperText> </FormHelperText>
+                                <FormHelperText error>{errors.firstname + ' '}</FormHelperText>
                             </FormControl>
                         </Grid>
                         <Grid item xs={6}>
@@ -100,9 +197,11 @@ const Register = () => {
                                     id="surname" 
                                     placeholder="Nazwisko"
                                     color="secondary"
-                                    onChange={(event: any) => setForm({...form, surname: event.target.value})} 
+                                    value={form.surname}
+                                    error={errors.surname != ''}
+                                    onChange={(event: any) => onFieldChange('surname', event)} 
                                 />
-                                <FormHelperText> </FormHelperText>
+                                <FormHelperText error>{errors.surname + ' '}</FormHelperText>
                             </FormControl>
                         </Grid>
                         <Grid item xs={6}>
@@ -112,9 +211,11 @@ const Register = () => {
                                     placeholder="E-mail"
                                     type="email"
                                     color="secondary"
-                                    onChange={(event: any) => setForm({...form, email: event.target.value})} 
+                                    value={form.email}
+                                    error={errors.email != ''}
+                                    onChange={(event: any) => onFieldChange('email', event)} 
                                 />
-                                <FormHelperText> </FormHelperText>
+                                <FormHelperText error>{errors.email + ' '}</FormHelperText>
                             </FormControl>
                         </Grid>
                         <Grid item xs={6}>
@@ -124,21 +225,25 @@ const Register = () => {
                                     placeholder="Hasło"
                                     type="password"
                                     color="secondary"
-                                    onChange={(event: any) => setForm({...form, password: event.target.value})} 
+                                    value={form.password}
+                                    error={errors.password != ''}
+                                    onChange={(event: any) => onFieldChange('password', event)} 
                                 />
-                                <FormHelperText> </FormHelperText>
+                                <FormHelperText error>{errors.password + ' '}</FormHelperText>
                             </FormControl>
                         </Grid>
                         <Grid item xs={6}>
                             <FormControl>
                                 <OutlinedInput 
-                                    id="password1" 
+                                    id="repeatedPassword" 
                                     placeholder="Powtórz hasło"
                                     type="password"
                                     color="secondary"
-                                    onChange={(event: any) => setForm({...form, repeatedPassword: event.target.value})} 
+                                    value={form.repeatedPassword}
+                                    error={errors.repeatedPassword != ''}
+                                    onChange={(event: any) => onFieldChange('repeatedPassword', event)} 
                                 />
-                                <FormHelperText> </FormHelperText>
+                                <FormHelperText error>{errors.repeatedPassword + ' '}</FormHelperText>
                             </FormControl>
                         </Grid>
                         <Grid item xs={6} sx={{mb: 3}}>
