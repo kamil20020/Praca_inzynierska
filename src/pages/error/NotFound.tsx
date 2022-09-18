@@ -1,13 +1,13 @@
 ﻿import { Grid, Typography } from "@mui/material";
 
-const Home = () => {
+const NotFound = () => {
     return (
         <Grid item xs={12}>
             <Typography textAlign="center" variant="h4">
-                Technologie IT
+                Status 404 - Nie znaleziono strony
             </Typography>
         </Grid>
-    );
+    )
 }
 
-export default Home;
+export default NotFound;

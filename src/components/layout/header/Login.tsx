@@ -5,6 +5,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import KeycloakService from "../../../keycloak/KeycloakService";
 import { keycloakSlice, logout, setAccessToken, setRefreshToken } from "../../../redux/slices/keycloakSlice";
 import { setNotificationMessage, setNotificationStatus, setNotificationType } from "../../../redux/slices/notificationSlice";
+import { setRoles } from "../../../redux/slices/userSlice";
 import { RootState, store } from "../../../redux/store";
 import FormValidator from "../../../services/FormValidator";
 import XCloeasableDialog from "../../common/XCloeasableDialog";
@@ -89,6 +90,10 @@ const Login = () => {
             dispatch(setNotificationMessage('Zalogowano pomyślnie'))
             dispatch(setNotificationType('success'))
             dispatch(setNotificationStatus(true))
+
+            const decodedAccessToken = KeycloakService.decodeAccessToken(accessToken)
+
+            dispatch(setRoles(decodedAccessToken.resource_access.account.roles))
             console.log('C')
 
             const handleTokensExpiring = () => {

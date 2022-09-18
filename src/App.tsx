@@ -13,6 +13,13 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AppBar } from "@mui/material";
 import axios from "axios";
 import Notification from "./components/common/Notification";
+import Content from "./components/layout/content/Content";
+import Footer from "./components/layout/footer/Footer";
+import Articles from "./pages/articles/Articles";
+import Technologies from "./pages/technologies/Technologies";
+import NotFound from "./pages/error/NotFound";
+import ProtectedRoute from "./keycloak/ProtectedRoute";
+import UserDetails from "./pages/user-details/UserDetails";
 
 const theme = createTheme({
   typography: {
@@ -47,10 +54,21 @@ function App() {
             <Header/>
             <NavBar/>
           </AppBar>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
+          <Content>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/user-details" element={
+                <ProtectedRoute requiredLogin={true}>
+                  <UserDetails/>
+                </ProtectedRoute>
+              } />
+              <Route path="/articles" element={<Articles />} />
+              <Route path="/technologies" element={<Technologies />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Content>
           <Notification/>
+          <Footer/>
         </ThemeProvider>
       </BrowserRouter>
     </React.StrictMode>

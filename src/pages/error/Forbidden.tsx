@@ -1,13 +1,13 @@
 ﻿import { Grid, Typography } from "@mui/material";
 
-const Home = () => {
+const Forbidden = () => {
     return (
         <Grid item xs={12}>
             <Typography textAlign="center" variant="h4">
-                Technologie IT
+                Status 403 - Brak dostępu do zasobu
             </Typography>
         </Grid>
-    );
+    )
 }
 
-export default Home;
+export default Forbidden;

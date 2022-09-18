@@ -1,13 +1,13 @@
 ﻿import { Grid, Typography } from "@mui/material";
 
-const Home = () => {
+const UserDetails = () => {
     return (
         <Grid item xs={12}>
             <Typography textAlign="center" variant="h4">
-                Technologie IT
+                Dane użytkownika
             </Typography>
         </Grid>
     );
 }
 
-export default Home;
+export default UserDetails;

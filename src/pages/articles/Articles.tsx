@@ -1,13 +1,14 @@
 ﻿import { Grid, Typography } from "@mui/material";
+import React from "react";
 
-const Home = () => {
+const Articles = () => {
     return (
         <Grid item xs={12}>
             <Typography textAlign="center" variant="h4">
-                Technologie IT
+                Artykuły
             </Typography>
         </Grid>
     );
 }
 
-export default Home;
+export default Articles;
