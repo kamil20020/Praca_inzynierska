@@ -12,8 +12,10 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
 
     private Integer id;
-    private String username;
+    private String userAccountId;
+    private String nickname;
     private String firstname;
     private String surname;
-    private Byte[] avatar;
+    private String email;
+    private String avatar;
 }
