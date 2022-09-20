@@ -18,10 +18,13 @@ export const userSlice = createSlice({
     reducers: {
         setRoles(state, action: PayloadAction<string[]>){
             state.roles = action.payload
+        },
+        setUser(state, action: PayloadAction<User>){
+            state.user = action.payload
         }
     }
 })
 
-export const { setRoles } = userSlice.actions
+export const { setRoles, setUser } = userSlice.actions
 
 export default userSlice.reducer

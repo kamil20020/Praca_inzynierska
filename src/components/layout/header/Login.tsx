@@ -5,9 +5,10 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import KeycloakService from "../../../keycloak/KeycloakService";
 import { keycloakSlice, logout, setAccessToken, setRefreshToken } from "../../../redux/slices/keycloakSlice";
 import { setNotificationMessage, setNotificationStatus, setNotificationType } from "../../../redux/slices/notificationSlice";
-import { setRoles } from "../../../redux/slices/userSlice";
+import { setRoles, setUser } from "../../../redux/slices/userSlice";
 import { RootState, store } from "../../../redux/store";
 import FormValidator from "../../../services/FormValidator";
+import UserAPIService from "../../../services/UserAPIService";
 import XCloeasableDialog from "../../common/XCloeasableDialog";
 
 interface FormFields {
@@ -93,8 +94,12 @@ const Login = () => {
 
             const decodedAccessToken = KeycloakService.decodeAccessToken(accessToken)
 
-            dispatch(setRoles(decodedAccessToken.resource_access.account.roles))
-            console.log('C')
+            dispatch(setRoles(decodedAccessToken.realm_access.roles))
+            
+            UserAPIService.getUserByUserAccountId(decodedAccessToken.sub)
+            .then((response) => {
+                dispatch(setUser(response.data))
+            })
 
             const handleTokensExpiring = () => {
 
@@ -138,56 +143,54 @@ const Login = () => {
     }
 
     return (
-        <React.Fragment>
-            <XCloeasableDialog 
-                title="Logowanie"
-                form = {
-                    <Grid 
-                        container 
-                        spacing={2}
-                        direction="column"
-                        alignItems="center"
-                    >
-                        <Grid item xs={6}>
-                            <FormControl>
-                                <OutlinedInput 
-                                    id="login-email" 
-                                    placeholder="Login lub E-mail"
-                                    color="secondary"
-                                    value={form.username_email}
-                                    error={errors.username_email != ''}
-                                    onChange={(event: any) => onFieldChange('username_email', event)} 
-                                />
-                                <FormHelperText error>{errors.username_email + ' '}</FormHelperText>
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <FormControl>
-                                <OutlinedInput 
-                                    id="password" 
-                                    placeholder="Hasło"
-                                    color="secondary"
-                                    type="password"
-                                    value={form.password}
-                                    error={errors.password != ''}
-                                    onChange={(event: any) => onFieldChange('password', event)} 
-                                />
-                                <FormHelperText error>{errors.password + ' '}</FormHelperText>
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Button
-                                variant="contained"
+        <XCloeasableDialog 
+            title="Logowanie"
+            form = {
+                <Grid 
+                    container 
+                    spacing={2}
+                    direction="column"
+                    alignItems="center"
+                >
+                    <Grid item xs={6}>
+                        <FormControl>
+                            <OutlinedInput 
+                                id="login-email" 
+                                placeholder="Login lub E-mail"
                                 color="secondary"
-                                onClick={handleSubmit}
-                            >
-                                Zaloguj
-                            </Button>
-                        </Grid>
+                                value={form.username_email}
+                                error={errors.username_email != ''}
+                                onChange={(event: any) => onFieldChange('username_email', event)} 
+                            />
+                            <FormHelperText error>{errors.username_email + ' '}</FormHelperText>
+                        </FormControl>
                     </Grid>
-                }
-            />
-        </React.Fragment>
+                    <Grid item xs={6}>
+                        <FormControl>
+                            <OutlinedInput 
+                                id="password" 
+                                placeholder="Hasło"
+                                color="secondary"
+                                type="password"
+                                value={form.password}
+                                error={errors.password != ''}
+                                onChange={(event: any) => onFieldChange('password', event)} 
+                            />
+                            <FormHelperText error>{errors.password + ' '}</FormHelperText>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleSubmit}
+                        >
+                            Zaloguj
+                        </Button>
+                    </Grid>
+                </Grid>
+            }
+        />
     );
 }
 

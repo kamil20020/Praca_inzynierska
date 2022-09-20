@@ -1,5 +1,8 @@
 ﻿import axios from "axios";
+import { error } from "console";
 import { access } from "fs";
+import User from "../models/User";
+import UserAPIService from "../services/UserAPIService";
 import keycloak from "./Keycloak"
 
 export interface LoginCredentials {
@@ -10,6 +13,11 @@ export interface LoginCredentials {
 export interface RegisterCredentials {
     username: string,
     password: string
+}
+
+export interface Role{
+    id: string,
+    name: string
 }
 
 class KeycloakService {
@@ -101,9 +109,14 @@ class KeycloakService {
         return axios.post(`${keycloak.url}/realms/master/protocol/openid-connect/logout`, body, header)
     }
 
-    register = (user: RegisterCredentials) => {
+    addRoleToUser = (userId: string, roles: Role[], header: any) => {
+        return axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${userId}/role-mappings/realm`, roles, header)
+    }
+
+    checkAccountAndUserCanBeCreated = (userCredentials: RegisterCredentials, user: User) => {
 
         return new Promise((resolve, reject) => {
+
             this.adminAuth()
             .then((response) => {
                 const data = response.data
@@ -116,20 +129,29 @@ class KeycloakService {
                     }
                 }
 
-                const userData = {
-                    username: user.username,
-                    credentials: [{
-                            type: "password",
-                            value: user.password,
-                            temporary: false
-                    }],
-                    enabled: true
-                }
+                let usernameParamQuery = new URLSearchParams()
+                usernameParamQuery.set('username', userCredentials.username)
+                usernameParamQuery.set('exact', String(true))
 
-                axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users`, userData, header)
+                axios.get(`${keycloak.url}/admin/realms/${keycloak.realm}/users?${usernameParamQuery.toString()}`, header) //user account with username exists
                 .then((response) => {
-                    this.adminUnAuth(accessToken, refreshToken)
-                    resolve('Accept')
+
+                    if(response.data.length > 0){
+                        throw new Error('Istnieje już konto o takiej nazwie użytkownika')
+                    }
+
+                    UserAPIService.existsUserWithNickname(user.nickname)
+                    .then((response) => {
+
+                        if(response.data){
+                            throw new Error('Istnieje już użytkownik o takim pseudonimie')
+                        }
+                        resolve('Accept')
+                    })
+                    .catch((error) => {
+                        this.adminUnAuth(accessToken, refreshToken)
+                        reject(error)
+                    })
                 })
                 .catch((error) => {
                     this.adminUnAuth(accessToken, refreshToken)
@@ -138,6 +160,64 @@ class KeycloakService {
             })
             .catch((error) => {
                 reject(error)
+            })
+        })
+    }
+
+    register = (userCredentials: RegisterCredentials, user: User) => {
+
+        return new Promise((resolve, reject) => {
+
+            this.adminAuth()
+            .then((response) => {
+                const data = response.data
+                const accessToken = data.access_token
+                const refreshToken = data.refresh_token
+
+                const header = {
+                    headers: { 
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                }
+
+                const userAccountData = {
+                    username: userCredentials.username,
+                    credentials: [{
+                            type: "password",
+                            value: userCredentials.password,
+                            temporary: false
+                    }],
+                    enabled: true
+                }
+        
+                axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users`, userAccountData, header) //create user account
+                .then((response) => {
+                    const userAccountId = response.headers.location.split('/')[7]
+                    const roles = [{
+                        id: "cec99090-10b9-4fc9-880c-9f72dca702eb",
+                        name: "logged_user"
+                    }]
+                    this.addRoleToUser(userAccountId, roles, header)
+                    .then((response) => {
+                        this.adminUnAuth(accessToken, refreshToken)
+                        user.userAccountId = userAccountId
+                        UserAPIService.createUser(user)
+                        .then((response) => {
+                            resolve('Accept')
+                        })
+                        .catch((error) => {
+                            reject(error)
+                        })
+                    })
+                    .catch((error) => {
+                        this.adminUnAuth(accessToken, refreshToken)
+                        reject(error)
+                    })
+                })
+                .catch((error) => {
+                    this.adminUnAuth(accessToken, refreshToken)
+                    reject(error)
+                })
             })
         })
     }

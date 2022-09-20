@@ -9,12 +9,7 @@ const CustomAvatar = (file: any) => {
         if(!file.file)
             return
 
-        const reader = new FileReader();
-        reader.readAsDataURL(file.file)
-
-        reader.onload = (event) => {
-            setImg(event.target?.result);
-        }
+        setImg(file.file);
     }
 
     useEffect(() => {
@@ -22,7 +17,7 @@ const CustomAvatar = (file: any) => {
     }, [file])
 
     return (
-        <Avatar alt="Avatar" src={img}/>
+        <Avatar alt="Avatar" src={`data:image/jpeg;base64,${img}`}/>
     );
 }
 

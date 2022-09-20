@@ -1,12 +1,15 @@
 ﻿import { Tooltip, IconButton, Avatar, Menu, MenuItem, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/slices/keycloakSlice";
 import { setNotificationMessage, setNotificationStatus } from "../../../redux/slices/notificationSlice";
+import { RootState } from "../../../redux/store";
+import CustomAvatar from "../../common/CustomAvatar";
 
 const AccountSettings = () => {
 
+    const user = useSelector((state: RootState) => state.user).user
     const dispatch = useDispatch()
 
     const [anchorElUserSettings, setAnchorElUserSettings] = React.useState<null | HTMLElement>(null);
@@ -30,11 +33,11 @@ const AccountSettings = () => {
         <React.Fragment>
             <Stack direction="row" alignItems="center">
                 <Typography sx={{mr: 2}}>
-                    Kamil Dywan
+                    {user.nickname}
                 </Typography>
                 <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserSettings}>
-                        <Avatar alt="Avatar"/>
+                        <CustomAvatar file={user.avatar}/>
                     </IconButton>
                 </Tooltip>
             </Stack>

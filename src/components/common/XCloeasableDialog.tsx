@@ -5,7 +5,8 @@ import CloseIcon from "@mui/icons-material/Close";
 export interface XCloeasableDialogProps {
     title: string,
     form: any,
-    close?: boolean
+    close?: boolean,
+    setClose?: (value: boolean) => void
 }
 
 const XCloeasableDialog = (props: XCloeasableDialogProps) => {
@@ -14,15 +15,22 @@ const XCloeasableDialog = (props: XCloeasableDialogProps) => {
 
     useEffect(() => {
         if(props.close)
-            setOpen(false)
+            setOpen(!props.close)
     }, [props.close])
+
+    const handleOpen = () => {
+        setOpen(true)
+        if(props.setClose != null){
+            props.setClose!(false)
+        }
+    }
 
     return (
         <React.Fragment>
             <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => setOpen(true)}
+                onClick={handleOpen}
                 sx={{mr: 2}}
             >
                 {props.title}

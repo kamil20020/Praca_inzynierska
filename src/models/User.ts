@@ -1,8 +1,9 @@
 ﻿export default interface User {
-    id: number,
-    username: string,
+    id?: number,
+    userAccountId?: string,
+    nickname: string,
     firstname: string,
     surname: string,
     email: string,
-    avatar?: Blob
+    avatar?: string
 }
