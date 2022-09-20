@@ -242,6 +242,11 @@ class KeycloakService {
     
         return JSON.parse(jsonPayload);
     }
+
+    getUsernameFormAccessToken = (access_token: string) => {
+        const decodedAccessToken = this.decodeAccessToken(access_token)
+        return decodedAccessToken.preferred_username
+    }
 }
 
 export default new KeycloakService()

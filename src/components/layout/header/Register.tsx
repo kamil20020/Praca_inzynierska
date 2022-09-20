@@ -20,10 +20,6 @@ interface FormFields {
     avatar?: string
 };
 
-const fontColor = {
-    style: { color: 'black' }
-}
-
 const Register = () => {
 
     const initialFormState = {

@@ -8,7 +8,7 @@ type LayoutProps = {
 const Content = ({ children }: LayoutProps) => {
     return (
         <main>
-            <Grid container justifyContent="center" alignItems="center">
+            <Grid container justifyContent="center" alignItems="stretch">
                 {children}
             </Grid>
         </main>

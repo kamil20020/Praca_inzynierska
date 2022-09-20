@@ -2,12 +2,15 @@
 import { Stack } from "@mui/system";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/slices/keycloakSlice";
 import { setNotificationMessage, setNotificationStatus } from "../../../redux/slices/notificationSlice";
 import { RootState } from "../../../redux/store";
 import CustomAvatar from "../../common/CustomAvatar";
 
 const AccountSettings = () => {
+
+    const navigate = useNavigate()
 
     const user = useSelector((state: RootState) => state.user).user
     const dispatch = useDispatch()
@@ -22,11 +25,18 @@ const AccountSettings = () => {
         setAnchorElUserSettings(null)
     }
 
+    const handleUserDetails = () => {
+        handleCloseUseSettings()
+        navigate('/user-details')
+    }
+
     const handleLogout = () => {
         dispatch(logout())
         
         dispatch(setNotificationMessage('Wylogowano pomyślnie'))
         dispatch(setNotificationStatus(true))
+
+        navigate('/');
     }
 
     return (
@@ -47,13 +57,9 @@ const AccountSettings = () => {
                 open={Boolean(anchorElUserSettings)}
                 onClose={handleCloseUseSettings}
             >
-                <MenuItem>Dane użytkownika</MenuItem>
+                <MenuItem onClick={handleUserDetails}>Dane użytkownika</MenuItem>
                 <MenuItem>Zmień hasło</MenuItem>
-                <MenuItem
-                    onClick={handleLogout}
-                >
-                    Wyloguj się
-                </MenuItem>
+                <MenuItem onClick={handleLogout}>Wyloguj się</MenuItem>
             </Menu>
         </React.Fragment>
     );
