@@ -7,7 +7,7 @@ const NonEditMode = (props: any) => {
 
     const accessToken = useSelector((state: RootState) => state.keycloak).access_token as string
     const user = useSelector((state: RootState) => state.user).user
-    const username = useSelector((state: RootState) => state.user).username
+    const username = useSelector((state: RootState) => state.keycloak).username
 
     return (
         <Grid item xs={12} container justifyContent="center">

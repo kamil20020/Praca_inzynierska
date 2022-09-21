@@ -10,7 +10,9 @@ export interface KeycloakState {
     access_token_expires_in: number,
     refresh_token?: string,
     refresh_token_expires_in: number,
-    authenticated: boolean
+    authenticated: boolean,
+    username: string,
+    roles: string[]
 }
 
 const initialState: KeycloakState = {
@@ -18,7 +20,9 @@ const initialState: KeycloakState = {
     access_token_expires_in: 0,
     refresh_token: '',
     refresh_token_expires_in: 0,
-    authenticated: false
+    authenticated: false,
+    username: '',
+    roles: []
 }
 
 export interface Token{
@@ -49,10 +53,18 @@ export const keycloakSlice = createSlice({
             state.refresh_token = ''
             state.refresh_token_expires_in = 0
             state.authenticated = false
+            state.username = ''
+            state.roles = []
+        },
+        setRoles(state, action: PayloadAction<string[]>){
+            state.roles = action.payload
+        },
+        setUsername(state, action: PayloadAction<string>){
+            state.username = action.payload
         }
     }
 })
 
-export const { setAccessToken, setRefreshToken, logout } = keycloakSlice.actions
+export const { setAccessToken, setRefreshToken, logout, setRoles, setUsername } = keycloakSlice.actions
 
 export default keycloakSlice.reducer

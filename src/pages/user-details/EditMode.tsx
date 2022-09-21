@@ -8,8 +8,8 @@ import KeycloakService, { Credentials, UpdateCredentials } from "../../keycloak/
 import FormValidator from "../../services/FormValidator";
 import UserAPIService, { UpdateUserModel } from "../../services/UserAPIService";
 import { setNotificationMessage, setNotificationType, setNotificationStatus } from "../../redux/slices/notificationSlice";
-import { setUser, setUsername } from "../../redux/slices/userSlice";
-import { setAccessToken, setRefreshToken, logout } from "../../redux/slices/keycloakSlice";
+import { setUser } from "../../redux/slices/userSlice";
+import { setAccessToken, setRefreshToken, logout, setUsername } from "../../redux/slices/keycloakSlice";
 
 interface FormFields {
     firstname: string,
@@ -23,9 +23,8 @@ interface FormFields {
 const EditMode = (props: any) => {
 
     const user = useSelector((state: RootState) => state.user).user
-    const username = useSelector((state: RootState) => state.user).username
     const keycloak = useSelector((state: RootState) => state.keycloak)
-    const accessToken = keycloak.access_token as string
+    const username = keycloak.username
 
     const dispatch = useDispatch()
 

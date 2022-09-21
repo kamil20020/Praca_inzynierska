@@ -13,7 +13,6 @@ type PrivateRouteProps = {
 const PrivateRoute = (props: PrivateRouteProps) => {
 
     const keycloak = useSelector((state: RootState) => state.keycloak);
-    const user = useSelector((state: RootState) => state.user)
 
     if(!props.requiredLogin){
         return <React.Fragment>{props.children}</React.Fragment>
@@ -24,7 +23,7 @@ const PrivateRoute = (props: PrivateRouteProps) => {
         return isLoggedIn ? <React.Fragment>{props.children}</React.Fragment> : <Forbidden/>
     }
 
-    return user.roles.includes(props.requiredRole, 0) ? <React.Fragment>{props.children}</React.Fragment> : <Forbidden/>
+    return keycloak.roles.includes(props.requiredRole) ? <React.Fragment>{props.children}</React.Fragment> : <Forbidden/>
 }
 
 export default PrivateRoute;

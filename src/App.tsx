@@ -4,7 +4,8 @@ import keycloak from "./keycloak/Keycloak";
 import {
   Route,
   BrowserRouter,
-  Routes
+  Routes,
+  Outlet
 } from "react-router-dom";
 import Home from "./pages/home/Home";
 import NavBar from "./components/layout/navigation/NavBar";
@@ -20,6 +21,8 @@ import Technologies from "./pages/technologies/Technologies";
 import NotFound from "./pages/error/NotFound";
 import ProtectedRoute from "./keycloak/ProtectedRoute";
 import UserDetails from "./pages/user-details/UserDetails";
+import SearchUsers from "./pages/manage-users/SearchUsers";
+import ManageUser from "./pages/manage-users/ManageUser";
 
 const theme = createTheme({
   typography: {
@@ -64,6 +67,14 @@ function App() {
               } />
               <Route path="/articles" element={<Articles />} />
               <Route path="/technologies" element={<Technologies />} />
+              <Route path="/manage-users" element={
+                <ProtectedRoute requiredLogin={true} requiredRole="administrator">
+                  <Outlet />
+                </ProtectedRoute>
+              }>
+                <Route index element={<SearchUsers/>} />
+                <Route path="user/:id" element={<ManageUser/>} />
+              </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Content>
