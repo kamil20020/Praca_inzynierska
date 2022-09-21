@@ -5,14 +5,14 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import KeycloakService from "../../../keycloak/KeycloakService";
 import { keycloakSlice, logout, setAccessToken, setRefreshToken } from "../../../redux/slices/keycloakSlice";
 import { setNotificationMessage, setNotificationStatus, setNotificationType } from "../../../redux/slices/notificationSlice";
-import { setRoles, setUser } from "../../../redux/slices/userSlice";
+import { setRoles, setUser, setUsername } from "../../../redux/slices/userSlice";
 import { RootState, store } from "../../../redux/store";
 import FormValidator from "../../../services/FormValidator";
 import UserAPIService from "../../../services/UserAPIService";
 import XCloeasableDialog from "../../common/XCloeasableDialog";
 
 interface FormFields {
-    username_email: string,
+    username: string,
     password: string
 }
 
@@ -22,12 +22,12 @@ const Login = () => {
     const dispatch = useDispatch()
 
     const [form, setForm] = React.useState<FormFields>({
-        username_email: '',
+        username: '',
         password: ''
     })
 
     const [errors, setErrors] = React.useState<FormFields>({
-        username_email: '',
+        username: '',
         password: ''
     })
 
@@ -37,8 +37,8 @@ const Login = () => {
 
         let newErrorsState = {...errors}
 
-        if(!FormValidator.checkIfIsRequired(form.username_email)){
-            newErrorsState.username_email = FormValidator.requiredMessage
+        if(!FormValidator.checkIfIsRequired(form.username)){
+            newErrorsState.username = FormValidator.requiredMessage
             success = false
         }
 
@@ -99,6 +99,7 @@ const Login = () => {
             UserAPIService.getUserByUserAccountId(decodedAccessToken.sub)
             .then((response) => {
                 dispatch(setUser(response.data))
+                dispatch(setUsername(form.username))
             })
 
             const handleTokensExpiring = () => {
@@ -155,14 +156,14 @@ const Login = () => {
                     <Grid item xs={6}>
                         <FormControl>
                             <OutlinedInput 
-                                id="login-email" 
-                                placeholder="Login lub E-mail"
+                                id="username" 
+                                placeholder="Nazwa użytkownika"
                                 color="secondary"
-                                value={form.username_email}
-                                error={errors.username_email != ''}
-                                onChange={(event: any) => onFieldChange('username_email', event)} 
+                                value={form.username}
+                                error={errors.username != ''}
+                                onChange={(event: any) => onFieldChange('username', event)} 
                             />
-                            <FormHelperText error>{errors.username_email + ' '}</FormHelperText>
+                            <FormHelperText error>{errors.username + ' '}</FormHelperText>
                         </FormControl>
                     </Grid>
                     <Grid item xs={6}>

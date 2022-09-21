@@ -1,6 +1,5 @@
 ﻿import { Grid, Button } from "@mui/material";
 import { useSelector } from "react-redux";
-import KeycloakService from "../../keycloak/KeycloakService";
 import { RootState } from "../../redux/store";
 import { FormLabel } from "./UserDetails";
 
@@ -8,6 +7,7 @@ const NonEditMode = (props: any) => {
 
     const accessToken = useSelector((state: RootState) => state.keycloak).access_token as string
     const user = useSelector((state: RootState) => state.user).user
+    const username = useSelector((state: RootState) => state.user).username
 
     return (
         <Grid item xs={12} container justifyContent="center">
@@ -34,7 +34,7 @@ const NonEditMode = (props: any) => {
                             <FormLabel value="Nazwa użytkownika"/>
                         </Grid>
                         <Grid item xs={6}>
-                            <FormLabel value={KeycloakService.getUsernameFormAccessToken(accessToken)}/>
+                            <FormLabel value={username}/>
                         </Grid>
                     </Grid>
                     <Grid item xs={12} container>

@@ -5,14 +5,14 @@ import User from "../models/User";
 import UserAPIService from "../services/UserAPIService";
 import keycloak from "./Keycloak"
 
-export interface LoginCredentials {
-    username_email: string,
+export interface Credentials {
+    username: string,
     password: string
 }
 
-export interface RegisterCredentials {
-    username: string,
-    password: string
+export interface UpdateCredentials {
+    username?: string,
+    password?: string
 }
 
 export interface Role{
@@ -22,11 +22,11 @@ export interface Role{
 
 class KeycloakService {
 
-    login(credentials: LoginCredentials){
+    login(credentials: Credentials){
 
         const body = new URLSearchParams({
             client_id: keycloak.clientId as string,
-            username: credentials.username_email,
+            username: credentials.username,
             password: credentials.password,
             grant_type: 'password'
         });
@@ -113,7 +113,7 @@ class KeycloakService {
         return axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${userId}/role-mappings/realm`, roles, header)
     }
 
-    checkAccountAndUserCanBeCreated = (userCredentials: RegisterCredentials, user: User) => {
+    checkAccountAndUserCanBeCreated = (userCredentials: Credentials, user: User) => {
 
         return new Promise((resolve, reject) => {
 
@@ -164,7 +164,7 @@ class KeycloakService {
         })
     }
 
-    register = (userCredentials: RegisterCredentials, user: User) => {
+    register = (userCredentials: Credentials, user: User) => {
 
         return new Promise((resolve, reject) => {
 
@@ -218,6 +218,60 @@ class KeycloakService {
                     this.adminUnAuth(accessToken, refreshToken)
                     reject(error)
                 })
+            })
+            .catch((error) => {
+                reject(error)
+            })
+        })
+    }
+
+    updateUserAccount = (accountId: string, credentials: UpdateCredentials) => {
+
+        return new Promise((resolve, reject) => {
+
+            this.adminAuth()
+            .then((response) => {
+                const data = response.data
+                const accessToken = data.access_token
+                const refreshToken = data.refresh_token
+
+                const header = {
+                    headers: { 
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                }
+
+                let body = {}
+
+                if(credentials.username){
+                    body = {
+                        username: credentials.username
+                    }
+                }
+
+                if(credentials.password){
+                    body = {
+                        ...body,
+                        credentials: [{
+                            type: "password",
+                            value: credentials.password,
+                            temporary: false
+                        }]
+                    }
+                }
+
+                axios.put(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${accountId}`, body, header)
+                .then((response) => {
+                    this.adminUnAuth(accessToken, refreshToken)
+                    resolve(response)
+                })
+                .catch((error) => {
+                    this.adminUnAuth(accessToken, refreshToken)
+                    reject(error)
+                })
+            })
+            .catch((error) => {
+                reject(error)
             })
         })
     }

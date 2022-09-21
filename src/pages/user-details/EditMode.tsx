@@ -1,10 +1,15 @@
 ﻿import { Grid, FormControl, OutlinedInput, FormHelperText, Button, Typography } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { FormLabel } from "./UserDetails";
 import SaveIcon from '@mui/icons-material/Save';
-import KeycloakService from "../../keycloak/KeycloakService";
+import KeycloakService, { Credentials, UpdateCredentials } from "../../keycloak/KeycloakService";
+import FormValidator from "../../services/FormValidator";
+import UserAPIService, { UpdateUserModel } from "../../services/UserAPIService";
+import { setNotificationMessage, setNotificationType, setNotificationStatus } from "../../redux/slices/notificationSlice";
+import { setUser, setUsername } from "../../redux/slices/userSlice";
+import { setAccessToken, setRefreshToken, logout } from "../../redux/slices/keycloakSlice";
 
 interface FormFields {
     firstname: string,
@@ -12,22 +17,28 @@ interface FormFields {
     username: string,
     nickname: string,
     email: string,
-    avatar?: string,
+    avatar?: string
 };
 
 const EditMode = (props: any) => {
 
-    const accessToken = useSelector((state: RootState) => state.keycloak).access_token as string
     const user = useSelector((state: RootState) => state.user).user
+    const username = useSelector((state: RootState) => state.user).username
+    const keycloak = useSelector((state: RootState) => state.keycloak)
+    const accessToken = keycloak.access_token as string
 
-    const [form, setForm] = React.useState<FormFields>({
+    const dispatch = useDispatch()
+
+    const initialForm = {
         firstname: user.firstname,
         surname: user.surname,
-        username: KeycloakService.getUsernameFormAccessToken(accessToken),
+        username: username,
         nickname: user.nickname,
         email: user.email,
         avatar: user.avatar,
-    })
+    }
+
+    const [form, setForm] = React.useState<FormFields>(initialForm)
 
     const [errors, setErrors] = React.useState<FormFields>({
         firstname: '',
@@ -59,15 +70,109 @@ const EditMode = (props: any) => {
         })
     }
 
+    const validateForm = () => {
+
+        let success = true
+
+        let newErrorsState = {...errors}
+
+        if(!FormValidator.checkIfIsRequired(form.username)){
+            newErrorsState.username = FormValidator.requiredMessage
+            success = false
+        }
+
+        if(!FormValidator.checkIfIsRequired(form.nickname)){
+            newErrorsState.nickname = FormValidator.requiredMessage
+            success = false
+        }
+
+        if(!FormValidator.checkIfIsRequired(form.firstname)){
+            newErrorsState.firstname = FormValidator.requiredMessage
+            success = false
+        }
+        
+        if(!FormValidator.checkIfIsRequired(form.surname)){
+            newErrorsState.surname = FormValidator.requiredMessage
+            success = false
+        }
+
+        if(!FormValidator.checkIfIsRequired(form.email)){
+            newErrorsState.email = FormValidator.requiredMessage
+            success = false
+        }
+        else if(!FormValidator.checkEmail(form.email)){
+            newErrorsState.email = FormValidator.emailMessage
+            success = false
+        }
+
+        setErrors(newErrorsState)
+
+        return success
+    }
+
+    const handleSubmit = () => {
+
+        if(!validateForm())
+            return
+
+        const changedCredentials: UpdateCredentials = {
+            username: form.username != initialForm.username ? form.username : undefined
+        }
+
+        const changedUserData: UpdateUserModel = {
+            nickname: form.nickname != initialForm.nickname ? form.nickname : undefined,
+            firstname: form.firstname != initialForm.firstname ? form.firstname : undefined,
+            surname: form.surname != initialForm.surname ? form.surname : undefined,
+            email: form.email != initialForm.email ? form.email : undefined,
+            avatar: form.avatar != initialForm.avatar ? form.avatar : undefined
+        }
+
+        const updateUser = () => {
+            UserAPIService.updateUser(user.id as number, changedUserData)
+            .then((response) => {
+                const changedUser = response.data
+                dispatch(setUser(changedUser))
+                dispatch(setNotificationMessage("Zmienione dane zostały zapisane"))
+                dispatch(setNotificationType('success'))
+                dispatch(setNotificationStatus(true))
+                props.setEditMode(false)
+            })
+            .catch((error) => {
+                dispatch(setNotificationMessage(error.message))
+                dispatch(setNotificationType('error'))
+                dispatch(setNotificationStatus(true))
+            })
+        }
+
+        if(form.username != initialForm.username){
+
+            KeycloakService.updateUserAccount(user.userAccountId as string, changedCredentials)
+            .then((response) => {
+                dispatch(setUsername(form.username))
+                updateUser()
+            })
+            .catch((error) => {
+                if(error.request.code == 409){
+                    dispatch(setNotificationMessage("Istnieje już użytkownik o takiej nazwie użytkownika"))
+                    dispatch(setNotificationType('error'))
+                    dispatch(setNotificationStatus(true))
+                }
+            })
+        }
+        else{
+            updateUser()
+        }
+    }
+
     return(
         <Grid item xs={12} container justifyContent="center">
             <Grid item container>
-                <Grid item xs={6} container>
+                <Grid item xs={6} container spacing={1}>
                     <Grid item xs={12} container alignItems="center">
                         <Grid item xs={6}>
                             <FormLabel value="Imię"/>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} container alignItems="center">
                             <FormControl>
                                 <OutlinedInput 
                                     id="firstname" 
@@ -84,7 +189,7 @@ const EditMode = (props: any) => {
                         <Grid item xs={6}>
                             <FormLabel value="Nazwisko"/>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} container alignItems="center">
                             <FormControl>
                                 <OutlinedInput 
                                     id="surname" 
@@ -101,16 +206,16 @@ const EditMode = (props: any) => {
                         <Grid item xs={6}>
                             <FormLabel value="Nazwa użytkownika"/>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} container alignItems="center">
                             <FormControl>
                                 <OutlinedInput 
-                                    id="surname" 
+                                    id="username" 
                                     color="secondary"
-                                    value={form.surname}
-                                    error={errors.surname != ''}
-                                    onChange={(event: any) => onFieldChange('surname', event)} 
+                                    value={form.username}
+                                    error={errors.username != ''}
+                                    onChange={(event: any) => onFieldChange('username', event)} 
                                 />
-                                <FormHelperText error>{errors.surname + ' '}</FormHelperText>
+                                <FormHelperText error>{errors.username + ' '}</FormHelperText>
                             </FormControl>
                         </Grid>
                     </Grid>
@@ -118,7 +223,7 @@ const EditMode = (props: any) => {
                         <Grid item xs={6}>
                             <FormLabel value="Pseudonim"/>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} container alignItems="center">
                             <FormControl>
                                 <OutlinedInput 
                                     id="nickname" 
@@ -135,7 +240,7 @@ const EditMode = (props: any) => {
                         <Grid item xs={6}>
                             <FormLabel value="E-mail"/>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} container alignItems="center">
                             <FormControl>
                                 <OutlinedInput 
                                     id="email" 
@@ -180,6 +285,7 @@ const EditMode = (props: any) => {
                         <Button
                             variant="contained"
                             color="secondary"
+                            onClick={handleSubmit}
                         >
                             Zapisz
                         </Button>
