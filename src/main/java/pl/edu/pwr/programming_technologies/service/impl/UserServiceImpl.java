@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import pl.edu.pwr.programming_technologies.exceptions.EntityConflictException;
 import pl.edu.pwr.programming_technologies.exceptions.EntityNotFoundException;
+import pl.edu.pwr.programming_technologies.mapper.UserMapper;
 import pl.edu.pwr.programming_technologies.model.dto.UserDTO;
 import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
 import pl.edu.pwr.programming_technologies.repository.UserRepository;
 import pl.edu.pwr.programming_technologies.service.UserService;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Slf4j
@@ -64,9 +66,6 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("Nie podano pseudonimu");
         }
 
-        System.out.println(userEntity.getUserAccountId());
-        System.out.println(userEntity);
-
         if(userRepository.existsByUserAccountId(userEntity.getUserAccountId())){
             throw new EntityConflictException("Istnieje już użytkownik o takim id konta");
         }
@@ -76,5 +75,40 @@ public class UserServiceImpl implements UserService {
         }
 
         return userRepository.save(userEntity);
+    }
+
+    @Override
+    @Transactional
+    public UserEntity updateUser(Integer userId, UserEntity userEntity) throws IllegalArgumentException{
+
+        if(userEntity == null){
+            throw new IllegalArgumentException("Nie poddano danych");
+        }
+
+        Optional<UserEntity> foundUserOpt = userRepository.findById(userId);
+
+        if(foundUserOpt.isEmpty()){
+            throw new EntityNotFoundException("Nie istnieje użytkownik o takim id");
+        }
+
+        UserEntity foundUser = foundUserOpt.get();
+
+        if(userEntity.getNickname() != null){
+            foundUser.setNickname(userEntity.getNickname());
+        }
+
+        if(userEntity.getFirstname() != null){
+            foundUser.setFirstname(userEntity.getFirstname());
+        }
+
+        if(userEntity.getSurname() != null){
+            foundUser.setSurname(userEntity.getSurname());
+        }
+
+        if(userEntity.getAvatar() != null){
+            foundUser.setAvatar(userEntity.getAvatar());
+        }
+
+        return foundUser;
     }
 }

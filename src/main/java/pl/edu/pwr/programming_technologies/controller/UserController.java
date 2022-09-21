@@ -76,4 +76,34 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUserDTO);
     }
+
+    @PutMapping("/{userId}")
+    ResponseEntity updateUser(@PathVariable("userId") String userIdStr, @RequestBody UserDTO userDTO){
+
+        Integer userId;
+
+        try{
+            userId = Integer.valueOf(userIdStr);
+        }
+        catch(NumberFormatException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Podano nieprawidłowe id użytkownika");
+        }
+
+        UserEntity userEntity = userMapper.userDTOToUserEntity(userDTO);
+        UserEntity changedUserEntity;
+
+        try{
+            changedUserEntity = userService.updateUser(userId, userEntity);
+        }
+        catch(IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        catch(EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
+        UserDTO changedUserDTO = userMapper.userEntityToUserDTO(changedUserEntity);
+
+        return ResponseEntity.ok(changedUserDTO);
+    }
 }

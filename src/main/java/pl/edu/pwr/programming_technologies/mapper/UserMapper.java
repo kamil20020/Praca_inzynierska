@@ -23,6 +23,9 @@ public interface UserMapper {
 
     @Named("byteArrayToBase64")
     default String base64ToByteArray(Byte[] byteArr) {
+        if(byteArr == null){
+            return null;
+        }
         byte[] primitiveByteArr = ArrayUtils.toPrimitive(byteArr);
         System.out.println(Base64.getMimeEncoder().encodeToString(primitiveByteArr));
         return Base64.getMimeEncoder().encodeToString(primitiveByteArr);
@@ -30,7 +33,9 @@ public interface UserMapper {
 
     @Named("base64ToByteArray")
     default Byte[] base64ToByteArray(String base64) {
-        System.out.println(base64);
+        if(base64 == null){
+            return null;
+        }
         byte[] byteArr = Base64.getMimeDecoder().decode(base64);
         return ArrayUtils.toObject(byteArr);
     }

@@ -8,4 +8,5 @@ public interface UserService {
     UserEntity getUserByUserAccountId(String userAccountId);
     UserEntity createUser(UserEntity userEntity);
     boolean existsUserByNickname(String nickname);
+    UserEntity updateUser(Integer userId, UserEntity userEntity);
 }
