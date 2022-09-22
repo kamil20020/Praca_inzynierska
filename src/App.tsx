@@ -1,4 +1,3 @@
-import { ReactKeycloakProvider, useKeycloak } from "@react-keycloak/web";
 import React from 'react';
 import keycloak from "./keycloak/Keycloak";
 import {
@@ -23,6 +22,7 @@ import ProtectedRoute from "./keycloak/ProtectedRoute";
 import UserDetails from "./pages/user-details/UserDetails";
 import SearchUsers from "./pages/manage-users/SearchUsers";
 import ManageUser from "./pages/manage-users/ManageUser";
+import ArticlesVerification from './pages/articles-verification/ArticlesVerification';
 
 const theme = createTheme({
   typography: {
@@ -44,7 +44,11 @@ const theme = createTheme({
       main: '#5CA8EE',
       dark: '#168AF4',
       contrastText: '#fff',
-    }
+    },
+    info: {
+      main: '#008080',
+      contrastText: '#fff',
+    },
   },
 })
 
@@ -67,6 +71,11 @@ function App() {
               } />
               <Route path="/articles" element={<Articles />} />
               <Route path="/technologies" element={<Technologies />} />
+              <Route path="/articles-verification" element={
+                <ProtectedRoute requiredLogin={true} requiredRole="reviewer">
+                  <ArticlesVerification/>
+                </ProtectedRoute>
+              } />
               <Route path="/manage-users" element={
                 <ProtectedRoute requiredLogin={true} requiredRole="administrator">
                   <Outlet />

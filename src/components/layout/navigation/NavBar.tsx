@@ -21,6 +21,14 @@ const NavBar = () => {
                         Technologie
                     </Link>
                 </Typography>
+                {roles.includes('reviewer') ?
+                    <Typography variant="h6" align="center" component="div" sx={{ flexGrow: 1, ml: 2}}>
+                        <Link to="/articles-verification" className="nice-link">
+                            Weryfikacja artykułów
+                        </Link>
+                    </Typography>
+                : null
+                }
                 {roles.includes('administrator') ?
                     <Typography variant="h6" align="center" component="div" sx={{ flexGrow: 1, ml: 2}}>
                         <Link to="/manage-users" className="nice-link">

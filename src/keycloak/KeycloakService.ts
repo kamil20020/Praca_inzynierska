@@ -113,7 +113,7 @@ class KeycloakService {
         return axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${userId}/role-mappings/realm`, roles, header)
     }
 
-    checkAccountAndUserCanBeCreated = (userCredentials: Credentials, user: User) => {
+    searchUserAccountByUsername = (username: string, exactSearch: boolean = false) => {
 
         return new Promise((resolve, reject) => {
 
@@ -130,32 +130,45 @@ class KeycloakService {
                 }
 
                 let usernameParamQuery = new URLSearchParams()
-                usernameParamQuery.set('username', userCredentials.username)
-                usernameParamQuery.set('exact', String(true))
+                usernameParamQuery.set('username', username)
+
+                if(exactSearch){
+                    usernameParamQuery.set('exact', String(true))
+                }
 
                 axios.get(`${keycloak.url}/admin/realms/${keycloak.realm}/users?${usernameParamQuery.toString()}`, header) //user account with username exists
                 .then((response) => {
-
-                    if(response.data.length > 0){
-                        throw new Error('Istnieje już konto o takiej nazwie użytkownika')
-                    }
-
-                    UserAPIService.existsUserWithNickname(user.nickname)
-                    .then((response) => {
-
-                        if(response.data){
-                            throw new Error('Istnieje już użytkownik o takim pseudonimie')
-                        }
-                        resolve('Accept')
-                    })
-                    .catch((error) => {
-                        this.adminUnAuth(accessToken, refreshToken)
-                        reject(error)
-                    })
+                    resolve(response.data)
                 })
                 .catch((error) => {
                     this.adminUnAuth(accessToken, refreshToken)
                     reject(error)
+                })
+            })
+            .catch((error) => {
+                reject(error)
+            })
+        })
+    }
+
+    checkAccountAndUserCanBeCreated = (userCredentials: Credentials, user: User) => {
+
+        return new Promise((resolve, reject) => {
+
+            this.searchUserAccountByUsername(userCredentials.username, true) //user account with username exists
+            .then((response) => {
+
+                if((response as Array<any>).length > 0){
+                    throw new Error('Istnieje już konto o takiej nazwie użytkownika')
+                }
+
+                UserAPIService.existsUserWithNickname(user.nickname)
+                .then((response) => {
+
+                    if(response.data){
+                        throw new Error('Istnieje już użytkownik o takim pseudonimie')
+                    }
+                    resolve('Accept')
                 })
             })
             .catch((error) => {
@@ -213,6 +226,38 @@ class KeycloakService {
                         this.adminUnAuth(accessToken, refreshToken)
                         reject(error)
                     })
+                })
+                .catch((error) => {
+                    this.adminUnAuth(accessToken, refreshToken)
+                    reject(error)
+                })
+            })
+            .catch((error) => {
+                reject(error)
+            })
+        })
+    }
+
+    getUserAccountByUserAccountId = (accountId: string) => {
+
+        return new Promise((resolve, reject) => {
+
+            this.adminAuth()
+            .then((response) => {
+                const data = response.data
+                const accessToken = data.access_token
+                const refreshToken = data.refresh_token
+
+                const header = {
+                    headers: { 
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                }
+
+                axios.get(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${accountId}`, header)
+                .then((response) => {
+                    this.adminUnAuth(accessToken, refreshToken)
+                    resolve(response)
                 })
                 .catch((error) => {
                     this.adminUnAuth(accessToken, refreshToken)

@@ -1,15 +1,16 @@
 ﻿import { Grid, FormControl, OutlinedInput, FormHelperText, Button, Typography } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
 import { FormLabel } from "./UserDetails";
 import SaveIcon from '@mui/icons-material/Save';
-import KeycloakService, { Credentials, UpdateCredentials } from "../../keycloak/KeycloakService";
-import FormValidator from "../../services/FormValidator";
-import UserAPIService, { UpdateUserModel } from "../../services/UserAPIService";
-import { setNotificationMessage, setNotificationType, setNotificationStatus } from "../../redux/slices/notificationSlice";
-import { setUser } from "../../redux/slices/userSlice";
-import { setAccessToken, setRefreshToken, logout, setUsername } from "../../redux/slices/keycloakSlice";
+import KeycloakService, { UpdateCredentials } from "../../../keycloak/KeycloakService";
+import { setUsername } from "../../../redux/slices/keycloakSlice";
+import { setNotificationMessage, setNotificationType, setNotificationStatus } from "../../../redux/slices/notificationSlice";
+import { setUser } from "../../../redux/slices/userSlice";
+import { RootState } from "../../../redux/store";
+import FormValidator from "../../../services/FormValidator";
+import UserAPIService, { UpdateUserModel } from "../../../services/UserAPIService";
+import User from "../../../models/User";
 
 interface FormFields {
     firstname: string,
@@ -21,13 +22,15 @@ interface FormFields {
 };
 
 export interface EditModeProps {
+    user: User,
+    username: string,
     setEditMode: (value: boolean) => void
 }
 
 const EditMode = (props: EditModeProps) => {
 
-    const user = useSelector((state: RootState) => state.user).user
-    const username = useSelector((state: RootState) => state.keycloak).username
+    const user = props.user
+    const username = props.username
 
     const dispatch = useDispatch()
 
@@ -132,8 +135,6 @@ const EditMode = (props: EditModeProps) => {
         const updateUser = () => {
             UserAPIService.updateUser(user.id as number, changedUserData)
             .then((response) => {
-                const changedUser = response.data
-                dispatch(setUser(changedUser))
                 dispatch(setNotificationMessage("Zmienione dane zostały zapisane"))
                 dispatch(setNotificationType('success'))
                 dispatch(setNotificationStatus(true))
@@ -165,6 +166,9 @@ const EditMode = (props: EditModeProps) => {
             updateUser()
         }
     }
+
+    if(!user || !username)
+        return <div></div>
 
     return(
         <Grid item xs={12} container justifyContent="center">
@@ -254,6 +258,14 @@ const EditMode = (props: EditModeProps) => {
                                 <FormHelperText error>{errors.email + ' '}</FormHelperText>
                             </FormControl>
                         </Grid>
+                    </Grid>
+                    <Grid item xs={9} container alignItems="center" justifyContent="center">
+                        <Button
+                            variant="contained"
+                            color="info"
+                        >
+                            Reset hasła
+                        </Button>
                     </Grid>
                 </Grid>
                 <Grid item xs={6} container alignItems="center">

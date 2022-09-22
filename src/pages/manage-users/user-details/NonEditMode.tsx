@@ -1,17 +1,23 @@
 ﻿import { Grid, Button } from "@mui/material";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import User from "../../models/User";
-import { RootState } from "../../redux/store";
+import User from "../../../models/User";
+import { RootState } from "../../../redux/store";
 import { FormLabel } from "./UserDetails";
 
 export interface NonEditModeProps {
+    user: User,
+    username: string,
     setEditMode: (value: boolean) => void
 }
 
 const NonEditMode = (props: NonEditModeProps) => {
 
-    const user = useSelector((state: RootState) => state.user).user
-    const username = useSelector((state: RootState) => state.keycloak).username
+    const user = props.user
+    const username = props.username
+
+    if(!user || !username)
+        return <div></div>
 
     return (
         <Grid item xs={12} container justifyContent="center">
@@ -56,6 +62,14 @@ const NonEditMode = (props: NonEditModeProps) => {
                         <Grid item xs={6}>
                             <FormLabel value={user.email}/>
                         </Grid>
+                    </Grid>
+                    <Grid item xs={9} container alignItems="center" justifyContent="center">
+                        <Button
+                            variant="contained"
+                            color="info"
+                        >
+                            Reset hasła
+                        </Button>
                     </Grid>
                 </Grid>
                 <Grid item xs={6} container alignItems="center">

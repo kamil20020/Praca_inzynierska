@@ -1,5 +1,4 @@
 ﻿import { AppBar, Avatar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from "@mui/material";
-import { useKeycloak } from "@react-keycloak/web";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
