@@ -1,7 +1,7 @@
 \chapter{Architektura systemu}
 
-Realizowany system jest serwisem webowym, który w du¿ym uogólnieniu mo¿na opisaæ jako system typu klient-serwer. Klient (\texttt{Klient}) wysy³a ¿¹danie do serwera 
-(\texttt{Serwer aplikacji}), a nastêpnie serwer odpowiednio przetwarza otrzymane ¿¹dania i zwraca klientowi odpowiedŸ, któr¹ to póŸniej odpowiedŸ klient interpretuje i przedstawia u¿ytkownikowi (w tym przypadku jest to \texttt{GUI} interfejsu webowego). 
+Realizowany system jest serwisem webowym, który w du¿ym uogólnieniu mo¿na opisaæ jako system typu klient-serwer. Klient wysy³a ¿¹danie do serwera 
+aplikacji, a nastêpnie serwer ten odpowiednio przetwarza otrzymane ¿¹danie i zwraca klientowi odpowiedŸ, któr¹ to póŸniej odpowiedŸ klient interpretuje i przedstawia u¿ytkownikowi (w tym przypadku jest to \texttt{GUI} interfejsu webowego).
 
 Szczegó³ow¹ architekturê systemu dobrze opisuje rysunek~\ref{fig:architektura-systemu}
 
@@ -12,9 +12,10 @@ Szczegó³ow¹ architekturê systemu dobrze opisuje rysunek~\ref{fig:architektura-sy
 	\label{fig:architektura-systemu}
 \end{figure}
 
+Zdecydowano siê na zaimplementowanie systemu w postaci serwisu webowego, gdy¿ taka forma aplikacji zapewnia du¿¹ wygodê u¿ytkowania z powodu braku koniecznoœci jej zainstalowania przez u¿ytkownika, a z powodu tego, ¿e za³o¿ono, i¿ system powinien byæ dostêpny dla ka¿dego, kto posiada dostêp do Internetu, to nie ma wymogu instalowania aplikacji. Nastêpnym powodem wybrania tego typu aplikacji jest to, ¿e aplikacje webowe s¹ obecnie najpopularniejszym typem systemu i implementacja takiej aplikacji pozwala na zdobycie wartoœciowego doœwiadczenia.
 
 \section{Baza danych}
-Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. \texttt{Baza danych 1} jest g³ówn¹ baz¹ danych w systemie, a \texttt{Baza danych 2} jest dodatkow¹ baz¹ danych, która przechowuje informacje o zawartoœciach artyku³ów. Zdecydowano, ¿e \texttt{Baza danych 2} bêdzie odpowiedzialna za przechowywanie informacji o zawartoœciach artyku³ów, gdy¿ jest to baza nierelacyjna (NoSQL). Bazy nierelacyjne charakteryzuj¹ siê tym, ¿e mo¿na w swobodniejszy sposób (bez relacji) przechowywaæ dane, a w tym przypadku jest to po¿¹dane z powodu tego, ¿e artyku³ mo¿e zawieraæ rozdzia³y i podrozdzia³y. Nie zdecydowano siê na u¿ycie w projekcie tylko \texttt{Baza danych 2} (NoSQL), gdy¿ \texttt{Baza danych 1} jest baz¹ obiektowo-relacyjn¹ (SQL), która pozwala na wiêksz¹ integralnoœæ danych ni¿ w przypadku baz nierelacyjnych, gdy¿ nale¿y na pocz¹tku zdefiniowaæ schemat oraz mo¿na utworzyæ relacje miêdzy tabeli, a w realizowanym systemie przewidziano wiele relacji. Zdecydowano siê na obiektowoœæ \texttt{Baza danych 1}, gdy¿ upraszcza ona pracê z kilkoma wykorzystywanymi narzêdziami (np. Jav'owy framework Hibernate), które wykorzystuj¹ obiektowoœæ.
+Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. Za³o¿ono, ¿e w systemie zostan¹ wykorzystane dwie ró¿nego rodzaju bazy danych: obiektowo-relacyjna (SQL) oraz nierelacyjna oparta na dokumentach (NoSQL). Jako g³ówn¹ bazê danych wybrano bazê relacyjn¹, gdy¿ bazy te charakteryzuj¹ siê tym, ¿e zapewniaj¹ integralnoœæ danych poprzez tworzenie relacji np. poprzez powi¹zanie tabel kluczem obcym, a w realizowanym systemie wykryto wiele przypadków, w których mo¿na by by³o utworzyæ relacje np. w³aœciciel artyku³u jest powi¹zaniem miêdzy encjami u¿ytkownika i artyku³u, historia modyfikacji technologii jest do³¹czona do danej technologii, czy recenzent ma przypisane do siebie technologie, w których siê specjalizuje. W tym przypadku zdecydowano siê na obiektow¹ bazê danych, gdy¿ upraszcza ona pracê z kilkoma wykorzystywanymi narzêdziami (np. Jav'owy framework Hibernate), które oparte s¹ na programowaniu obiektowym. Jako pomocnicz¹ bazê danych wybrano bazê nierelacyjn¹ opart¹ na dokumentach, która pozwala na przechowywanie struktur typu klucz-wartoœæ, co zapewnia du¿¹ elastycznoœæ w przechowywaniu danych, pozwala na m.in. przechowywanie zagnie¿d¿onych struktur oraz umo¿liwia pobranie danych w postaci zagnie¿d¿onej struktury nawet poprzez jedno zapytanie. Za³o¿ono, ¿e pomocnicza baza danych bêdzie odpowiadaæ za przechowywanie danych o artyku³ach, gdy¿ artyku³y maj¹ z³o¿on¹, zagnie¿d¿on¹ strukturê, zawieraj¹: rozdzia³y, podrozdzia³y, komentarze oraz opinie, a nierelacyjna baza dokumentowa wydaje siê byæ dobrym pomys³em do tego, gdy¿ w przypadku relacyjnej bazy danych nale¿a³oby wykonaæ wiele klauzuli JOIN, aby pobraæ te same dane (np. komentarze o danym artykule), co jest mniej efektywne, ni¿ w przypadku nierelacyjnej bazy dokumentowej.
 
 \section{Aplikacja serwerowa - Backend}
 Backend jest odpowiedzialny za przyjmowanie ¿¹dañ od klienta, odpowiednie przetwarzanie tych ¿¹dañ, wykonywanie pewnych operacji na danych przechowywanych w bazie danych na podstawie otrzymanych danych od klienta i przekazywanie klientowi adekwatnej odpowiedzi. Warstwa ta jest w œcis³ym powi¹zaniu z warstw¹ bazy danych.
@@ -226,6 +227,7 @@ Zdefiniowano nastêpuj¹ce definicje:
 						\item Podczas rejestracji u¿ytkownik bêdzie podawa³ nastêpuj¹ce informacje:
 							\begin{itemize}
 								\item Nazwa u¿ytkownika,
+								\item Pseudonim (nazwa, pod któr¹ u¿ytkownik bêdzie móg³ byæ rozpoznany w serwisie przez innych u¿ytkowników)
 								\item Imiê,
 								\item Nazwisko,
 								\item Adres e-mail,
