@@ -383,8 +383,8 @@ Na podstawie celu oraz zakresu pracy zdefiniowano nastêpuj¹ce wymagania niefunkc
 		\begin{itemize}
 			\item Backend - \texttt{Spring Boot},
 			\item Frontend - \texttt{React} (g³ówny framework), \texttt{Typescript} (statyczne typowanie), \texttt{MUI} (biblioteka komponentów),
-			\item Baza danych 1 (g³ówna baza danych) - \texttt{PostgreSQL},
-			\item Baza danych 2 (baza danych przechowuj¹ca zawartoœci artyku³ów) - \texttt{MongoDB},
+			\item G³ówna baza danych - \texttt{PostgreSQL},
+			\item Baza danych artyku³ów - \texttt{MongoDB},
 			\item Warstwa bezpieczeñstwa (serwer uwierzytelniania i autoryzacji) - \texttt{Keycloak},
 			\item Dokumentacja - \texttt{LaTeX}.
 		\end{itemize}
@@ -2079,20 +2079,21 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \end{figure}
 
 \section{Projekt baz danych}
-Na podstawie zdefiniowanych wymagañ funkcjonalnych oraz szczegó³owych opisów przypadków u¿ycia, zaprojektowano diagram zwi¹zków encji (ERD) dla obiektowo-relacyjnej 
-bazy~(\texttt{Baza danych 1}) oraz utworzono schemat danych dla bazy nierelacyjnej~(\texttt{Baza danych 2}). Diagram ERD dla~(\texttt{Baza danych 1}) przedstawiono na 
-rysunku~\ref{fig:diagram-erd-baza-danych-1}.
+Na podstawie zdefiniowanych wymagañ funkcjonalnych oraz szczegó³owych opisów przypadków u¿ycia, zaprojektowano diagram zwi¹zków encji (ERD) dla g³ównej bazy danych (obiektowo-relacyjna baza) oraz utworzono schematy danych dla bazy artyku³ów (nierelacyjna dokumentowa baza). Diagram ERD dla g³ównej bazy danych przedstawiono na 
+rysunku~\ref{fig:schemat-erd-baza-danych-1}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/schemat-baza-danych-1}
-	\caption{Diagram ERD dla \texttt{Baza danych 1}}
-	\label{fig:schemat-baza-danych-1}
+	\caption{Diagram ERD dla g³ównej bazy danych}
+	\label{fig:schemat-erd-baza-danych-1}
 \end{figure}
 
-Poni¿ej znajduje siê kod Ÿród³owy dla schematu danych w postaci formatu JSON dla bazy nierelacyjnej~(\texttt{Baza danych 2}) opartej na dokumentach.
+Dla bazy danych artyku³ów utworzono osobne schematy danych w postaci formatu JSON dla nastêpuj¹cych kolekcji: artyku³, komentarz oraz opinia. Nie zdecydowano siê na tylko jedn¹ kolekcjê zawieraj¹c¹ te wszystkie informacje, gdy¿ za³o¿ono, ¿e u¿ytkownik bêdzie móg³ w jednym momencie przegl¹daæ albo komentarze albo opinie i nie ma potrzeby pobierania razem obu tych informacji. Wed³ug zdefiniowano schematów danych utworzono
 
-\begin{lstlisting}[style=json-style, caption=Schemat danych dla nierelacyjnej bazy~\texttt{Baza danych 2}, label=lst:schemat-danych-baza-danych-2]
+Kod Ÿród³owy schematu artyku³u znajduje siê na listingu~\ref{lst:schemat-danych-baza-danych-2-artykul}, kod komentarza na listingu~\ref{lst:schemat-danych-baza-danych-2-komentarz} oraz kod opinii na listingu~\ref{lst:schemat-danych-baza-danych-2-opinia}.
+
+\begin{lstlisting}[style=json-style, caption=Schemat kolekcji artyku³ w postaci JSON dla bazy danych artyku³ów, label=lst:schemat-danych-baza-danych-2-artykul]
 {
    "$jsonSchema":{
       "bsonType":"object",
@@ -2139,34 +2140,87 @@ Poni¿ej znajduje siê kod Ÿród³owy dla schematu danych w postaci formatu JSON dla
          },
          "modificationDate":{
             "bsonType":"timestamp"
+         }
+      }
+   }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=json-style, caption=Schemat kolekcji komentarz w postaci JSON dla bazy danych artyku³ów, label=lst:schemat-danych-baza-danych-2-komentarz]
+{
+   "$jsonSchema":{
+      "bsonType":"object",
+      "title":"comment",
+      "required":[
+         "author_id",
+         "content",
+         "title",
+         "content",
+         "creationDate",
+         "modificationDate"
+      ],
+      "properties":{
+         "_id":{
+            "bsonType":"objectId"
+         },
+         "author_id":{
+            "bsonType":"int"
+         },
+         "content":{
+            "bsonType":"string"
+         },
+         "creationDate":{
+            "bsonType":"timestamp"
+         },
+         "modificationDate":{
+            "bsonType":"timestamp"
          },
          "comments":{
             "bsonType":"array",
             "items":{
-               "bsonType":"object",
-               "properties":{
-                  "_id":{
-                     "bsonType":"objectId"
-                  },
-                  "author_id":{
-                     "bsonType":"int"
-                  },
-                  "content":{
-                     "bsonType":"string"
-                  },
-                  "creationDate":{
-                     "bsonType":"timestamp"
-                  },
-                  "modificationDate":{
-                     "bsonType":"timestamp"
-                  },
-                  "parentCommentId":{
-                     "bsonType":"objectId"
-                  }
-               }
+               "bsonType":"object"
             }
+         }
+      }
+   }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=json-style, caption=Schemat kolekcji opinia w postaci JSON dla bazy danych artyku³ów, label=lst:schemat-danych-baza-danych-2-opinia]
+{
+   "$jsonSchema":{
+      "bsonType":"object",
+      "title":"opinion",
+      "required":[
+         "author_id",
+         "rating",
+         "content",
+         "content",
+         "creationDate",
+         "modificationDate"
+      ],
+      "properties":{
+         "_id":{
+            "bsonType":"objectId"
          },
-         "opinions":{
+         "author_id":{
+            "bsonType":"int"
+         },
+         "rating":{
+            "bsonType":"int",
+            "minimum":1,
+            "maximum":5
+         },
+         "content":{
+            "bsonType":"string"
+         },
+         "creationDate":{
+            "bsonType":"timestamp"
+         },
+         "modificationDate":{
+            "bsonType":"timestamp"
+         },
+         "acceptances":{
             "bsonType":"array",
             "items":{
                "bsonType":"object",
@@ -2177,40 +2231,12 @@ Poni¿ej znajduje siê kod Ÿród³owy dla schematu danych w postaci formatu JSON dla
                   "author_id":{
                      "bsonType":"int"
                   },
-                  "rating":{
+                  "value":{
                      "bsonType":"int",
-                     "minimum":1,
-                     "maximum":5
-                  },
-                  "content":{
-                     "bsonType":"string"
-                  },
-                  "creationDate":{
-                     "bsonType":"timestamp"
-                  },
-                  "modificationDate":{
-                     "bsonType":"timestamp"
-                  },
-                  "acceptances":{
-                     "bsonType":"array",
-                     "items":{
-                        "bsonType":"object",
-                        "properties":{
-                           "_id":{
-                              "bsonType":"objectId"
-                           },
-                           "author_id":{
-                              "bsonType":"int"
-                           },
-                           "value":{
-                              "bsonType":"int",
-                              "enum":[
-                                 -1,
-                                 1
-                              ]
-                           }
-                        }
-                     }
+                     "enum":[
+                        -1,
+                        1
+                     ]
                   }
                }
             }
