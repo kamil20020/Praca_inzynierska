@@ -1,4 +1,4 @@
-﻿import { Button, Dialog, DialogTitle, IconButton } from "@mui/material";
+﻿import { Breakpoint, Button, Dialog, DialogTitle, IconButton } from "@mui/material";
 import React, { useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -6,6 +6,7 @@ export interface XCloeasableDialogProps {
     title: string,
     form: any,
     close?: boolean,
+    size?: Breakpoint,
     setClose?: (value: boolean) => void
 }
 
@@ -37,7 +38,7 @@ const XCloeasableDialog = (props: XCloeasableDialogProps) => {
             </Button>
             <Dialog
                 title={props.title}
-                maxWidth="xs"
+                maxWidth={props.size !== null ? props.size : "xs"}
                 fullWidth={true}
                 open={open}
                 onClose={() => setOpen(false)}

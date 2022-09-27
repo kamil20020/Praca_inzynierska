@@ -95,12 +95,12 @@ const SearchUsers = () => {
     return (
         <Grid item xs={12} container alignItems="center" justifyContent="center">
             <Grid item xs={12}>
-                <Typography textAlign="center" variant="h4">
+                <Typography textAlign="center" variant="h4" sx={{marginTop: 2}}>
                     Wyszukiwanie użytkowników
                 </Typography>
             </Grid>
             <Grid item xs={5} container direction="row" alignItems="stretch" justifyContent="center">
-                <Grid item xs={4} container alignItems="center" justifyContent="center">
+                <Grid item xs={4} container alignItems="center" justifyContent="end">
                     <Typography 
                         textAlign="left" 
                         variant="h6"
@@ -117,7 +117,7 @@ const SearchUsers = () => {
                        
                     />
                 </Grid>
-                <Grid item xs={4} container alignItems="center" justifyContent="center">
+                <Grid item xs={4} container alignItems="center" justifyContent="start">
                     <Button
                         variant="contained"
                         color="secondary"

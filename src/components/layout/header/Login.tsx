@@ -1,4 +1,5 @@
-﻿import { Button, FormControl, FormHelperText, Grid, Hidden, Input, InputLabel, OutlinedInput, TextField } from "@mui/material";
+﻿import { Label } from "@mui/icons-material";
+import { Button, FormControl, FormControlLabel, FormHelperText, Grid, Hidden, Input, InputLabel, OutlinedInput, TextField } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
@@ -155,27 +156,36 @@ const Login = () => {
                 >
                     <Grid item xs={6}>
                         <FormControl>
-                            <OutlinedInput 
+                            <TextField
                                 id="username" 
+                                label={form.username !== '' ? 'Nazwa użytkownika' : ''}
                                 placeholder="Nazwa użytkownika"
                                 color="secondary"
                                 value={form.username}
                                 error={errors.username != ''}
                                 onChange={(event: any) => onFieldChange('username', event)} 
+                                InputLabelProps={{
+                                    style: { color: errors.username !== '' ? 'red' : '#5CA8EE' },
+                                }}
+                                sx={{marginTop: 2}}
                             />
                             <FormHelperText error>{errors.username + ' '}</FormHelperText>
                         </FormControl>
                     </Grid>
                     <Grid item xs={6}>
                         <FormControl>
-                            <OutlinedInput 
-                                id="password" 
+                            <TextField
+                                id="password"
+                                type="password"
+                                label={form.password !== '' ? 'Hasło' : ''}
                                 placeholder="Hasło"
                                 color="secondary"
-                                type="password"
                                 value={form.password}
                                 error={errors.password != ''}
                                 onChange={(event: any) => onFieldChange('password', event)} 
+                                InputLabelProps={{
+                                    style: { color: errors.password !== '' ? 'red' : '#5CA8EE' },
+                                }}
                             />
                             <FormHelperText error>{errors.password + ' '}</FormHelperText>
                         </FormControl>

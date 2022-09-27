@@ -35,7 +35,7 @@ const UserDetails = (props: UserDetailsProps) => {
         .then((response: any) => {
             setUsername(response.data.username)
         })
-    }, [])
+    }, [editMode])
 
     return (
         <Grid item xs={8} container alignItems="space-evenly" direction="row">

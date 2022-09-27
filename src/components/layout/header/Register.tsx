@@ -8,6 +8,8 @@ import CustomAvatar from "../../common/CustomAvatar";
 import KeycloakService from "../../../keycloak/KeycloakService";
 import { setNotificationMessage, setNotificationStatus, setNotificationType } from "../../../redux/slices/notificationSlice";
 import FormValidator from "../../../services/FormValidator";
+import { Label } from "@mui/icons-material";
+import { statute } from "../../../assets/statute";
 
 interface FormFields {
     username: string,
@@ -188,108 +190,147 @@ const Register = () => {
             title="Rejestracja"
             close = {close}
             setClose = {setClose}
+            size="md"
             form = {
                 <Grid 
-                    container 
-                    spacing={1}
+                    container
+                    spacing={4}
                     direction="column"
+                    xs={8}
+                    alignSelf="center"
+                    justifyContent="center"
                     alignItems="center"
+                    sx={{marginTop: 0}}
                 >
                     {!openStatute ? 
                         <React.Fragment>
-                            <Grid item xs={6}>
-                                <FormControl>
-                                    <OutlinedInput 
-                                        id="username" 
-                                        placeholder="Nazwa użytkownika"
-                                        color="secondary"
-                                        value={form.username}
-                                        error={errors.username != ''}
-                                        onChange={(event: any) => onFieldChange('username', event)} 
-                                    />
-                                    <FormHelperText error>{errors.username + ' '}</FormHelperText>
-                                </FormControl>
+                            <Grid item container justifyContent="space-between">
+                                <Grid item xs={5.5}>
+                                    <FormControl fullWidth={true}>
+                                        <TextField 
+                                            id="firstname"
+                                            label={form.firstname !== '' ? 'Imię' : ''}
+                                            placeholder="Imię"
+                                            color="secondary"
+                                            value={form.firstname}
+                                            error={errors.firstname != ''}
+                                            onChange={(event: any) => onFieldChange('firstname', event)}
+                                            InputLabelProps={{
+                                                style: { color: errors.firstname !== '' ? 'red' : '#5CA8EE' },
+                                            }}
+                                        />
+                                        <FormHelperText error>{errors.firstname + ' '}</FormHelperText>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={5.5}>
+                                    <FormControl fullWidth={true}>
+                                        <TextField 
+                                            id="surname"
+                                            label={form.surname !== '' ? 'Nazwisko' : ''}
+                                            placeholder="Nazwisko"
+                                            color="secondary"
+                                            value={form.surname}
+                                            error={errors.surname != ''}
+                                            onChange={(event: any) => onFieldChange('surname', event)}
+                                            InputLabelProps={{
+                                                style: { color: errors.surname !== '' ? 'red' : '#5CA8EE' },
+                                            }}
+                                        />
+                                        <FormHelperText error>{errors.surname + ' '}</FormHelperText>
+                                    </FormControl>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={6}>
-                                <FormControl>
-                                    <OutlinedInput 
-                                        id="nickname" 
-                                        placeholder="Pseudonim"
-                                        color="secondary"
-                                        value={form.nickname}
-                                        error={errors.nickname != ''}
-                                        onChange={(event: any) => onFieldChange('nickname', event)} 
-                                    />
-                                    <FormHelperText error>{errors.nickname + ' '}</FormHelperText>
-                                </FormControl>
+                            <Grid item container justifyContent="space-between">
+                                <Grid item xs={5.5}>
+                                    <FormControl fullWidth={true}>
+                                        <TextField 
+                                            id="username"
+                                            label={form.username !== '' ? 'Nazwa użytkownika' : ''}
+                                            placeholder="Nazwa użytkownika"
+                                            color="secondary"
+                                            value={form.username}
+                                            error={errors.username != ''}
+                                            onChange={(event: any) => onFieldChange('username', event)}
+                                            InputLabelProps={{
+                                                style: { color: errors.username !== '' ? 'red' : '#5CA8EE' },
+                                            }}
+                                        />
+                                        <FormHelperText error>{errors.username + ' '}</FormHelperText>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={5.5}>
+                                    <FormControl fullWidth={true}>
+                                        <TextField 
+                                            id="nickname"
+                                            label={form.nickname !== '' ? 'Pseudonim' : ''}
+                                            placeholder="Pseudonim"
+                                            color="secondary"
+                                            value={form.nickname}
+                                            error={errors.nickname != ''}
+                                            onChange={(event: any) => onFieldChange('nickname', event)}
+                                            InputLabelProps={{
+                                                style: { color: errors.nickname !== '' ? 'red' : '#5CA8EE' },
+                                            }}
+                                        />
+                                        <FormHelperText error>{errors.nickname + ' '}</FormHelperText>
+                                    </FormControl>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={6}>
-                                <FormControl>
-                                    <OutlinedInput 
-                                        id="firstname" 
-                                        placeholder="Imię"
-                                        color="secondary"
-                                        value={form.firstname}
-                                        error={errors.firstname != ''}
-                                        onChange={(event: any) => onFieldChange('firstname', event)} 
-                                    />
-                                    <FormHelperText error>{errors.firstname + ' '}</FormHelperText>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <FormControl>
-                                    <OutlinedInput 
-                                        id="surname" 
-                                        placeholder="Nazwisko"
-                                        color="secondary"
-                                        value={form.surname}
-                                        error={errors.surname != ''}
-                                        onChange={(event: any) => onFieldChange('surname', event)} 
-                                    />
-                                    <FormHelperText error>{errors.surname + ' '}</FormHelperText>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <FormControl>
-                                    <OutlinedInput 
-                                        id="email" 
+                            <Grid item xs={12} container>
+                                <FormControl fullWidth={true}>
+                                    <TextField 
+                                        id="email"
+                                        label={form.email !== '' ? 'E-mail' : ''}
                                         placeholder="E-mail"
                                         type="email"
                                         color="secondary"
                                         value={form.email}
                                         error={errors.email != ''}
-                                        onChange={(event: any) => onFieldChange('email', event)} 
+                                        onChange={(event: any) => onFieldChange('email', event)}
+                                        InputLabelProps={{
+                                            style: { color: errors.email !== '' ? 'red' : '#5CA8EE' },
+                                        }}
                                     />
                                     <FormHelperText error>{errors.email + ' '}</FormHelperText>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={6}>
-                                <FormControl>
-                                    <OutlinedInput 
-                                        id="password" 
-                                        placeholder="Hasło"
-                                        type="password"
-                                        color="secondary"
-                                        value={form.password}
-                                        error={errors.password != ''}
-                                        onChange={(event: any) => onFieldChange('password', event)} 
-                                    />
-                                    <FormHelperText error>{errors.password + ' '}</FormHelperText>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <FormControl>
-                                    <OutlinedInput 
-                                        id="repeatedPassword" 
-                                        placeholder="Powtórz hasło"
-                                        type="password"
-                                        color="secondary"
-                                        value={form.repeatedPassword}
-                                        error={errors.repeatedPassword != ''}
-                                        onChange={(event: any) => onFieldChange('repeatedPassword', event)} 
-                                    />
-                                    <FormHelperText error>{errors.repeatedPassword + ' '}</FormHelperText>
-                                </FormControl>
+                            <Grid item container justifyContent="space-between">
+                                <Grid item xs={5.5}>
+                                    <FormControl fullWidth={true}>
+                                        <TextField 
+                                            id="password"
+                                            label={form.password !== '' ? 'Hasło' : ''}
+                                            placeholder="Hasło"
+                                            type="password"
+                                            color="secondary"
+                                            value={form.password}
+                                            error={errors.password != ''}
+                                            onChange={(event: any) => onFieldChange('password', event)}
+                                            InputLabelProps={{
+                                                style: { color: errors.password !== '' ? 'red' : '#5CA8EE' },
+                                            }}
+                                        />
+                                        <FormHelperText error>{errors.password + ' '}</FormHelperText>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={5.5}>
+                                    <FormControl fullWidth={true}>
+                                        <TextField 
+                                            id="repeatedPassword"
+                                            label={form.repeatedPassword !== '' ? 'Powtórz hasło' : ''}
+                                            placeholder="Powtórz hasło"
+                                            type="password"
+                                            color="secondary"
+                                            value={form.repeatedPassword}
+                                            error={errors.repeatedPassword != ''}
+                                            onChange={(event: any) => onFieldChange('repeatedPassword', event)}
+                                            InputLabelProps={{
+                                                style: { color: errors.repeatedPassword !== '' ? 'red' : '#5CA8EE' },
+                                            }}
+                                        />
+                                        <FormHelperText error>{errors.repeatedPassword + ' '}</FormHelperText>
+                                    </FormControl>
+                                </Grid>
                             </Grid>
                             <Grid item xs={6} sx={{mb: 3}}>
                                 <Stack direction="row" spacing={2}>
@@ -320,8 +361,8 @@ const Register = () => {
                                 </Button>
                             </Grid>          
                         </React.Fragment>
-                        : 
-                        <Grid item xs={12} container justifyContent="center" spacing={2}>
+                    : 
+                        <Grid item xs={12} container justifyContent="center" spacing={2} sx={{marginTop: -5}}>
                             <Grid item xs={11}>
                                 <TextField
                                     id="outlined-multiline-static"
@@ -335,25 +376,10 @@ const Register = () => {
                                           WebkitTextFillColor: "black",
                                         },
                                       }}
-                                    defaultValue="
-                                    1. Ogólne zasady
-
-                                    Użytkownicy nie powinni umieszczać w serwisie treści zawierających wulgaryzmy, będących spamem lub zawierających linki do 
-                                    niebezpiecznych stron (wirusy itp.). W pierwszym przypadku treści te będą usuwane przez administratorów, a w przypadku 
-                                    skrajnych lub powtarzających się takich działań, konto użytkownika odpowiadającego za tego typu treści może zostać 
-                                    zablokowane na jakiś czas (zwykle 1 dzień) lub na stałe.
-                                    
-                                    2. Artykuły
-                                    
-                                    Użytkownicy nie powinni publikować w artykułach informacji nieprawdziwych, nieaktualnych, tekst nie powinien zawierać błędów,
-                                    zamieszczane rysunki powinny być czytelne, a kod powinien być wstawiony za pomocą pól specjalnie do tego przeznaczonych.
-                                    W przypadku niezastosowania się użytkownika do powyższych reguł, artykuł zostanie zedytowany przez administratora w przypadku
-                                    wymogu drobnych poprawek, a w przypadku dużych zmian, artykuł taki zostanie wycofany z serwisu, autor artykułu będzie
-                                    musiał poprawić błędy i zmieniony artykuł przejdzie jeszcze raz weryfikację przez automatycznie wybranego recenzenta.
-                                    "
+                                    defaultValue={statute}
                                 />
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={11} container justifyContent="center">
                                 <FormControl>
                                     <RadioGroup name="accept-statute">
                                         <FormControlLabel 
