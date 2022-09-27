@@ -1,7 +1,7 @@
 {
    "$jsonSchema":{
       "bsonType":"object",
-      "title":"article",
+      "title":"articles",
       "required":[
          "author_id",
          "technology_category_id",

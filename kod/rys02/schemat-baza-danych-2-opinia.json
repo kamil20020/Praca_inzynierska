@@ -1,11 +1,10 @@
 {
    "$jsonSchema":{
       "bsonType":"object",
-      "title":"opinion",
+      "title":"opinions",
       "required":[
          "author_id",
          "rating",
-         "content",
          "content",
          "creationDate",
          "modificationDate"
@@ -35,6 +34,10 @@
             "bsonType":"array",
             "items":{
                "bsonType":"object",
+               "required":[
+                  "author_id",
+                  "value"
+               ],
                "properties":{
                   "_id":{
                      "bsonType":"objectId"

@@ -2079,8 +2079,8 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \end{figure}
 
 \section{Projekt baz danych}
-Na podstawie zdefiniowanych wymagañ funkcjonalnych oraz szczegó³owych opisów przypadków u¿ycia, zaprojektowano diagram zwi¹zków encji (ERD) dla g³ównej bazy danych (obiektowo-relacyjna baza) oraz utworzono schematy danych dla bazy artyku³ów (nierelacyjna dokumentowa baza). Diagram ERD dla g³ównej bazy danych przedstawiono na 
-rysunku~\ref{fig:schemat-erd-baza-danych-1}.
+Na podstawie zdefiniowanych wymagañ funkcjonalnych oraz szczegó³owych opisów przypadków u¿ycia, zaprojektowano diagram zwi¹zków encji (ERD) dla g³ównej bazy danych (obiektowo-relacyjna baza) oraz utworzono schematy danych dla bazy artyku³ów (nierelacyjna dokumentowa baza). Do sporz¹dzenia diagramu ERD wykorzystano narzêdzie 
+\texttt{Visual Paradigm Standard}. Diagram ERD dla g³ównej bazy danych przedstawiono na rysunku~\ref{fig:schemat-erd-baza-danych-1}.
 
 \begin{figure}[H]
 	\centering
@@ -2089,15 +2089,17 @@ rysunku~\ref{fig:schemat-erd-baza-danych-1}.
 	\label{fig:schemat-erd-baza-danych-1}
 \end{figure}
 
-Dla bazy danych artyku³ów utworzono osobne schematy danych w postaci formatu JSON dla nastêpuj¹cych kolekcji: artyku³, komentarz oraz opinia. Nie zdecydowano siê na tylko jedn¹ kolekcjê zawieraj¹c¹ te wszystkie informacje, gdy¿ za³o¿ono, ¿e u¿ytkownik bêdzie móg³ w jednym momencie przegl¹daæ albo komentarze albo opinie i nie ma potrzeby pobierania razem obu tych informacji. Wed³ug zdefiniowano schematów danych utworzono
+Dla bazy danych artyku³ów utworzono osobne schematy danych w postaci formatu JSON dla nastêpuj¹cych kolekcji: artyku³, komentarz oraz opinia. Nie zdecydowano siê na tylko jedn¹ kolekcjê zawieraj¹c¹ te wszystkie informacje, gdy¿ za³o¿ono, ¿e u¿ytkownik bêdzie móg³ w jednym momencie przegl¹daæ albo komentarze albo opinie i nie ma potrzeby pobierania razem obu tych informacji. Dla zdefiniowanych schematów danych bazy artyku³ów utworzono równie¿ po jednym przyk³adowym dokumencie w formacie JSON.
 
-Kod Ÿród³owy schematu artyku³u znajduje siê na listingu~\ref{lst:schemat-danych-baza-danych-2-artykul}, kod komentarza na listingu~\ref{lst:schemat-danych-baza-danych-2-komentarz} oraz kod opinii na listingu~\ref{lst:schemat-danych-baza-danych-2-opinia}.
+Kod Ÿród³owy schematu artyku³ów znajduje siê na listingu~\ref{lst:schemat-danych-baza-danych-2-artykul}.
 
-\begin{lstlisting}[style=json-style, caption=Schemat kolekcji artyku³ w postaci JSON dla bazy danych artyku³ów, label=lst:schemat-danych-baza-danych-2-artykul]
+\newpage
+
+\begin{lstlisting}[style=json-style, caption=Schemat kolekcji artyku³ów w postaci JSON dla bazy danych artyku³ów, label=lst:schemat-danych-baza-danych-2-artykul]
 {
    "$jsonSchema":{
       "bsonType":"object",
-      "title":"article",
+      "title":"articles",
       "required":[
          "author_id",
          "technology_category_id",
@@ -2146,7 +2148,39 @@ Kod Ÿród³owy schematu artyku³u znajduje siê na listingu~\ref{lst:schemat-danych-
 }
 \end{lstlisting}
 
-\begin{lstlisting}[style=json-style, caption=Schemat kolekcji komentarz w postaci JSON dla bazy danych artyku³ów, label=lst:schemat-danych-baza-danych-2-komentarz]
+Na podstawie schematu artyku³ów (listing~\ref{lst:schemat-danych-baza-danych-2-artykul}) utworzono przyk³adowy dokument, który jest przedstawiony na
+~listingu~\ref{lst:przykladowy-artykul-json}
+
+\newpage
+
+\begin{lstlisting}[style=json-style, caption=Przyk³adowy dokument dla kolekcji artyku³ów zgodny ze zdefiniowanym schematem, label=lst:przykladowy-artykul-json]
+{
+   "_id":{
+      "$oid":"633304053a8c252174852384"
+   },
+   "author_id":1,
+   "technology_category_id":1,
+   "title":"Java",
+   "content":"Java jest to wspó³bie¿ny, opaty na klasach i mocno typowany obiektowy jêzyk programowania (...)",
+   "status":"new",
+   "creationDate":{
+      "$timestamp":{
+         "t":323,
+         "i":3128182693
+      }
+   },
+   "modificationDate":{
+      "$timestamp":{
+         "t":323,
+         "i":3128182693
+      }
+   }
+}
+\end{lstlisting}
+
+Kod Ÿród³owy schematu komentarzy znajduje siê na listingu~\ref{lst:schemat-danych-baza-danych-2-komentarz}
+
+\begin{lstlisting}[style=json-style, caption=Schemat kolekcji komentarzy w postaci JSON dla bazy danych artyku³ów, label=lst:schemat-danych-baza-danych-2-komentarz]
 {
    "$jsonSchema":{
       "bsonType":"object",
@@ -2186,15 +2220,64 @@ Kod Ÿród³owy schematu artyku³u znajduje siê na listingu~\ref{lst:schemat-danych-
 }
 \end{lstlisting}
 
-\begin{lstlisting}[style=json-style, caption=Schemat kolekcji opinia w postaci JSON dla bazy danych artyku³ów, label=lst:schemat-danych-baza-danych-2-opinia]
+Na podstawie schematu komentarzy (listing~\ref{lst:schemat-danych-baza-danych-2-komentarz}) utworzono przyk³adowy dokument, który jest przedstawiony na
+~listingu~\ref{lst:przykladowy-komentarz-json}
+
+\begin{lstlisting}[style=json-style, caption=Przyk³adowy dokument dla kolekcji komentarzy zgodny ze zdefiniowanym schematem, label=lst:przykladowy-komentarz-json]
+{
+   "_id":{
+      "$oid":"6333276b3a8c2521748523a4"
+   },
+   "author_id":1,
+   "content":"Dobrze wyt³umaczone zagadnienie",
+   "creationDate":{
+      "$timestamp":{
+         "t":323,
+         "i":3128182693
+      }
+   },
+   "modificationDate":{
+      "$timestamp":{
+         "t":323,
+         "i":3128182693
+      }
+   },
+   "comments":[
+      {
+         "_id":{
+            "$oid":"6333276b3a8c2521748523a4"
+         },
+         "author_id":1,
+         "content":"Zgadzam siê",
+         "creationDate":{
+            "$timestamp":{
+               "t":324,
+               "i":3128182694
+            }
+         },
+         "modificationDate":{
+            "$timestamp":{
+               "t":324,
+               "i":3128182694
+            }
+         }
+      }
+   ]
+}
+\end{lstlisting}
+
+Kod Ÿród³owy schematu opinii znajduje siê na listingu~\ref{lst:schemat-danych-baza-danych-2-opinia}
+
+\newpage
+
+\begin{lstlisting}[style=json-style, caption=Schemat kolekcji opinii w postaci JSON dla bazy danych artyku³ów, label=lst:schemat-danych-baza-danych-2-opinia]
 {
    "$jsonSchema":{
       "bsonType":"object",
-      "title":"opinion",
+      "title":"opinions",
       "required":[
          "author_id",
          "rating",
-         "content",
          "content",
          "creationDate",
          "modificationDate"
@@ -2224,6 +2307,10 @@ Kod Ÿród³owy schematu artyku³u znajduje siê na listingu~\ref{lst:schemat-danych-
             "bsonType":"array",
             "items":{
                "bsonType":"object",
+               "required":[
+                  "author_id",
+                  "value"
+               ],
                "properties":{
                   "_id":{
                      "bsonType":"objectId"
@@ -2243,6 +2330,48 @@ Kod Ÿród³owy schematu artyku³u znajduje siê na listingu~\ref{lst:schemat-danych-
          }
       }
    }
+}
+\end{lstlisting}
+
+Na podstawie schematu opinii (listing~\ref{lst:schemat-danych-baza-danych-2-opinia}) utworzono przyk³adowy dokument, który jest przedstawiony na
+~listingu~\ref{lst:przykladowa-opinia-json}
+
+\begin{lstlisting}[style=json-style, caption=Przyk³adowy dokument dla kolekcji opinii zgodny ze zdefiniowanym schematem, label=lst:przykladowa-opinia-json]
+{
+   "_id":{
+      "$oid":"6333266e3a8c25217485239c"
+   },
+   "author_id":1,
+   "rating":4,
+   "content":"Dobry artyku³, ale brakuje trochê o wersjach",
+   "creationDate":{
+      "$timestamp":{
+         "t":323,
+         "i":3128182693
+      }
+   },
+   "modificationDate":{
+      "$timestamp":{
+         "t":323,
+         "i":3128182693
+      }
+   },
+   "acceptances":[
+      {
+         "_id":{
+            "$oid":"6333266e3a8c25217485239c"
+         },
+         "author_id":2,
+         "value":1
+      },
+      {
+         "_id":{
+            "$oid":"6333266e3a8c25217485239d"
+         },
+         "author_id":3,
+         "value":-1
+      }
+   ]
 }
 \end{lstlisting}
 

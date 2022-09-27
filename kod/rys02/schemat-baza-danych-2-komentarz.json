@@ -1,11 +1,9 @@
 {
    "$jsonSchema":{
       "bsonType":"object",
-      "title":"comment",
+      "title":"comments",
       "required":[
          "author_id",
-         "content",
-         "title",
          "content",
          "creationDate",
          "modificationDate"
