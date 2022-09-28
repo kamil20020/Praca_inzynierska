@@ -6,10 +6,12 @@ import {
   Routes,
   Outlet
 } from "react-router-dom";
+import { Box, Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import Home from "./pages/home/Home";
 import NavBar from "./components/layout/navigation/NavBar";
 import Header from "./components/layout/header/Header";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { plPL } from '@mui/material/locale';
 import { AppBar } from "@mui/material";
 import axios from "axios";
 import Notification from "./components/common/Notification";
@@ -24,71 +26,78 @@ import SearchUsers from "./pages/manage-users/SearchUsers";
 import ManageUser from "./pages/manage-users/ManageUser";
 import ArticlesVerification from './pages/articles-verification/ArticlesVerification';
 
-const theme = createTheme({
-  typography: {
-    fontFamily: 'Helvetica, Roboto, Arial, sans-serif',
-    fontSize: 13,
-    fontWeightLight: 300,
-    fontWeightRegular: 400,
-    fontWeightMedium: 500,
-    button: {
-      textTransform: 'none'
-    }
+const theme = createTheme(
+  {
+    typography: {
+      fontFamily: 'Helvetica, Roboto, Arial, sans-serif',
+      fontSize: 13,
+      fontWeightLight: 300,
+      fontWeightRegular: 400,
+      fontWeightMedium: 500,
+      button: {
+        textTransform: 'none'
+      }
+    },
+    palette: {
+      primary: {
+        main: '#fff',
+        contrastText: '#000',
+      },
+      secondary: {
+        main: '#5CA8EE',
+        dark: '#168AF4',
+        contrastText: '#fff',
+      },
+      info: {
+        main: '#008080',
+        contrastText: '#fff',
+      },
+    },
   },
-  palette: {
-    primary: {
-      main: '#fff',
-      contrastText: '#000',
-    },
-    secondary: {
-      main: '#5CA8EE',
-      dark: '#168AF4',
-      contrastText: '#fff',
-    },
-    info: {
-      main: '#008080',
-      contrastText: '#fff',
-    },
-  },
-})
+  plPL
+)
 
 function App() {
   return (
     <React.StrictMode>
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <AppBar position="static">
-            <Header/>
-            <NavBar/>
-          </AppBar>
-          <Content>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/user-details" element={
-                <ProtectedRoute requiredLogin={true}>
-                  <UserDetails/>
-                </ProtectedRoute>
-              } />
-              <Route path="/articles" element={<Articles />} />
-              <Route path="/technologies" element={<Technologies />} />
-              <Route path="/articles-verification" element={
-                <ProtectedRoute requiredLogin={true} requiredRole="reviewer">
-                  <ArticlesVerification/>
-                </ProtectedRoute>
-              } />
-              <Route path="/manage-users" element={
-                <ProtectedRoute requiredLogin={true} requiredRole="administrator">
-                  <Outlet />
-                </ProtectedRoute>
-              }>
-                <Route index element={<SearchUsers/>} />
-                <Route path="user/:id" element={<ManageUser/>} />
-              </Route>
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Content>
+          <Grid item xs={12} container>
+            <Grid item xs={12} container justifyContent="center" alignItems="flex-start">
+              <AppBar position="static">
+                <Header/>
+                <NavBar/>
+              </AppBar>
+            </Grid>
+            <Content>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/user-details" element={
+                  <ProtectedRoute requiredLogin={true}>
+                    <UserDetails/>
+                  </ProtectedRoute>
+                } />
+                <Route path="/articles" element={<Articles />} />
+                <Route path="/technologies" element={<Technologies />} />
+                <Route path="/articles-verification" element={
+                  <ProtectedRoute requiredLogin={true} requiredRole="reviewer">
+                    <ArticlesVerification/>
+                  </ProtectedRoute>
+                } />
+                <Route path="/manage-users" element={
+                  <ProtectedRoute requiredLogin={true} requiredRole="administrator">
+                    <Outlet />
+                  </ProtectedRoute>
+                }>
+                  <Route index element={<SearchUsers/>} />
+                  <Route path="user/:id" element={<ManageUser/>} />
+                </Route>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Content>
+            <Footer/>
+          </Grid>
           <Notification/>
-          <Footer/>
         </ThemeProvider>
       </BrowserRouter>
     </React.StrictMode>

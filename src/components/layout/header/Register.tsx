@@ -149,12 +149,9 @@ const Register = () => {
         if(!validateForm())
             return
 
-        console.log('B')
-
         KeycloakService.checkAccountAndUserCanBeCreated({username: form.username, password: form.password}, form)
         .then(() => {
             setOpenStatute(true)
-            console.log('A')
         })
         .catch((error) => {
             console.log(error)

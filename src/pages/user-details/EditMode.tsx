@@ -281,7 +281,7 @@ const EditMode = (props: EditModeProps) => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item xs={12} container justifyContent="center" alignItems="center">
+            <Grid item xs={12} container justifyContent="center" alignItems="center" sx={{marginTop: 6}}>
                 <Grid item xs={4} container justifyContent="center">
                     <Grid item xs={3} container justifyContent="center">
                         <Button

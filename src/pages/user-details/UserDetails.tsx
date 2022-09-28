@@ -19,7 +19,7 @@ const UserDetails = () => {
 
     return (
         <Grid item xs={8} container alignItems="space-evenly" direction="row">
-            <Grid item xs={12} container alignItems="center" justifyContent="center">
+            <Grid item xs={12} container alignItems="center" justifyContent="center" sx={{marginBottom: 6}}>
                 <Typography textAlign="center" variant="h4">
                     Dane użytkownika
                 </Typography>

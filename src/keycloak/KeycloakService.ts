@@ -109,8 +109,69 @@ class KeycloakService {
         return axios.post(`${keycloak.url}/realms/master/protocol/openid-connect/logout`, body, header)
     }
 
-    addRoleToUser = (userId: string, roles: Role[], header: any) => {
-        return axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${userId}/role-mappings/realm`, roles, header)
+    addRoleToUser = (userId: string, roles: Role[]) => {
+
+        return new Promise((resolve, reject) => {
+
+            this.adminAuth()
+            .then((response) => {
+                const data = response.data
+                const accessToken = data.access_token
+                const refreshToken = data.refresh_token
+    
+                const header = {
+                    headers: { 
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                }
+
+                axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${userId}/role-mappings/realm`, roles, header)
+                .then((response) => {
+                    resolve(response.data)
+                })
+                .catch((error) => {
+                    this.adminUnAuth(accessToken, refreshToken)
+                    reject(error)
+                })
+            })
+            .catch((error) => {
+                reject(error)
+            })
+        })
+    }
+
+    removeRoleFromUser = (userId: string, roles: Role[]) => {
+
+        return new Promise((resolve, reject) => {
+
+            this.adminAuth()
+            .then((response) => {
+                const data = response.data
+                const accessToken = data.access_token
+                const refreshToken = data.refresh_token
+    
+                const header = {
+                    headers: { 
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                }
+
+                axios.delete(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${userId}/role-mappings/realm`, {
+                    ...header,
+                    data: roles
+                })
+                .then((response) => {
+                    resolve(response.data)
+                })
+                .catch((error) => {
+                    this.adminUnAuth(accessToken, refreshToken)
+                    reject(error)
+                })
+            })
+            .catch((error) => {
+                reject(error)
+            })
+        })
     }
 
     searchUserAccountByUsername = (username: string, exactSearch: boolean = false) => {
@@ -210,7 +271,7 @@ class KeycloakService {
                         id: "cec99090-10b9-4fc9-880c-9f72dca702eb",
                         name: "logged_user"
                     }]
-                    this.addRoleToUser(userAccountId, roles, header)
+                    axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${userAccountId}/role-mappings/realm`, roles, header) // add user role
                     .then((response) => {
                         this.adminUnAuth(accessToken, refreshToken)
                         user.userAccountId = userAccountId
@@ -226,6 +287,38 @@ class KeycloakService {
                         this.adminUnAuth(accessToken, refreshToken)
                         reject(error)
                     })
+                })
+                .catch((error) => {
+                    this.adminUnAuth(accessToken, refreshToken)
+                    reject(error)
+                })
+            })
+            .catch((error) => {
+                reject(error)
+            })
+        })
+    }
+
+    getUserAccountRoles = (accountId: string) => {
+
+        return new Promise((resolve, reject) => {
+
+            this.adminAuth()
+            .then((response) => {
+                const data = response.data
+                const accessToken = data.access_token
+                const refreshToken = data.refresh_token
+
+                const header = {
+                    headers: { 
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                }
+
+                axios.get(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${accountId}/role-mappings/realm`, header)
+                .then((response) => {
+                    this.adminUnAuth(accessToken, refreshToken)
+                    resolve(response)
                 })
                 .catch((error) => {
                     this.adminUnAuth(accessToken, refreshToken)

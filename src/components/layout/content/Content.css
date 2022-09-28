@@ -1,7 +1,8 @@
 ﻿main{
-    height: 100%;
     width: 100%;
     display: flex;
     justify-content: stretch;
+    justify-self: stretch;
     align-content: stretch;
+    margin-bottom: 20px;
 }

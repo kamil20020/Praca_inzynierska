@@ -67,7 +67,7 @@ const NonEditMode = (props: NonEditModeProps) => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item xs={12} container justifyContent="center" alignItems="center">
+            <Grid item xs={12} container justifyContent="center" alignItems="center" sx={{marginTop: 6}}>
                 <Button
                     variant="contained"
                     color="secondary"

@@ -1,14 +1,14 @@
-html, body, #root {
+html, body{
   height: 100%;
-}
-
-body {
-  margin: 0;
 }
 
 #root{
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   justify-content: stretch;
+  height: 100vh;
+}
+
+body {
+  margin: 0;
 }

@@ -93,7 +93,7 @@ const SearchUsers = () => {
     }
 
     return (
-        <Grid item xs={12} container alignItems="center" justifyContent="center">
+        <Grid item xs={12} container alignItems="center" justifyContent="center" spacing={5}>
             <Grid item xs={12}>
                 <Typography textAlign="center" variant="h4" sx={{marginTop: 2}}>
                     Wyszukiwanie użytkowników

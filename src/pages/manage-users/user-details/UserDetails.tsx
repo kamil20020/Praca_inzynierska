@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import KeycloakService from "../../../keycloak/KeycloakService";
 import User from "../../../models/User";
 import UserAPIService from "../../../services/UserAPIService";
+import { ManageUserChildProps } from "../ManageUser";
 import EditMode from "./EditMode";
 import NonEditMode from "./NonEditMode";
 
@@ -13,11 +14,7 @@ export const FormLabel = function(props: any){
     );
 }
 
-export interface UserDetailsProps {
-    userAccountId: string
-}
-
-const UserDetails = (props: UserDetailsProps) => {
+const UserDetails = (props: ManageUserChildProps) => {
 
     const userAccountId: string = props.userAccountId
 
@@ -38,8 +35,8 @@ const UserDetails = (props: UserDetailsProps) => {
     }, [editMode])
 
     return (
-        <Grid item xs={8} container alignItems="space-evenly" direction="row">
-            <Grid item xs={12} container alignItems="center" justifyContent="center">
+        <Grid item xs={8} container alignItems="space-evenly" direction="row" sx={{marginTop: 6}}>
+            <Grid item xs={12} container alignItems="center" justifyContent="center" sx={{marginBottom: 6}}>
                 <Typography textAlign="center" variant="h4">
                     Dane użytkownika
                 </Typography>
