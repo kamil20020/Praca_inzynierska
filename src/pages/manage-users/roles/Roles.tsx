@@ -1,49 +1,44 @@
 ﻿import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Paper, Radio, RadioGroup, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import KeycloakService from "../../../keycloak/KeycloakService";
+import KeycloakService, { roles } from "../../../keycloak/KeycloakService";
 import { RootState } from "../../../redux/store";
 import { Role } from "../../../keycloak/KeycloakService";
 import { ManageUserChildProps } from "../ManageUser";
 
-const Roles = (props: ManageUserChildProps) => {
+export interface RolesProps {
+    actualRoles: string[],
+    loadUserRoles: () => void,
+    userAccountId: string
+}
 
-    const userAccountId: string = props.userAccountId
-
-    const [roles, setRoles] = React.useState<string[]>([])
-
-    useEffect(() => {
-        KeycloakService.getUserAccountRoles(userAccountId)
-        .then((response) => {
-            setRoles(response as string[])
-        })
-    }, [])
+const Roles = (props: RolesProps) => {
 
     const handleChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
 
         const choice = event.target.value
         const checked = event.target.checked
 
-        let roles: Role[] = []
+        let toUpdateRole: Role
 
-        if(choice === "admin" ){
-            roles = [{
-                id: "db417da8-5df0-49aa-aa2a-878ef45fb343",
-                name: "admin"
-            }]
+        if(choice === roles.administrator.name){
+            toUpdateRole = roles.administrator
         }
         else{
-            roles = [{
-                id: "c59b2c5e-c209-4e66-8c07-d4a5a0625552",
-                name: "reviewer"
-            }]
+            toUpdateRole = roles.reviewer
         }
             
         if(checked){
-            KeycloakService.addRoleToUser(userAccountId, roles)
+            KeycloakService.addRoleToUser(props.userAccountId, toUpdateRole)
+            .then(() => {
+                props.loadUserRoles()
+            })
         }
         else{
-            KeycloakService.removeRoleFromUser(userAccountId, roles)
+            KeycloakService.removeRoleFromUser(props.userAccountId, toUpdateRole)
+            .then(() => {
+                props.loadUserRoles()
+            })
         }
     }
 
@@ -65,8 +60,9 @@ const Roles = (props: ManageUserChildProps) => {
                             </Grid>
                             <Grid item xs={6} container justifyContent="end">
                                 <Checkbox
-                                    value="admin"
-                                    color="secondary" 
+                                    value={roles.administrator.name}
+                                    color="secondary"
+                                    checked={props.actualRoles.includes(roles.administrator.name)}
                                     onChange={(event: any) => handleChangeRole(event)}
                                 />
                             </Grid>
@@ -77,8 +73,9 @@ const Roles = (props: ManageUserChildProps) => {
                             </Grid>
                             <Grid item xs={6} container justifyContent="end">
                                 <Checkbox
-                                    value="reviewer"
-                                    color="secondary" 
+                                    value={roles.reviewer.name}
+                                    color="secondary"
+                                    checked={props.actualRoles.includes(roles.reviewer.name)}
                                     onChange={(event: any) => handleChangeRole(event)}
                                 />
                             </Grid>

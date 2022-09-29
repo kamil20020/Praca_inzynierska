@@ -20,6 +20,21 @@ export interface Role{
     name: string
 }
 
+export const roles = {
+    logged_user: {
+        id: "cec99090-10b9-4fc9-880c-9f72dca702eb",
+        name: "logged_user"
+    },
+    administrator: {
+        id: "dd8865ea-a3ee-4569-9298-5ea705f5c475",
+        name: "administrator"
+    },
+    reviewer: {
+        id: "c59b2c5e-c209-4e66-8c07-d4a5a0625552",
+        name: "reviewer"
+    }
+}
+
 class KeycloakService {
 
     login(credentials: Credentials){
@@ -109,7 +124,7 @@ class KeycloakService {
         return axios.post(`${keycloak.url}/realms/master/protocol/openid-connect/logout`, body, header)
     }
 
-    addRoleToUser = (userId: string, roles: Role[]) => {
+    addRoleToUser = (userId: string, role: Role) => {
 
         return new Promise((resolve, reject) => {
 
@@ -120,12 +135,12 @@ class KeycloakService {
                 const refreshToken = data.refresh_token
     
                 const header = {
-                    headers: { 
+                    headers: {
                         'Authorization': `Bearer ${accessToken}`
                     }
                 }
 
-                axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${userId}/role-mappings/realm`, roles, header)
+                axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${userId}/role-mappings/realm`, [role], header)
                 .then((response) => {
                     resolve(response.data)
                 })
@@ -140,7 +155,7 @@ class KeycloakService {
         })
     }
 
-    removeRoleFromUser = (userId: string, roles: Role[]) => {
+    removeRoleFromUser = (userId: string, role: Role) => {
 
         return new Promise((resolve, reject) => {
 
@@ -158,7 +173,7 @@ class KeycloakService {
 
                 axios.delete(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${userId}/role-mappings/realm`, {
                     ...header,
-                    data: roles
+                    data: [role]
                 })
                 .then((response) => {
                     resolve(response.data)
@@ -267,11 +282,7 @@ class KeycloakService {
                 axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users`, userAccountData, header) //create user account
                 .then((response) => {
                     const userAccountId = response.headers.location.split('/')[7]
-                    const roles = [{
-                        id: "cec99090-10b9-4fc9-880c-9f72dca702eb",
-                        name: "logged_user"
-                    }]
-                    axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${userAccountId}/role-mappings/realm`, roles, header) // add user role
+                    axios.post(`${keycloak.url}/admin/realms/${keycloak.realm}/users/${userAccountId}/role-mappings/realm`, [roles.logged_user], header) // add user role
                     .then((response) => {
                         this.adminUnAuth(accessToken, refreshToken)
                         user.userAccountId = userAccountId

@@ -1,12 +1,13 @@
 ﻿import { Button, Toolbar, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { roles } from "../../../keycloak/KeycloakService";
 import { RootState } from "../../../redux/store";
 import "./NavBar.css";
 
 const NavBar = () => {
 
-    const roles = useSelector((state: RootState) => state.keycloak).roles
+    const actualRoles = useSelector((state: RootState) => state.keycloak).roles
 
     return (
         <nav>
@@ -21,7 +22,7 @@ const NavBar = () => {
                         Technologie
                     </Link>
                 </Typography>
-                {roles.includes('reviewer') ?
+                {actualRoles.includes(roles.reviewer.name) ?
                     <Typography variant="h6" align="center" component="div" sx={{ flexGrow: 1, ml: 2}}>
                         <Link to="/articles-verification" className="nice-link">
                             Weryfikacja artykułów
@@ -29,7 +30,7 @@ const NavBar = () => {
                     </Typography>
                 : null
                 }
-                {roles.includes('administrator') ?
+                {actualRoles.includes(roles.administrator.name) ?
                     <Typography variant="h6" align="center" component="div" sx={{ flexGrow: 1, ml: 2}}>
                         <Link to="/manage-users" className="nice-link">
                             Zarządzanie użytkownikami
