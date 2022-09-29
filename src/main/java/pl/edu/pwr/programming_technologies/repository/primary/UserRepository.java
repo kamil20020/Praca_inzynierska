@@ -1,8 +1,8 @@
-package pl.edu.pwr.programming_technologies.repository;
+package pl.edu.pwr.programming_technologies.repository.primary;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
+import pl.edu.pwr.programming_technologies.model.entity.primary.UserEntity;
 
 import java.util.Optional;
 

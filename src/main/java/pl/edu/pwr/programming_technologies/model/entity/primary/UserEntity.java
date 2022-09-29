@@ -1,4 +1,4 @@
-package pl.edu.pwr.programming_technologies.model.entity;
+package pl.edu.pwr.programming_technologies.model.entity.primary;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,7 +32,7 @@ public class UserEntity {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "avatar")

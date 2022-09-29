@@ -2,16 +2,11 @@ package pl.edu.pwr.programming_technologies.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import pl.edu.pwr.programming_technologies.exceptions.EntityConflictException;
 import pl.edu.pwr.programming_technologies.exceptions.EntityNotFoundException;
-import pl.edu.pwr.programming_technologies.mapper.UserMapper;
-import pl.edu.pwr.programming_technologies.model.dto.UserDTO;
-import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
-import pl.edu.pwr.programming_technologies.repository.UserRepository;
+import pl.edu.pwr.programming_technologies.model.entity.primary.UserEntity;
+import pl.edu.pwr.programming_technologies.repository.primary.UserRepository;
 import pl.edu.pwr.programming_technologies.service.UserService;
 
 import javax.transaction.Transactional;
@@ -25,12 +20,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public UserEntity getUserByUserAccountId(String userAccountId)
-            throws IllegalArgumentException, EntityNotFoundException
-    {
-        if(userAccountId == null || userAccountId.isBlank()){
-            throw new IllegalArgumentException("Podano nieprawidlowe id konta");
-        }
+    public UserEntity getUserByUserAccountId(String userAccountId) throws EntityNotFoundException {
 
         Optional<UserEntity> foundUserAccountId = userRepository.findByUserAccountId(userAccountId);
 
@@ -43,10 +33,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean existsUserByNickname(String nickname){
-
-        if(nickname == null || nickname.isBlank()){
-            throw new IllegalArgumentException("Nie podano pseudonimu");
-        }
 
         return userRepository.existsByNickname(nickname);
     }
@@ -79,7 +65,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserEntity updateUser(Integer userId, UserEntity userEntity) throws IllegalArgumentException{
+    public UserEntity updateUser(Integer userId, UserEntity userEntity)
+            throws IllegalArgumentException, EntityNotFoundException, EntityConflictException
+    {
 
         if(userEntity == null){
             throw new IllegalArgumentException("Nie poddano danych");
@@ -89,6 +77,10 @@ public class UserServiceImpl implements UserService {
 
         if(foundUserOpt.isEmpty()){
             throw new EntityNotFoundException("Nie istnieje użytkownik o takim id");
+        }
+
+        if(existsUserByNickname(userEntity.getNickname())){
+            throw new EntityConflictException("Istnieje już użytkownik o takim pseudonimie");
         }
 
         UserEntity foundUser = foundUserOpt.get();
@@ -103,6 +95,10 @@ public class UserServiceImpl implements UserService {
 
         if(userEntity.getSurname() != null){
             foundUser.setSurname(userEntity.getSurname());
+        }
+
+        if(userEntity.getEmail() != null){
+            foundUser.setEmail(userEntity.getEmail());
         }
 
         if(userEntity.getAvatar() != null){

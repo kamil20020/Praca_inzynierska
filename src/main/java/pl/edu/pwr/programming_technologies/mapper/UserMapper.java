@@ -6,7 +6,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 import pl.edu.pwr.programming_technologies.model.dto.UserDTO;
-import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
+import pl.edu.pwr.programming_technologies.model.entity.primary.UserEntity;
 
 import java.util.Base64;
 

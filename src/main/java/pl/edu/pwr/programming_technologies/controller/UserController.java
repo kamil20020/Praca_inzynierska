@@ -1,7 +1,6 @@
 package pl.edu.pwr.programming_technologies.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +8,7 @@ import pl.edu.pwr.programming_technologies.exceptions.EntityConflictException;
 import pl.edu.pwr.programming_technologies.exceptions.EntityNotFoundException;
 import pl.edu.pwr.programming_technologies.mapper.UserMapper;
 import pl.edu.pwr.programming_technologies.model.dto.UserDTO;
-import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
+import pl.edu.pwr.programming_technologies.model.entity.primary.UserEntity;
 import pl.edu.pwr.programming_technologies.service.UserService;
 
 @RestController
@@ -17,9 +16,6 @@ import pl.edu.pwr.programming_technologies.service.UserService;
 @RequiredArgsConstructor
 @RequestMapping(value = "/user")
 public class UserController {
-
-    @Value("${frontend.url}")
-    private String frontendURL;
 
     private final UserService userService;
     private final UserMapper userMapper = UserMapper.INSTANCE;
@@ -31,9 +27,6 @@ public class UserController {
 
         try{
             foundUser = userService.getUserByUserAccountId(userAccountId);
-        }
-        catch(IllegalArgumentException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
         catch(EntityNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -47,13 +40,9 @@ public class UserController {
     @GetMapping("/nickname/{nickname}")
     ResponseEntity existsUserByNickname(@PathVariable("nickname") String nickname){
 
-        try{
-            boolean result = userService.existsUserByNickname(nickname);
-            return ResponseEntity.ok(result);
-        }
-        catch(IllegalArgumentException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+        boolean result = userService.existsUserByNickname(nickname);
+
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping
@@ -100,6 +89,9 @@ public class UserController {
         }
         catch(EntityNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+        catch(EntityConflictException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
 
         UserDTO changedUserDTO = userMapper.userEntityToUserDTO(changedUserEntity);

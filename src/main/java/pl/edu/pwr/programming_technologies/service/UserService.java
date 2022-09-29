@@ -1,7 +1,6 @@
 package pl.edu.pwr.programming_technologies.service;
 
-import org.springframework.http.ResponseEntity;
-import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
+import pl.edu.pwr.programming_technologies.model.entity.primary.UserEntity;
 
 public interface UserService {
 
