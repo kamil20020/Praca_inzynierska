@@ -1,5 +1,6 @@
 ﻿import axios from "axios";
 import User from "../models/User";
+import GeneralAxiosService from "./GeneralAxiosService";
 
 export interface UpdateUserModel {
     nickname?: string,
@@ -12,33 +13,21 @@ export interface UpdateUserModel {
 class UserAPIService {
 
     private apiUrl: string = `${process.env.REACT_APP_API as string}/user`
-
-    generateHeader = () => {
-        const header = {
-            headers: {
-                ...axios.defaults.headers.common,
-                'Content-Type': 'application/json'
-            }
-        }
-
-        return header
-    }
-
     
     getUserByUserAccountId = (userAccountId: string) => {
-        return axios.get(`${this.apiUrl}/user-account-id/${userAccountId}`, this.generateHeader())
+        return axios.get(`${this.apiUrl}/user-account-id/${userAccountId}`, GeneralAxiosService.generateHeader())
     }
 
     existsUserWithNickname = (nickname: string) => {
-        return axios.get(`${this.apiUrl}/nickname/${nickname}`, this.generateHeader())
+        return axios.get(`${this.apiUrl}/nickname/${nickname}`, GeneralAxiosService.generateHeader())
     }
 
     createUser = (user: User) => {
-        return axios.post(this.apiUrl, user, this.generateHeader())
+        return axios.post(this.apiUrl, user, GeneralAxiosService.generateHeader())
     }
 
     updateUser = (userId: number, user: UpdateUserModel) => {
-        return axios.put(`${this.apiUrl}/${userId}`, user, this.generateHeader())
+        return axios.put(`${this.apiUrl}/${userId}`, user, GeneralAxiosService.generateHeader())
     }
 }
 

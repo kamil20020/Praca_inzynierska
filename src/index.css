@@ -12,3 +12,8 @@ html, body{
 body {
   margin: 0;
 }
+
+.tree-node-text:hover{
+  cursor: pointer;
+  color: #168AF4;
+}

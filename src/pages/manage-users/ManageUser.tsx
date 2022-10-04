@@ -12,7 +12,9 @@ export interface ManageUserChildProps {
 
 const ManageUser = () => {
 
-    const userAccountId = useParams().id as string
+    const params = useParams()
+    const userAccountId = params.userAccountId as string
+    const userId = params.userId as unknown as number
 
     const [actualRoles, setActualRoles] = React.useState<string[]>([])
 
@@ -42,7 +44,7 @@ const ManageUser = () => {
             >
                 <Roles actualRoles={actualRoles} loadUserRoles={loadUserRoles} userAccountId={userAccountId}/>
                 {actualRoles.includes(roles.reviewer.name) ?
-                    <ReviewerTechnologies userAccountId={userAccountId}/>
+                    <ReviewerTechnologies userId={userId}/>
                 : null
                 }
             </Grid>

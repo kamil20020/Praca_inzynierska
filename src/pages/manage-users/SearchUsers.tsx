@@ -42,6 +42,7 @@ const columns: GridColDef[] = [
 
 export interface UserInfo {
     id: number,         // array index
+    userId: number,
     userAccountId: string,
     username: string,
     nickname: string,
@@ -54,11 +55,7 @@ const SearchUsers = () => {
     const navigate = useNavigate()
 
     const [username, setUsername] = React.useState<string>('');
-    const [usersData, setUsersData] = React.useState<UserInfo[]>([])
-
-    useEffect(() => {
-
-    })
+    const [usersData, setUsersData] = React.useState<UserInfo[]>([]);
 
     const handleSearch = () => {
         let newUsersData: UserInfo[] = []
@@ -71,7 +68,8 @@ const SearchUsers = () => {
                     const userData = response.data
                     newUsersData.push({
                         id: newUsersData.length+1,
-                        userAccountId: u.id,
+                        userId: userData.id,
+                        userAccountId: userData.userAccountId,
                         username: u.username,
                         nickname: userData.nickname,
                         firstname: userData.firstname,
@@ -135,7 +133,8 @@ const SearchUsers = () => {
                         pageSize={5}
                         rowsPerPageOptions={[5]}
                         onSelectionModelChange={(id) => {
-                            navigate(`user/${usersData[+id-1].userAccountId}`)
+                            const userData = usersData[+id-1]
+                            navigate(`user/${userData.userId}/${userData.userAccountId}`)
                         }}
                     />
                 </Box>

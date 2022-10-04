@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 export interface XCloeasableDialogProps {
     title: string,
+    buttonTitle?: string,
     form: any,
     close?: boolean,
     size?: Breakpoint,
@@ -34,7 +35,7 @@ const XCloeasableDialog = (props: XCloeasableDialogProps) => {
                 onClick={handleOpen}
                 sx={{mr: 2}}
             >
-                {props.title}
+                {props.buttonTitle ? props.buttonTitle : props.title}
             </Button>
             <Dialog
                 title={props.title}

@@ -91,7 +91,7 @@ function App() {
                   </ProtectedRoute>
                 }>
                   <Route index element={<SearchUsers/>} />
-                  <Route path="user/:id" element={<ManageUser/>} />
+                  <Route path="user/:userId/:userAccountId" element={<ManageUser/>} />
                 </Route>
                 <Route path="*" element={<NotFound />} />
               </Routes>
