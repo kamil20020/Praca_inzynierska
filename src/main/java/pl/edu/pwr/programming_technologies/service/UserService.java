@@ -1,6 +1,6 @@
 package pl.edu.pwr.programming_technologies.service;
 
-import pl.edu.pwr.programming_technologies.model.entity.primary.UserEntity;
+import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
 
 public interface UserService {
 

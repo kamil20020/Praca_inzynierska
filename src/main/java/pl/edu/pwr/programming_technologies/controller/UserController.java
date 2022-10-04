@@ -8,7 +8,7 @@ import pl.edu.pwr.programming_technologies.exceptions.EntityConflictException;
 import pl.edu.pwr.programming_technologies.exceptions.EntityNotFoundException;
 import pl.edu.pwr.programming_technologies.mapper.UserMapper;
 import pl.edu.pwr.programming_technologies.model.dto.UserDTO;
-import pl.edu.pwr.programming_technologies.model.entity.primary.UserEntity;
+import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
 import pl.edu.pwr.programming_technologies.service.UserService;
 
 @RestController

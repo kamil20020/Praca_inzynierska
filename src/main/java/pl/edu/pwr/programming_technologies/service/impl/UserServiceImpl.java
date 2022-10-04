@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.edu.pwr.programming_technologies.exceptions.EntityConflictException;
 import pl.edu.pwr.programming_technologies.exceptions.EntityNotFoundException;
-import pl.edu.pwr.programming_technologies.model.entity.primary.UserEntity;
-import pl.edu.pwr.programming_technologies.repository.primary.UserRepository;
+import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
+import pl.edu.pwr.programming_technologies.repository.UserRepository;
 import pl.edu.pwr.programming_technologies.service.UserService;
 
 import javax.transaction.Transactional;

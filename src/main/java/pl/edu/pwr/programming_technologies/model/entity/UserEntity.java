@@ -1,4 +1,4 @@
-package pl.edu.pwr.programming_technologies.model.entity.primary;
+package pl.edu.pwr.programming_technologies.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Builder
 @Data
@@ -37,4 +38,8 @@ public class UserEntity {
 
     @Column(name = "avatar")
     private Byte[] avatar;
+
+    @Transient
+    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
+    private List<TechnologyExpertEntity> technologyExpertEntityList;
 }

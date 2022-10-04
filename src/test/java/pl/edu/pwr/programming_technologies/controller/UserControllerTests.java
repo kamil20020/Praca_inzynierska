@@ -12,8 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import pl.edu.pwr.programming_technologies.mapper.UserMapper;
 import pl.edu.pwr.programming_technologies.model.dto.UserDTO;
-import pl.edu.pwr.programming_technologies.model.entity.primary.UserEntity;
-import pl.edu.pwr.programming_technologies.repository.primary.UserRepository;
+import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
+import pl.edu.pwr.programming_technologies.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
