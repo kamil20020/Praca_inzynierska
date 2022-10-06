@@ -10,6 +10,7 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ActiveProfiles;
 import pl.edu.pwr.programming_technologies.mapper.UserMapper;
 import pl.edu.pwr.programming_technologies.model.dto.UserDTO;
 import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @RequiredArgsConstructor
@@ -30,7 +32,7 @@ public class UserControllerTests {
     @Autowired
     private UserRepository userRepository;
 
-    private UserMapper userMapper = UserMapper.INSTANCE;
+    private final UserMapper userMapper = UserMapper.INSTANCE;
 
     private List<UserEntity> users;
 
@@ -57,16 +59,6 @@ public class UserControllerTests {
         }
 
         users = userRepository.saveAll(users);
-    }
-
-    @AfterAll
-    public void removeUsers(){
-
-        userRepository.deleteAllById(
-            users.stream()
-                .map(userEntity -> userEntity.getId())
-                .collect(Collectors.toList())
-        );
     }
 
     @Test
@@ -328,7 +320,7 @@ public class UserControllerTests {
                 .when()
                 .contentType(ContentType.APPLICATION_JSON.toString())
                 .body(userDTO)
-                .put(url + "10");
+                .put(url + "11");
 
         response.then().statusCode(HttpStatus.NOT_FOUND.value());
     }

@@ -31,4 +31,14 @@ public interface TechnologyCategoryMapper {
     List<ComplexTechnologyCategoryDTO> technologyCategoryEntityListToComplexTechnologyCategoryDTOList(
             List<TechnologyCategoryEntity> technologyCategoryEntityList
     );
+
+    @Mapping(source = "childrenTechnologyCategoryDTOList", target = "childrenTechnologyCategoryEntityList")
+    TechnologyCategoryEntity complexTechnologyCategoryDTOToTechnologyCategoryEntity(
+            ComplexTechnologyCategoryDTO technologyCategoryEntity
+    );
+
+    List<TechnologyCategoryEntity> complexTechnologyCategoryDTOListTotechnologyCategoryEntityList(
+            List<ComplexTechnologyCategoryDTO> technologyCategoryEntityList
+    );
+
 }
