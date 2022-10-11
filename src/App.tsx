@@ -26,6 +26,8 @@ import SearchUsers from "./pages/manage-users/SearchUsers";
 import ManageUser from "./pages/manage-users/ManageUser";
 import ArticlesVerification from './pages/articles-verification/ArticlesVerification';
 import { roles } from './keycloak/KeycloakService';
+import SearchArticles from './pages/articles/SearchArticles';
+import ArticleView from './pages/articles/ArticleView';
 
 const theme = createTheme(
   {
@@ -78,7 +80,10 @@ function App() {
                     <UserDetails/>
                   </ProtectedRoute>
                 } />
-                <Route path="/articles" element={<Articles />} />
+                <Route path="/articles" element={<Outlet/>}>
+                  <Route index element={<SearchArticles/>} />
+                  <Route path="details/:articleId" element={<ArticleView/>} />
+                </Route>
                 <Route path="/technologies" element={<Technologies />} />
                 <Route path="/articles-verification" element={
                   <ProtectedRoute requiredLogin={true} requiredRole={roles.reviewer.name}>

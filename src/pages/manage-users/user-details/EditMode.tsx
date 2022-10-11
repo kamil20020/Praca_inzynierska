@@ -10,7 +10,7 @@ import { setUser } from "../../../redux/slices/userSlice";
 import { RootState } from "../../../redux/store";
 import FormValidator from "../../../services/FormValidator";
 import UserAPIService, { UpdateUserModel } from "../../../services/UserAPIService";
-import User from "../../../models/User";
+import User from "../../../models/dto/User";
 
 interface FormFields {
     firstname: string,
@@ -173,7 +173,7 @@ const EditMode = (props: EditModeProps) => {
     return(
         <Grid item xs={12} container justifyContent="center">
             <Grid item container>
-                <Grid item xs={6} container spacing={1}>
+                <Grid item xs={6} container>
                     <Grid item xs={12} container alignItems="center">
                         <Grid item xs={6}>
                             <FormLabel value="Imię"/>

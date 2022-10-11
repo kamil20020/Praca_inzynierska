@@ -1,6 +1,6 @@
 ﻿import { Grid, TextField } from "@mui/material"
 import React, { useEffect } from "react"
-import ComplexTechnologyCategory from "../../models/ComplexTechnologyCatgory"
+import ComplexTechnologyCategory from "../../models/dto/ComplexTechnologyCatgory"
 import TechnologyCategoryAPIService from "../../services/TechnologyCategoryAPIService"
 import TreeView, { NodeData } from "./TreeView"
 import XCloeasableDialog from "./XCloeasableDialog"

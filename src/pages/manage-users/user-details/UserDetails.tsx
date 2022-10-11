@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import KeycloakService from "../../../keycloak/KeycloakService";
-import User from "../../../models/User";
+import User from "../../../models/dto/User";
 import UserAPIService from "../../../services/UserAPIService";
 import { ManageUserChildProps } from "../ManageUser";
 import EditMode from "./EditMode";

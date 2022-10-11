@@ -1,5 +1,5 @@
 ﻿import axios from "axios";
-import User from "../models/User";
+import User from "../models/dto/User";
 import GeneralAxiosService from "./GeneralAxiosService";
 
 export interface UpdateUserModel {

@@ -10,7 +10,7 @@ const NavBar = () => {
     const actualRoles = useSelector((state: RootState) => state.keycloak).roles
 
     return (
-        <nav>
+        <nav id="main-nav">
             <Toolbar>
                 <Typography variant="h6" align="center" component="div" sx={{ flexGrow: 1, ml: 2}}>
                     <Link to="/articles" className="nice-link">

@@ -169,7 +169,7 @@ const EditMode = (props: EditModeProps) => {
     return(
         <Grid item xs={12} container justifyContent="center">
             <Grid item container>
-                <Grid item xs={6} container spacing={1}>
+                <Grid item xs={6} container>
                     <Grid item xs={12} container alignItems="center">
                         <Grid item xs={6}>
                             <FormLabel value="Imię"/>

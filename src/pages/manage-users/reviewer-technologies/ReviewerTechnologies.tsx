@@ -2,7 +2,7 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Technology } from "../../../models/Technology";
+import { Technology } from "../../../models/dto/Technology";
 import { TechnologyExpert } from "../../../models/TechnologyExpert";
 import { setNotificationMessage, setNotificationType, setNotificationStatus } from "../../../redux/slices/notificationSlice";
 import TechnologyExpertAPIService from "../../../services/TechnologyExpertAPIService";
@@ -119,7 +119,8 @@ const ReviewerTechnologies = (props: ReviewerTechnologiesProps) => {
                                                 </Button>
                                             </TableCell>
                                         </TableRow>
-                                ))}
+                                    ))
+                                }
                                 </TableBody>
                             </Table>
                         </TableContainer>

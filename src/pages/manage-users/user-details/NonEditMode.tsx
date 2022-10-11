@@ -1,7 +1,7 @@
 ﻿import { Grid, Button } from "@mui/material";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import User from "../../../models/User";
+import User from "../../../models/dto/User";
 import { RootState } from "../../../redux/store";
 import { FormLabel } from "./UserDetails";
 

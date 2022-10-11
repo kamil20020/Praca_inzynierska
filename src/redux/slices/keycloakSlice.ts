@@ -2,7 +2,7 @@
 import { Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import KeycloakService from "../../keycloak/KeycloakService";
-import User from "../../models/User";
+import User from "../../models/dto/User";
 import { RootState, store } from "../store";
 
 export interface KeycloakState {

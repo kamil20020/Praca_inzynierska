@@ -1,0 +1,8 @@
+﻿.css-cxbbn1-MuiRating-root.Mui-disabled{
+    opacity: 1
+}
+
+.article-header:hover{
+    cursor: pointer;
+    background-color: rgba(135, 206, 235, 0.1);
+}

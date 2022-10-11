@@ -1,7 +1,7 @@
 ﻿import axios from "axios";
 import { error } from "console";
 import { access } from "fs";
-import User from "../models/User";
+import User from "../models/dto/User";
 import UserAPIService from "../services/UserAPIService";
 import keycloak from "./Keycloak"
 

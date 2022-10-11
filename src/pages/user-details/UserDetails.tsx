@@ -2,7 +2,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CustomAvatar from "../../components/common/CustomAvatar";
-import User from "../../models/User";
+import User from "../../models/dto/User";
 import { RootState } from "../../redux/store";
 import EditMode from "./EditMode";
 import NonEditMode from "./NonEditMode";
