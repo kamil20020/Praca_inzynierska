@@ -3,7 +3,6 @@ package pl.edu.pwr.programming_technologies.controller;
 import io.restassured.response.Response;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.entity.ContentType;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -18,7 +17,6 @@ import pl.edu.pwr.programming_technologies.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,7 +34,7 @@ public class UserControllerTests {
 
     private List<UserEntity> users;
 
-    private String url = "http://localhost:9000/user/";
+    private final String url = "http://localhost:9000/user/";
 
     @BeforeAll
     public void initUsers() {
@@ -75,11 +73,11 @@ public class UserControllerTests {
         UserDTO userDTO = response.as(UserDTO.class);
         UserEntity userEntity = userMapper.userDTOToUserEntity(userDTO);
 
-        assertTrue(userEntity.getUserAccountId().equals(user.getUserAccountId()));
+        assertEquals(userEntity.getUserAccountId(), user.getUserAccountId());
     }
 
     @Test
-    public void shouldntGetUserByNotExistingUserAccountId() {
+    public void shouldNotGetUserByNotExistingUserAccountId() {
 
         Response response = given()
                 .when()
@@ -99,7 +97,7 @@ public class UserControllerTests {
 
         boolean result = response.as(boolean.class);
 
-        assertEquals(result, true);
+        assertTrue(result);
     }
 
     @Test
@@ -113,7 +111,7 @@ public class UserControllerTests {
 
         boolean result = response.as(boolean.class);
 
-        assertEquals(result, false);
+        assertFalse(result);
     }
 
     @Test
@@ -146,7 +144,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void shouldntCreateUserWithConflictUserAccountId(){
+    public void shouldNotCreateUserWithConflictUserAccountId(){
 
         UserEntity userEntity = UserEntity.builder()
                 .userAccountId("1")
@@ -168,7 +166,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void shouldntCreateUserWithConflictNickname(){
+    public void shouldNotCreateUserWithConflictNickname(){
 
         UserEntity userEntity = UserEntity.builder()
                 .userAccountId("10")
@@ -190,7 +188,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void shouldntCreateUserWithEmptyData(){
+    public void shouldNotCreateUserWithEmptyData(){
 
         Response response = given()
                 .when()
@@ -201,7 +199,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void shouldntCreateUserWithNotGivenUserAccountId(){
+    public void shouldNotCreateUserWithNotGivenUserAccountId(){
 
         UserEntity userEntity = UserEntity.builder()
                 .nickname("10")
@@ -222,7 +220,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void shouldntCreateUserWithNotGivenNickname(){
+    public void shouldNotCreateUserWithNotGivenNickname(){
 
         UserEntity userEntity = UserEntity.builder()
                 .userAccountId("10")
@@ -273,7 +271,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void shouldntUpdateUserWithInvalidId(){
+    public void shouldNotUpdateUserWithInvalidId(){
 
         UserEntity userEntity = UserEntity.builder()
                 .nickname("10")
@@ -294,7 +292,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void shouldntUpdateUserWithEmptyData(){
+    public void shouldNotUpdateUserWithEmptyData(){
 
         Response response = given()
                 .when()
@@ -305,7 +303,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void shouldntUpdateUserWhenIdDoesntExist(){
+    public void shouldNotUpdateUserWhenIdDoesntExist(){
 
         UserEntity userEntity = UserEntity.builder()
                 .nickname("10")
@@ -326,7 +324,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void shouldntUpdateUserWithConflictNickname(){
+    public void shouldNotUpdateUserWithConflictNickname(){
 
         UserEntity userEntity = UserEntity.builder()
                 .nickname("1")

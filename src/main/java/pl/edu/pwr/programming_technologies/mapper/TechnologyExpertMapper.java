@@ -8,7 +8,7 @@ import pl.edu.pwr.programming_technologies.model.entity.TechnologyExpertEntity;
 
 import java.util.List;
 
-@Mapper(uses = {TechnologyMapper.class})
+@Mapper(uses = {TechnologyMapper.class,})
 public interface TechnologyExpertMapper {
 
     TechnologyExpertMapper INSTANCE = Mappers.getMapper(TechnologyExpertMapper.class);
@@ -16,5 +16,14 @@ public interface TechnologyExpertMapper {
     @Mapping(source = "technologyEntity", target = "technologyDTO")
     TechnologyExpertDTO technologyExpertEntityToTechnologyExpertDTO(TechnologyExpertEntity technologyExpertEntity);
 
-    List<TechnologyExpertDTO> technologyExpertEntityListToTechnologyExpertDTOList(List<TechnologyExpertEntity> technologyExpertEntity);
+    List<TechnologyExpertDTO> technologyExpertEntityListToTechnologyExpertDTOList(
+            List<TechnologyExpertEntity> technologyExpertEntityList
+    );
+
+    @Mapping(source = "technologyDTO", target = "technologyEntity")
+    TechnologyExpertEntity technologyExpertDTOToTechnologyExpertEntity(TechnologyExpertDTO technologyExpertDTO);
+
+    List<TechnologyExpertEntity> technologyExpertDTOListToTechnologyExpertEntityList(
+            List<TechnologyExpertDTO> technologyExpertDTOList
+    );
 }

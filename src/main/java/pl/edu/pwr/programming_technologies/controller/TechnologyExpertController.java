@@ -191,5 +191,4 @@ public class TechnologyExpertController {
 
         return ResponseEntity.noContent().build();
     }
-
 }

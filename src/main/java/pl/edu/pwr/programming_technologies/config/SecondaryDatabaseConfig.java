@@ -19,13 +19,13 @@ import javax.sql.DataSource;
 /*@Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = {"pl.edu.pwr.programming_technologies.repository.secondary"},
+        basePackages = {"pl.edu.pwr.programming_technologies.repository.mongodb"},
         entityManagerFactoryRef = "secondaryEntityManagerFactory",
         transactionManagerRef = "secondaryTransactionManager"
-)*/
+)
 public class SecondaryDatabaseConfig {
 
-    /*@Bean(name = "secondaryDataSource")
+    @Bean(name = "secondaryDataSource")
     @ConfigurationProperties(prefix="spring.datasource1")
     public DataSource secondaryDataSource() {
         return DataSourceBuilder.create().build();
@@ -38,7 +38,7 @@ public class SecondaryDatabaseConfig {
     ) {
         return builder
                 .dataSource(secondaryDataSource)
-                .packages("pl.edu.pwr.programming_technologies.repository.secondary")
+                .packages("pl.edu.pwr.programming_technologies.repository.mongodb")
                 .persistenceUnit("secondary")
                 .build();
     }
@@ -48,5 +48,5 @@ public class SecondaryDatabaseConfig {
             @Qualifier("secondaryEntityManagerFactory") EntityManagerFactory secondaryEntityManagerFactory
     ) {
         return new JpaTransactionManager(secondaryEntityManagerFactory);
-    }*/
-}
+    }
+}*/

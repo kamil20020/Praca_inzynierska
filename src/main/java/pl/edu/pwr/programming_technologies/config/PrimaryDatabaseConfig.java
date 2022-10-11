@@ -19,13 +19,13 @@ import javax.sql.DataSource;
 /*@Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "pl.edu.pwr.programming_technologies.repository.primary",
+        basePackages = "pl.edu.pwr.programming_technologies.repository",
         entityManagerFactoryRef = "primaryEntityManagerFactory",
         transactionManagerRef = "primaryTransactionManager"
-)*/
+)
 public class PrimaryDatabaseConfig {
 
-    /*@Primary
+    @Primary
     @Bean(name = "primaryDataSource")
     @ConfigurationProperties(prefix="spring.datasource")
     public DataSource primaryDataSource() {
@@ -40,7 +40,7 @@ public class PrimaryDatabaseConfig {
     ) {
         return builder
                 .dataSource(primaryDataSource)
-                .packages("pl.edu.pwr.programming_technologies.repository.primary")
+                .packages("pl.edu.pwr.programming_technologies.repository")
                 .persistenceUnit("primary")
                 .build();
     }
@@ -51,5 +51,5 @@ public class PrimaryDatabaseConfig {
             @Qualifier("primaryEntityManagerFactory") EntityManagerFactory primaryEntityManagerFactory
     ) {
         return new JpaTransactionManager(primaryEntityManagerFactory);
-    }*/
-}
+    }
+}*/

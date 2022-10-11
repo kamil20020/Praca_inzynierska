@@ -2,9 +2,7 @@ package pl.edu.pwr.programming_technologies.controller;
 
 import io.restassured.response.Response;
 import lombok.RequiredArgsConstructor;
-import org.junit.After;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import pl.edu.pwr.programming_technologies.mapper.TechnologyCategoryMapper;
 import pl.edu.pwr.programming_technologies.model.dto.ComplexTechnologyCategoryDTO;
-import pl.edu.pwr.programming_technologies.model.dto.TechnologyCategoryDTO;
-import pl.edu.pwr.programming_technologies.model.dto.UserDTO;
 import pl.edu.pwr.programming_technologies.model.entity.TechnologyCategoryEntity;
-import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
 import pl.edu.pwr.programming_technologies.repository.TechnologyCategoryRepository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -36,11 +28,12 @@ public class TechnologyCategoryControllerTests {
 
     @Autowired
     private TechnologyCategoryRepository technologyCategoryRepository;
+
     private final TechnologyCategoryMapper technologyCategoryMapper = TechnologyCategoryMapper.INSTANCE;
 
     private List<TechnologyCategoryEntity> technologyCategories;
 
-    private String url = "http://localhost:9000/technology-category/";
+    private final String url = "http://localhost:9000/technology-category/";
 
     @BeforeAll
     public void initTechnologyCategories(){
@@ -120,7 +113,7 @@ public class TechnologyCategoryControllerTests {
                 response.as(ComplexTechnologyCategoryDTO[].class)
         ).toList();
         List<TechnologyCategoryEntity> foundTechnologyCategories =
-            technologyCategoryMapper.complexTechnologyCategoryDTOListTotechnologyCategoryEntityList(
+            technologyCategoryMapper.complexTechnologyCategoryDTOListToTechnologyCategoryEntityList(
                     foundComplexTechnologyCategoryDTOs
             );
 

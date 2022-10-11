@@ -1,11 +1,16 @@
 package pl.edu.pwr.programming_technologies.mapper;
 
+import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 import pl.edu.pwr.programming_technologies.model.dto.ComplexTechnologyCategoryDTO;
 import pl.edu.pwr.programming_technologies.model.dto.TechnologyCategoryDTO;
+import pl.edu.pwr.programming_technologies.model.dto.UserDTO;
 import pl.edu.pwr.programming_technologies.model.entity.TechnologyCategoryEntity;
+import pl.edu.pwr.programming_technologies.repository.TechnologyCategoryRepository;
 
 import java.util.List;
 
@@ -37,8 +42,7 @@ public interface TechnologyCategoryMapper {
             ComplexTechnologyCategoryDTO technologyCategoryEntity
     );
 
-    List<TechnologyCategoryEntity> complexTechnologyCategoryDTOListTotechnologyCategoryEntityList(
+    List<TechnologyCategoryEntity> complexTechnologyCategoryDTOListToTechnologyCategoryEntityList(
             List<ComplexTechnologyCategoryDTO> technologyCategoryEntityList
     );
-
 }

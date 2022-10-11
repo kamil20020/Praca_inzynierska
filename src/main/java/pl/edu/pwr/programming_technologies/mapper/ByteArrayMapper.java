@@ -17,7 +17,7 @@ public interface ByteArrayMapper {
     ByteArrayMapper INSTANCE = Mappers.getMapper(ByteArrayMapper.class);
 
     @Named("byteArrayToBase64")
-    default String base64ToByteArray(Byte[] byteArr) {
+    default String byteArrayToBase64(Byte[] byteArr) {
         if(byteArr == null){
             return null;
         }
