@@ -36,20 +36,20 @@ const SelectTechnologyCategory = (props: SelectTechnologyCategoryProps) => {
     }
 
     return (
-        <Grid item xs={12} container>
-            <Grid item xs={6} container justifyContent="end">
+        <Grid item xs={12} container justifyContent="center" spacing={2}>
+            <Grid item xs={6}>
                 <TextField
-                    id="username" 
+                    id="technology-category-name" 
                     disabled
                     fullWidth
                     color="secondary"
                     value={selectedTechnologyCategory ? selectedTechnologyCategory.name : ''}
                 />
             </Grid>
-            <Grid item xs={6} container justifyContent="end">
+            <Grid item xs={6} container>
                 <XCloeasableDialog
                     title="Wybór kategorii technologii"
-                    size="md"
+                    size="sm"
                     close = {close}
                     setClose = {setClose}
                     form = {

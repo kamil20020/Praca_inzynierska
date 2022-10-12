@@ -24,7 +24,6 @@ const AddReviewerTechnology = (props: AddReviewerTechnologyProps) => {
     const [selectedTechnologyId, setSelectedTechnologyId] = React.useState<number>(-1);
     const [selectedTechnologyCategoryId, setSelectedTechnologyCategoryId] = React.useState<number>(-1);
     const [availableTechnologies, setAvailableTechnologies] = React.useState<Technology[]>([]);
-    const [error, setError] = React.useState<string>('');
     const [close, setClose] = React.useState<boolean>(true)
     const dispatch = useDispatch()
 
@@ -121,23 +120,5 @@ const AddReviewerTechnology = (props: AddReviewerTechnologyProps) => {
         />
     );
 }
-
-
-/*<FormControl fullWidth>
-    <InputLabel id="technology-label" color="secondary">Technologia</InputLabel>
-    <Select
-        labelId="technology-label"
-        id="technology"
-        value={selectedTechnologyId === -1 ? '' : selectedTechnologyId.toString()}
-        label="Age"
-        color="secondary"
-        onChange={(event: SelectChangeEvent) => setSelectedTechnologyId(+event.target.value)}
-    >
-        {technologies.map((t: Technology, index: number) => (
-            <MenuItem key={index} value={t.id}>{t.name}</MenuItem>
-        ))}
-    </Select>
-    <FormHelperText error>{error + ' '}</FormHelperText>
-</FormControl>*/
 
 export default AddReviewerTechnology;

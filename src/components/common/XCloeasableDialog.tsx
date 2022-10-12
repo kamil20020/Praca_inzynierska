@@ -8,6 +8,7 @@ export interface XCloeasableDialogProps {
     form: any,
     close?: boolean,
     size?: Breakpoint,
+    buttonSx?: any,
     setClose?: (value: boolean) => void
 }
 
@@ -30,10 +31,11 @@ const XCloeasableDialog = (props: XCloeasableDialogProps) => {
     return (
         <React.Fragment>
             <Button
+                fullWidth
                 variant="contained"
                 color="secondary"
                 onClick={handleOpen}
-                sx={{mr: 2}}
+                sx={props.buttonSx ? props.buttonSx : null}
             >
                 {props.buttonTitle ? props.buttonTitle : props.title}
             </Button>

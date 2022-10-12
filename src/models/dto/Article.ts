@@ -3,13 +3,13 @@ import { Technology } from "./Technology"
 import User from "./User"
 
 export default interface Article {
-    id: string,
+    id: String,
     authorDTO: User,
     technologyDTO: Technology,
     title: string,
     content: string,
     status: Status,
-    creationDateTime: Date,
+    creationDate: Date,
     modificationDate: Date,
     averageRating?: number
 }

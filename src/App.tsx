@@ -28,6 +28,7 @@ import ArticlesVerification from './pages/articles-verification/ArticlesVerifica
 import { roles } from './keycloak/KeycloakService';
 import SearchArticles from './pages/articles/SearchArticles';
 import ArticleView from './pages/articles/ArticleView';
+import CreateUpdateArticle from './pages/articles/CreateUpdateArticle';
 
 const theme = createTheme(
   {
@@ -83,6 +84,11 @@ function App() {
                 <Route path="/articles" element={<Outlet/>}>
                   <Route index element={<SearchArticles/>} />
                   <Route path="details/:articleId" element={<ArticleView/>} />
+                  <Route path="create-edit/:articleId" element={
+                    <ProtectedRoute requiredLogin={true}>
+                      <CreateUpdateArticle/>
+                    </ProtectedRoute>
+                  } />
                 </Route>
                 <Route path="/technologies" element={<Technologies />} />
                 <Route path="/articles-verification" element={

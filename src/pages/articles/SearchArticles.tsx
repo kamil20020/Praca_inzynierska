@@ -11,6 +11,7 @@ import ArticleAPIService from "../../services/ArticleAPIService";
 import Page from "../../models/dto/Page";
 import CustomAvatar from "../../components/common/CustomAvatar";
 import { useNavigate } from "react-router-dom";
+import FormElement from "../../components/common/FormElement";
 
 interface FormFields {
     title: string,
@@ -20,34 +21,6 @@ interface FormFields {
     creationDate: string,
     modificationDate: string,
 };
-
-interface FormElementProps {
-    fieldName: string,
-    value: string,
-    onChange: (event: any) => void
-}
-
-const FormElement = (props: FormElementProps) => {
-    return (
-        <Grid item xs={12} container>
-            <Grid item xs={6} container alignItems="center" justifyContent="left">
-                <Typography 
-                    textAlign="left" 
-                    variant="h6"
-                >
-                    {props.fieldName}
-                </Typography>
-            </Grid>
-            <Grid item xs={6} container justifyContent="end">
-                <OutlinedInput
-                    color="secondary"
-                    value={props.value}
-                    onChange={props.onChange}
-                />
-            </Grid>
-        </Grid>
-    )
-}
 
 interface ArticleHeaderProps {
     article: Article,
@@ -124,6 +97,8 @@ const SearchArticles = () => {
     const [articles, setArticles] = React.useState<Article[]>([])
     const [totalPages, setTotalPages] = React.useState<number>(0)
 
+    const navigate = useNavigate()
+
     useEffect(() => {
         ArticleAPIService.getAll({page: page, size: pageSize})
         .then((response) => {
@@ -154,7 +129,7 @@ const SearchArticles = () => {
     }
 
     return (
-        <Grid item xs={12} container alignItems="center" justifyContent="center">
+        <Grid item xs={12} container alignItems="start" justifyContent="center">
             <Grid item xs={12} container justifyContent="center" sx={{marginTop: 7}}>
                 <Typography textAlign="center" variant="h4" sx={{marginRight: 5}}>
                     Wyszukiwanie artykułów
@@ -163,6 +138,7 @@ const SearchArticles = () => {
                     <Button
                         variant="contained"
                         color="secondary"
+                        onClick={() => navigate(`create-edit/${null}`)}
                     >
                         Dodaj artykuł
                     </Button>

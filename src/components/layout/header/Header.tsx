@@ -1,4 +1,4 @@
-﻿import { AppBar, Avatar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from "@mui/material";
+﻿import { AppBar, Avatar, Box, Button, Grid, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -27,10 +27,14 @@ const Header = () => {
                 {keycloak.authenticated ? 
                     <AccountSettings/> 
                     : 
-                    <React.Fragment>
-                        <Login/>
-                        <Register/>
-                    </React.Fragment>
+                    <Grid container justifyContent="space-between" marginRight={4}>
+                        <Grid item xs={5.65}>
+                            <Login/>
+                        </Grid>
+                        <Grid item xs={5.65}>
+                            <Register/>
+                        </Grid>
+                    </Grid>
                 }
             </Box>
         </Toolbar>

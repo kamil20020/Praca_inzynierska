@@ -1,4 +1,5 @@
 ﻿export interface TechnologyCategory{
     id: number,
-    name: string
+    name: string,
+    parentTechnologyCategoryDTO: TechnologyCategory
 }
