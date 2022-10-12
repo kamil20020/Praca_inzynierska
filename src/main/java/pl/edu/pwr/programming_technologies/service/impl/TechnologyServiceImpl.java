@@ -18,5 +18,21 @@ import java.util.List;
 public class TechnologyServiceImpl implements TechnologyService {
 
     private final TechnologyRepository technologyRepository;
+    private final TechnologyCategoryRepository technologyCategoryRepository;
 
+    @Override
+    public List<TechnologyEntity> getAll() {
+        return technologyRepository.findAll();
+    }
+
+    @Override
+    public List<TechnologyEntity> getAllByTechnologyCategoryId(Integer technologyCategoryId)
+            throws EntityNotFoundException
+    {
+        if(!technologyCategoryRepository.existsById(technologyCategoryId)){
+            throw new EntityNotFoundException("Nie istnieje kategoria technologii o takim id");
+        }
+
+        return technologyRepository.findAllByTechnologyCategoryEntityId(technologyCategoryId);
+    }
 }

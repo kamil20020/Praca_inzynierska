@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface TechnologyService {
 
+    List<TechnologyEntity> getAll();
+    List<TechnologyEntity> getAllByTechnologyCategoryId(Integer technologyCategoryId);
 }
