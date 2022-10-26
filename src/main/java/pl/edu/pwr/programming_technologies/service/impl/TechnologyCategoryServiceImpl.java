@@ -9,6 +9,7 @@ import pl.edu.pwr.programming_technologies.repository.TechnologyCategoryReposito
 import pl.edu.pwr.programming_technologies.service.TechnologyCategoryService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -26,7 +27,14 @@ public class TechnologyCategoryServiceImpl implements TechnologyCategoryService 
     public TechnologyCategoryEntity getTechnologyCategoryById(Integer technologyCategoryId)
             throws EntityNotFoundException
     {
+        Optional<TechnologyCategoryEntity> technologyCategoryEntityOpt = technologyCategoryRepository.findById(
+                technologyCategoryId
+        );
 
-        return null;
+        if(technologyCategoryEntityOpt.isEmpty()){
+            throw new EntityNotFoundException("Nie istnieje kategoria technologii o takim id");
+        }
+
+        return technologyCategoryEntityOpt.get();
     }
 }

@@ -12,11 +12,15 @@ public interface MongoObjectIDMapper {
 
     @Named("objectIdToHexString")
     default String objectIdToHexString(ObjectId objectId){
+        if(objectId == null)
+            return null;
         return objectId.toHexString();
     }
 
     @Named("hexStringToObjectId")
     default ObjectId hexStringToObjectId(String hexString){
+        if(hexString == null)
+            return null;
         return new ObjectId(hexString);
     }
 }

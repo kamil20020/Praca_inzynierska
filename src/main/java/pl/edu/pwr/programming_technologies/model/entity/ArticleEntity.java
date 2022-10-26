@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -34,9 +31,9 @@ public class ArticleEntity {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @MongoId(FieldType.OBJECT_ID)
     @Field(name = "_id")
-    private ObjectId _id;
+    private ObjectId id;
 
     @NotNull
     @Field(name = "authorId")

@@ -68,9 +68,8 @@ public class UserServiceImpl implements UserService {
     public UserEntity updateUser(Integer userId, UserEntity userEntity)
             throws IllegalArgumentException, EntityNotFoundException, EntityConflictException
     {
-
         if(userEntity == null){
-            throw new IllegalArgumentException("Nie poddano danych");
+            throw new IllegalArgumentException("Nie poddano danych użytkownika");
         }
 
         Optional<UserEntity> foundUserOpt = userRepository.findById(userId);
@@ -79,13 +78,14 @@ public class UserServiceImpl implements UserService {
             throw new EntityNotFoundException("Nie istnieje użytkownik o takim id");
         }
 
-        if(existsUserByNickname(userEntity.getNickname())){
-            throw new EntityConflictException("Istnieje już użytkownik o takim pseudonimie");
-        }
-
         UserEntity foundUser = foundUserOpt.get();
 
         if(userEntity.getNickname() != null){
+
+            if(existsUserByNickname(userEntity.getNickname())){
+                throw new EntityConflictException("Istnieje już użytkownik o takim pseudonimie");
+            }
+
             foundUser.setNickname(userEntity.getNickname());
         }
 

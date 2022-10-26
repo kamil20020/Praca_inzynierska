@@ -5,7 +5,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import pl.edu.pwr.programming_technologies.model.dto.ArticleDTO;
-import pl.edu.pwr.programming_technologies.model.dto.SimpleArticleDTO;
 import pl.edu.pwr.programming_technologies.model.entity.ArticleEntity;
 import pl.edu.pwr.programming_technologies.repository.TechnologyRepository;
 import pl.edu.pwr.programming_technologies.repository.UserRepository;
@@ -16,7 +15,7 @@ public interface ArticleMapper {
 
     ArticleMapper INSTANCE = Mappers.getMapper(ArticleMapper.class);
 
-    @Mapping(source = "_id", target = "id", qualifiedByName = "objectIdToHexString")
+    @Mapping(source = "id", target = "id", qualifiedByName = "objectIdToHexString")
     @Mapping(
             source = "creationDate",
             target = "creationDate",
@@ -44,16 +43,4 @@ public interface ArticleMapper {
             @Context UserRepository userRepository,
             @Context TechnologyRepository technologyRepository
     );
-
-    @Mapping(
-            source = "creationDate",
-            target = "creationDate",
-            qualifiedByName = "offsetDateTimeToLocalDateTime"
-    )
-    @Mapping(
-            source = "modificationDate",
-            target = "modificationDate",
-            qualifiedByName = "offsetDateTimeToLocalDateTime"
-    )
-    ArticleEntity simpleArticleDTOToArticleEntity(SimpleArticleDTO simpleArticleDTO);
 }

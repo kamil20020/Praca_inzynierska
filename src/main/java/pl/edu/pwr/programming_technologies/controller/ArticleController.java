@@ -8,11 +8,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.pwr.programming_technologies.exceptions.EntityConflictException;
 import pl.edu.pwr.programming_technologies.exceptions.EntityNotFoundException;
 import pl.edu.pwr.programming_technologies.mapper.ArticleMapper;
 import pl.edu.pwr.programming_technologies.mapper.MongoObjectIDMapper;
+import pl.edu.pwr.programming_technologies.mapper.SearchCriteriaMapper;
+import pl.edu.pwr.programming_technologies.model.api.request.ArticleSearchCriteria;
 import pl.edu.pwr.programming_technologies.model.dto.ArticleDTO;
-import pl.edu.pwr.programming_technologies.model.dto.SimpleArticleDTO;
+import pl.edu.pwr.programming_technologies.model.api.request.CreateUpdateArticle;
+import pl.edu.pwr.programming_technologies.model.dto.ArticleSearchCriteriaDTO;
 import pl.edu.pwr.programming_technologies.model.entity.ArticleEntity;
 import pl.edu.pwr.programming_technologies.repository.TechnologyRepository;
 import pl.edu.pwr.programming_technologies.repository.UserRepository;
@@ -27,9 +31,26 @@ public class ArticleController {
 
     private final ArticleService articleService;
     private final ArticleMapper articleMapper = ArticleMapper.INSTANCE;
-    private final MongoObjectIDMapper mongoObjectIDMapper = MongoObjectIDMapper.INSTANCE;
+    private final SearchCriteriaMapper searchCriteriaMapper = SearchCriteriaMapper.INSTANCE;
     private final UserRepository userRepository;
     private final TechnologyRepository technologyRepository;
+
+    @PostMapping("/search")
+    public ResponseEntity<Page<ArticleDTO>> searchByCriteria(
+            @RequestBody ArticleSearchCriteriaDTO articleSearchCriteriaDTO, Pageable pageable
+    ){
+        if(pageable == null){
+            pageable = Pageable.unpaged();
+        }
+
+        ArticleSearchCriteria articleSearchCriteria =
+                searchCriteriaMapper.articleSearchCriteriaDTOToArticleSearchCriteria(articleSearchCriteriaDTO);
+
+        Page<ArticleDTO> pageOfArticleDTOs = articleService.searchByCriteria(articleSearchCriteria, pageable)
+                .map(a -> articleMapper.articleEntityToArticleDTO(a, userRepository, technologyRepository));
+
+        return ResponseEntity.ok(pageOfArticleDTOs);
+    }
 
     @GetMapping
     public ResponseEntity<Page<ArticleDTO>> getAll(Pageable pageable){
@@ -54,8 +75,7 @@ public class ArticleController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Podano niewłasciwe id artykułu");
         }
 
-        ObjectId articleId = mongoObjectIDMapper.hexStringToObjectId(articleIdStr);
-
+        ObjectId articleId = new ObjectId(articleIdStr);
         ArticleEntity foundArticle;
 
         try{
@@ -73,14 +93,58 @@ public class ArticleController {
     }
 
     @PostMapping
-    public ResponseEntity<ArticleDTO> addArticle(@RequestBody SimpleArticleDTO simpleArticleDTO){
+    public ResponseEntity addArticle(@RequestBody CreateUpdateArticle createUpdateArticle){
 
-        ArticleEntity articleEntity = articleMapper.simpleArticleDTOToArticleEntity(simpleArticleDTO);
-        ArticleEntity createdArticle = articleService.addArticle(articleEntity);
+        ArticleEntity createdArticle;
+
+        try{
+            createdArticle = articleService.addArticle(createUpdateArticle);
+        }
+        catch(IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        catch(EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+        catch(EntityConflictException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+
         ArticleDTO createdArticleDTO = articleMapper.articleEntityToArticleDTO(
                 createdArticle, userRepository, technologyRepository
         );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdArticleDTO);
+    }
+
+    @PutMapping("/{articleId}")
+    public ResponseEntity updateArticleById(
+            @PathVariable("articleId") String articleIdStr, @RequestBody CreateUpdateArticle createUpdateArticle
+    ){
+        if(!ObjectId.isValid(articleIdStr)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Podano niewłasciwe id artykułu");
+        }
+
+        ObjectId articleId = new ObjectId(articleIdStr);
+        ArticleEntity updatedArticle;
+
+        try{
+            updatedArticle = articleService.updateArticle(articleId, createUpdateArticle);
+        }
+        catch(IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        catch(EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+        catch(EntityConflictException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+
+        ArticleDTO updatedArticleDTO = articleMapper.articleEntityToArticleDTO(
+                updatedArticle, userRepository, technologyRepository
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(updatedArticleDTO);
     }
 }
