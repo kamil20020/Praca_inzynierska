@@ -1,7 +1,9 @@
-﻿import { Grid, TextField } from "@mui/material"
+﻿import { Grid, TextField, Typography } from "@mui/material"
 import React, { useEffect } from "react"
 import ComplexTechnologyCategory from "../../models/dto/ComplexTechnologyCatgory"
+import { TechnologyCategory } from "../../models/dto/TechnologyCategory"
 import TechnologyCategoryAPIService from "../../services/TechnologyCategoryAPIService"
+import FormElement from "./FormElement"
 import TreeView, { NodeData } from "./TreeView"
 import XCloeasableDialog from "./XCloeasableDialog"
 
@@ -11,6 +13,7 @@ interface SelectedTechnologyCategoryProps {
 }
 
 interface SelectTechnologyCategoryProps {
+    technologyCategoryId?: number,
     onSelect: (id: number) => void
 }
 
@@ -20,7 +23,7 @@ const SelectTechnologyCategory = (props: SelectTechnologyCategoryProps) => {
 
     const [technologyCategories, setTechnologyCategories] = React.useState<ComplexTechnologyCategory[]>([])
 
-    const [close, setClose] = React.useState<boolean>(true)
+    const [open, setOpen] = React.useState<boolean>(false)
 
     useEffect(() => {
         TechnologyCategoryAPIService.getTreeOfTechnologyCategories()
@@ -29,14 +32,40 @@ const SelectTechnologyCategory = (props: SelectTechnologyCategoryProps) => {
         })
     }, [])
 
+    useEffect(() => {
+
+        if(!props.technologyCategoryId)
+            return;
+
+        const initialTechnologyCategoryId = props.technologyCategoryId as number
+
+        TechnologyCategoryAPIService.getTechnologyCategoryById(initialTechnologyCategoryId)
+        .then((response) => {
+            const initialTechnologyCategory = response.data
+            setSelectedTechnologyCategory({
+                id: initialTechnologyCategory.id, 
+                name: initialTechnologyCategory.name
+            })
+            props.onSelect(initialTechnologyCategoryId)
+        })
+    }, [props.technologyCategoryId])
+
     const handleSelectTechnologyCategory = (id: number, name: string) => {
-        setClose(true)
+        setOpen(false)
         setSelectedTechnologyCategory({id: id, name: name})
         props.onSelect(id)
     }
 
     return (
-        <Grid item xs={12} container justifyContent="center" spacing={2}>
+        <Grid item xs={12} container alignItems="center">
+            <Grid item xs={6}>
+                <Typography 
+                    textAlign="start" 
+                    variant="h6"
+                >
+                    Wybierz kategorię technologii
+                </Typography>
+            </Grid>
             <Grid item xs={6}>
                 <TextField
                     id="technology-category-name" 
@@ -44,25 +73,24 @@ const SelectTechnologyCategory = (props: SelectTechnologyCategoryProps) => {
                     fullWidth
                     color="secondary"
                     value={selectedTechnologyCategory ? selectedTechnologyCategory.name : ''}
+                    onClick={() => setOpen(true)}
                 />
             </Grid>
-            <Grid item xs={6} container>
-                <XCloeasableDialog
-                    title="Wybór kategorii technologii"
-                    size="sm"
-                    close = {close}
-                    setClose = {setClose}
-                    form = {
-                        <Grid container justifyContent="center">
-                            <TreeView 
-                                children={technologyCategories as unknown as NodeData[]}
-                                childrenNames={"childrenTechnologyCategoryDTOList"}
-                                handleSelectItem={handleSelectTechnologyCategory}
-                            />
-                        </Grid>
-                    }
-                />
-            </Grid>
+            <XCloeasableDialog
+                title="Wybór kategorii technologii"
+                size="sm"
+                open = {open}
+                showButton={false}
+                form = {
+                    <Grid container justifyContent="center">
+                        <TreeView 
+                            children={technologyCategories as unknown as NodeData[]}
+                            childrenNames={"childrenTechnologyCategoryDTOList"}
+                            handleSelectItem={handleSelectTechnologyCategory}
+                        />
+                    </Grid>
+                }
+            />
         </Grid>
     )
 }

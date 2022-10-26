@@ -8,6 +8,10 @@ class TechnologyCategory {
     getTreeOfTechnologyCategories = () => {
         return axios.get(`${this.apiUrl}/tree`, GeneralAxiosService.generateHeader())
     }
+
+    getTechnologyCategoryById = (technologyCategoryId: number) => {
+        return axios.get(`${this.apiUrl}/${technologyCategoryId}`)
+    }
 }
 
 export default new TechnologyCategory();

@@ -64,8 +64,6 @@ const AddReviewerTechnology = (props: AddReviewerTechnologyProps) => {
         <XCloeasableDialog 
             title="Przypisywanie technologii"
             buttonTitle="Dodaj"
-            close = {close}
-            setClose = {setClose}
             form = {
                 <Grid 
                     container 

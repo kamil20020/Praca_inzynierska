@@ -12,14 +12,23 @@ import Page from "../../models/dto/Page";
 import CustomAvatar from "../../components/common/CustomAvatar";
 import { useNavigate } from "react-router-dom";
 import FormElement from "../../components/common/FormElement";
+import DatePickerForm from "../../components/common/DatePickerForm";
+import DateRangePickerForm from "../../components/common/DateRangePickerForm";
+import moment from "moment";
+import { ArticleSearchCriteria } from "../../models/ArticleSearchCriteria";
+import SelectTechnologyCategory from "../../components/common/SelectTechnologyCategory";
+import SelectTechnology from "../../components/common/SelectTechnology";
 
 interface FormFields {
-    title: string,
-    author: string,
-    technologyCategory: string,
-    technologyProvider: string,
-    creationDate: string,
-    modificationDate: string,
+    title?: string,
+    authorNickname?: string,
+    technologyCategoryId?: number,
+    technologyId?: number,
+    technologyProvider?: string,
+    fromCreationDate?: Date,
+    toCreationDate?: Date,
+    fromModificationDate?: Date,
+    toModificationDate?: Date,
 };
 
 interface ArticleHeaderProps {
@@ -81,23 +90,16 @@ const SearchArticles = () => {
 
     const actualRoles = useSelector((state: RootState) => state.keycloak).roles
 
-    const initialFormState = {
-        title: '',
-        author: '',
-        technologyCategory: '',
-        technologyProvider: '',
-        creationDate: '',
-        modificationDate: '',
-    }
-
-    const [form, setForm] = React.useState<FormFields>(initialFormState)
+    const [form, setForm] = React.useState<FormFields>({})
     const [showSearchCriteria, switchShowSearchCriteria] = React.useState<boolean>(true);
     const [page, setPage] = React.useState<number>(0)
-    const [pageSize, setPageSize] = React.useState<number>(2)
+    const [pageSize, setPageSize] = React.useState<number>(5)
     const [articles, setArticles] = React.useState<Article[]>([])
     const [totalPages, setTotalPages] = React.useState<number>(0)
 
-    const navigate = useNavigate()
+    const [searchCriteria, setSearchCriteria] = React.useState<ArticleSearchCriteria>({});
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         ArticleAPIService.getAll({page: page, size: pageSize})
@@ -111,7 +113,15 @@ const SearchArticles = () => {
     const CustomPagination = () => {
 
         const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
-            setPage(value-1);
+            if(value-1 != page){
+                ArticleAPIService.search(searchCriteria, {page: value-1, size: pageSize})
+                .then((response) => {
+                    const page: Page = response.data
+                    setPage(value-1)
+                    setArticles(page.content)
+                    setTotalPages(page.totalPages)
+                })
+            }
         };
 
         return (
@@ -126,6 +136,27 @@ const SearchArticles = () => {
                 />
             </Grid>
         )
+    }
+
+    const handleSearch = () => {   
+
+        const newSearchCriteria = {
+            ...form,
+            fromCreationDate: form.fromCreationDate ? moment(form.fromCreationDate).toISOString() : undefined,
+            toCreationDate: form.toCreationDate ? moment(form.toCreationDate).toISOString() : undefined,
+            fromModificationDate: form.fromModificationDate ? moment(form.fromModificationDate).toISOString() : undefined,
+            toModificationDate: form.toModificationDate ? moment(form.toModificationDate).toISOString() : undefined
+        }
+
+        setSearchCriteria(newSearchCriteria)
+
+        ArticleAPIService.search(newSearchCriteria, {page: page, size: pageSize})
+        .then((response) => {
+            const page: Page = response.data
+            setPage(0)
+            setArticles(page.content)
+            setTotalPages(page.totalPages)
+        })
     }
 
     return (
@@ -145,36 +176,40 @@ const SearchArticles = () => {
                 }
             </Grid>
             {showSearchCriteria &&
-                <Grid item xs={3} container direction="row" alignItems="stretch" justifyContent="center" spacing={2} marginTop={5}>
+                <Grid item xs={3.6} container direction="row" alignItems="stretch" justifyContent="center" spacing={2} marginTop={5}>
                     <FormElement 
                         fieldName="Tytuł" 
-                        value={form.title} 
+                        value={form.title ? form.title : ''} 
                         onChange={(event: any) => setForm({...form, title: event.target.value})}
                     />
                     <FormElement 
                         fieldName="Autor" 
-                        value={form.author} 
-                        onChange={(event: any) => setForm({...form, author: event.target.value})}
+                        value={form.authorNickname ? form.authorNickname : ''} 
+                        onChange={(event: any) => setForm({...form, authorNickname: event.target.value})}
                     />
-                    <FormElement 
-                        fieldName="Kategoria technologii" 
-                        value={form.technologyCategory} 
-                        onChange={(event: any) => setForm({...form, technologyCategory: event.target.value})}
+                    <SelectTechnologyCategory onSelect={(id: number) => setForm({...form, technologyCategoryId: id})}/>
+                    <SelectTechnology 
+                        selectedTechnologyCategoryId={form.technologyCategoryId}
+                        onSelect={(id: number) => setForm({...form, technologyId: id})}
                     />
                     <FormElement 
                         fieldName="Dostawca technologii" 
-                        value={form.technologyProvider}
+                        value={form.technologyProvider ? form.technologyProvider : ''}
                         onChange={(event: any) => setForm({...form, technologyProvider: event.target.value})}
                     />
-                    <FormElement 
-                        fieldName="Data utworzenia" 
-                        value={form.creationDate} 
-                        onChange={(event: any) => setForm({...form, creationDate: event.target.value})}
+                    <DateRangePickerForm
+                        fieldName="Data utworzenia"
+                        fromValue={form.fromCreationDate}
+                        toValue={form.toCreationDate}
+                        onFromChange={(newDate: Date | null) => setForm({...form, fromCreationDate: newDate as Date | undefined})}
+                        onToChange={(newDate: Date | null) => setForm({...form, toCreationDate: newDate as Date | undefined})}
                     />
-                    <FormElement 
-                        fieldName="Data modyfikacji" 
-                        value={form.modificationDate} 
-                        onChange={(event: any) => setForm({...form, modificationDate: event.target.value})}
+                    <DateRangePickerForm
+                        fieldName="Data modyfikacji"
+                        fromValue={form.fromModificationDate}
+                        toValue={form.toModificationDate}
+                        onFromChange={(newDate: Date | null) => setForm({...form, fromModificationDate: newDate as Date | undefined})}
+                        onToChange={(newDate: Date | null) => setForm({...form, toModificationDate: newDate as Date | undefined})}
                     />
                 </Grid>
             }
@@ -190,6 +225,7 @@ const SearchArticles = () => {
                 <Button
                     variant="contained"
                     color="secondary"
+                    onClick={handleSearch}
                 >
                     Szukaj
                 </Button>
@@ -197,7 +233,6 @@ const SearchArticles = () => {
             <Grid item xs={10} container direction="column" alignItems="stretch" justifyContent="center" spacing={0} sx={{marginTop: 5}}>
                 {articles.length > 7 && <CustomPagination/>}
                 {articles
-                    .slice(page * pageSize, page * pageSize + pageSize)
                     .map((a: Article, index: number) => (
                         <ArticleHeader key={index} article={a}/>
                     ))

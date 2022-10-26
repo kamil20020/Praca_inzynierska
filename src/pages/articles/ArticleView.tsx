@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import CustomAvatar from "../../components/common/CustomAvatar";
 import CustomImage from "../../components/common/CustomImage";
-import Image from "../../components/common/CustomImage";
-import { roles } from "../../keycloak/KeycloakService";
 import Article from "../../models/dto/Article";
 import { TechnologyCategory } from "../../models/dto/TechnologyCategory";
 import { setNotificationMessage, setNotificationType, setNotificationStatus } from "../../redux/slices/notificationSlice";
@@ -13,7 +11,25 @@ import { RootState } from "../../redux/store";
 import ArticleAPIService from "../../services/ArticleAPIService";
 import Loading from "../Loading";
 import parse from 'html-react-parser';
-import { Editor } from "@tinymce/tinymce-react";
+import Comments from "./Comments";
+import Opinions from "./Opinions";
+import Prism from "prismjs";
+import "prismjs/themes/prism-tomorrow.css";
+import "prismjs/components/prism-c.js"
+import "prismjs/components/prism-csharp"
+import "prismjs/components/prism-cpp"
+import "prismjs/components/prism-css"
+import "prismjs/components/prism-fsharp"
+import "prismjs/components/prism-java"
+import "prismjs/components/prism-markup"
+import "prismjs/components/prism-javascript"
+import "prismjs/components/prism-json"
+import "prismjs/components/prism-python"
+import "prismjs/components/prism-ruby"
+import "prismjs/components/prism-scss"
+import "prismjs/components/prism-sql"
+import "prismjs/components/prism-typescript"
+import ConfirmationDialog from "../../components/common/ConfirmationDialog";
 
 const ArticleView = () => {
 
@@ -23,10 +39,12 @@ const ArticleView = () => {
     const dispatch = useDispatch()
 
     const [article, setArticle] = React.useState<Article | null>(null)
+    const [isSelectedComments, setIsSelectedComments] = React.useState<boolean>(true);
 
     const navigate = useNavigate()
 
     useEffect(() => {
+        Prism.highlightAll();
         ArticleAPIService.getById(articleId)
         .then((response) => {
             setArticle(response.data)
@@ -55,10 +73,23 @@ const ArticleView = () => {
         )
     }
 
+    const ArticleContent = () => {
+
+        useEffect(() => {
+            Prism.highlightAll();
+        }, [])
+
+        return (
+            <Typography textAlign="start" variant="h6">
+                {parse(article.content)}    
+            </Typography>
+        )
+    }
+
     return (
         <Grid item xs={12} container alignItems="start" justifyContent="center" marginTop={4}>
             <Grid item xs={10.5} container justifyContent="space-between" direction="row">
-                <Grid item xs={5} container direction="column" spacing={2}>
+                <Grid item xs={7} container direction="column" spacing={2}>
                     <Grid item container alignItems="center" spacing={3}>
                         <Grid item>
                             <CustomAvatar file={article.authorDTO.avatar}/>    
@@ -83,7 +114,7 @@ const ArticleView = () => {
                     </Grid>
                 </Grid>
                 {userId === (article as Article).authorDTO.id &&
-                    <Grid item xs={5} container justifyContent="end" alignItems="start" spacing={3}>
+                    <Grid item xs={5} container justifyContent="end" alignItems="start" spacing={3}>     
                         <Grid item>
                             <Typography textAlign="center" variant="h6">Status: {article.status}</Typography>
                         </Grid>
@@ -97,12 +128,12 @@ const ArticleView = () => {
                             </Button>
                         </Grid>
                         <Grid item>
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                            >
-                                Usuń artykuł
-                            </Button>
+                            <ConfirmationDialog 
+                                buttonTitle="Usuń artykuł" 
+                                title="Czy napewno ten artykuł powinien zostać usunięty?" 
+                                onAccept={() => null} 
+                                onCancel={() => null}
+                            />
                         </Grid>
                     </Grid>
                 }
@@ -125,7 +156,7 @@ const ArticleView = () => {
             </Grid>
             <Grid item xs={10.5} marginTop={5}>
                 <Typography textAlign="start" variant="h4" marginBottom={4}>{article.title}</Typography>
-                <Typography textAlign="start" variant="h6">{parse(article.content)}</Typography>
+                <ArticleContent/>
                 <Rating size="large" max={5} value={article.averageRating} precision={0.1} disabled sx={{opacity: 1, marginTop: 2}}/>
                 {article.averageRating && 
                     <Typography textAlign="center" variant="h6">{article.averageRating}%</Typography>
@@ -135,6 +166,7 @@ const ArticleView = () => {
                         <Button
                             variant="contained"
                             color="secondary"
+                            onClick={() => setIsSelectedComments(true)}
                         >
                             Komentarze
                         </Button>
@@ -143,10 +175,14 @@ const ArticleView = () => {
                         <Button
                             variant="contained"
                             color="secondary"
+                            onClick={() => setIsSelectedComments(false)}
                         >
                             Opinie
                         </Button>
                     </Grid>
+                </Grid>
+                <Grid container marginTop={3} spacing={2}>
+                    {isSelectedComments ? <Comments/> : <Opinions/>}
                 </Grid>
             </Grid>
         </Grid>

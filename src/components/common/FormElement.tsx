@@ -8,7 +8,7 @@ interface FormElementProps {
 
 const FormElement = (props: FormElementProps) => {
     return (
-        <Grid item xs={12} container>
+        <Grid item xs={12} container alignItems="center">
             <Grid item xs={6}>
                 <Typography 
                     textAlign="start" 
