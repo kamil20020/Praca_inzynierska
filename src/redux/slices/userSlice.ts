@@ -3,18 +3,18 @@ import User from "../../models/dto/User";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 export interface UserState {
-    user: User,
+    user: any,
 }
 
 const initialState: UserState = {
-    user: {} as User,
+    user: {},
 }
 
 export const userSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        setUser(state, action: PayloadAction<User>){
+        setUser(state, action: PayloadAction<User | {}>){
             state.user = action.payload
         }
     }

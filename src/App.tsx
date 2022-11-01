@@ -49,13 +49,12 @@ const theme = createTheme(
       },
       secondary: {
         main: '#5CA8EE',
-        dark: '#168AF4',
         contrastText: '#fff',
       },
       info: {
         main: '#008080',
         contrastText: '#fff',
-      },
+      }
     },
   },
   plPL

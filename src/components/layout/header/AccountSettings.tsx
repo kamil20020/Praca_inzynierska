@@ -4,6 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/slices/keycloakSlice";
+import { setUser } from "../../../redux/slices/userSlice"
 import { setNotificationMessage, setNotificationStatus } from "../../../redux/slices/notificationSlice";
 import { RootState } from "../../../redux/store";
 import CustomAvatar from "../../common/CustomAvatar";
@@ -32,6 +33,7 @@ const AccountSettings = () => {
 
     const handleLogout = () => {
         dispatch(logout())
+        dispatch(setUser({}))
         
         dispatch(setNotificationMessage('Wylogowano pomyślnie'))
         dispatch(setNotificationStatus(true))
@@ -45,7 +47,7 @@ const AccountSettings = () => {
                 <Typography sx={{mr: 2}}>
                     {user.nickname}
                 </Typography>
-                <Tooltip title="Open settings">
+                <Tooltip title="Opcje konta">
                     <IconButton onClick={handleOpenUserSettings}>
                         <CustomAvatar file={user.avatar}/>
                     </IconButton>

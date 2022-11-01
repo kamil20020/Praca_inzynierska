@@ -7,6 +7,8 @@ export interface XCloeasableDialogProps {
     buttonTitle?: string,
     form: any,
     open?: boolean,
+    setOpen?: (open: boolean) => void,
+    onCancel?: () => void,
     size?: Breakpoint,
     buttonSx?: any,
     showButton?: boolean
@@ -17,8 +19,24 @@ const XCloeasableDialog = (props: XCloeasableDialogProps) => {
     const [open, setOpen] = React.useState<boolean>(props.open ? props.open : false);
 
     useEffect(() => {
+        if(props.open == null){
+            return
+        }
         setOpen(props.open as boolean)
     }, [props.open])
+
+    const handleOpen = (newOpen: boolean) => {
+        if(props.setOpen){
+            props.setOpen(newOpen)
+        }
+        setOpen(newOpen)
+    }
+
+    const handleClose = () => {
+        if(props.onCancel)
+            props.onCancel()
+        handleOpen(false)
+    }
 
     return (
         <React.Fragment>
@@ -27,7 +45,7 @@ const XCloeasableDialog = (props: XCloeasableDialogProps) => {
                     fullWidth
                     variant="contained"
                     color="secondary"
-                    onClick={() => setOpen(true)}
+                    onClick={() => handleOpen(true)}
                     sx={props.buttonSx ? props.buttonSx : null}
                 >
                     {props.buttonTitle ? props.buttonTitle : props.title}
@@ -38,10 +56,10 @@ const XCloeasableDialog = (props: XCloeasableDialogProps) => {
                 maxWidth={props.size !== null ? props.size : "xs"}
                 fullWidth={true}
                 open={open}
-                onClose={() => setOpen(false)}
+                onClose={handleClose}
             >
                 <IconButton
-                    onClick={() => setOpen(false)}
+                    onClick={handleClose}
                     style={{ position: "absolute", right: 0 }}
                 >
                     <CloseIcon fontSize="large"/>

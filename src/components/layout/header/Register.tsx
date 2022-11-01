@@ -185,13 +185,14 @@ const Register = () => {
     return (
         <XCloeasableDialog 
             title="Rejestracja"
-            open = {open}
+            showButton={true}
             size="md"
             form = {
                 <Grid 
                     container
                     spacing={4}
                     direction="column"
+                    item
                     xs={8}
                     alignSelf="center"
                     justifyContent="center"

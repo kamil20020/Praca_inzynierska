@@ -11,8 +11,8 @@ import { RootState } from "../../redux/store";
 import ArticleAPIService from "../../services/ArticleAPIService";
 import Loading from "../Loading";
 import parse from 'html-react-parser';
-import Comments from "./Comments";
-import Opinions from "./Opinions";
+import Comments from "./comments/Comments";
+import Opinions from "./opinions/Opinions";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/components/prism-c.js"
@@ -40,6 +40,7 @@ const ArticleView = () => {
 
     const [article, setArticle] = React.useState<Article | null>(null)
     const [isSelectedComments, setIsSelectedComments] = React.useState<boolean>(true);
+    const [openDeletionConfirmation, setOpenDeletionConfirmation] = React.useState<boolean>(false);
 
     const navigate = useNavigate()
 
@@ -86,6 +87,22 @@ const ArticleView = () => {
         )
     }
 
+    const handleDeleteArticle = () => {
+        setOpenDeletionConfirmation(false)
+        ArticleAPIService.deleteArticleById(articleId)
+        .then(() => {
+            dispatch(setNotificationMessage("Artykuł został usunięty pomyślnie"))
+            dispatch(setNotificationType('success'))
+            dispatch(setNotificationStatus(true))
+            navigate('../')
+        })
+        .catch((error) => {
+            dispatch(setNotificationMessage(error.response.data))
+            dispatch(setNotificationType('error'))
+            dispatch(setNotificationStatus(true))
+        })
+    }
+
     return (
         <Grid item xs={12} container alignItems="start" justifyContent="center" marginTop={4}>
             <Grid item xs={10.5} container justifyContent="space-between" direction="row">
@@ -129,10 +146,12 @@ const ArticleView = () => {
                         </Grid>
                         <Grid item>
                             <ConfirmationDialog 
-                                buttonTitle="Usuń artykuł" 
-                                title="Czy napewno ten artykuł powinien zostać usunięty?" 
-                                onAccept={() => null} 
-                                onCancel={() => null}
+                                buttonTitle="Usuń artykuł"
+                                showButton={true}
+                                title="Czy napewno ten artykuł powinien zostać usunięty?"
+                                open={openDeletionConfirmation}
+                                onAccept={handleDeleteArticle} 
+                                onCancel={() => setOpenDeletionConfirmation(false)}
                             />
                         </Grid>
                     </Grid>
@@ -165,7 +184,7 @@ const ArticleView = () => {
                     <Grid item>
                         <Button
                             variant="contained"
-                            color="secondary"
+                            color={isSelectedComments ? "success" : "secondary"}
                             onClick={() => setIsSelectedComments(true)}
                         >
                             Komentarze
@@ -174,7 +193,7 @@ const ArticleView = () => {
                     <Grid item>
                         <Button
                             variant="contained"
-                            color="secondary"
+                            color={!isSelectedComments ? "success" : "secondary"}
                             onClick={() => setIsSelectedComments(false)}
                         >
                             Opinie
@@ -182,7 +201,7 @@ const ArticleView = () => {
                     </Grid>
                 </Grid>
                 <Grid container marginTop={3} spacing={2}>
-                    {isSelectedComments ? <Comments/> : <Opinions/>}
+                    {isSelectedComments ? <Comments articleId={articleId}/> : <Opinions articleId={articleId}/>}
                 </Grid>
             </Grid>
         </Grid>

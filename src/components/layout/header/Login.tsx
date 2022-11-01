@@ -147,6 +147,7 @@ const Login = () => {
     return (
         <XCloeasableDialog 
             title="Logowanie"
+            showButton={true}
             form = {
                 <Grid 
                     container 

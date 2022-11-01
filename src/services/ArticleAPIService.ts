@@ -40,12 +40,24 @@ class ArticleAPIService {
         return axios.get(`${this.apiUrl}/${articleId}`)
     }
 
+    getParentComments = (articleId: string, pagination: Pagination) => {
+        return axios.get(`${this.apiUrl}/${articleId}/comments/parents`, {
+            params: {
+                ...pagination
+            }
+        })
+    }
+
     createArticle = (article: CreateArticle) => {
         return axios.post(this.apiUrl, article)
     }
 
     updateArticleById = (articleId: string, article: CreateArticle) => {
         return axios.put(`${this.apiUrl}/${articleId}`, article)
+    }
+
+    deleteArticleById = (articleId: string) => {
+        return axios.delete(`${this.apiUrl}/${articleId}`)
     }
 }
 
