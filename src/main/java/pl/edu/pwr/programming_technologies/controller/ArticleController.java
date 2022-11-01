@@ -11,16 +11,21 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.programming_technologies.exceptions.EntityConflictException;
 import pl.edu.pwr.programming_technologies.exceptions.EntityNotFoundException;
 import pl.edu.pwr.programming_technologies.mapper.ArticleMapper;
-import pl.edu.pwr.programming_technologies.mapper.MongoObjectIDMapper;
+import pl.edu.pwr.programming_technologies.mapper.CommentMapper;
 import pl.edu.pwr.programming_technologies.mapper.SearchCriteriaMapper;
 import pl.edu.pwr.programming_technologies.model.api.request.ArticleSearchCriteria;
+import pl.edu.pwr.programming_technologies.model.api.request.CreateArticle;
 import pl.edu.pwr.programming_technologies.model.dto.ArticleDTO;
-import pl.edu.pwr.programming_technologies.model.api.request.CreateUpdateArticle;
+import pl.edu.pwr.programming_technologies.model.api.request.UpdateArticle;
 import pl.edu.pwr.programming_technologies.model.dto.ArticleSearchCriteriaDTO;
+import pl.edu.pwr.programming_technologies.model.dto.CommentDTO;
 import pl.edu.pwr.programming_technologies.model.entity.ArticleEntity;
+import pl.edu.pwr.programming_technologies.model.entity.CommentEntity;
 import pl.edu.pwr.programming_technologies.repository.TechnologyRepository;
 import pl.edu.pwr.programming_technologies.repository.UserRepository;
 import pl.edu.pwr.programming_technologies.service.ArticleService;
+import pl.edu.pwr.programming_technologies.service.CommentService;
+
 import java.util.List;
 
 @RestController
@@ -30,6 +35,8 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final CommentService commentService;
+    private final CommentMapper commentMapper = CommentMapper.INSTANCE;
     private final ArticleMapper articleMapper = ArticleMapper.INSTANCE;
     private final SearchCriteriaMapper searchCriteriaMapper = SearchCriteriaMapper.INSTANCE;
     private final UserRepository userRepository;
@@ -92,13 +99,37 @@ public class ArticleController {
         return ResponseEntity.ok(foundArticleDTO);
     }
 
+    @GetMapping("/{articleId}/comments/parents")
+    public ResponseEntity getParentComments(
+        @PathVariable("articleId") String articleIdStr, Pageable pageable
+    ){
+        if(!ObjectId.isValid(articleIdStr)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Podano niewłasciwe id artykułu");
+        }
+
+        ObjectId articleId = new ObjectId(articleIdStr);
+
+        if(pageable == null){
+            pageable = Pageable.unpaged();
+        }
+
+        Page<CommentEntity> foundCommentEntityPage = commentService.getSubComments(
+            articleId, null, pageable
+        );
+        Page<CommentDTO> foundCommentDTOPage = foundCommentEntityPage.map(c ->
+                commentMapper.commentEntityToCommentDTO(c, userRepository)
+        );
+
+        return ResponseEntity.ok(foundCommentDTOPage);
+    }
+
     @PostMapping
-    public ResponseEntity addArticle(@RequestBody CreateUpdateArticle createUpdateArticle){
+    public ResponseEntity addArticle(@RequestBody CreateArticle createArticle){
 
         ArticleEntity createdArticle;
 
         try{
-            createdArticle = articleService.addArticle(createUpdateArticle);
+            createdArticle = articleService.addArticle(createArticle);
         }
         catch(IllegalArgumentException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -119,7 +150,7 @@ public class ArticleController {
 
     @PutMapping("/{articleId}")
     public ResponseEntity updateArticleById(
-            @PathVariable("articleId") String articleIdStr, @RequestBody CreateUpdateArticle createUpdateArticle
+            @PathVariable("articleId") String articleIdStr, @RequestBody UpdateArticle updateArticle
     ){
         if(!ObjectId.isValid(articleIdStr)){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Podano niewłasciwe id artykułu");
@@ -129,7 +160,7 @@ public class ArticleController {
         ArticleEntity updatedArticle;
 
         try{
-            updatedArticle = articleService.updateArticle(articleId, createUpdateArticle);
+            updatedArticle = articleService.updateArticle(articleId, updateArticle);
         }
         catch(IllegalArgumentException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -146,5 +177,24 @@ public class ArticleController {
         );
 
         return ResponseEntity.status(HttpStatus.OK).body(updatedArticleDTO);
+    }
+
+    @DeleteMapping("/{articleId}")
+    public ResponseEntity deleteArticleById(@PathVariable("articleId") String articleIdStr){
+
+        if(!ObjectId.isValid(articleIdStr)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Podano niewłasciwe id artykułu");
+        }
+
+        ObjectId articleId = new ObjectId(articleIdStr);
+
+        try{
+            articleService.deleteArticleById(articleId);
+        }
+        catch(EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
