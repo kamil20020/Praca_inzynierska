@@ -14,13 +14,16 @@ import java.util.List;
 public class SecurityConfig {
 
     @Value("${frontend.url}")
-    private String frontendURL;
+    private String localFrontendURL;
+
+    @Value("https://technologie-programistyczne.netlify.app")
+    private String prodFrontendURL;
 
     @Bean
     public FilterRegistrationBean corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration().applyPermitDefaultValues();
-        config.setAllowedOrigins(List.of(frontendURL));
+        config.setAllowedOrigins(List.of(localFrontendURL, prodFrontendURL));
         config.setAllowedHeaders(List.of("Access-Control-Allow-Headers", "AUTHORIZATION", "CONTENT-TYPE"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowCredentials(true);

@@ -19,7 +19,7 @@ import pl.edu.pwr.programming_technologies.service.CommentService;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "https://technologie-programistyczne.netlify.app/"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://technologie-programistyczne.netlify.app"})
 @RequiredArgsConstructor
 @RequestMapping(value = "/comment")
 public class CommentController {
