@@ -24,6 +24,8 @@ public interface UserMapper {
 
     @Named("userIdToUserDTO")
     default UserDTO userIdToUserDTO(Integer userId, @Context UserRepository userRepository){
+        if(userId == null)
+            return null;
         return userEntityToUserDTO(userRepository.findById(userId).get());
     }
 }
