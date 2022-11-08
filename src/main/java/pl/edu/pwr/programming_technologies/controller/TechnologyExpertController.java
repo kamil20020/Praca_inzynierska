@@ -17,7 +17,7 @@ import pl.edu.pwr.programming_technologies.service.TechnologyExpertService;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://technologie-programistyczne.netlify.app/"})
 @RequiredArgsConstructor
 @RequestMapping(value = "/technology-expert")
 public class TechnologyExpertController {

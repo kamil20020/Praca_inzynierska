@@ -13,7 +13,7 @@ import pl.edu.pwr.programming_technologies.service.TechnologyService;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://technologie-programistyczne.netlify.app/"})
 @RequiredArgsConstructor
 @RequestMapping(value = "/technology")
 public class TechnologyController {

@@ -12,7 +12,7 @@ import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
 import pl.edu.pwr.programming_technologies.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://technologie-programistyczne.netlify.app/"})
 @RequiredArgsConstructor
 @RequestMapping(value = "/user")
 public class UserController {
