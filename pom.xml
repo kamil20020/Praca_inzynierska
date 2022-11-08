@@ -20,6 +20,23 @@
 		<org.projectlombok.version>1.18.24</org.projectlombok.version>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 	</properties>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<activatedProperties>dev</activatedProperties>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<activatedProperties>prod</activatedProperties>
+			</properties>
+		</profile>
+	</profiles>
 	<dependencies>
 		<!-- SPRING -->
 		<dependency>
