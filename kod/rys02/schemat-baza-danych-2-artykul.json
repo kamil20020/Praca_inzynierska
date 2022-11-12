@@ -3,8 +3,8 @@
       "bsonType":"object",
       "title":"articles",
       "required":[
-         "author_id",
-         "technology_category_id",
+         "authorId",
+         "technologyCategoryId",
          "title",
          "content",
          "status",
@@ -15,14 +15,15 @@
          "_id":{
             "bsonType":"objectId"
          },
-         "author_id":{
+         "authorId":{
             "bsonType":"int"
          },
-         "technology_category_id":{
+         "technologyCategoryId":{
             "bsonType":"int"
          },
          "title":{
-            "bsonType":"string"
+            "bsonType":"string",
+            "uniqueItems":true
          },
          "content":{
             "bsonType":"string"
@@ -30,7 +31,7 @@
          "status":{
             "bsonType":"string",
             "enum":[
-               "new",
+               "_new",
                "assigning_to_verification",
                "verification",
                "expired_verification",
@@ -40,10 +41,13 @@
             ]
          },
          "creationDate":{
-            "bsonType":"timestamp"
+            "bsonType":"date"
          },
          "modificationDate":{
-            "bsonType":"timestamp"
+            "bsonType":"date"
+         },
+         "averageRating":{
+            "bsonType":"double"
          }
       }
    }

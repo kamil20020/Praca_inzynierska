@@ -1,13 +1,15 @@
 {
    "$jsonSchema":{
       "bsonType":"object",
-      "title":"opinions",
+      "title":"opinion",
       "required":[
          "author_id",
          "rating",
          "content",
          "creationDate",
-         "modificationDate"
+         "modificationDate",
+         "positiveAcceptancesCount",
+         "negativeAcceptancesCount"
       ],
       "properties":{
          "_id":{
@@ -54,6 +56,14 @@
                   }
                }
             }
+         },
+         "positiveAcceptancesCount":{
+            "bsonType":"int",
+            "minimum":0
+         },
+         "negativeAcceptancesCount":{
+            "bsonType":"int",
+            "minimum":0
          }
       }
    }

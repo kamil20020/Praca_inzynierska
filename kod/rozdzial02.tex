@@ -2101,8 +2101,8 @@ Kod Ÿród³owy schematu artyku³ów znajduje siê na listingu~\ref{lst:schemat-danych
       "bsonType":"object",
       "title":"articles",
       "required":[
-         "author_id",
-         "technology_category_id",
+         "authorId",
+         "technologyId",
          "title",
          "content",
          "status",
@@ -2113,14 +2113,15 @@ Kod Ÿród³owy schematu artyku³ów znajduje siê na listingu~\ref{lst:schemat-danych
          "_id":{
             "bsonType":"objectId"
          },
-         "author_id":{
+         "authorId":{
             "bsonType":"int"
          },
-         "technology_category_id":{
+         "technologyId":{
             "bsonType":"int"
          },
          "title":{
-            "bsonType":"string"
+            "bsonType":"string",
+            "uniqueItems":true
          },
          "content":{
             "bsonType":"string"
@@ -2128,20 +2129,23 @@ Kod Ÿród³owy schematu artyku³ów znajduje siê na listingu~\ref{lst:schemat-danych
          "status":{
             "bsonType":"string",
             "enum":[
-               "new",
-               "assigning_to_verification",
-               "verification",
-               "expired_verification",
-               "refused",
-               "published",
-               "editing"
+               "NEW",
+               "ASSIGNING_TO_VERIFICATION",
+               "VERIFICATION",
+               "EXPIRED_VERIFICATION",
+               "REFUSED",
+               "PUBLISHED"
             ]
          },
          "creationDate":{
-            "bsonType":"timestamp"
+            "bsonType":"date"
          },
          "modificationDate":{
-            "bsonType":"timestamp"
+            "bsonType":"date"
+         },
+         "averageRating":{
+            "bsonType":"double",
+            "minimum":0
          }
       }
    }
@@ -2156,23 +2160,21 @@ Na podstawie schematu artyku³ów (listing~\ref{lst:schemat-danych-baza-danych-2-a
 \begin{lstlisting}[style=json-style, caption=Przyk³adowy dokument dla kolekcji artyku³ów zgodny ze zdefiniowanym schematem, label=lst:przykladowy-artykul-json]
 {
    "_id":{
-      "$oid":"633304053a8c252174852384"
+      "$oid":"634308ab8f35533467caa4f7"
    },
-   "author_id":1,
-   "technology_category_id":1,
-   "title":"Java",
-   "content":"Java jest to wspó³bie¿ny, opaty na klasach i mocno typowany obiektowy jêzyk programowania (...)",
-   "status":"new",
+   "authorId":27,
+   "technologyId":1,
+   "title":"Podstawy Javy1",
+   "content":"<p style=\"text-align: justify;\">Java jest to wsp&oacute;³bie¿ny, opaty na klasach i mocno typowany obiektowy jêzyk programowania...",
+   "status":"NEW",
    "creationDate":{
-      "$timestamp":{
-         "t":323,
-         "i":3128182693
+      "$date":{
+         "$numberLong":"1665337515291"
       }
    },
    "modificationDate":{
-      "$timestamp":{
-         "t":323,
-         "i":3128182693
+      "$date":{
+         "$numberLong":"1665337515294"
       }
    }
 }
@@ -2182,41 +2184,40 @@ Kod Ÿród³owy schematu komentarzy znajduje siê na listingu~\ref{lst:schemat-danyc
 
 \begin{lstlisting}[style=json-style, caption=Schemat kolekcji komentarzy w postaci JSON dla bazy danych artyku³ów, label=lst:schemat-danych-baza-danych-2-komentarz]
 {
-   "$jsonSchema":{
-      "bsonType":"object",
-      "title":"comment",
-      "required":[
-         "author_id",
-         "content",
-         "title",
-         "content",
-         "creationDate",
-         "modificationDate"
-      ],
-      "properties":{
-         "_id":{
-            "bsonType":"objectId"
-         },
-         "author_id":{
-            "bsonType":"int"
-         },
-         "content":{
-            "bsonType":"string"
-         },
-         "creationDate":{
-            "bsonType":"timestamp"
-         },
-         "modificationDate":{
-            "bsonType":"timestamp"
-         },
-         "comments":{
-            "bsonType":"array",
-            "items":{
-               "bsonType":"object"
-            }
-         }
+  $jsonSchema: {
+    bsonType: 'object',
+    title: 'comment',
+    required: [
+      'articleId',
+      'authorId',
+      'content',
+      'creationDate',
+      'modificationDate'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      articleId: {
+        bsonType: 'objectId'
+      },
+      parentCommentId: {
+        bsonType: 'objectId'
+      },
+      authorId: {
+        bsonType: 'int'
+      },
+      content: {
+        bsonType: 'string'
+      },
+      creationDate: {
+        bsonType: 'date'
+      },
+      modificationDate: {
+        bsonType: 'date'
       }
-   }
+    }
+  }
 }
 \end{lstlisting}
 
@@ -2225,44 +2226,27 @@ Na podstawie schematu komentarzy (listing~\ref{lst:schemat-danych-baza-danych-2-
 
 \begin{lstlisting}[style=json-style, caption=Przyk³adowy dokument dla kolekcji komentarzy zgodny ze zdefiniowanym schematem, label=lst:przykladowy-komentarz-json]
 {
-   "_id":{
-      "$oid":"6333276b3a8c2521748523a4"
-   },
-   "author_id":1,
-   "content":"Dobrze wyt³umaczone zagadnienie",
-   "creationDate":{
-      "$timestamp":{
-         "t":323,
-         "i":3128182693
-      }
-   },
-   "modificationDate":{
-      "$timestamp":{
-         "t":323,
-         "i":3128182693
-      }
-   },
-   "comments":[
-      {
-         "_id":{
-            "$oid":"6333276b3a8c2521748523a4"
-         },
-         "author_id":1,
-         "content":"Zgadzam siê",
-         "creationDate":{
-            "$timestamp":{
-               "t":324,
-               "i":3128182694
-            }
-         },
-         "modificationDate":{
-            "$timestamp":{
-               "t":324,
-               "i":3128182694
-            }
-         }
-      }
-   ]
+  "_id": {
+    "$oid": "63618aa9973c760cacac05af"
+  },
+  "articleId": {
+    "$oid": "634308ab8f35533467caa4f7"
+  },
+  "parentCommentId": {
+    "$oid": "63617ca71676af3917d483fd"
+  },
+  "authorId": 27,
+  "content": "111",
+  "creationDate": {
+    "$date": {
+      "$numberLong": "1667336873772"
+    }
+  },
+  "modificationDate": {
+    "$date": {
+      "$numberLong": "1667336873772"
+    }
+  }
 }
 \end{lstlisting}
 
@@ -2272,64 +2256,70 @@ Kod Ÿród³owy schematu opinii znajduje siê na listingu~\ref{lst:schemat-danych-ba
 
 \begin{lstlisting}[style=json-style, caption=Schemat kolekcji opinii w postaci JSON dla bazy danych artyku³ów, label=lst:schemat-danych-baza-danych-2-opinia]
 {
-   "$jsonSchema":{
-      "bsonType":"object",
-      "title":"opinions",
-      "required":[
-         "author_id",
-         "rating",
-         "content",
-         "creationDate",
-         "modificationDate"
-      ],
-      "properties":{
-         "_id":{
-            "bsonType":"objectId"
-         },
-         "author_id":{
-            "bsonType":"int"
-         },
-         "rating":{
-            "bsonType":"int",
-            "minimum":1,
-            "maximum":5
-         },
-         "content":{
-            "bsonType":"string"
-         },
-         "creationDate":{
-            "bsonType":"timestamp"
-         },
-         "modificationDate":{
-            "bsonType":"timestamp"
-         },
-         "acceptances":{
-            "bsonType":"array",
-            "items":{
-               "bsonType":"object",
-               "required":[
-                  "author_id",
-                  "value"
-               ],
-               "properties":{
-                  "_id":{
-                     "bsonType":"objectId"
-                  },
-                  "author_id":{
-                     "bsonType":"int"
-                  },
-                  "value":{
-                     "bsonType":"int",
-                     "enum":[
-                        -1,
-                        1
-                     ]
-                  }
-               }
+  $jsonSchema: {
+    bsonType: 'object',
+    title: 'opinion',
+    required: [
+      'author_id',
+      'rating',
+      'content',
+      'creationDate',
+      'modificationDate'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      author_id: {
+        bsonType: 'int'
+      },
+      rating: {
+        bsonType: 'int',
+        minimum: 1,
+        maximum: 5
+      },
+      content: {
+        bsonType: 'string'
+      },
+      creationDate: {
+        bsonType: 'timestamp'
+      },
+      modificationDate: {
+        bsonType: 'timestamp'
+      },
+      acceptances: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'object',
+          required: [
+            'author_id',
+            'value'
+          ],
+          properties: {
+            _id: {
+              bsonType: 'objectId'
+            },
+            author_id: {
+              bsonType: 'int'
+            },
+            value: {
+              bsonType: 'int',
+              'enum': [
+                -1,
+                1
+              ]
             }
-         }
+          }
+        }
+      },
+      positiveAcceptancesCount: {
+        bsonType: 'int'
+      },
+      negativeAcceptancesCount: {
+        bsonType: 'int'
       }
-   }
+    }
+  }
 }
 \end{lstlisting}
 
@@ -2338,40 +2328,39 @@ Na podstawie schematu opinii (listing~\ref{lst:schemat-danych-baza-danych-2-opin
 
 \begin{lstlisting}[style=json-style, caption=Przyk³adowy dokument dla kolekcji opinii zgodny ze zdefiniowanym schematem, label=lst:przykladowa-opinia-json]
 {
-   "_id":{
-      "$oid":"6333266e3a8c25217485239c"
-   },
-   "author_id":1,
-   "rating":4,
-   "content":"Dobry artyku³, ale brakuje trochê o wersjach",
-   "creationDate":{
-      "$timestamp":{
-         "t":323,
-         "i":3128182693
-      }
-   },
-   "modificationDate":{
-      "$timestamp":{
-         "t":323,
-         "i":3128182693
-      }
-   },
-   "acceptances":[
-      {
-         "_id":{
-            "$oid":"6333266e3a8c25217485239c"
-         },
-         "author_id":2,
-         "value":1
+  "_id": {
+    "$oid": "6333266e3a8c25217485239c"
+  },
+  "author_id": 1,
+  "rating": 4,
+  "content": "Dobry artyku³, ale brakuje trochê o wersjach",
+  "creationDate": {
+    "$timestamp": {
+      "t": 323,
+      "i": 3128182693
+    }
+  },
+  "modificationDate": {
+    "$timestamp": {
+      "t": 323,
+      "i": 3128182693
+    }
+  },
+  "acceptances": [
+    {
+      "_id": {
+        "$oid": "6333266e3a8c25217485239c"
       },
-      {
-         "_id":{
-            "$oid":"6333266e3a8c25217485239d"
-         },
-         "author_id":3,
-         "value":-1
-      }
-   ]
+      "author_id": 2
+    },
+    {
+      "_id": {
+        "$oid": "6333266e3a8c25217485239d"
+      },
+      "author_id": 3,
+      "value": -1
+    }
+  ]
 }
 \end{lstlisting}
 
