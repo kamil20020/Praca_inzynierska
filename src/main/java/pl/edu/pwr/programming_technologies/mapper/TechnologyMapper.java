@@ -7,6 +7,7 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 import pl.edu.pwr.programming_technologies.model.dto.TechnologyCategoryDTO;
 import pl.edu.pwr.programming_technologies.model.dto.TechnologyDTO;
+import pl.edu.pwr.programming_technologies.model.entity.ArticleEntity;
 import pl.edu.pwr.programming_technologies.model.entity.TechnologyEntity;
 import pl.edu.pwr.programming_technologies.repository.TechnologyCategoryRepository;
 import pl.edu.pwr.programming_technologies.repository.TechnologyRepository;
@@ -74,6 +75,8 @@ public interface TechnologyMapper {
     default TechnologyDTO technologyIdToTechnologyDTO(
             Integer technologyId, @Context TechnologyRepository technologyRepository
     ){
+        if(technologyId == null)
+            return null;
         return technologyEntityToTechnologyDTO(
                 technologyRepository.findById(technologyId).get()
         );

@@ -13,21 +13,31 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Builder
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Document("articles")
+    @Builder
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Document("articles")
 public class ArticleEntity {
 
     public enum Status {
-        _new,
-        assigning_to_verification,
-        verification,
-        expired_verification,
-        refused,
-        published,
-        editing;
+        NEW("Utworzony"),
+        ASSIGNING_TO_VERIFICATION("Przypisywany do weryfikacji"),
+        VERIFICATION("Weryfikacja"),
+        EXPIRED_VERIFICATION("Przedawniona weryfikacja"),
+        REFUSED("Odrzucony"),
+        PUBLISHED("Opublikowany");
+;
+        private String value;
+
+        Status(String value){
+            this.value = value;
+        }
+
+        @Override
+        public String toString(){
+            return value;
+        }
     }
 
     @Id

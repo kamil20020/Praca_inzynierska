@@ -8,7 +8,7 @@ import pl.edu.pwr.programming_technologies.model.entity.TechnologyExpertEntity;
 
 import java.util.List;
 
-@Mapper(uses = {TechnologyMapper.class,})
+@Mapper(uses = {TechnologyMapper.class})
 public interface TechnologyExpertMapper {
 
     TechnologyExpertMapper INSTANCE = Mappers.getMapper(TechnologyExpertMapper.class);

@@ -21,10 +21,7 @@ public class ArticleDTO {
     private UserDTO authorDTO;
     private TechnologyDTO technologyDTO;
     private String content;
-
-    @Enumerated(EnumType.STRING)
-    private ArticleEntity.Status status;
-
+    private String status;
     private OffsetDateTime creationDate;
     private OffsetDateTime modificationDate;
     private Double ratingAverage;

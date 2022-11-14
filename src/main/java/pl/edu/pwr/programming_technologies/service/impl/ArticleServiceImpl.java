@@ -14,6 +14,7 @@ import pl.edu.pwr.programming_technologies.model.api.request.ArticleSearchCriter
 import pl.edu.pwr.programming_technologies.model.api.request.CreateArticle;
 import pl.edu.pwr.programming_technologies.model.api.request.UpdateArticle;
 import pl.edu.pwr.programming_technologies.model.entity.ArticleEntity;
+import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
 import pl.edu.pwr.programming_technologies.repository.ArticleRepository;
 import pl.edu.pwr.programming_technologies.repository.CommentRepository;
 import pl.edu.pwr.programming_technologies.repository.TechnologyRepository;
@@ -22,6 +23,8 @@ import pl.edu.pwr.programming_technologies.service.ArticleService;
 //import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +43,10 @@ public class ArticleServiceImpl implements ArticleService {
 
     private final MongoTemplate mongoTemplate;
 
-    private String toLikeRegex(String source) {
-        return source.replaceAll("\\*", ".*");
-    }
-
-    public Page<ArticleEntity> searchByCriteria(ArticleSearchCriteria articleSearchCriteria, Pageable pageable){
+    @Override
+    public Page<ArticleEntity> searchByCriteria(
+        ArticleSearchCriteria articleSearchCriteria, Pageable pageable, String role, String loggedUserId
+    ){
 
         Query query = new Query();
 
@@ -118,7 +120,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         if(articleSearchCriteria.getTitle() != null && !articleSearchCriteria.getTitle().isBlank()){
             query.addCriteria(
-                    Criteria.where("title").regex(articleSearchCriteria.getTitle(), "i")
+                Criteria.where("title").regex(articleSearchCriteria.getTitle(), "i")
             );
         }
 
@@ -154,6 +156,17 @@ public class ArticleServiceImpl implements ArticleService {
 
         if(addedModificationDateCriteria)
             query.addCriteria(modificationDateCriteria);
+
+        if(role == null || role.equals(UserEntity.Role.USER.toString())){
+            query.addCriteria(Criteria.where("status").is(ArticleEntity.Status.PUBLISHED));
+        }
+        else if(role.equals(UserEntity.Role.LOGGED_USER.toString())){
+            query.addCriteria(
+                Criteria.where("status").is(ArticleEntity.Status.PUBLISHED).orOperator(
+                    Criteria.where("authorId").is(loggedUserId)
+                )
+            );
+        }
 
         long totalElements = mongoTemplate.count(query, ArticleEntity.class);
         query.with(pageable);
@@ -207,7 +220,7 @@ public class ArticleServiceImpl implements ArticleService {
             .authorId(createArticle.getAuthorId())
             .technologyId(createArticle.getTechnologyId())
             .content(createArticle.getContent())
-            .status(ArticleEntity.Status._new)
+            .status(ArticleEntity.Status.NEW)
             .creationDate(LocalDateTime.now())
             .modificationDate(LocalDateTime.now())
             .build();
@@ -256,6 +269,21 @@ public class ArticleServiceImpl implements ArticleService {
         }
 
         return articleRepository.save(foundArticleEntity);
+    }
+
+    @Transactional
+    @Override
+    public void updateArticleStatus(ObjectId articleId, ArticleEntity.Status articleStatus)
+        throws EntityNotFoundException
+    {
+        Optional<ArticleEntity> foundArticleEntityOpt = articleRepository.findById(articleId);
+
+        if(foundArticleEntityOpt.isEmpty()){
+            throw new EntityNotFoundException("Nie istnieje artykuł o takim id");
+        }
+
+        ArticleEntity foundArticleEntity = foundArticleEntityOpt.get();
+        foundArticleEntity.setStatus(articleStatus);
     }
 
     @Override

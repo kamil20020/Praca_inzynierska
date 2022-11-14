@@ -21,6 +21,7 @@ import pl.edu.pwr.programming_technologies.model.dto.ArticleSearchCriteriaDTO;
 import pl.edu.pwr.programming_technologies.model.dto.CommentDTO;
 import pl.edu.pwr.programming_technologies.model.entity.ArticleEntity;
 import pl.edu.pwr.programming_technologies.model.entity.CommentEntity;
+import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
 import pl.edu.pwr.programming_technologies.repository.TechnologyRepository;
 import pl.edu.pwr.programming_technologies.repository.UserRepository;
 import pl.edu.pwr.programming_technologies.service.ArticleService;
@@ -44,7 +45,10 @@ public class ArticleController {
 
     @PostMapping("/search")
     public ResponseEntity<Page<ArticleDTO>> searchByCriteria(
-            @RequestBody ArticleSearchCriteriaDTO articleSearchCriteriaDTO, Pageable pageable
+            @RequestBody ArticleSearchCriteriaDTO articleSearchCriteriaDTO,
+            Pageable pageable,
+            String role,
+            String loggedUserId
     ){
         if(pageable == null){
             pageable = Pageable.unpaged();
@@ -53,8 +57,10 @@ public class ArticleController {
         ArticleSearchCriteria articleSearchCriteria =
                 searchCriteriaMapper.articleSearchCriteriaDTOToArticleSearchCriteria(articleSearchCriteriaDTO);
 
-        Page<ArticleDTO> pageOfArticleDTOs = articleService.searchByCriteria(articleSearchCriteria, pageable)
-                .map(a -> articleMapper.articleEntityToArticleDTO(a, userRepository, technologyRepository));
+        Page<ArticleDTO> pageOfArticleDTOs = articleService.searchByCriteria(
+                articleSearchCriteria, pageable, role, loggedUserId
+            )
+            .map(a -> articleMapper.articleEntityToArticleDTO(a, userRepository, technologyRepository));
 
         return ResponseEntity.ok(pageOfArticleDTOs);
     }

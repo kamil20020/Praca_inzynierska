@@ -10,6 +10,7 @@ import pl.edu.pwr.programming_technologies.repository.UserRepository;
 
 import java.lang.annotation.Target;
 import java.util.Base64;
+import java.util.Optional;
 
 @Mapper(uses = {ByteArrayMapper.class})
 public interface UserMapper {
@@ -26,6 +27,10 @@ public interface UserMapper {
     default UserDTO userIdToUserDTO(Integer userId, @Context UserRepository userRepository){
         if(userId == null)
             return null;
-        return userEntityToUserDTO(userRepository.findById(userId).get());
+        Optional<UserEntity> foundUserEntityOpt = userRepository.findById(userId);
+        if(foundUserEntityOpt.isEmpty()){
+            return null;
+        }
+        return userEntityToUserDTO(foundUserEntityOpt.get());
     }
 }

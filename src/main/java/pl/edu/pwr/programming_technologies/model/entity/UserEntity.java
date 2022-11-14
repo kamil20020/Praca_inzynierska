@@ -16,9 +16,27 @@ import java.util.List;
 @Table(name="USERS")
 public class UserEntity {
 
+    public enum Role{
+        USER("user"),
+        LOGGED_USER("logged_user"),
+        ADMIN("administrator"),
+        REVIEWER("reviewer");
+
+        private String value;
+
+        Role(String value){
+            this.value = value;
+        }
+
+        @Override
+        public String toString(){
+            return value;
+        }
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "user_id", insertable = false, updatable = false)
     private Integer id;
 
     @Column(name = "user_account_id", nullable = false, unique = true)
@@ -42,4 +60,12 @@ public class UserEntity {
     @Transient
     @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
     private List<TechnologyExpertEntity> technologyExpertEntityList;
+
+    @Transient
+    @OneToOne(mappedBy = "userEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
+    private UserInaccessibilityEntity userAvailabilityEntity;
+
+    @Transient
+    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
+    private List<ArticleVerificationEntity> assignedArticleEntityList;
 }
