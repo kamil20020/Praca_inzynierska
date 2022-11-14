@@ -24,7 +24,7 @@ const AddReviewerTechnology = (props: AddReviewerTechnologyProps) => {
     const [selectedTechnologyId, setSelectedTechnologyId] = React.useState<number>(-1);
     const [selectedTechnologyCategoryId, setSelectedTechnologyCategoryId] = React.useState<number>(-1);
     const [availableTechnologies, setAvailableTechnologies] = React.useState<Technology[]>([]);
-    const [close, setClose] = React.useState<boolean>(true)
+    const [open, setOpen] = React.useState<boolean>(false)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -64,6 +64,9 @@ const AddReviewerTechnology = (props: AddReviewerTechnologyProps) => {
         <XCloeasableDialog 
             title="Przypisywanie technologii"
             buttonTitle="Dodaj"
+            open={open}
+            setOpen={setOpen}
+            showButton={true}
             form = {
                 <Grid 
                     container 
@@ -106,7 +109,7 @@ const AddReviewerTechnology = (props: AddReviewerTechnologyProps) => {
                                 <Button
                                     variant="contained"
                                     color="secondary"
-                                    onClick={() => setClose(true)}
+                                    onClick={() => setOpen(false)}
                                 >
                                     Anuluj
                                 </Button>

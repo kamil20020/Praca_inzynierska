@@ -13,23 +13,50 @@ import Loading from "../Loading";
 import parse from 'html-react-parser';
 import Comments from "./comments/Comments";
 import Opinions from "./opinions/Opinions";
-import Prism from "prismjs";
-import "prismjs/themes/prism-tomorrow.css";
-import "prismjs/components/prism-c.js"
-import "prismjs/components/prism-csharp"
-import "prismjs/components/prism-cpp"
-import "prismjs/components/prism-css"
-import "prismjs/components/prism-fsharp"
-import "prismjs/components/prism-java"
-import "prismjs/components/prism-markup"
-import "prismjs/components/prism-javascript"
-import "prismjs/components/prism-json"
-import "prismjs/components/prism-python"
-import "prismjs/components/prism-ruby"
-import "prismjs/components/prism-scss"
-import "prismjs/components/prism-sql"
-import "prismjs/components/prism-typescript"
 import ConfirmationDialog from "../../components/common/ConfirmationDialog";
+import { ArticleContent } from "./ArticleContent";
+
+export const ArticleHeader = (props: {article: Article}) => {
+
+    const toRenderTechnologyCategoryTree = (technologyCategory: TechnologyCategory) => {
+
+        const parentTechnologyCategory = technologyCategory.parentTechnologyCategoryDTO
+
+        return (
+            <React.Fragment>
+                {parentTechnologyCategory ? toRenderTechnologyCategoryTree(parentTechnologyCategory) : null}
+                <Typography textAlign="center" variant="h6" marginRight={1}>{technologyCategory.name} {"->"}</Typography>
+            </React.Fragment>
+        )
+    }
+
+    return (
+        <Grid item xs={7} container direction="column" spacing={2}>
+            <Grid item container alignItems="center" spacing={3}>
+                <Grid item>
+                    <CustomAvatar file={props.article.authorDTO.avatar}/>    
+                </Grid>
+                <Grid item>
+                    <Typography textAlign="center" variant="h6">{props.article.authorDTO.nickname}</Typography>
+                </Grid>
+            </Grid>
+            <Grid item container alignItems="center">
+                <Typography textAlign="center" variant="h6">
+                    Data utworzenia: {new Date(props.article.creationDate).toLocaleString()}
+                </Typography>
+            </Grid>
+            <Grid item container alignItems="center">
+                <Typography textAlign="center" variant="h6">
+                    Data modyfikacji: {new Date(props.article.modificationDate).toLocaleString()}
+                </Typography>
+            </Grid>
+            <Grid item container alignItems="center">
+                {toRenderTechnologyCategoryTree(props.article.technologyDTO.technologyCategoryDTO)}
+                <Typography textAlign="center" variant="h6">{props.article.technologyDTO.name}</Typography>
+            </Grid>
+        </Grid>
+    )
+}
 
 const ArticleView = () => {
 
@@ -45,7 +72,6 @@ const ArticleView = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        Prism.highlightAll();
         ArticleAPIService.getById(articleId)
         .then((response) => {
             setArticle(response.data)
@@ -60,31 +86,6 @@ const ArticleView = () => {
 
     if(article == null){
         return <Loading/>
-    }
-
-    const toRenderTechnologyCategoryTree = (technologyCategory: TechnologyCategory) => {
-
-        const parentTechnologyCategory = technologyCategory.parentTechnologyCategoryDTO
-
-        return (
-            <React.Fragment>
-                {parentTechnologyCategory ? toRenderTechnologyCategoryTree(parentTechnologyCategory) : null}
-                <Typography textAlign="center" variant="h6" marginRight={1}>{technologyCategory.name} {"->"}</Typography>
-            </React.Fragment>
-        )
-    }
-
-    const ArticleContent = () => {
-
-        useEffect(() => {
-            Prism.highlightAll();
-        }, [])
-
-        return (
-            <Typography textAlign="start" variant="h6">
-                {parse(article.content)}    
-            </Typography>
-        )
     }
 
     const handleDeleteArticle = () => {
@@ -106,30 +107,7 @@ const ArticleView = () => {
     return (
         <Grid item xs={12} container alignItems="start" justifyContent="center" marginTop={4}>
             <Grid item xs={10.5} container justifyContent="space-between" direction="row">
-                <Grid item xs={7} container direction="column" spacing={2}>
-                    <Grid item container alignItems="center" spacing={3}>
-                        <Grid item>
-                            <CustomAvatar file={article.authorDTO.avatar}/>    
-                        </Grid>
-                        <Grid item>
-                            <Typography textAlign="center" variant="h6">{article.authorDTO.nickname}</Typography>
-                        </Grid>
-                    </Grid>
-                    <Grid item container alignItems="center">
-                        <Typography textAlign="center" variant="h6">
-                            Data utworzenia: {new Date(article.creationDate).toLocaleString()}
-                        </Typography>
-                    </Grid>
-                    <Grid item container alignItems="center">
-                        <Typography textAlign="center" variant="h6">
-                            Data modyfikacji: {new Date(article.modificationDate).toLocaleString()}
-                        </Typography>
-                    </Grid>
-                    <Grid item container alignItems="center">
-                        {toRenderTechnologyCategoryTree(article.technologyDTO.technologyCategoryDTO)}
-                        <Typography textAlign="center" variant="h6">{article.technologyDTO.name}</Typography>
-                    </Grid>
-                </Grid>
+                <ArticleHeader article={article}/>
                 {userId === (article as Article).authorDTO.id &&
                     <Grid item xs={5} container justifyContent="end" alignItems="start" spacing={3}>     
                         <Grid item>
@@ -175,7 +153,7 @@ const ArticleView = () => {
             </Grid>
             <Grid item xs={10.5} marginTop={5}>
                 <Typography textAlign="start" variant="h4" marginBottom={4}>{article.title}</Typography>
-                <ArticleContent/>
+                <ArticleContent article={article}/>
                 <Rating size="large" max={5} value={article.averageRating} precision={0.1} disabled sx={{opacity: 1, marginTop: 2}}/>
                 {article.averageRating && 
                     <Typography textAlign="center" variant="h6">{article.averageRating}%</Typography>

@@ -39,6 +39,7 @@ interface ArticleHeaderProps {
 const ArticleHeader = (props: ArticleHeaderProps) => {
     
     const article = props.article
+    const userData = useSelector((state: RootState) => state.user).user
     const navigate = useNavigate()
 
     return (
@@ -46,7 +47,11 @@ const ArticleHeader = (props: ArticleHeaderProps) => {
             <Card 
                 className="article-header" 
                 variant="outlined" 
-                sx={{paddingTop: 2.5, paddingBottom: 2.5}}
+                sx={{
+                    paddingTop: 2.5, 
+                    paddingBottom: 2.5, 
+                    borderColor: article.authorDTO.nickname === userData.nickname ? 'skyblue' : 'rgba(0, 0, 0, 0.12)'
+                }}
                 onClick={(event: any) => navigate(`details/${article.id}`)}
             >
                 <Grid container justifyContent="space-evenly" alignItems="center">
@@ -101,8 +106,16 @@ const SearchArticles = () => {
 
     const navigate = useNavigate();
 
+    const userId = useSelector((state: RootState) => state.user).user.id
+
+    const highestRole: string = actualRoles.includes(roles.administrator.name) ? roles.administrator.name : 
+        actualRoles.includes(roles.reviewer.name) ? roles.reviewer.name : 
+        actualRoles.includes(roles.logged_user.name) ? roles.logged_user.name : roles.user;
+
+    const isLoggedUser: boolean = highestRole === roles.user
+
     useEffect(() => {
-        ArticleAPIService.getAll({page: page, size: pageSize})
+        ArticleAPIService.search({}, {page: page, size: pageSize}, highestRole, isLoggedUser ? userId : undefined)
         .then((response) => {
             const page: Page = response.data
             setArticles(page.content)
@@ -114,7 +127,7 @@ const SearchArticles = () => {
 
         const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
             if(value-1 != page){
-                ArticleAPIService.search(searchCriteria, {page: value-1, size: pageSize})
+                ArticleAPIService.search(searchCriteria, {page: value-1, size: pageSize}, highestRole, isLoggedUser ? userId : undefined)
                 .then((response) => {
                     const page: Page = response.data
                     setPage(value-1)
@@ -145,12 +158,13 @@ const SearchArticles = () => {
             fromCreationDate: form.fromCreationDate ? moment(form.fromCreationDate).toISOString() : undefined,
             toCreationDate: form.toCreationDate ? moment(form.toCreationDate).toISOString() : undefined,
             fromModificationDate: form.fromModificationDate ? moment(form.fromModificationDate).toISOString() : undefined,
-            toModificationDate: form.toModificationDate ? moment(form.toModificationDate).toISOString() : undefined
+            toModificationDate: form.toModificationDate ? moment(form.toModificationDate).toISOString() : undefined,
+            role: highestRole
         }
 
         setSearchCriteria(newSearchCriteria)
 
-        ArticleAPIService.search(newSearchCriteria, {page: page, size: pageSize})
+        ArticleAPIService.search(newSearchCriteria, {page: page, size: pageSize}, highestRole, isLoggedUser ? userId : undefined)
         .then((response) => {
             const page: Page = response.data
             setPage(0)

@@ -21,6 +21,7 @@ export interface Role{
 }
 
 export const roles = {
+    user: "user",
     logged_user: {
         id: "cec99090-10b9-4fc9-880c-9f72dca702eb",
         name: "logged_user"

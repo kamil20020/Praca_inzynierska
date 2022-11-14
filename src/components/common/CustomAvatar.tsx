@@ -1,23 +1,23 @@
-﻿import { Avatar } from "@mui/material";
+﻿import { Avatar, SxProps, Theme } from "@mui/material";
 import React, { useEffect } from "react";
 
-const CustomAvatar = (file: any) => {
+const CustomAvatar = (props: {file: any, sx?: SxProps<Theme>}) => {
     const [img, setImg] = React.useState<any>('');
 
     const loadImg = () => {
 
-        if(!file.file)
+        if(!props.file)
             return
 
-        setImg(file.file);
+        setImg(props.file);
     }
 
     useEffect(() => {
         loadImg()
-    }, [file])
+    }, [props])
 
     return (
-        <Avatar alt="Avatar" src={`data:image/jpeg;base64,${img}`}/>
+        <Avatar alt="Avatar" src={`data:image/jpeg;base64,${img}`} sx={{...props.sx}}/>
     );
 }
 

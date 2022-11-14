@@ -20,11 +20,19 @@ class ArticleAPIService {
 
     private apiUrl: string = `${process.env.REACT_APP_API as string}/article`
 
-    search = (searchCriteria: ArticleSearchCriteria, pagination: Pagination) => {
+    search = (searchCriteria: ArticleSearchCriteria, pagination: Pagination, role: string, loggedUserId?: number) => {
+
+        let params = {
+            ...pagination,
+            role: role,
+        }
+
+        if(loggedUserId){
+            Object.assign(params, loggedUserId)
+        }
+
         return axios.post(`${this.apiUrl}/search`, searchCriteria, {
-            params: {
-                ...pagination
-            },
+            params: params
         })
     }
 

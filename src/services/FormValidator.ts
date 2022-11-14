@@ -7,6 +7,7 @@
     upperLetterMessage = "Wymagana co najmniej jedna duża litera"
     digitMessage = "Wymagana co najmniej jedna cyfra"
     emailMessage = "Niepoprawny e-mail"
+    dateMessage = "Nieprawidłowa data"
 
     checkIfIsRequired = (text: string) => {
         return text && !/^\s*$/.test(text)
@@ -34,6 +35,10 @@
 
     checkEmail = (text: string) => {
         return /\S+@\S+\.\S+/.test(text)
+    }
+
+    checkDate = (text: string) => {
+        return !isNaN(Date.parse(text))
     }
 }
 

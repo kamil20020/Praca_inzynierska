@@ -7,5 +7,5 @@
     fromCreationDate?: string,
     toCreationDate?: string,
     fromModificationDate?: string,
-    toModificationDate?: string,
+    toModificationDate?: string
 };

@@ -3,17 +3,20 @@ import { Stack } from "@mui/system";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../../redux/slices/keycloakSlice";
-import { setUser } from "../../../redux/slices/userSlice"
-import { setNotificationMessage, setNotificationStatus } from "../../../redux/slices/notificationSlice";
-import { RootState } from "../../../redux/store";
-import CustomAvatar from "../../common/CustomAvatar";
+import { logout } from "../../../../redux/slices/keycloakSlice";
+import { setUser } from "../../../../redux/slices/userSlice"
+import { setNotificationMessage, setNotificationStatus } from "../../../../redux/slices/notificationSlice";
+import { RootState } from "../../../../redux/store";
+import CustomAvatar from "../../../common/CustomAvatar";
+import { roles } from "../../../../keycloak/KeycloakService";
+import UserAvialibility from "./UserAvialibility";
 
 const AccountSettings = () => {
 
     const navigate = useNavigate()
 
     const user = useSelector((state: RootState) => state.user).user
+    const actualRoles = useSelector((state: RootState) => state.keycloak).roles
     const dispatch = useDispatch()
 
     const [anchorElUserSettings, setAnchorElUserSettings] = React.useState<null | HTMLElement>(null);
@@ -59,6 +62,9 @@ const AccountSettings = () => {
                 open={Boolean(anchorElUserSettings)}
                 onClose={handleCloseUseSettings}
             >
+                {actualRoles.includes(roles.reviewer.name) &&
+                    <MenuItem><UserAvialibility/></MenuItem>
+                }
                 <MenuItem onClick={handleUserDetails}>Dane użytkownika</MenuItem>
                 <MenuItem>Zmień hasło</MenuItem>
                 <MenuItem onClick={handleLogout}>Wyloguj się</MenuItem>

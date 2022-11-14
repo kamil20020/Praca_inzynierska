@@ -57,6 +57,10 @@ const SearchUsers = () => {
     const [username, setUsername] = React.useState<string>('');
     const [usersData, setUsersData] = React.useState<UserInfo[]>([]);
 
+    useEffect(() => {
+        handleSearch()
+    }, [])
+
     const handleSearch = () => {
         let newUsersData: UserInfo[] = []
 
@@ -142,9 +146,5 @@ const SearchUsers = () => {
         </Grid>
     );
 }
-
-<Link to="user/2" className="nice-link">
-    Zarządzanie użytkownikiem
-</Link>
 
 export default SearchUsers;

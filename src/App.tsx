@@ -29,6 +29,8 @@ import { roles } from './keycloak/KeycloakService';
 import SearchArticles from './pages/articles/SearchArticles';
 import ArticleView from './pages/articles/ArticleView';
 import CreateUpdateArticle from './pages/articles/CreateUpdateArticle';
+import ArticleVerification from './pages/articles-verification/ArticleVerificationView';
+import ArticleVerificationView from './pages/articles-verification/ArticleVerificationView';
 
 const theme = createTheme(
   {
@@ -92,9 +94,12 @@ function App() {
                 <Route path="/technologies" element={<Technologies />} />
                 <Route path="/articles-verification" element={
                   <ProtectedRoute requiredLogin={true} requiredRole={roles.reviewer.name}>
-                    <ArticlesVerification/>
+                    <Outlet />
                   </ProtectedRoute>
-                } />
+                }>
+                  <Route index element={<ArticlesVerification/>} />
+                  <Route path=":articleVerificationId" element={<ArticleVerificationView/>} />
+                </Route>
                 <Route path="/manage-users" element={
                   <ProtectedRoute requiredLogin={true} requiredRole={roles.administrator.name}>
                     <Outlet />
@@ -108,7 +113,7 @@ function App() {
             </Content>
             <Footer/>
           </Grid>
-          <Notification/>
+
         </ThemeProvider>
       </BrowserRouter>
     </React.StrictMode>

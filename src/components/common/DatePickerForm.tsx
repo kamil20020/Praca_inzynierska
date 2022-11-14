@@ -10,6 +10,7 @@ export interface DatePickerFormProps {
     value?: Date,
     minDate?: Date,
     maxDate?: Date,
+    error?: boolean,
     onChange: (newDate: Date | null) => void
 }
 
@@ -26,6 +27,7 @@ const DatePickerForm = (props: DatePickerFormProps) => {
                 renderInput={(params: any) => (
                     <TextField 
                         {...params}
+                        error={props.error == true}
                         color="secondary"
                     />
                 )}
