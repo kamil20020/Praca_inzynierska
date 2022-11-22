@@ -1,63 +1,63 @@
-\chapter{Architektura systemu}
+\chapter{Projektowanie}
+
+\section{Architektura systemu}
 
 Realizowany system jest rozproszonym serwisem webowym, ktÛry w duøym uogÛlnieniu moøna opisaÊ jako system typu klient-serwer. Klient wysy≥a øπdanie do serwera 
-aplikacji, a nastÍpnie serwer ten odpowiednio przetwarza otrzymane øπdanie i zwraca klientowi odpowiedü, ktÛrπ to pÛüniej odpowiedü klient interpretuje i przedstawia uøytkownikowi (w tym przypadku jest to \texttt{GUI} interfejsu webowego).
+aplikacji, a nastÍpnie serwer odpowiednio przetwarza otrzymane øπdanie i zwraca klientowi odpowiedü, ktÛrπ klient interpretuje i przedstawia uøytkownikowi.
 
-SzczegÛ≥owπ architekturÍ systemu dobrze opisuje rysunek~\ref{fig:architektura-systemu}
+SzczegÛ≥owπ architekturÍ systemu przedstawiono na rysunku ~\ref{fig:architektura-systemu}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.8\linewidth]{rys02/architektura-systemu}
 	\caption{Architektura systemu}
 	\label{fig:architektura-systemu}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 Zdecydowano siÍ na zaimplementowanie systemu w postaci serwisu webowego, gdyø taka forma aplikacji zapewnia duøπ wygodÍ uøytkowania z powodu braku koniecznoúci jej zainstalowania przez uøytkownika, a z powodu tego, øe za≥oøono, iø system powinien byÊ dostÍpny dla kaødego, kto posiada dostÍp do Internetu, to nie ma wymogu instalowania aplikacji. NastÍpnym powodem wybrania tego typu aplikacji jest to, øe aplikacje webowe sπ obecnie najpopularniejszym typem systemu i implementacja takiej aplikacji pozwala na zdobycie wartoúciowego doúwiadczenia.
 
-\section{Baza danych}
-Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. Za≥oøono, øe w systemie zostanπ wykorzystane dwie rÛønego rodzaju bazy danych: obiektowo-relacyjna (SQL) oraz nierelacyjna oparta na dokumentach (NoSQL). 
+Komunikacja w systemie przebiega g≥Ûwnie poprzez protokÛ≥ HTTP (ang.\ \emph{Hypertext Transfer Protocol}). ProtokÛ≥ ten jest oparty na komunikacji typu klient-serwer, przy czym klientem jest najczÍúciej przeglπdarka. Klientem wysy≥a øπdanie do serwera, a serwer wysy≥a do klienta odpowiedü. ZawartoúÊ wiadomoúci HTTP moøna przede wszystkim podzieliÊ na nag≥Ûwek (ang.\ \emph{Header}) oraz ≥adunek (ang.\ \emph{Body}). W nag≥Ûwku znajdujπ siÍ pola typu klucz-wartoúÊ. Nag≥Ûwek øπdania rÛøni siÍ od nag≥Ûwka odpowiedzi poprzez dostÍpne opcje, ale majπ one rÛwnieø wspÛlne pola np. informacja o hoúcie docelowym, czy format wiadomoúci. W nag≥Ûwku øπdania moøna wyrÛøniÊ jeszcze np. nag≥Ûwek \texttt{Authorization}, w ktÛrym umieszczane sπ poúwiadczenia uwierzytelnienia. W nag≥Ûwku odpowiedzi moøna za to wyrÛøniÊ m.in. status odpowiedzi, ktÛry np. informuje o tym, czy øπdanie zosta≥o wykonane pomyúlnie (np. status 200), czy teø wystπpi≥ b≥πd, a jeúli wystπpi≥, to z jakiego powodu (np. status 401 oznaczajπcy nieudane uwierzytelnienie uøytkownika). £adunek jest opcjonalnym polem, ktÛre stanowi treúÊ wiadomoúci HTTP i np. w przypadku odpowiedzi moøe zawieraÊ listÍ wyszukanych artyku≥Ûw.
 
-Jako g≥Ûwnπ bazÍ danych wybrano bazÍ relacyjnπ, gdyø bazy te charakteryzujπ siÍ tym, øe zapewniajπ integralnoúÊ danych poprzez tworzenie relacji np. poprzez powiπzanie tabel kluczem obcym, a w realizowanym systemie wykryto wiele przypadkÛw, w ktÛrych moøna by by≥o utworzyÊ relacje np. w≥aúciciel artyku≥u jest powiπzaniem miÍdzy encjami uøytkownika i artyku≥u, historia modyfikacji technologii jest do≥πczona do danej technologii, czy teø recenzent ma przypisane do siebie technologie, w ktÛrych siÍ specjalizuje. W tym przypadku zdecydowano siÍ na obiektowπ bazÍ danych, gdyø upraszcza ona pracÍ z kilkoma wykorzystywanymi narzÍdziami (np. Jav'owy framework Hibernate), ktÛre oparte sπ na programowaniu obiektowym. 
+Komunikacja w systemie jest zgodna ze stylem architektury oprogramowania REST (ang.\ \emph{Representational state transfer}). \texttt{REST} jest to sposÛb i format w jaki komunikuje siÍ klient z serwerem. Serwer udostÍpnia klientowi punkty koÒcowe (end-pointy), do ktÛrych klient moøe wys≥aÊ øπdania http przesy≥ajπc przy tym jakieú dane np. tytu≥ wyszukiwanego artyku≥u. W skrÛcie komunikacja REST odznacza siÍ nastÍpujπcymi cechami:
+\begin{itemize}
+	\item bezstanowoúÊ (nie przechowuje informacji o poprzednich wymianach wiadmoúci),
+	\item architektura klient-serwer,
+	\item jednolity interfejs komunikacyjny ñ dziÍki temu moøliwe jest np. komunikowanie siÍ systemÛw zaimplementowanych w rÛønych jÍzykach programowania, czy zainstalowanych na rÛønych platformach (mobilna,
+	\item wykorzystywanie protoko≥u \texttt{http}.
+\end{itemize}
 
-Jako pomocniczπ bazÍ danych wybrano bazÍ nierelacyjnπ opartπ na dokumentach, ktÛra pozwala na przechowywanie struktur typu klucz-wartoúÊ, co zapewnia duøπ elastycznoúÊ w przechowywaniu danych, gdyø pozwala na m.in. przechowywanie zagnieødøonych struktur oraz umoøliwia pobranie danych w postaci zagnieødøonej struktury nawet poprzez jedno zapytanie. Za≥oøono, øe pomocnicza baza danych bÍdzie odpowiadaÊ za przechowywanie danych o artyku≥ach, gdyø artyku≥y majπ z≥oøonπ, zagnieødøonπ strukturÍ. Artyku≥y zawierajπ rozdzia≥y, podrozdzia≥y, komentarze oraz opinie, a nierelacyjna baza dokumentowa wydaje siÍ byÊ dobrym pomys≥em do tego, gdyø w przypadku relacyjnej bazy danych naleøa≥oby wykonaÊ wiele klauzuli JOIN, aby pobraÊ te same dane (np. w przypadku komentarze o danym artykule), co jest mniej efektywne niø w przypadku nierelacyjnej bazy dokumentowej, przy ktÛrej wystarczy≥oby nawet jedno zapytanie.
+\subsection{Baza danych}
+Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. Za≥oøono, øe w systemie zostanπ wykorzystane dwie rÛøne bazy danych: obiektowo-relacyjna (SQL) oraz nierelacyjna oparta na dokumentach (NoSQL). 
 
-\section{Aplikacja serwerowa - Backend}
-Backend jest odpowiedzialny za przyjmowanie øπdaÒ od klienta, odpowiednie przetwarzanie tych øπdaÒ, wykonywanie pewnych operacji na danych przechowywanych w bazie danych na podstawie otrzymanych przez klienta danych i przekazywanie klientowi adekwatnej odpowiedzi. Backend udostÍpnia klientowi punkty koÒcowe (ang.\ \emph{API endpoints}) do ktÛrych klient moøe przes≥aÊ øπdanie. Punkty koÒcowe posiadajπ adresy URL np. http://localhost:9000/user, ktÛre sk≥adajπ siÍ nazwy protoko≥u (http), nazwy hosta docelowego (localhost), portu docelowego (9000) oraz reszty, ktÛra identyfikuje punkt koÒcowy oraz jego przeznaczenie (dla przyk≥adu punkt koÒcowy o koÒcÛwce adresu user zwiπzany jest z uøytkownikami i klient moøe np. wys≥aÊ øπdanie na ten endpoint do pobrania danych uøytkownika o danym id). Waønym elementem w przypadku backendu jest rÛwnieø wys≥anie klientowi odpowiedniego statusu odpowiedzi oraz ewentualne do≥πczenie informacji zwrotnej do wiadomoúci, tak aby klient mÛg≥ odpowiednio zareagowaÊ na otrzymanπ odpowiedü (np. w przypadku otrzymania negatywnej odpowiedzi, klient bÍdzie mÛg≥ wyúwietliÊ uøytkownikowi komunikat o b≥Ídzie, a w przypadku otrzymania odpowiedzi negatywnej, klient bÍdzie mÛg≥ wyúwietliÊ komunikat o sukcesie). Punkty koÒcowe backendu sπ chronione przez warstwÍ bezpieczeÒstwa. Klient bÍdzie mÛg≥ wys≥aÊ øπdanie na dany endpoint tylko wtedy, gdy uøytkownik po stronie klienta bÍdzie mia≥ wymagane przez ten endpoint uprawnienia (role). Warstwa ta jest w úcis≥ym powiπzaniu z warstwπ bazy danych.
+Jako g≥Ûwnπ bazÍ danych wybrano bazÍ obiektowo-relacyjnπ, gdyø bazy relacyjne charakteryzujπ siÍ tym, øe zapewniajπ integralnoúÊ danych poprzez tworzenie relacji np. poprzez powiπzanie tabel kluczem obcym, a w realizowanym systemie wykryto wiele przypadkÛw, w ktÛrych moøna by utworzyÊ relacje np. w≥aúciciel artyku≥u jest powiπzaniem miÍdzy encjami uøytkownika i artyku≥u, historia modyfikacji technologii jest do≥πczona do danej technologii, czy teø recenzent ma przypisane do siebie technologie, w ktÛrych siÍ specjalizuje. W tym przypadku zdecydowano siÍ na obiektowπ warstwÍ bazy danych, gdyø upraszcza ona pracÍ z kilkoma wykorzystywanymi narzÍdziami (np. Jav'owy framework Hibernate), ktÛre oparte sπ na programowaniu obiektowym. 
 
-\section{Klient - Frontend}
-Frontend jest odpowiedzialny za wysy≥anie øπdaÒ do warstwy backendowej i nastÍpnie odpowiednie przetwarzanie oraz wyúwietlanie danych otrzymanych w odpowiedzi od backendu. W systemie tym klientem jest strona internetowa renderowana po stronie uøytkownika. Klient jest aplikacjπ typu SPA (ang.\ \emph{Single Page Application}), co oznacza, øe aplikacja sk≥ada siÍ z jednej strony HTML, a jej zawartoúÊ jest zmieniana dynamiczne poprzez JavaScript. Zdecydowano siÍ na aplikacjÍ typu SPA, a nie MPA (ang.\ \emph{Multi Page Application}) g≥Ûwnie dlatego, øe aplikacje SPA dzia≥ajπ szybciej z powodu tylko jednej strony HTML, co jest w przypadku tego systemu konieczne, gdyø przewidziano, øe aplikacja bÍdzie siÍ sk≥adaÊ z wielu podstron. Kolejnymi kryteriami na korzyúÊ SPA by≥y ≥atwiejsze wdroøenie, gdyø wystarczπ jedynie 3 pliki (HTML, CSS i JavaScript), ≥atwiejsze wprowadzenie dynamicznej zawartoúci oraz u≥atwione tworzenie aplikacji. Frontend jest rÛwnieø chroniony przez warstwÍ bezpieczeÒstwa. Uøytkownik bÍdzie mia≥ dostÍp do podstron oraz funkcji systemu jedynie w zakresie posiadanych przez niego uprawnieÒ (rÛl).
+Jako pomocniczπ bazÍ danych wybrano bazÍ nierelacyjnπ opartπ na dokumentach, ktÛra pozwala na przechowywanie struktur typu klucz-wartoúÊ, co zapewnia duøπ elastycznoúÊ w przechowywaniu danych, gdyø pozwala na m.in. przechowywanie zagnieødøonych struktur oraz umoøliwia pobranie danych w postaci zagnieødøonej struktury nawet poprzez jedno zapytanie. Za≥oøono, øe pomocnicza baza danych bÍdzie odpowiadaÊ za przechowywanie danych o artyku≥ach, gdyø artyku≥y majπ z≥oøonπ, zagnieødøonπ strukturÍ. Artyku≥y zawierajπ rozdzia≥y, podrozdzia≥y, komentarze oraz opinie, a nierelacyjna baza dokumentowa wydaje siÍ byÊ dobrym pomys≥em do tego, gdyø w przypadku relacyjnej bazy danych naleøa≥oby wykonaÊ wiele klauzuli JOIN, aby pobraÊ te same dane (np. w przypadku komentarzy o danym artykule), co jest mniej efektywne niø w przypadku nierelacyjnej bazy dokumentowej, przy ktÛrej wystarczy≥oby tylko jedno zapytanie.
 
-\section{Warstwa bezpieczeÒstwa}
-W systemie zostanie dodana warstwa bezpieczeÒstwa w postaci osobnego serwera, ktÛry odpowiada za uwierzytelnienie i autoryzacjÍ. Warstwa ta zabezpiecza zarÛwno warstwÍ klienckπ poprzez blokowanie niektÛrych podstron, jak i funkcji systemu, ktÛre nie powinny byÊ dostÍpne dla danego uøytkownika, jak i serwer aplikacji poprzez wymÛg dostarczania prawid≥owego tokenu dostÍpu (ang.\ \emph{Access token}) przy wysy≥aniu przez klienta kaødego øπdania do zabezpieczonego punktu koÒcowego tego serwera.
+\subsection{Aplikacja serwerowa - Backend}
+Backend jest odpowiedzialny za przyjmowanie øπdaÒ od klienta, odpowiednie przetwarzanie tych øπdaÒ, wykonywanie pewnych operacji na danych przechowywanych w bazie danych na podstawie otrzymanych przez klienta danych i przekazywanie klientowi adekwatnej odpowiedzi. Backend udostÍpnia klientowi punkty koÒcowe (ang.\ \emph{API endpoints}) do ktÛrych klient moøe przes≥aÊ øπdanie. Punkty koÒcowe posiadajπ adresy URL np. http://localhost:9000/user (1). Adresy URL sk≥adajπ siÍ nazwy protoko≥u, nazwy hosta docelowego, portu docelowego oraz reszty, ktÛra identyfikuje punkt koÒcowy oraz jego przeznaczenie. Waønym elementem w przypadku backendu jest rÛwnieø wys≥anie klientowi odpowiedniego statusu odpowiedzi oraz ewentualne do≥πczenie informacji zwrotnej do wiadomoúci, tak aby klient mÛg≥ odpowiednio zareagowaÊ na otrzymanπ odpowiedü (np. w przypadku otrzymania negatywnej odpowiedzi, klient bÍdzie mÛg≥ wyúwietliÊ uøytkownikowi komunikat o b≥Ídzie, a w przypadku otrzymania odpowiedzi negatywnej, klient bÍdzie mÛg≥ wyúwietliÊ komunikat o sukcesie). Punkty koÒcowe backendu sπ chronione przez warstwÍ bezpieczeÒstwa. Klient bÍdzie mÛg≥ wys≥aÊ øπdanie na dany endpoint tylko wtedy, gdy uøytkownik po stronie klienta bÍdzie mia≥ wymagane przez ten endpoint uprawnienia (role). Warstwa ta jest úciúle powiπzana z warstwπ bazy danych.
+
+\subsection{Klient - Frontend}
+Frontend jest odpowiedzialny za wysy≥anie øπdaÒ do warstwy backendowej i nastÍpnie odpowiednie przetwarzanie oraz wyúwietlanie danych otrzymanych w odpowiedzi od backendu. W systemie tym klientem jest strona internetowa renderowana po stronie uøytkownika. Klient jest aplikacjπ typu SPA (ang.\ \emph{Single Page Application}), co oznacza, øe aplikacja sk≥ada siÍ z jednej strony HTML, a jej zawartoúÊ jest zmieniana dynamiczne poprzez JavaScript. Zdecydowano siÍ na aplikacjÍ typu SPA, a nie MPA (ang.\ \emph{Multi Page Application}) g≥Ûwnie dlatego, øe aplikacje SPA dzia≥ajπ szybciej z powodu tylko jednej strony HTML. Kolejnymi kryteriami na korzyúÊ SPA by≥y ≥atwiejsze wdroøenie, gdyø wystarczπ do tego jedynie 3 pliki (HTML, CSS i JavaScript), ≥atwiejsze wprowadzenie dynamicznej zawartoúci oraz u≥atwione tworzenie aplikacji. Frontend jest rÛwnieø chroniony przez warstwÍ bezpieczeÒstwa. Uøytkownik bÍdzie mia≥ dostÍp do podstron oraz funkcji systemu jedynie w zakresie posiadanych przez niego uprawnieÒ (rÛl).
+
+\subsection{Warstwa bezpieczeÒstwa}
+W systemie zostanie dodana warstwa bezpieczeÒstwa w postaci osobnego serwera, ktÛry odpowiada za uwierzytelnienie i autoryzacjÍ. Warstwa ta zabezpiecza zarÛwno warstwÍ klienckπ, jak i serwer aplikacji. Warstwa kliencka jest chroniona poprzez blokowanie niektÛrych podstron, jak i funkcji systemu, ktÛre nie powinny byÊ dostÍpne dla danego uøytkownika. Mechanizmem bezpieczeÒstwa dla aplikacji serwerowej jest wymÛg dostarczania prawid≥owego tokenu dostÍpu (ang.\ \emph{Access token}) oraz posiadania odpowiednich uprawnieÒ przy wysy≥aniu przez klienta øπdania do zabezpieczonego punktu koÒcowego tego serwera.
 
 Klient moøe uzyskaÊ token dostÍpu poprzez zalogowanie siÍ do serwera bezpieczeÒstwa. Logowanie moøe byÊ wykonane poprzez wys≥anie przez klienta øπdania z danymi do logowania na odpowiedni endpoint serwera bezpieczeÒstwa. W przypadku pomyúlnego logowania, klient otrzymuje od serwera bezpieczeÒstwa m.in. wygenerowane tokeny dostÍpu oraz odúwieøania wraz z datami waønoúci tych tokenÛw. Token dostÍpu jest pÛüniej dostarczany przez klienta w nag≥Ûwku wiadomoúci w polu przeznaczonym do autoryzacji: \texttt{Authorization: Bearer <token>}. Przed wys≥aniem øπdania do backendu klient sprawdza, czy token dostÍpu straci≥ swojπ waønoúÊ (zwykle kilka minut) i jeúli token ten straci≥ swojπ waønoúÊ, to klient wysy≥a øπdanie z do≥πczonym tokenem odúwieøania o wygenerowanie nowego tokenu dostÍpu, do ktÛrego do≥πczony bÍdzie rÛwnieø aktualny token odúwieøania. Token odúwieøania moøe straciÊ swojπ waønoúÊ jedynie w przypadku wylogowania oraz nieaktywnoúci uøytkownika. Opisany proces uwierzytelnienia nazywa siÍ uwierzytelnianiem na okaziciela (ang.\ \emph{Bearer authentication}). Zastosowany serwer bezpieczeÒstwa przeprowadza autoryzacjÍ uøytkownikÛw w oparciu o ich role.
 
-\section{REST (ang.\ \emph{Representational state transfer})}
-Komunikacja w systemie miÍdzy frontendem i backendem, frontendem i serwerem bezpieczeÒstwa oraz backendem i serwerem bezpieczeÒstwa odbywa siÍ za pomocπ \texttt{REST}. \texttt{REST} jest to sposÛb i format w jaki komunikuje siÍ klient z serwerem. Serwer udostÍpnia klientowi punkty koÒcowe (end-pointy), do ktÛrych klient moøe wys≥aÊ øπdania http przesy≥ajπc przy tym jakieú dane np. tytu≥ wyszukiwanego artyku≥u. W skrÛcie komunikacja REST odznacza siÍ nastÍpujπcymi cechami:
-\begin{itemize}
-	\item BezstanowoúÊ (nie przechowuje informacji o poprzednich wymianach wiadmoúci),
-	\item Architektura klient-serwer,
-	\item Jednolity interfejs komunikacyjny ñ dziÍki temu moøliwe jest np. komunikowanie siÍ systemÛw zaimplementowanych w rÛønych jÍzykach programowania, czy zainstalowanych na rÛønych platformach (mobilna,
-	\item Wykorzystywanie protoko≥u \texttt{http}.
-\end{itemize}
+\section{Wymagania funkcjonalne}
 
-\section{HTTP (ang.\ \emph{Hypertext Transfer Protocol})}
-ProtokÛ≥ warstwy aplikacji opisujπcy zasady przesy≥ania zawartoúci w Internecie. ProtokÛ≥ ten jest oparty na komunikacji typu klient-serwer, przy czym klientem jest najczÍúciej przeglπdarka. Klientem wysy≥a øπdanie do serwera, a serwer wysy≥a do klienta odpowiedü. ZawartoúÊ wiadomoúci HTTP moøna przede wszystkim podzieliÊ na nag≥Ûwek (ang.\ \emph{Header}) oraz ≥adunek (ang.\ \emph{Body}). W nag≥Ûwku znajdujπ siÍ pola typu klucz-wartoúÊ. Nag≥Ûwek øπdania rÛøni siÍ od nag≥Ûwka odpowiedzi poprzez dostÍpne opcje, ale majπ one rÛwnieø wspÛlne pola np. informacja o hoúcie docelowym, czy format wiadomoúci. W nag≥Ûwku øπdania moøna wyrÛøniÊ jeszcze np. nag≥Ûwek 
-\texttt{Authorization}, w ktÛrym umieszczane sπ poúwiadczenia uwierzytelnienia. W nag≥Ûwku odpowiedzi moøna za to wyrÛøniÊ m.in. status odpowiedzi, ktÛry np. informuje o tym, czy øπdanie zosta≥o wykonane pomyúlnie (np. status 200), czy teø wystπpi≥ b≥πd, a jeúli wystπpi≥, to z jakiego powodu (np. status 401 oznaczajπcy nieudane uwierzytelnienie uøytkownika). £adunek jest opcjonalnym polem, ktÛre stanowi treúÊ wiadomoúci HTTP i np. w przypadku odpowiedzi moøe zawieraÊ listÍ wyszukanych artyku≥Ûw.
+Pierwszym etapem realizacji pracy jest okreúlenie wymagaÒ funkcjonalnych i niefunkcjonalnych. W tym celu konieczne jest wprowadzenie pojÍÊ, ktÛre bÍdπ wykorzystywane w dalszej czÍúci pracy.
 
-\chapter{Wymagania funkcjonalne}
-
-Na podstawie celu oraz zakresu pracy zdefiniowano definicje oraz wymagania funkcjonalne.
-
-\section{Definicje}
+\subsection{S≥ownik pojÍÊ}
 
 Przed zdefiniowaniem wymagaÒ funkcjonalnych, potrzebne by≥o okreúlenie definicji, ktÛre bÍdπ uøywane zarÛwno przy wymaganiach funkcjonalnych, jak i w reszcie pracy.
 \newline
 \newline
-Zdefiniowano nastÍpujπce definicje:
+W pracy bÍdπ wykorzystywane nastÍpujπce pojÍcia:
 \begin{itemize}
-	\item Technologie - technologie i narzÍdzia wykorzystywane przez informatykÛw, a przede wszystkim przez programistÛw. 
-		Technologie bÍdπ opisywane nastÍpujπcymi atrybutami:
+	\item Technologia - pakiet oprogramowania wykorzystywany przez informatykÛw, a w szczegÛlnoúci przez programistÛw. 
+		Technologia bÍdzie opisywana nastÍpujπcymi atrybutami:
 		\begin{itemize}
 			\item Nazwa,
 			\item Opis,
@@ -66,10 +66,9 @@ Zdefiniowano nastÍpujπce definicje:
 			\item Kategoria,
 			\item Data pierwszego wydania (opcjonalne),
 			\item Data ostatniego wydania (opcjonalne),
-			\item Daty edycji,
-			\item Informacje o osobach, ktÛre dokona≥y edycji.
+			\item Daty edycji.
 		\end{itemize}
-	\item Klasyfikacja technologii - hierarchiczny podzia≥ technologii na kategorie ze wzglÍdu na ich architekturÍ. KlasyfikacjÍ tÍ moøna przedstawiÊ w postaci 
+	\item Podzia≥ technologii - hierarchiczny podzia≥ technologii na kategorie ze wzglÍdu na ich architekturÍ. KlasyfikacjÍ tÍ moøna przedstawiÊ w postaci 
 				nastÍpujπcego drzewa:
 				\begin{itemize}
 					\item Technologie informatyczne
@@ -90,24 +89,23 @@ Zdefiniowano nastÍpujπce definicje:
 					\item årodowiska uruchomieniowe
 						\begin{itemize}
 							\item System operacyjny (np. Windows, Linux)
-							\item Wysokopoziomowe (JVM, .NET, node.js)
-							\item Niskopoziomowe (np. Arduino, Rasberry Pi)	
+							\item årodowiska wirtualizowane (JVM, .NET, node.js)
+							\item Systemy wbudowane (np. Arduino, Rasberry Pi)	
 						\end{itemize}
-					\item NarzÍdzia (oprogramowanie)
+					\item NarzÍdzia developerskie
 						\begin{itemize}
 							\item årodowisko programistyczne (np. Netbeans, Eclipse, Visual Studio Code, Visual Studio, Itellij)
 							\item System kontroli wersji (np. git)
 								\begin{itemize}
 									\item Serwisy hostujπce gita (np. GitLab, GitHub)
 								\end{itemize}
-							\item CI/CD (np. Jenkins, GitlLab CI)
+							\item CI/CD - ciπg≥a integracja/ciπg≥e dostarczanie (np. Jenkins, GitlLab CI)
 							\item Konteneryzacja (np. docker)
 							\item Orkiestracja (system do zarzπdzania, organizacji i planowania zasobÛw systemu ñ np. Docker Compose, Kubernetes)
 						\end{itemize}
-					\item Inne (w przypadku, gdy w bazie danych nie znaleziono kategorii technologii ze wzglÍdu na jej architekturÍ)
+					\item Inne (oprogramowanie, ktÛre nie zosta≥o przypisane do øadnej z ww. kategorii)
 				\end{itemize}
-		Za≥oøono, øe drzewo to bÍdzie edytowalne dopiero powyøej 1 poziomu.
-	\item Artyku≥ - informacja o danej technologii stworzona przez uøytkownika. 
+	\item Artyku≥ - opis danej technologii przygotowany przez uøytkownika systemu. 
 		Artyku≥ bÍdzie opisywany nastÍpujπcymi atrybutami:
 		\begin{itemize}
 			\item Status (moøliwe wartoúci: nowy, przypisywany do weryfikacji, weryfikowany, przedawniona weryfikacja, odrzucony, opublikowany, edytowany),
@@ -123,63 +121,66 @@ Zdefiniowano nastÍpujπce definicje:
 			\item Lista opinii o artykule,
 			\item Lista opinii o technologii,
 			\item årednia ocena z co najmniej 5-ciu opinii o artykule,
-			\item Data przypisania do weryfikacji,
-			\item Weryfikujπcy recenzent.
+			\item Data przypisania artyku≥u do weryfikacji,
+			\item Recenzent przypisany do weryfikacji artyku≥u.
 		\end{itemize}
-		Artyku≥y podlegajπ cyklowi øycia, ktÛry jest przedstawiony na diagramie maszyny stanÛw~\ref{fig:cykl-zycia-artykulu}:
+		Artyku≥y podlegajπ cyklowi øycia, ktÛry jest przedstawiony na diagramie~\ref{fig:cykl-zycia-artykulu}:
 		
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=\linewidth]{rys02/cykl-zycia-artykulu}
 			\caption{Cykl øycia artyku≥u}
 			\label{fig:cykl-zycia-artykulu}
+			\caption*{èrÛd≥o: opracowanie w≥asne}
 		\end{figure}
-		
-		Diagram~\ref{fig:cykl-zycia-artykulu} przedstawia przejúcia do odpowiednich statusÛw artyku≥u (zaokrπglone prostokπty) w zaleønoúci od podjÍtych przez uøytkownikÛw 
-		dzia≥aÒ.
-	\item Rola - zestaw uprawnieÒ uøytkownika, ktÛre okreúlajπ jego zakres dostÍpu do systemu oraz okreúlonych funkcji tego systemu. Moøliwe jest przypisanie danemu 
-				uøytkownikowi rÛl, co jest rÛwnoznaczne z uzyskaniem przez tego uøytkownika uprawnieÒ zdefiniowanych w tych rolach. WyrÛøniono w systemie nastÍpujπce 
-				role:
-		\begin{itemize}
-			\item Uøytkownik - kaødy uøytkownik korzystajπcy z serwisu. Moøe on jedynie przeglπdaÊ zasoby serwisu,
-			\item Niezalogowany uøytkownik - niezalogowany uøytkownik majπcy moøliwoúÊ przeglπdania zasobÛw serwisu oraz moøe siÍ zarejestrowaÊ i zalogowaÊ,
-			\item Zalogowany uøytkownik - kaødy zarejestrowany i zalogowany uøytkownik. Moøe on przede wszystkim przeglπdaÊ i tworzyÊ artyku≥y oraz wystawiaÊ komentarze i 
-						opinie o artyku≥ach.
-			\item Autor artyku≥u - zalogowany uøytkownik mogπcy edytowaÊ oraz usuwaÊ utworzone przez siebie artyku≥y,
-			\item Autor komentarza o artykule - zalogowany uøytkownik mogπcy edytowaÊ oraz usuwaÊ utworzone przez siebie komentarze o artykule,
-			\item Autor opinii o artykule - zalogowany uøytkownik mogπcy edytowaÊ oraz usunπÊ utworzonπ przez siebie opiniÍ o artykule,
-			\item Autor akceptacji opinii o artykule - zalogowany uøytkownik mogπcy usunπÊ utworzonπ przez siebie akceptacjÍ opinii o artykule,
-			\item Recenzent (ekspert od technologii) - zalogowany uøytkownik, ktÛry otrzyma≥ od administratora rolÍ recenzenta. Jego g≥Ûwnym zadaniem jest 
-						weryfikacja artyku≥Ûw przed ich opublikowaniem w serwisie. Na podstawie utworzonej przez administratora listy technologii, w ktÛrych dany recenzent jest 
-						ekspertem, przydzielane sπ temu recenzentowi odpowiednie artyku≥y do zrecenzowania (zweryfikowania). Innym uprawnieniem tego uøytkownika jest m.in. 
-						zarzπdzanie klasyfikacjπ technologii.
-			\item Administrator (utrzymuje porzπdek w serwisie) - zalogowany uøytkownik, ktÛry otrzyma≥ od innego administratora rolÍ administratora. Odpowiada 
-						on  przede wszystkim za przydzielanie rÛl uøytkownikom, ustalanie listy technologii, w ktÛrych dany recenzent jest ekspertem oraz utrzymywanie porzπdku w 
-						serwisie poprzez edytowanie i usuwanie niew≥aúciwych treúci (np. wirusy lub spam). Przy instalacji systemu powinno byÊ tworzone co najmniej jedno konto 
-						uøytkownika z rolπ administratora, gdyø to w≥aúnie administrator odpowiada za przydzielanie rÛl innym uøytkownikom,
-			\item System - sprzÍt, ktÛry odpowiada za automatyczne przypisywanie recenzenta do weryfikacji artyku≥Ûw oraz automatyczne ponowne przypisanie artyku≥u do 
-						weryfikacji innemu recenzentowi, jeúli up≥ynπ≥ 1-tygodniowy termin weryfikacji artyku≥u przez aktualnego recenzenta.
-		\end{itemize}
+	\item Weryfikacja artyku≥u - ocena artyku≥u dotyczπca tego, czy artyku≥ powinien zostaÊ opublikowany w serwisie (zaakceptowanie artyku≥u) albo wymaga jeszcze korekty (
+				odrzucenie artyku≥u),
+	\item DostÍpnoúÊ uøytkownika - informacja o tym, czy recenzent bÍdzie mÛg≥ weryfikowaÊ artyku≥y w danym czasie,
 	\item Komentarz do artyku≥u - tekstowa informacja zwrotna zalogowanego uøytkownika o danym artykule,
-	\item Ocena artyku≥u - ocena wystawiona przez zalogowanego uøytkownika na temat danego artyku≥u. Ocena ta jest w postaci gwiazdek bÍdπca wartoúciπ od 1 
-				do 5, przy czym wartoúÊ 1 oznacza ocenÍ negatywnπ i wskazuje, øe artyku≥ posiada raøπce b≥Ídy i powinien zostaÊ edytowany albo usuniÍty, a wartoúÊ 5 oznacza ocenÍ 
+	\item Ocena artyku≥u - ocena wystawiona przez zalogowanego uøytkownika na temat danego artyku≥u. Ocena ta jest w postaci gwiazdek bÍdπca wartoúciπ od 1 do 5, przy 
+				czym wartoúÊ 1 oznacza ocenÍ negatywnπ i wskazuje, øe artyku≥ posiada raøπce b≥Ídy i powinien zostaÊ edytowany albo usuniÍty, a wartoúÊ 5 oznacza ocenÍ 
 				pozytywnπ i wskazuje, øe artyku≥ nie posiada raøπcych b≥ÍdÛw oraz informacje w nim zawarte sπ niezwykle przydatne dla uøytkownikÛw,
 	\item Opinia o artykule - oceniajπca informacja zwrotna zalogowanego uøytkownika na temat danego artyku≥u, ktÛra zawiera tekstowy komentarz oraz 
 				ocenÍ tego artyku≥u,
 	\item Akceptacja opinii o artykule - ocena wystawiona przez zalogowanego uøytkownika dotyczπca opinii o artykule. Przyjmuje ona dwie wartoúci: ocena pozytywna (≥apka w 
 				gÛrÍ) oznaczajπca, øe uøytkownik zgadza siÍ z opiniπ i ocena negatywna (≥apka w dÛ≥) oznaczajπca, iø uøytkownik nie zgadza siÍ z opiniπ.
+		
+		Diagram~\ref{fig:cykl-zycia-artykulu} przedstawia przejúcia do odpowiednich statusÛw artyku≥u (zaokrπglone prostokπty) w wyniku podjÍtych przez uøytkownikÛw 
+		dzia≥aÒ.
+	\item Rola - zestaw uprawnieÒ uøytkownika, ktÛre okreúlajπ jego zakres dostÍpu do systemu oraz okreúlonych funkcji tego systemu. Moøliwe jest przypisanie danemu 
+				uøytkownikowi rÛl, co jest rÛwnoznaczne z uzyskaniem przez tego uøytkownika uprawnieÒ zdefiniowanych w tych rolach. WyrÛøniono w systemie nastÍpujπce 
+				role:
+		\begin{itemize}
+			\item uøytkownik - kaødy uøytkownik korzystajπcy z serwisu. Moøe on jedynie przeglπdaÊ zasoby serwisu,
+			\item niezalogowany uøytkownik - niezalogowany uøytkownik majπcy moøliwoúÊ przeglπdania zasobÛw serwisu oraz moøe siÍ zarejestrowaÊ i zalogowaÊ,
+			\item zalogowany uøytkownik - kaødy zarejestrowany i zalogowany uøytkownik. Moøe on przede wszystkim przeglπdaÊ i tworzyÊ artyku≥y oraz wystawiaÊ komentarze i 
+						opinie o artyku≥ach.
+			\item autor artyku≥u - zalogowany uøytkownik mogπcy edytowaÊ oraz usuwaÊ utworzone przez siebie artyku≥y,
+			\item autor komentarza o artykule - zalogowany uøytkownik mogπcy edytowaÊ oraz usuwaÊ utworzone przez siebie komentarze o artykule,
+			\item autor opinii o artykule - zalogowany uøytkownik mogπcy edytowaÊ oraz usunπÊ utworzonπ przez siebie opiniÍ o artykule,
+			\item autor akceptacji opinii o artykule - zalogowany uøytkownik mogπcy usunπÊ utworzonπ przez siebie akceptacjÍ opinii o artykule,
+			\item recenzent (ekspert od technologii) - zalogowany uøytkownik, ktÛry otrzyma≥ od administratora rolÍ recenzenta. Jego g≥Ûwnym zadaniem jest 
+						weryfikacja artyku≥Ûw przed ich opublikowaniem w serwisie. Na podstawie utworzonej przez administratora listy technologii, w ktÛrych dany recenzent jest 
+						ekspertem, przydzielane sπ temu recenzentowi odpowiednie artyku≥y do zrecenzowania (zweryfikowania). Innym uprawnieniem tego uøytkownika jest m.in. 
+						zarzπdzanie klasyfikacjπ technologii.
+			\item administrator (utrzymuje porzπdek w serwisie) - zalogowany uøytkownik, ktÛry otrzyma≥ od innego administratora rolÍ administratora. Odpowiada 
+						on  przede wszystkim za przydzielanie rÛl uøytkownikom, ustalanie listy technologii, w ktÛrych dany recenzent jest ekspertem oraz utrzymywanie porzπdku w 
+						serwisie poprzez edytowanie i usuwanie niew≥aúciwych treúci (np. wirusy lub spam). Przy instalacji systemu powinno byÊ tworzone co najmniej jedno konto 
+						uøytkownika z rolπ administratora, gdyø to w≥aúnie administrator odpowiada za przydzielanie rÛl innym uøytkownikom,
+			\item system - sprzÍt, ktÛry odpowiada za automatyczne przypisywanie recenzenta do weryfikacji artyku≥Ûw oraz automatyczne ponowne przypisanie artyku≥u do 
+						weryfikacji innemu recenzentowi, jeúli up≥ynπ≥ 1-tygodniowy termin weryfikacji artyku≥u przez aktualnego recenzenta.
+		\end{itemize}
 \end{itemize}
 				
-\section{Wymagania funkcjonalne poszczegÛlnych rÛl uøytkownikÛw}
-	Po zdefiniowaniu potrzebnych definicji, moøna by≥o juø przystπpiÊ do okreúlenia wymagaÒ funkcjonalnych poszczegÛlnych rÛl uøytkownikÛw, ktÛre bÍdπ opisywa≥y dostÍpne
-	funkcje dla uøytkownikÛw.
+\subsection{Wymagania funkcjonalne poszczegÛlnych rÛl uøytkownikÛw}
+	Po zdefiniowaniu pojÍÊ, przystπpiono do okreúlenia wymagaÒ funkcjonalnych poszczegÛlnych rÛl uøytkownikÛw.
 	\newline
 	\newline
 	Zdefiniowano nastÍpujπce wymagania funkcjonalne:
 	\begin{itemize}
 		\item \texttt{Uøytkownik} powinien mieÊ moøliwoúÊ:
 			\begin{itemize}
-				\item Wyszukiwania artyku≥Ûw po nastÍpujπcych kryteriach:
+				\item wyszukiwania artyku≥Ûw po nastÍpujπcych kryteriach:
 					\begin{itemize}
 						\item Tytu≥,
 						\item Autor,
@@ -190,17 +191,17 @@ Zdefiniowano nastÍpujπce definicje:
 						\item Zakres dat, w ktÛrych mieúci siÍ data modyfikacji,
 						\item W≥asne artyku≥y.
 					\end{itemize}
-				\item Sortowania artyku≥Ûw po nastÍpujπcych wartoúciach:
+				\item sortowania artyku≥Ûw wed≥ug nastÍpujπcych kryteriÛw:
 					\begin{itemize}
 						\item PopularnoúÊ (liczba opinii),
 						\item Data powstania,
 						\item Data modyfikacji,
 						\item årednia ocena.
 					\end{itemize}
-				\item Wyúwietlenia zawartoúci artyku≥u,
-				\item Przeglπdania komentarzy o artykule,
-				\item Przeglπdania opinii o artykule,
-				\item Wyszukiwania technologii po nastÍpujπcych kryteriach:
+				\item wyúwietlenia zawartoúci artyku≥u,
+				\item przeglπdania komentarzy o artykule,
+				\item przeglπdania opinii o artykule,
+				\item wyszukiwania technologii po nastÍpujπcych kryteriach:
 					\begin{itemize}
 						\item Nazwa
 						\item Kategoria,
@@ -209,18 +210,18 @@ Zdefiniowano nastÍpujπce definicje:
 						\item Zakres dat, w ktÛrych mieúci siÍ data pierwszego wydania,
 						\item Zakres dat, w ktÛrych mieúci siÍ data ostatniego wydania.
 					\end{itemize}
-				\item Sortowania technologii po nastÍpujπcych wartoúciach:
+				\item sortowania technologii wed≥ug nastÍpujπcych kryteriÛw:
 					\begin{itemize}
 						\item PopularnoúÊ (liczba opinii),
 						\item Data pierwszego wydania,
 						\item Data ostatniego wydania,
 						\item årednia ocena.
 					\end{itemize}
-				\item Wyúwietlenia opisu technologii,
+				\item wyúwietlenia opisu technologii,
 			\end{itemize}
 		\item \texttt{Niezalogowany uøytkownik} powinien mieÊ moøliwoúÊ:
 			\begin{itemize}
-				\item Zarejestrowania siÍ
+				\item zarejestrowania siÍ
 					\begin{itemize}
 						\item Podczas rejestracji uøytkownik bÍdzie podawa≥ nastÍpujπce informacje:
 							\begin{itemize}
@@ -235,7 +236,7 @@ Zdefiniowano nastÍpujπce definicje:
 						\item Po rejestracji i zalogowaniu, uøytkownik uzyskuje uprawnienia zalogowanego uøytkownika, a aby uzyskaÊ uprawnienia recenzenta lub administratora, naleøy 
 								  w tym celu skontaktowaÊ siÍ z administratorem, ktÛry bÍdzie w stanie nadaÊ takπ rolÍ,
 					\end{itemize}
-				\item Zalogowania siÍ
+				\item zalogowania siÍ
 					\begin{itemize}
 						\item Podczas logowania uøytkownik bÍdzie wpisywa≥ login lub e-mail oraz has≥o,
 						\item Uøytkownik bÍdzie mÛg≥ w tym samym momencie korzystaÊ jedynie z uprawnieÒ w ramach jednej posiadanej i wybranej przez niego roli,
@@ -244,50 +245,50 @@ Zdefiniowano nastÍpujπce definicje:
 			\end{itemize}
 		\item \texttt{Zalogowany uøytkownik} powinien mieÊ moøliwoúÊ:
 			\begin{itemize}
-				\item Edycji w≥asnych danych,
-				\item Zmiany has≥a,
-				\item Wylogowania siÍ,
-				\item Stworzenia artyku≥u, przy czym aby artyku≥ zosta≥ opublikowany w serwisie, to artyku≥ ten musi przejúÊ pozytywnie weryfikacjÍ przeprowadzanπ przez recenzenta,
-				\item Dodania komentarza o artykule,
-				\item Dodania opinii o artykule ktÛrego uøytkownik nie jest autorem. Uøytkownik bÍdzie mÛg≥ zostawiÊ tylko jednπ opiniÍ dla danego artyku≥u,
-				\item Dodania akceptacji opinii o artykule. Uøytkownik bÍdzie mÛg≥ zostawiÊ akceptacjÍ opinii, ktÛrej opinii nie jest autorem oraz bÍdzie mÛg≥ zostawiÊ tylko 
+				\item edycji w≥asnych danych,
+				\item zmiany has≥a,
+				\item wylogowania siÍ,
+				\item stworzenia artyku≥u, przy czym aby artyku≥ zosta≥ opublikowany w serwisie, to artyku≥ ten musi przejúÊ pozytywnie weryfikacjÍ przeprowadzanπ przez recenzenta,
+				\item dodania komentarza o artykule,
+				\item dodania opinii o artykule ktÛrego uøytkownik nie jest autorem. Uøytkownik bÍdzie mÛg≥ zostawiÊ tylko jednπ opiniÍ dla danego artyku≥u,
+				\item dodania akceptacji opinii o artykule. Uøytkownik bÍdzie mÛg≥ zostawiÊ akceptacjÍ opinii, ktÛrej opinii nie jest autorem oraz bÍdzie mÛg≥ zostawiÊ tylko 
 							jednπ akceptacjÍ dla danej opinii o artykule.
 			\end{itemize}
 		\item \texttt{Autor artyku≥u} powinien mieÊ moøliwoúÊ:
 			\begin{itemize}
-				\item Zarzπdzania w≥asnymi artyku≥ami w nastÍpujπcym zakresie:
+				\item zarzπdzania w≥asnymi artyku≥ami w nastÍpujπcym zakresie:
 					\begin{itemize}
-						\item Edytowanie, przy czym aby zmieniony artyku≥ zosta≥ opublikowany w serwisie, to artyku≥ ten musi przejúÊ pozytywnie weryfikacjÍ przeprowadzanπ przez 
+						\item edytowanie, przy czym aby zmieniony artyku≥ zosta≥ opublikowany w serwisie, to artyku≥ ten musi przejúÊ pozytywnie weryfikacjÍ przeprowadzanπ przez 
 									recenzenta,
-						\item Usuwanie.
+						\item usuwanie.
 					\end{itemize}
 			\end{itemize}
 		\item \texttt{Autor komentarza o artykule} powinien mieÊ moøliwoúÊ:
 			\begin{itemize}
-				\item Zarzπdzania w≥asnymi komentarzami o artykule w nastÍpujπcym zakresie:
+				\item zarzπdzania w≥asnymi komentarzami o artykule w nastÍpujπcym zakresie:
 					\begin{itemize}
-						\item Edytowanie,
-						\item Usuwanie.
+						\item edytowanie,
+						\item usuwanie.
 					\end{itemize}
 			\end{itemize}
 		\item \texttt{Autor opinii o artykule} powinien mieÊ moøliwoúÊ:
 			\begin{itemize}
-				\item Zarzπdzania w≥asnπ opiniπ o artykule w nastÍpujπcym zakresie:
+				\item zarzπdzania w≥asnπ opiniπ o artykule w nastÍpujπcym zakresie:
 					\begin{itemize}
-						\item Edytowanie,
-						\item Usuwanie.
+						\item edytowanie,
+						\item usuwanie.
 					\end{itemize}
 			\end{itemize}
 		\item \texttt{Autor akceptacji opinii o artykule} powinien mieÊ moøliwoúÊ:
 			\begin{itemize}
-				\item UsuniÍcia w≥asnej akceptacji opinii o artykule.
+				\item usuniÍcia w≥asnej akceptacji opinii o artykule.
 			\end{itemize}
 		\item \texttt{Recenzent} powinien mieÊ moøliwoúÊ:
 			\begin{itemize}
-				\item Edycji rodziny technologii,
-				\item Ustawienia w≥asnej dostÍpnoúci na ,,dostÍpny'' albo ,,niedostÍpny''. W przypadku ustawionej niedostÍpnoúci nie bÍdπ takiemu recenzentowi przypisywane 
+				\item edycji rodziny technologii,
+				\item ustawienia w≥asnej dostÍpnoúci na ,,dostÍpny'' albo ,,niedostÍpny''. W przypadku ustawionej niedostÍpnoúci nie bÍdπ takiemu recenzentowi przypisywane 
 							artyku≥y do zweryfikowania.
-				\item Weryfikacji artyku≥Ûw
+				\item weryfikacji artyku≥Ûw
 					\begin{itemize}
 						\item Powinna byÊ moøliwoúÊ automatycznego przypisywania artyku≥Ûw do zrecenzowania recenzentom na podstawie ich dostÍpnoúci, posiadanych przez nich list 
 									technologii, w ktÛrych sπ ekspertami oraz liczby zrecenzowanych przez nich artyku≥Ûw. W pierwszej kolejnoúci nie bÍdπ brani pod uwagÍ 
@@ -303,45 +304,45 @@ Zdefiniowano nastÍpujπce definicje:
 			\end{itemize}
 		\item \texttt{Administrator} powinien mieÊ moøliwoúÊ:
 			\begin{itemize}
-				\item Edycji danych innych uøytkownikÛw,
-				\item Zarzπdzania artyku≥ami w nastÍpujπcym zakresie:
+				\item edycji danych innych uøytkownikÛw,
+				\item zarzπdzania artyku≥ami w nastÍpujπcym zakresie:
 					\begin{itemize}
-						\item	Edytowanie,
-						\item Usuwanie.
+						\item	edytowanie,
+						\item usuwanie.
 					\end{itemize}
-				\item Usuwania komentarzy o artykule,
-				\item Usuwania opinii o artykule,
-				\item Przypisywania innym uøytkownikom rÛl,
-				\item Usuwania przypisanych rÛl innych uøytkownikÛw,
-				\item Wyszukiwania technologii spoúrÛd listy technologii, w ktÛrych recenzent jest ekspertem,
-				\item Zarzπdzania listami technologii, w ktÛrych recenzenci sπ ekspertami. Administrator powinien mieÊ moøliwoúÊ:
+				\item usuwania komentarzy o artykule,
+				\item usuwania opinii o artykule,
+				\item przypisywania innym uøytkownikom rÛl,
+				\item usuwania przypisanych rÛl innych uøytkownikÛw,
+				\item wyszukiwania technologii spoúrÛd listy technologii, w ktÛrych recenzent jest ekspertem,
+				\item zarzπdzania listami technologii, w ktÛrych recenzenci sπ ekspertami. Administrator powinien mieÊ moøliwoúÊ:
 					\begin{itemize}
-						\item	Dodawania technologii,
-						\item Usuwania technologii.
+						\item	dodawania technologii,
+						\item usuwania technologii.
 					\end{itemize}
 			\end{itemize}
 		\item \texttt{System} powinien mieÊ moøliwoúÊ:
 			\begin{itemize}
-				\item Edycji danych innych uøytkownikÛw,
-				\item Zarzπdzania artyku≥ami w nastÍpujπcym zakresie:
+				\item edycji danych innych uøytkownikÛw,
+				\item zarzπdzania artyku≥ami w nastÍpujπcym zakresie:
 					\begin{itemize}
-						\item	Edytowanie,
-						\item Usuwanie.
+						\item	edytowanie,
+						\item usuwanie.
 					\end{itemize}
-				\item Usuwania komentarzy o artykule,
-				\item Usuwania opinii o artykule,
-				\item Przypisywania innym uøytkownikom rÛl,
-				\item Usuwania przypisanych rÛl innych uøytkownikÛw,
-				\item Wyszukiwania technologii spoúrÛd listy technologii, w ktÛrych recenzent jest ekspertem,
-				\item Zarzπdzania listami technologii, w ktÛrych recenzenci sπ ekspertami. Administrator powinien mieÊ moøliwoúÊ:
+				\item usuwania komentarzy o artykule,
+				\item usuwania opinii o artykule,
+				\item przypisywania innym uøytkownikom rÛl,
+				\item usuwania przypisanych rÛl innych uøytkownikÛw,
+				\item wyszukiwania technologii spoúrÛd listy technologii, w ktÛrych recenzent jest ekspertem,
+				\item zarzπdzania listami technologii, w ktÛrych recenzenci sπ ekspertami. Administrator powinien mieÊ moøliwoúÊ:
 					\begin{itemize}
-						\item	Dodawania technologii,
-						\item Usuwania technologii.
+						\item	dodawania technologii,
+						\item usuwania technologii.
 					\end{itemize}
 			\end{itemize}
 \end{itemize}
 
-\chapter{Wymagania niefunkcjonalne}
+\section{Wymagania niefunkcjonalne}
 
 Na podstawie celu oraz zakresu pracy zdefiniowano nastÍpujπce wymagania niefunkcjonalne:
 \begin{itemize}
@@ -390,12 +391,11 @@ Na podstawie celu oraz zakresu pracy zdefiniowano nastÍpujπce wymagania niefunkc
 		\end{itemize}
 \end{itemize}
 
-
-\chapter{Diagramy przypadkÛw uøycia}
+\section{Diagramy przypadkÛw uøycia}
 
 Na podstawie zdefiniowanych wczeúniej wymagaÒ funkcjonalnych, wykonano identyfikacjÍ aktorÛw oraz sporzπdzono diagramy przypadkÛw uøycia. Do stworzenia diagramÛw wykorzystano program \texttt{Visual Paradigm Standard}.
 
-\section{Identyfikacja aktorÛw}
+\subsection{Identyfikacja aktorÛw}
 
 Na podstawie analizy wymagaÒ funkcjonalnych zdefiniowano nastÍpujπcych aktorÛw:
 \begin{itemize}
@@ -410,7 +410,8 @@ Na podstawie analizy wymagaÒ funkcjonalnych zdefiniowano nastÍpujπcych aktorÛw:
 	\item \texttt{Administrator}.
 \end{itemize}
 
-\section{Diagramy przypadkÛw uøycia}
+\subsection{Diagramy przypadkÛw uøycia}
+
 Na podstawie zdefiniowanych wczeúniej wymagaÒ funkcjonalnych oraz zidentyfikowanych aktorÛw, sporzπdzono diagramy przypadkÛw uøycia. Zdecydowano siÍ na zastosowanie dziedziczenia miÍdzy aktorami, gdyø opracowane role charakteryzujπ siÍ tym, øe posiadajπ wiele wspÛlnych uprawnieÒ (przypadkÛw uøycia) i dzia≥anie to pozwala na zmniejszenie z≥oøonoúci systemu. Dziedziczenie aktorÛw zosta≥o przedstawione na rysunku~\ref{fig:diagram-przypadkow-uzycia-dziedziczenie-aktorow}.
 
 \begin{figure}[H]
@@ -418,6 +419,7 @@ Na podstawie zdefiniowanych wczeúniej wymagaÒ funkcjonalnych oraz zidentyfikowan
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-dziedziczenie-aktorow}
 	\caption{Dziedziczenie miÍdzy aktorami}
 	\label{fig:diagram-przypadkow-uzycia-dziedziczenie-aktorow}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalnych i liczby rÛl, dla zachowania czytelnoúci, stworzono osobne diagramy dla kaødego aktora. Poniøej znajdujπ siÍ diagramy przypadkÛw uøycia dla poszczegÛlnych aktorÛw. 
@@ -427,6 +429,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-uzytkownik}
 	\caption{Diagram przypadkÛw uøycia dla kaødego uøytkownika}
 	\label{fig:diagram-przypadkow-uzycia-uzytkownik}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -434,6 +437,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 	\includegraphics[width=0.5\linewidth]{rys02/diagram-przypadkow-uzycia-niezalogowany-uzytkownik}
 	\caption{Diagram przypadkÛw uøycia dla niezalogowanego uøytkownika}
 	\label{fig:diagram-przypadkow-uzycia-niezalogowany-uzytkownik}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -441,6 +445,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-zalogowany-uzytkownik}
 	\caption{Diagram przypadkÛw uøycia dla zalogowanego uøytkownika}
 	\label{fig:diagram-przypadkow-uzycia-zalogowany-uzytkownik}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -448,6 +453,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 	\includegraphics[width=0.6\linewidth]{rys02/diagram-przypadkow-uzycia-autor-artykulu}
 	\caption{Diagram przypadkÛw uøycia dla autora artyku≥u}
 	\label{fig:diagram-przypadkow-uzycia-autor-artykulu}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -455,6 +461,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-autor-komentarza-o-artykule}
 	\caption{Diagram przypadkÛw uøycia dla autora komentarza o artykule}
 	\label{fig:diagram-przypadkow-uzycia-autor-komentarza-o-artykule}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -462,6 +469,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 	\includegraphics[width=0.7\linewidth]{rys02/diagram-przypadkow-uzycia-autor-opinii-o-artykule}
 	\caption{Diagram przypadkÛw uøycia dla autora opinii o artykule}
 	\label{fig:diagram-przypadkow-uzycia-autor-opinii-o-artykule}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -469,6 +477,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 	\includegraphics[width=0.8\linewidth]{rys02/diagram-przypadkow-uzycia-autor-akceptacji-opinii-o-artykule}
 	\caption{Diagram przypadkÛw uøycia dla autora akceptacji opinii artykule}
 	\label{fig:diagram-przypadkow-uzycia-autor-akceptacji-opinii-o-artykule}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -476,6 +485,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-recenzent}
 	\caption{Diagram przypadkÛw uøycia dla recenzenta}
 	\label{fig:diagram-przypadkow-uzycia-recenzent}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -483,6 +493,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-administrator}
 	\caption{Diagram przypadkÛw uøycia dla administratora}
 	\label{fig:diagram-przypadkow-uzycia-administrator}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -490,9 +501,10 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 	\includegraphics[width=0.8\linewidth]{rys02/diagram-przypadkow-uzycia-system}
 	\caption{Diagram przypadkÛw uøycia dla systemu}
 	\label{fig:diagram-przypadkow-uzycia-system}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
-\section{Opisy przypadkÛw uøycia}
+\subsection{Opisy przypadkÛw uøycia}
 
 Dla kaødego przypadku uøycia zdefiniowanego w poprzednim punkcie, zrobiono szczegÛ≥owe opisy w postaci tabel, ktÛre sk≥adajπ siÍ z nastÍpujπcych informacji:
 \begin{itemize}
@@ -557,6 +569,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-niezalogowany}
 	\caption{Nag≥Ûwek strony niezalogowanego uøytkownika}
 	\label{fig:prototyp-ui-naglowek-niezalogowany}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -564,6 +577,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-rejestracja}
 	\caption{Formularz rejestracji}
 	\label{fig:prototyp-ui-rejestracja}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -571,6 +585,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-regulaminu}
 	\caption{Formularz s≥uøacy do akceptacji regulaminu}
 	\label{fig:prototyp-ui-akceptacja-regulaminu}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -631,6 +646,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-logowanie}
 	\caption{Formularz logowania}
 	\label{fig:prototyp-ui-logowanie}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -638,6 +654,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-zalogowany}
 	\caption{Nag≥Ûwek strony zalogowanego uøytkownika}
 	\label{fig:prototyp-ui-naglowek-zalogowany}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -645,6 +662,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-ustawienie-hasla}
 	\caption{Formularz do ustawienia has≥a po zresetowaniu has≥a}
 	\label{fig:prototyp-ui-ustawienie-hasla}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -670,6 +688,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-zalogowany-otwarty}
 	\caption{Nag≥Ûwek strony zalogowanego uøytkownika z otwartymi opcjami dotyczπcymi konta}
 	\label{fig:prototyp-ui-naglowek-zalogowany-otwarty}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -716,6 +735,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dane-uzytkownika}
 	\caption{Panel z danymi uøytkownika}
 	\label{fig:prototyp-ui-dane-uzytkownika}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -723,6 +743,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-edycja-wlasnych-danych}
 	\caption{Panel umoøliwiajπcy uøytkownikowi edycjÍ w≥asnych danych}
 	\label{fig:prototyp-ui-edycja-wlasnych-danych}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |}
@@ -768,6 +789,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-zmiana-hasla}
 	\caption{Formularz zmiany has≥a}
 	\label{fig:prototyp-ui-zmiana-hasla}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |}
@@ -828,6 +850,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-administrator}
 	\caption{Nag≥Ûwek strony administratora}
 	\label{fig:prototyp-ui-naglowek-administrator}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -835,6 +858,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-uzytkownikow}
 	\caption{Panel do wyszukiwania uøytkownikÛw}
 	\label{fig:prototyp-ui-wyszukiwanie-uzytkownikow}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -842,6 +866,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}
 	\caption{Panel z danymi uøytkownika widziany przez administratora}
 	\label{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -849,6 +874,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}
 	\caption{Panel umoøliwiajπcy administratorowi edycjÍ danych uøytkownika}
 	\label{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych-edycja}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -935,6 +961,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}
 	\caption{Nag≥Ûwek strony dostÍpnego recenzenta z otwartymi opcjami dotyczπcymi konta}
 	\label{fig:prototyp-ui-naglowek-zalogowany-otwarty-dostepny-recenzent}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -942,6 +969,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-ustawienie-nieobecnosci-otwarte}
 	\caption{Formularz z ustawieniem daty, do ktÛrej ma byÊ ustawiona nieobecnoúÊ uøytkownika razem z otwartym oknem wyboru daty}
 	\label{fig:prototyp-ui-ustawienie-nieobecnosci-otwarte}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -949,6 +977,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}
 	\caption{Nag≥Ûwek strony niedostÍpnego recenzenta z otwartymi opcjami dotyczπcymi konta}
 	\label{fig:prototyp-ui-naglowek-zalogowany-otwarty-niedostepny-recenzent}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{table}[H] \small
@@ -980,6 +1009,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-artykulow-wyniki}
 	\caption{Panel do wyszukiwania artyku≥Ûw z podanymi kryteriami wyszukiwania oraz listπ wyszukanych artyku≥Ûw}
 	\label{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{table}[H] \small
@@ -1008,6 +1038,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=0.3\linewidth]{rys02/prototypy-ui/prototyp-ui-sortowanie-artykulow-opcje}
 	\caption{DostÍpne opcje sortowania artyku≥Ûw}
 	\label{fig:prototyp-ui-sortowanie-artykulow-opcje}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{table}[H] \small
@@ -1034,6 +1065,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-artykul}
 	\caption{Panel z zawartoúciπ artyku≥u}
 	\label{fig:prototyp-ui-artykul}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.3\linewidth} | m{0.65\linewidth} |}
@@ -1081,6 +1113,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-artykulu}
 	\caption{Panel z formularzem dodania lub edytowania artyku≥u}
 	\label{fig:prototyp-ui-dodawanie-edytowanie-artykulu}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.3\linewidth} | m{0.65\linewidth} |}
@@ -1166,6 +1199,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-naglowek-recenzent}
 	\caption{Nag≥owek strony recenzenta}
 	\label{fig:prototyp-ui-naglowek-recenzent}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -1173,6 +1207,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-artykuly-weryfikowane}
 	\caption{Panel z listπ artyku≥Ûw przypisanych recenzentowi do weryfikacji}
 	\label{fig:prototyp-ui-artykuly-weryfikowane}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{table}[H] \small
@@ -1199,6 +1234,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-weryfikacja-artykulu}
 	\caption{Panel s≥uøπcy do weryfikacji artyku≥u}
 	\label{fig:prototyp-ui-weryfikacja-artykulu}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -1240,6 +1276,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-akceptacja-artykulu}
 	\caption{Formularz akceptacji artyku≥u z podanπ informacjπ zwrotnπ}
 	\label{fig:prototyp-ui-akceptacja-artykulu}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -1282,6 +1319,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-odrzucenie-artykulu}
 	\caption{Formularz odrzucenia artyku≥u}
 	\label{fig:prototyp-ui-odrzucenie-artykulu}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -1348,6 +1386,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-artykul-administrator}
 	\caption{Panel z zawartoúciπ artyku≥u widziany z perspektywy administratora}
 	\label{fig:prototyp-ui-artykul-administrator}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{table}[H] \small
@@ -1375,6 +1414,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-komentarze-o-artykule}
 	\caption{Panel z listπ komentarzy o artykule}
 	\label{fig:prototyp-ui-komentarze-o-artykule}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -1419,6 +1459,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule}
 	\caption{Formularz dodania lub edytowania komentarza o artykule}
 	\label{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -1483,6 +1524,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-opcje-komentarza}
 	\caption{DostÍpne opcje do zarzπdzania komentarzem}
 	\label{fig:prototyp-ui-opcje-komentarza}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -1518,6 +1560,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-komentarze-o-artykule-administrator}
 	\caption{Lista komentarzy o artykule widziana z perspektywy administratora}
 	\label{fig:prototyp-ui-komentarze-o-artykule-administrator}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -1542,6 +1585,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-opinie-o-artykule}
 	\caption{Panel z listπ opinii o artykule}
 	\label{fig:prototyp-ui-opinie-o-artykule}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -1586,6 +1630,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=0.8\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-opinii-o-artykule}
 	\caption{Uzupe≥niony przyk≥adowymi danymi formularz dodania lub edytowania opinii o artykule}
 	\label{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-artykule}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -1678,6 +1723,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-opinie-o-artykule-administrator}
 	\caption{Panel z listπ opinii o artykule widziany z perspektywy administratora}
 	\label{fig:prototyp-ui-opinie-o-artykule-administrator}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -1755,6 +1801,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-technologii-wyniki}
 	\caption{Panel do wyszukiwania technologii z podanymi kryteriami wyszukiwania oraz listπ wyszukanych technologii}
 	\label{fig:prototyp-ui-wyszukiwanie-technologii-wyniki}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{table}[H] \small
@@ -1783,6 +1830,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=0.3\linewidth]{rys02/prototypy-ui/prototyp-ui-sortowanie-technologii-opcje}
 	\caption{DostÍpne opcje sortowania technologii}
 	\label{fig:prototyp-ui-sortowanie-technologii-opcje}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{table}[H] \small
@@ -1820,6 +1868,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-technologia}
 	\caption{Panel z zawartoúciπ technologii}
 	\label{fig:prototyp-ui-technologia}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -1913,6 +1962,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-technologii}
 	\caption{Panel z formularzem dodania lub modyfikacji technologii}
 	\label{fig:prototyp-ui-dodawanie-edytowanie-technologii}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
@@ -1920,6 +1970,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-technologii-wyniki-recenzent}
 	\caption{Panel do wyszukiwania technologii z podanymi kryteriami wyszukiwania i listπ technologii widziany z perspektywy recenzenta}
 	\label{fig:prototyp-ui-wyszukiwanie-technologii-wyniki-recenzent}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
@@ -2018,6 +2069,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-technologii-ekspert}
 	\caption{Panel do wyszukiwania technologii, w ktÛrych recenzent jest ekspertem}
 	\label{fig:prototyp-ui-wyszukiwanie-technologii-ekspert}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{table}[H] \small
@@ -2076,6 +2128,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-przypisanie-technologii}
 	\caption{Formularz przypisania technologii do recenzenta}
 	\label{fig:prototyp-ui-przypisanie-technologii}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \section{Projekt baz danych}
@@ -2087,6 +2140,7 @@ Na podstawie zdefiniowanych wymagaÒ funkcjonalnych oraz szczegÛ≥owych opisÛw prz
 	\includegraphics[width=\linewidth]{rys02/schemat-baza-danych-1}
 	\caption{Diagram ERD dla g≥Ûwnej bazy danych}
 	\label{fig:schemat-erd-baza-danych-1}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 Dla bazy danych artyku≥Ûw utworzono osobne schematy danych w postaci formatu JSON dla nastÍpujπcych kolekcji: artyku≥, komentarz oraz opinia. Nie zdecydowano siÍ na tylko jednπ kolekcjÍ zawierajπcπ te wszystkie informacje, gdyø za≥oøono, øe uøytkownik bÍdzie mÛg≥ w jednym momencie przeglπdaÊ albo komentarze albo opinie i nie ma potrzeby pobierania razem obu tych informacji. Dla zdefiniowanych schematÛw danych bazy artyku≥Ûw utworzono rÛwnieø po jednym przyk≥adowym dokumencie w formacie JSON.
