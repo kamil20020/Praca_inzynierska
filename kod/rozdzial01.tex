@@ -2,17 +2,16 @@
 
 \section{Wprowadzenie}
 
-Zdecydowano siê na realizowanie pracy dyplomowej z takim tematem, gdy¿ obecnie brak jest popularnego serwisu informacyjnego typu Wikipedia, który jest zorientowany jedynie na technologie programistyczne. Zalet¹ skupienia siê tylko na technologiach programistycznych pozwala na to, ¿e w serwisie bêdzie dostêpna o wiele wiêksza liczba treœci szczegó³owych, ni¿ na serwisach dostarczaj¹cych informacje z wielu dziedzin. Proponowane rozwi¹zanie bêdzie doskona³¹ opcj¹ dla programistów, dla których dokumentacja danej technologii jest niezrozumia³a, a treœci dostêpne w serwisach dotycz¹cych wiele dziedzin s¹ zbyt ogólne.
+Programista, który chcia³by siê czegoœ dowiedzieæ o technologii, z któr¹ nie jest zaznajomiony, najczêœciej mo¿e skorzystaæ z dokumentacji tej technologii albo serwisu informacyjnego dostarczaj¹cego treœci z wielu dziedzin (np. Wikipedia). Problemem jest tutaj to, ¿e nie ma popularnych serwisów informacyjnych, które zawieraj¹ treœci bêd¹ce pomiêdzy dokumentacjami i ogólnymi serwisami informacyjnymi. Z jednej strony dokumentacje technologii zawieraj¹ szczegó³owe treœci oraz rzadko kiedy wplatane s¹ jakieœ przyk³ady, a z drugiej strony encyklopedyczne serwisy informacyjne zawieraj¹ jedynie treœci ogólne. Dokumentacja mo¿e byæ niezrozumia³a dla tego u¿ytkownika, a serwisy informacyjne obejmuj¹ce wiele dziedzin najczêœciej nie dostarcz¹ mu wystarczaj¹cych informacji. Aplikacja, której dotyczy ta praca jest rozwi¹zaniem poœrednim, gdy¿ nie bêdzie nacisku na du¿¹ szczegó³owoœæ zamieszczanych treœci, jak i z powodu tego, ¿e tematyka serwisu to technologie programistyczne, to treœci nie bêd¹ zbyt ogólne.
 
-Z powodu szybkiego rozwoju informatyki, jest ci¹g³a potrzeba bycia na bie¿¹co z technologiami programistycznymi oraz obserwowania trendów. Mniejszy poziom szczegó³owoœci treœci zamieszczanych w serwisie w porównaniu do dokumentacji producentów technologii oraz dosyæ wygodna forma umieszczania treœci w serwisie, pozwol¹ na szybkie tworzenie artyku³ów o najnowszych technologiach i dziêki temu programiœci mog¹ byæ na bie¿¹co z technologiami.
+Z powodu szybkiego rozwoju informatyki, jest ci¹g³a potrzeba bycia na bie¿¹co z technologiami programistycznymi oraz obserwowania trendów. Wa¿ne jest zatem to, aby publikowane treœci by³y jak najbardziej aktualne. Nieaktualne treœci najczêœciej wystêpuj¹ w ksi¹¿kach, gdy¿ pisanie ksi¹¿ki trwa zazwyczaj bardzo d³ugo np. rok i czêsto siê zdarza, ¿e ksi¹¿ka w dniu wydania ju¿ zawiera treœci przestarza³e. Aplikacja, której dotyczy ta praca bêdzie umo¿liwia³a szybkie zamieszczanie treœci ka¿demu u¿ytkownikowi i dziêki temu, mo¿liwe bêdzie dostarczanie treœci aktualnych i nad¹¿anie za trendami.
 
-Du¿¹ wad¹ serwisów informacyjnych typu Wikipedia, jest ich niewystarczaj¹co rozbudowana forma spo³ecznoœciowa obejmuj¹ca m.in. oceny, komentarze, czy opinie. Jest to du¿a wada, gdy¿ w przypadku serwisów informacyjnych najwa¿niejsze jest to, aby zawiera³y one jedynie rzetelne informacje, a jeœli by³y by równie¿ treœci zawieraj¹ce b³êdy, to powinny byæ one odpowiednio oznaczone, aby u¿ytkownik wiedzia³ czego mo¿e siê spodziewaæ. Z tego powodu powinien byæ dodany przemyœlany mechanizm, który bêdzie umo¿liwia³ dostarczanie informacji o rzetelnoœci treœci. Najczêœciej w serwisach informacyjnych mo¿na siê spotkaæ z nastêpuj¹cymi niedoci¹gniêciami tego mechanizmu:
+Systemy umo¿liwiaj¹ce dostarczanie treœci ka¿demu u¿ytkownikowi s¹ szczególnie nara¿one na to, ¿e publikowane treœci bêd¹ nieodpowiednie np. spam, wirusy, czy informacje nieprawdziwe. W tego typu serwisach niezbêdna jest moderacja. Niestety, ale w przypadku popularnych serwisów tego typu, czêsto niemo¿liwe jest zapewnienie odpowiedniej liczby moderatorów i potrzebny jest wtenczas mechanizm wspomagaj¹cy moderatorów. Mechanizmem tym mo¿e byæ system komentarzy i opinii. Informacje zwrotne u¿ytkowników na temat treœci dostêpnych w serwisie bêd¹ mog³y byæ wtedy informacj¹ o jakoœci tych treœci zarówno dla moderatorów, jak i innych u¿ytkowników. W przypadku wielu serwisów informacyjnych mechanizm zostawiania informacji zwrotnej (komentarze, oceny, opinie) jest s³aby lub niewystarczaj¹co rozbudowany. Najczêœciej mo¿na siê spotkaæ z nastêpuj¹cymi niedoci¹gniêciami:
 \begin{itemize}
 	\item sekcja komentarzy jest nieczytelna oraz nie mo¿na odpowiedzieæ na komentarz innego u¿ytkownika,
-	\item w przypadku opinii jest zbyt ma³y zakres wystawianej oceny np. ³apka w górê i w dó³ albo sama pochwa³a, jak i czêsto nie ma wymogu zamieszczenia tekstowego 	
-				uzasadnienia do wystawionej oceny, a jest to wa¿ne, gdy¿ inny u¿ytkownik bêdzie móg³ od razu oceniæ, czy dana opinia jest merytoryczna, czy te¿ nie,
-	\item jest brak mo¿liwoœci ocenienia opinii innego u¿ytkownika, co w przypadku niemerytorycznej opinii bêdzie problemem, gdy¿ pocz¹tkuj¹cy w danej technologii 
-				programista mo¿e zostaæ wprowadzony w b³¹d.
+	\item w przypadku opinii jest zbyt ma³y zakres wystawianej oceny (np. ³apka w górê i w dó³ albo sama pochwa³a), jak i czêsto nie ma wymogu zamieszczenia tekstowego 	
+				uzasadnienia do wystawionej oceny,
+	\item brak mo¿liwoœci ocenienia opinii innego u¿ytkownika.
 \end{itemize}
 
 \section{Cel pracy}
@@ -21,8 +20,64 @@ Celem pracy jest zaprojektowanie i implementacja responsywnej aplikacji webowej,
 
 \section{Zakres pracy}
 
-Zakres pracy obejmuje: projekt, implementacjê, testowanie oraz wdro¿enie i opracowanie dokumentacji. Projekt obejmuje: zdefiniowanie wymagañ funkcjonalnych i niefunkcjonalnych, sporz¹dzanie diagramów i opisów przypadków u¿ycia, zrobienie widoków interfejsu u¿ytkownika oraz wykonanie schematów bazy danych. Implementacja obejmuje: aplikacje serwerow¹ (backend), aplikacjê klienck¹ (frontend) oraz uwierzytelnianie i autoryzacjê. Testowanie obejmuje: testy integracyjne backendu oraz manualne i automatyczne interfejsu u¿ytkownika.
+Zakres pracy obejmuje: projekt, implementacjê, testowanie oraz wdro¿enie i opracowanie dokumentacji. Projekt obejmuje: zdefiniowanie wymagañ funkcjonalnych i niefunkcjonalnych, sporz¹dzanie diagramów i opisów przypadków u¿ycia, zrobienie widoków interfejsu u¿ytkownika oraz wykonanie schematów bazy danych. Implementacja obejmuje: aplikacje serwerow¹ (backend), aplikacjê klienck¹ (frontend) oraz uwierzytelnianie i autoryzacjê. Testowanie obejmuje: testy integracyjne backendu oraz testy manualne i automatyczne interfejsu u¿ytkownika.
 
 \section{Przegl¹d dostêpnych rozwi¹zañ}
+Aktualnie nie ma popularnych serwisów informacyjnych zorientowanych jedynie na technologiach programistycznych, dlatego przedstawione zostan¹ przyk³adowe popularne serwisy zorientowane na wiele dziedzin.
+
+Jednym z takich serwisów jest niezwykle popularna Wikipedia~\ref{fig:wikipedia}. Wikipedia jest to serwis obejmuj¹cy bardzo wiele dziedzin, który umo¿liwia u¿ytkownikom publikowanie treœci w postaci artyku³ów. Treœci publikowane w tym serwisie zazwyczaj s¹ utrzymane w tonie encyklopedii. Serwis ten jest zorientowany na informacje i dlatego posiada s³abo rozwiniêt¹ formê spo³ecznoœciow¹. Przy ka¿dym z artyku³ów jest sekcja ,,Dyskusja'', w której mo¿na umieœciæ komentarz lub odpowiedzieæ na komentarz innego u¿ytkownika.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\linewidth]{rys01/wikipedia}
+	\caption{Wikipedia}
+	\label{fig:wikipedia}
+	\caption*{ród³o: opracowanie w³asne}
+\end{figure}
+
+\newpage
+
+Mo¿na wyró¿niæ nastêpuj¹ce zalety Wikipedii:
+\begin{itemize}
+	\item czytelne i ³adne artyku³y,
+	\item artyku³y posiadaj¹ podobn¹ budowê,
+	\item darmowy dostêp dla ka¿dego u¿ytkownika,
+	\item rozbudowany formularz tworzenia i edycji artyku³u.
+\end{itemize}
+
+Do wad Wikipedii mo¿na zaliczyæ:
+\begin{itemize}
+	\item sekcja komentarzy jest nieczytelna,
+	\item za ma³o kryteriów wyszukiwania,
+	\item czêsto artyku³y s¹ zbyt ogólne,
+	\item brak systemu opinii.
+\end{itemize}
+
+Podobnym serwisem do Wikipedii jest Medium~\ref{fig:medium}. Medium równie¿ obejmuje wiele dziedzin. U¿ytkownicy tak¿e publikuj¹ treœci w tym serwisie poprzez artyku³y, jednak treœci te s¹ najczêœciej utrzymane w swobodniejszym tonie, ni¿ encyklopedycznym. Serwis ten mo¿na zaliczyæ do serwisów spo³ecznoœciowych. Na pocz¹tku ka¿dego artyku³u widnieje wyraŸna informacja o autorze, mo¿na wejœæ na profil tego autora, zaobserwowaæ go albo zobaczyæ napisane przez niego artyku³y. W serwisie Medium jest równie¿ system zagnie¿d¿onych komentarzy oraz oceniania artyku³ów. Ka¿dy u¿ytkownik mo¿e zostawiæ jednostopniow¹ pochwa³ê do artyku³u lub komentarza.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\linewidth]{rys01/medium}
+	\caption{Medium}
+	\label{fig:medium}
+	\caption*{ród³o: opracowanie w³asne}
+\end{figure}
+
+Mo¿na wyró¿niæ nastêpuj¹ce zalety Medium:
+\begin{itemize}
+	\item czytelne i ³adne artyku³y,
+	\item rozbudowany system wyszukiwania artyku³ów (m.in. po kategorii, czy autorze),
+	\item czytelna sekcja z komentarzami,
+	\item rozbudowana forma spo³ecznoœciowa.
+\end{itemize}
+
+Do wad Medium mo¿na zaliczyæ:
+\begin{itemize}
+	\item budowa artyku³ów mo¿e siê mocno ró¿niæ,
+	\item zbyt prosty formularz do tworzenia artyku³ów,
+	\item zbyt ma³y zakres zostawianych ocen (jedynie jednostopniowa pochwa³a),
+	\item aby mieæ dostêp do wszystkich artyku³ów, trzeba posiadaæ p³atne konto premium,
+	\item brak obowi¹zkowego tekstowego uzasadnienia oceny artyku³u.
+\end{itemize}
 
 
