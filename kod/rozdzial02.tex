@@ -40,6 +40,9 @@ Backend jest odpowiedzialny za przyjmowanie ¿¹dañ od klienta, odpowiednie przetw
 \subsection{Klient - Frontend}
 Frontend jest odpowiedzialny za wysy³anie ¿¹dañ do warstwy backendowej i nastêpnie odpowiednie przetwarzanie oraz wyœwietlanie danych otrzymanych w odpowiedzi od backendu. W systemie tym klientem jest strona internetowa renderowana po stronie u¿ytkownika. Klient jest aplikacj¹ typu SPA (ang.\ \emph{Single Page Application}), co oznacza, ¿e aplikacja sk³ada siê z jednej strony HTML, a jej zawartoœæ jest zmieniana dynamiczne poprzez JavaScript. Zdecydowano siê na aplikacjê typu SPA, a nie MPA (ang.\ \emph{Multi Page Application}) g³ównie dlatego, ¿e aplikacje SPA dzia³aj¹ szybciej z powodu tylko jednej strony HTML. Kolejnymi kryteriami na korzyœæ SPA by³y ³atwiejsze wdro¿enie, gdy¿ wystarcz¹ do tego jedynie 3 pliki (HTML, CSS i JavaScript), ³atwiejsze wprowadzenie dynamicznej zawartoœci oraz u³atwione tworzenie aplikacji. Frontend jest równie¿ chroniony przez warstwê bezpieczeñstwa. U¿ytkownik bêdzie mia³ dostêp do podstron oraz funkcji systemu jedynie w zakresie posiadanych przez niego uprawnieñ (ról).
 
+\subsection{Serwer webowy}
+Warstwa odpowiedzialna za obs³ugiwanie ¿¹dañ protoko³u HTTP dla klienta.
+
 \subsection{Warstwa bezpieczeñstwa}
 Warstwa bezpieczeñstwa jest osobnym serwerem, który odpowiada za uwierzytelnienie i autoryzacjê. Warstwa ta zabezpiecza zarówno warstwê klienck¹, jak i serwer aplikacji. Warstwa kliencka jest chroniona poprzez blokowanie niektórych podstron, jak i funkcji systemu, które nie powinny byæ dostêpne dla danego u¿ytkownika. Mechanizmem bezpieczeñstwa dla aplikacji serwerowej jest wymóg dostarczania prawid³owego tokenu dostêpu (ang.\ \emph{Access token}) oraz posiadania odpowiednich uprawnieñ przy wysy³aniu przez klienta ¿¹dania do zabezpieczonego punktu koñcowego tego serwera.
 

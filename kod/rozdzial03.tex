@@ -22,7 +22,153 @@ Jako system zarzπdzania obiektowo-relacyjnπ bazπ danych wybrano PostgreSQL. Post
 Jako system zarzπdzania nierelacyjnπ bazπ danych opartπ na dokumentach wybrano MongoDB. MongoDB jest to otwarty i popularny system. MongoDB pozwala na wygodne przechowywanie danych w postaci klucz-wartoúÊ i nie wymaga uøycia schematÛw, ale jest to zalecane. Dane sπ przechowywane jako dokumenty w postaci JSON. Duøymi zaletami tej technologii jest ≥atwoúÊ tworzenia danych oraz skalowalnoúÊ. Z powodu wykorzystywanego formatu JSON, technologia ta jest wprost stworzona do uøycia razem z jÍzykiem JavaScript, ktÛry jest wykorzystywany podczas realizacji tej pracy.
 
 \subsection{Aplikacja serwerowa - Backend}
+Do realizacji aplikacji serwerowej wybrano jÍzyk Java. Java jest wieloplatformowym, obiektowym i opartym na maszynie wirtualnej niezwykle popularnym jÍzykiem programowania. JavÍ wykorzystuje siÍ w bardzo wielu dziedzinach, jednak najczÍúciej sπ to aplikacje webowe oraz mobilne. Z powodu popularnoúci tej technologii oraz jej d≥ugiego czasu na rynku (od 1996 roku), zebra≥a siÍ dosyÊ duøa spo≥ecznoúÊ wokÛ≥ niej. Java posiada duøπ liczbÍ bibliotek oraz frameworkÛw, ktÛre przyspieszajπ pracÍ programisty.
+
+Do realizacji aplikacji wykorzystano popularny Javowy framework Spring. Spring pozwala g≥Ûwnie na tworzenie backendu aplikacji webowych i jest obecnie bezkonkurencyjny w przypadku aplikacji tego typu. Pisanie aplikacji w Springu jest proste. Spring posiada bogatπ i czytelnπ dokumentacjÍ wraz z przyk≥adami uøycia. WokÛ≥ Springa zebra≥a siÍ duøa spo≥ecznoúÊ. Innπ zaletπ tego frameworka jest to, øe tak samo jak w przypadku Javy, dostÍpna jest duøa liczba rÛønych bibliotek. Wadπ tej technologii jest dosyÊ skomplikowana konfiguracja startowa aplikacji, lecz na szczÍúcie istniejπ technologie, ktÛre dostarczajπ tÍ konfiguracjÍ za programistÍ. Jednπ z takich technologii jest framework Spring Boot, ktÛry dostarcza ca≥π konfiguracjÍ aplikacji ≥πcznie serwerem i od razu moøliwe jest uruchomienie prostego backendu.
 
 \subsection{Klient - Frontend}
+Do realizacji aplikacji klienckiej wybrano JavaScriptowπ bibliotekÍ React. React jest to popularna technologia pozwalajπca tworzyÊ interfejsy graficzne aplikacji webowych. 
+G≥Ûwnym zastosowaniem tej technologii sπ aplikacje typu SPA. Tworzenie interfejsu graficznego w Reactcie jest proste i intuicyjne. Interfejs graficzny uøytkownika tworzy siÍ z tzw. komponentÛw. Komponenty pozwalajπ m.in. na ich ponowne uøycie i dziÍki temu moøna uniknπÊ niepotrzebnego powielania kodu.
+
+JavaScript jest jÍzykiem s≥abo typowanym i przez to w trakcie kompilacji programu moøe byÊ niewykryte wiele b≥ÍdÛw. Majπc na uwadze tÍ wadÍ, postanowiono wykorzystaÊ technologiÍ, ktÛra bÍdzie umoøliwia≥a wprowadzenie silnego typowania do aplikacji. Do tego celu wykorzystano Typescript, ktÛry jest nak≥adkπ na JavaScript. Typescript pozwala m.in. na tworzenie interfejsÛw, czy typowanie zmiennych.
+
+W realizowanej aplikacji przewidziano system logowania oparty na tokenach na okaziciela i z tego powodu niezbÍdnym jest przechowywanie tych tokenÛw, aby moøliwe by≥o wysy≥anie øπdaÒ do zabezpieczonego backendu. Do tego celu idealnie pasuje Reactowa biblioteka Redux, ktÛra umoøliwia przechowywanie odizolowanego od komponentÛw stanu aplikacji.
+
+Do tworzenia ≥adnego interfejsu uøytkownika wykorzystano popularnπ bibliotekÍ gotowych komponentÛw MUI. MUI zawiera bardzo duøπ liczbÍ gotowych komponentÛw, ktÛrych uøycie jest proste. Biblioteka wspiera m.in. internacjonalizacjÍ, czy lokalizacjÍ.
+
+\subsection{Serwer webowy}
+Do realizacji serwera webowego klienta wybrano serwer NGINX. NGINX jest to darmowy i popularny serwer webowy, proxy oraz IMAP/POP3. Serwer ten oparty jest na zdarzeniach (ang.\ \emph{event-driven approach}), co oznacza, øe moøe obs≥uøyÊ wiele øπdaÒ na jednym wπtku. Serwer ten jest czÍsto wykorzystywany przez duøe serwisy, jak np. Netflix, Instagram, czy GitHub.
 
 \subsection{Warstwa bezpieczeÒstwa}
+Do realizacji warstwy bezpieczeÒstwa wybrano technologiÍ Keycloak. Keycloak jest to otwarty system, ktÛry implementuje uwierzytelnianie i autoryzacje. Keycloak wspiera logowanie SSO (ang.\ \emph{single sign-on}), ktÛre umoøliwia zalogowanie siÍ do wielu serwisÛw za pomocπ jednego konta. Keycloak jest najczÍúciej wykorzystywany w formie osobnego serwera.
+
+\section{Aplikacja serwerowa}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys03/backend/backend-architektura}
+	\caption{Architektura aplikacji serwerowej}
+	\label{fig:backend-architektura}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\linewidth]{rys03/backend/backend-struktura-projektu}
+	\caption{Struktura projektu aplikacji serwerowej}
+	\label{fig:backend-struktura-projektu}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.7\linewidth]{rys03/backend/backend-model-komentarza}
+	\caption{Model komentarza w aplikacji serwerowej}
+	\label{fig:backend-model-komentarza}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys03/backend/backend-serwis-komentarza}
+	\caption{Serwis dla komentarzy w aplikacji serwerowej}
+	\label{fig:backend-serwis-komentarza}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys03/backend/backend-kontroler-komentarza}
+	\caption{Kontroler dla komentarzy w aplikacji serwerowej}
+	\label{fig:backend-kontroler-komentarza}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys03/backend/backend-mapper-komentarza}
+	\caption{Mapowanie miÍdzy modelem komentarza, a dto w aplikacji serwerowej}
+	\label{fig:backend-mapper-komentarza}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys03/backend/backend-api-1}
+	\caption{Endpointy dla uøytkownikÛw, komnetarzy oraz artyku≥Ûw w aplikacji serwerowej}
+	\label{fig:backend-api-1}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys03/backend/backend-api-2}
+	\caption{Endpointy dla weryfikacji artyku≥Ûw, dostÍpnoúci uøytkownikÛw oraz technologii, w ktÛrych specjalizujπ siÍ recenzenci w aplikacji serwerowej}
+	\label{fig:backend-api-2}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys03/backend/backend-api-3}
+	\caption{Endpointy dla technologii i kategorii technologii w aplikacji serwerowej}
+	\label{fig:backend-api-3}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\section{Aplikacja kliencka}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\linewidth]{rys03/frontend/frontend-struktura-projektu}
+	\caption{Struktura projektu aplikacji klienckiej}
+	\label{fig:frontend-struktura-projektu}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\linewidth]{rys03/frontend/frontend-model-technologii}
+	\caption{Model technologii w aplikacji klienckiej}
+	\label{fig:frontend-model-technologii}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\linewidth]{rys03/frontend/frontend-slice-uzytkownika}
+	\caption{Slice zalogowanego uøytkownika w aplikacji klienckiej}
+	\label{fig:frontend-slice-uzytkownika}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys03/frontend/frontend-komponent-nawigacja}
+	\caption{Komponent nawigacja w aplikacji klienckiej}
+	\label{fig:frontend-komponent-nawigacja}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\linewidth]{rys03/frontend/frontend-serwis-api-technologii}
+	\caption{Serwis API dla technologii w aplikacji klienckiej}
+	\label{fig:frontend-serwis-api-technologii}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\section{Warstwa bezpieczeÒstwa}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys03/keycloak}
+	\caption{Panel administratora Keycloka}
+	\label{fig:keycloak}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+
+
+
+
