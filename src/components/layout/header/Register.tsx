@@ -64,7 +64,7 @@ const Register = () => {
         })
     }
 
-    const [open, setOpen] = React.useState<boolean>(true)
+    const [open, setOpen] = React.useState<boolean>(false)
     const [openStatute, setOpenStatute] = React.useState<boolean>(false)
 
     const dispatch = useDispatch()
@@ -154,7 +154,6 @@ const Register = () => {
             setOpenStatute(true)
         })
         .catch((error) => {
-            console.log(error)
             dispatch(setNotificationMessage(error.message))
             dispatch(setNotificationType('error'))
             dispatch(setNotificationStatus(true))
@@ -186,6 +185,9 @@ const Register = () => {
         <XCloeasableDialog 
             title="Rejestracja"
             showButton={true}
+            setOpen={(value: boolean) => setOpen(value)}
+            onCancel={() => setOpen(false)}
+            open={open}
             size="md"
             form = {
                 <Grid 

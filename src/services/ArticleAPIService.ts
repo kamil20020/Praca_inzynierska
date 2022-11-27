@@ -22,13 +22,13 @@ class ArticleAPIService {
 
     search = (searchCriteria: ArticleSearchCriteria, pagination: Pagination, role: string, loggedUserId?: number) => {
 
-        let params = {
+        let params: any = {
             ...pagination,
             role: role,
         }
 
         if(loggedUserId){
-            Object.assign(params, loggedUserId)
+           params.loggedUserId = loggedUserId
         }
 
         return axios.post(`${this.apiUrl}/search`, searchCriteria, {

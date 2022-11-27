@@ -15,6 +15,7 @@ import Comments from "./comments/Comments";
 import Opinions from "./opinions/Opinions";
 import ConfirmationDialog from "../../components/common/ConfirmationDialog";
 import { ArticleContent } from "./ArticleContent";
+import { roles } from "../../keycloak/KeycloakService";
 
 export const ArticleHeader = (props: {article: Article}) => {
 
@@ -63,6 +64,7 @@ const ArticleView = () => {
     const params = useParams();
     const articleId = params.articleId as string;   
     const userId = useSelector((state: RootState) => state.user).user.id
+    const actualRoles = useSelector((state: RootState) => state.keycloak).roles
     const dispatch = useDispatch()
 
     const [article, setArticle] = React.useState<Article | null>(null)
@@ -108,7 +110,7 @@ const ArticleView = () => {
         <Grid item xs={12} container alignItems="start" justifyContent="center" marginTop={4}>
             <Grid item xs={10.5} container justifyContent="space-between" direction="row">
                 <ArticleHeader article={article}/>
-                {userId === (article as Article).authorDTO.id &&
+                {(userId === (article as Article).authorDTO.id || actualRoles.includes(roles.administrator.name)) &&
                     <Grid item xs={5} container justifyContent="end" alignItems="start" spacing={3}>     
                         <Grid item>
                             <Typography textAlign="center" variant="h6">Status: {article.status}</Typography>

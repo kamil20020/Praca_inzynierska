@@ -1,5 +1,4 @@
 ﻿import axios from "axios";
-import GeneralAxiosService from "./GeneralAxiosService";
 
 class TechnologyAPIService {
 

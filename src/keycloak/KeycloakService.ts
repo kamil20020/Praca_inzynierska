@@ -247,6 +247,9 @@ class KeycloakService {
                     }
                     resolve('Accept')
                 })
+                .catch((error) => {
+                    reject(error)
+                })
             })
             .catch((error) => {
                 reject(error)

@@ -113,7 +113,7 @@ function App() {
             </Content>
             <Footer/>
           </Grid>
-
+          <Notification/>
         </ThemeProvider>
       </BrowserRouter>
     </React.StrictMode>

@@ -135,7 +135,6 @@ const Login = () => {
             handleTokensExpiring()
         })
         .catch((error) => {
-            console.log(error)
             if(error.response.status == 401){
                 dispatch(setNotificationMessage('Login/e-mail lub hasło są niepoprawne'))
                 dispatch(setNotificationType('error'))

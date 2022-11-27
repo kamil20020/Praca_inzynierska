@@ -105,8 +105,6 @@ const ArticlesVerification = () => {
         })
     }, [])
 
-
-
     return (
         <Grid item xs={12} container alignItems="center" justifyContent="center" spacing={5}>
             <Grid item xs={12}>
@@ -124,7 +122,9 @@ const ArticlesVerification = () => {
                         onPageChange={(page: number) => setPage(page)}
                         onPageSizeChange={(pageSize: number) => setPageSize(pageSize)}
                         onSelectionModelChange={(id) => {
-                            const articleVerification = articleVerifications[+id-1]
+                            console.log(articleVerifications, +id+1)
+                            const articleVerification = articleVerifications
+                                .filter(a => a.id ==  +id)[0]
                             navigate(`${articleVerification.id}`)
                         }}
                     />

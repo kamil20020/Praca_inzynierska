@@ -112,7 +112,7 @@ const SearchArticles = () => {
         actualRoles.includes(roles.reviewer.name) ? roles.reviewer.name : 
         actualRoles.includes(roles.logged_user.name) ? roles.logged_user.name : roles.user;
 
-    const isLoggedUser: boolean = highestRole === roles.user
+    const isLoggedUser: boolean = highestRole !== roles.user
 
     useEffect(() => {
         ArticleAPIService.search({}, {page: page, size: pageSize}, highestRole, isLoggedUser ? userId : undefined)
