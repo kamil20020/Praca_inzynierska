@@ -13,11 +13,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-    @Builder
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Document("articles")
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Document("articles")
 public class ArticleEntity {
 
     public enum Status {

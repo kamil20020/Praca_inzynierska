@@ -16,7 +16,7 @@ import pl.edu.pwr.programming_technologies.repository.UserRepository;
 import pl.edu.pwr.programming_technologies.service.ArticleVerificationService;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "https://technologie-programistyczne.netlify.app"})
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping(value = "/article-verification")
 public class ArticleVerificationController {

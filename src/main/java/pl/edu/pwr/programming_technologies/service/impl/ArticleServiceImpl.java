@@ -45,9 +45,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Page<ArticleEntity> searchByCriteria(
-        ArticleSearchCriteria articleSearchCriteria, Pageable pageable, String role, String loggedUserId
-    ){
-
+        ArticleSearchCriteria articleSearchCriteria, Pageable pageable, String role, String loggedUserIdStr
+    ) throws NumberFormatException
+    {
         Query query = new Query();
 
         Criteria technologyIdCriteria = Criteria.where("technologyId");
@@ -158,9 +158,17 @@ public class ArticleServiceImpl implements ArticleService {
             query.addCriteria(modificationDateCriteria);
 
         if(role == null || role.equals(UserEntity.Role.USER.toString())){
-            query.addCriteria(Criteria.where("status").is(ArticleEntity.Status.PUBLISHED));
+            query.addCriteria(
+                Criteria.where("status").is(ArticleEntity.Status.PUBLISHED)
+            );
         }
-        else if(role.equals(UserEntity.Role.LOGGED_USER.toString())){
+        else if(role.equals(UserEntity.Role.LOGGED_USER.toString()) || role.equals(UserEntity.Role.REVIEWER.toString())) {
+
+            Integer loggedUserId = Integer.valueOf(loggedUserIdStr);
+            System.out.println("123456");
+            System.out.println(loggedUserIdStr);
+            System.out.println(loggedUserId);
+
             query.addCriteria(
                 Criteria.where("status").is(ArticleEntity.Status.PUBLISHED).orOperator(
                     Criteria.where("authorId").is(loggedUserId)
@@ -284,6 +292,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         ArticleEntity foundArticleEntity = foundArticleEntityOpt.get();
         foundArticleEntity.setStatus(articleStatus);
+        articleRepository.save(foundArticleEntity);
     }
 
     @Override

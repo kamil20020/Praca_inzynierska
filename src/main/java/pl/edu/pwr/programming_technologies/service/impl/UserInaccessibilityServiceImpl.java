@@ -5,14 +5,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.edu.pwr.programming_technologies.exceptions.EntityConflictException;
 import pl.edu.pwr.programming_technologies.exceptions.EntityNotFoundException;
-import pl.edu.pwr.programming_technologies.model.api.request.CreateUserInaccessibility;
 import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
 import pl.edu.pwr.programming_technologies.model.entity.UserInaccessibilityEntity;
 import pl.edu.pwr.programming_technologies.repository.UserInaccessibilityRepository;
 import pl.edu.pwr.programming_technologies.repository.UserRepository;
 import pl.edu.pwr.programming_technologies.service.UserInaccessibilityService;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.Optional;
 
 @Slf4j
@@ -60,6 +61,19 @@ public class UserInaccessibilityServiceImpl implements UserInaccessibilityServic
                 .toDate(toDate)
                 .build()
         );
+    }
+
+    @Override
+    public void updateReviewersInaccessibility(){
+
+        LocalDateTime actualDate = LocalDateTime.now();
+
+        userInaccessibilityRepository.findAll()
+            .forEach(userInaccessibilityEntity -> {
+                if(userInaccessibilityEntity.getToDate().isBefore(ChronoLocalDateTime.from(actualDate))){
+                    userInaccessibilityRepository.delete(userInaccessibilityEntity);
+                }
+            });
     }
 
     @Override

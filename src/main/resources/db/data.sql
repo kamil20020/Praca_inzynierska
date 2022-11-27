@@ -105,7 +105,7 @@ INSERT INTO public.technology_experts (technology_expert_id, technology_id, revi
 
 -- USER INACCESSIBILITY
 
-INSERT INTO public.user_inaccessibility (user_inaccessibility_id, user_id, to_date) VALUES (1, 30, '2016-06-22 19:10:25');
+INSERT INTO public.USER_INACCESSIBILITES (user_inaccessibility_id, user_id, to_date) VALUES (1, 30, '2016-06-22 19:10:25');
 
 -----------------------------------------
 

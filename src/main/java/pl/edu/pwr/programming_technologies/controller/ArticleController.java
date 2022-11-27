@@ -30,7 +30,7 @@ import pl.edu.pwr.programming_technologies.service.CommentService;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "https://technologie-programistyczne.netlify.app"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://technologie-programistyczne.azurewebsites.net"})
 @RequiredArgsConstructor
 @RequestMapping(value = "/article")
 public class ArticleController {
@@ -44,7 +44,7 @@ public class ArticleController {
     private final TechnologyRepository technologyRepository;
 
     @PostMapping("/search")
-    public ResponseEntity<Page<ArticleDTO>> searchByCriteria(
+    public ResponseEntity searchByCriteria(
             @RequestBody ArticleSearchCriteriaDTO articleSearchCriteriaDTO,
             Pageable pageable,
             String role,
@@ -57,10 +57,17 @@ public class ArticleController {
         ArticleSearchCriteria articleSearchCriteria =
                 searchCriteriaMapper.articleSearchCriteriaDTOToArticleSearchCriteria(articleSearchCriteriaDTO);
 
-        Page<ArticleDTO> pageOfArticleDTOs = articleService.searchByCriteria(
-                articleSearchCriteria, pageable, role, loggedUserId
-            )
-            .map(a -> articleMapper.articleEntityToArticleDTO(a, userRepository, technologyRepository));
+        Page<ArticleDTO> pageOfArticleDTOs;
+
+        try{
+            pageOfArticleDTOs = articleService.searchByCriteria(
+                    articleSearchCriteria, pageable, role, loggedUserId
+                )
+                .map(a -> articleMapper.articleEntityToArticleDTO(a, userRepository, technologyRepository));
+        }
+        catch(NumberFormatException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Podano nieprawidłowe id użytkownika");
+        }
 
         return ResponseEntity.ok(pageOfArticleDTOs);
     }

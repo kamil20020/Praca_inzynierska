@@ -6,10 +6,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.edu.pwr.programming_technologies.model.entity.ArticleVerificationEntity;
 
+import java.util.List;
+
 @Repository
 public interface ArticleVerificationRepository extends JpaRepository <ArticleVerificationEntity, Integer> {
 
     Page<ArticleVerificationEntity> findAllByUserEntityIdAndStatus(
         Integer userEntityId, ArticleVerificationEntity.Status articleVerificationStatus, Pageable pageable
     );
+
+    List<ArticleVerificationEntity> findAllByStatus(ArticleVerificationEntity.Status articleVerificationStatus);
+    int countAllByUserEntityIdAndStatusOrStatus(
+        Integer userEntityId, ArticleVerificationEntity.Status status1, ArticleVerificationEntity.Status status2
+    );
+    boolean existsByArticleIdAndStatus(String articleId, ArticleVerificationEntity.Status status1);
 }

@@ -14,7 +14,7 @@
 	<name>technologie-programistyczne</name>
 	<description>Praca inzynierska - aplikacja internetowa do gromadzenia i udostepniania informacji o technologiach programistycznych</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>17</java.version>
 		<springboot.version>${project.parent.version}</springboot.version>
 		<org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
 		<org.projectlombok.version>1.18.24</org.projectlombok.version>

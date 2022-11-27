@@ -19,5 +19,9 @@ public interface TechnologyExpertRepository extends JpaRepository<TechnologyExpe
     );
     List<TechnologyExpertEntity> findAllByUserEntityId(Integer userId);
     List<TechnologyExpertEntity> findAllByUserEntityNot(UserEntity userEntity);
+    List<TechnologyExpertEntity> findAllByTechnologyEntityIdAndUserEntityIdNot(Integer technologyId, Integer userId);
+    List<TechnologyExpertEntity> findAllByTechnologyEntityTechnologyCategoryEntityIdAndUserEntityIdNot(
+        Integer technologyCategoryId, Integer userId
+    );
     boolean existsByUserEntityIdAndTechnologyEntityId(Integer userId, Integer technologyId);
 }

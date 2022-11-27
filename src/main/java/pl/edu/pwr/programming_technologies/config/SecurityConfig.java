@@ -5,31 +5,29 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
-public class SecurityConfig {
-
-    @Value("${frontend.url}")
-    private String localFrontendURL;
-
-    @Value("https://technologie-programistyczne.netlify.app")
-    private String prodFrontendURL;
+public class SecurityConfig{
 
     @Bean
-    public FilterRegistrationBean corsFilter() {
+    CorsConfigurationSource corsConfigurationSource() {
+
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList(
+            "http://localhost:3000", "https://technologie-programistyczne.azurewebsites.net")
+        );
+        configuration.setAllowedMethods(Collections.singletonList("*"));
+        configuration.setAllowedHeaders(Collections.singletonList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration().applyPermitDefaultValues();
-        config.setAllowedOrigins(List.of(localFrontendURL, prodFrontendURL));
-        config.setAllowedHeaders(List.of("Access-Control-Allow-Headers", "AUTHORIZATION", "CONTENT-TYPE"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowCredentials(true);
-        source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-        bean.setOrder(0);
-        return bean;
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
     }
 }

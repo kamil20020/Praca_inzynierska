@@ -30,8 +30,4 @@ public interface CommentMapper {
     )
     @Mapping(source = "authorId", target = "authorDTO", qualifiedByName = "userIdToUserDTO")
     CommentDTO commentEntityToCommentDTO(CommentEntity commentEntity, @Context UserRepository userRepository);
-
-    List<CommentDTO> commentEntityListToCommentDTOList(
-        List<CommentEntity> commentEntityList, @Context UserRepository userRepository
-    );
 }

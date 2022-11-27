@@ -9,5 +9,6 @@ public interface UserInaccessibilityService {
 
     UserInaccessibilityEntity getUserInaccessibilityByUserId(Integer userId);
     UserInaccessibilityEntity createUserInaccessibility(Integer userId, LocalDateTime toDate);
+    void updateReviewersInaccessibility();
     void deleteUserInaccessibilityById(Integer userInaccessibilityId);
 }

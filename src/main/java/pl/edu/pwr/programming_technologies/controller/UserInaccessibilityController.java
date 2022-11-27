@@ -19,7 +19,7 @@ import java.time.OffsetDateTime;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "https://technologie-programistyczne.netlify.app"})
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping("/user-inaccessibility")
 public class UserInaccessibilityController {
