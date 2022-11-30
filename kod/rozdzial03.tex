@@ -1,32 +1,35 @@
 \chapter{Implementacja}
 
-\section{Technologie}
+\section{Technologie i narzÍdzia}
 
-W celu zaimplementowania zaprojektowanego systemu dokonano wyboru technologii. Przy wyborze technologii kierowano siÍ g≥Ûwnie ich odpowiednioúciπ do realizowanego systemu, popularnoúciπ oraz w≥asnym doúwiadczeniem uzyskanym w trakcie studiÛw. Z powodu tego, iø nie jest to projekt komercyjny, to poszukiwano darmowych technologii. Innymi waønymi czynnikami wyboru by≥y rÛwnieø rozbudowana i czytelna dokumentacja, poziom skomplikowania oraz bogata i aktywna spo≥ecznoúÊ wokÛ≥ technologii. Uøyte technologie moøna podzieliÊ na dwie kategorie: g≥Ûwne oraz narzÍdzia.
+W celu zaimplementowania zaprojektowanego systemu dokonano wyboru technologii i narzÍdzi. Przy ich wyborze kierowano siÍ g≥Ûwnie ich odpowiednioúciπ do realizowanego systemu, popularnoúciπ oraz w≥asnym doúwiadczeniem uzyskanym w trakcie studiÛw. Z powodu tego, iø nie jest to projekt komercyjny, to poszukiwano darmowych rozwiπzaÒ. Innymi waønymi czynnikami wyboru by≥y rÛwnieø rozbudowana i czytelna dokumentacja, niezbyt duøy poziom skomplikowania oraz bogata i aktywna spo≥ecznoúÊ wokÛ≥ danego oprogramowania.
 
-Technologie g≥Ûwne obejmujπ najwaøniejsze technologie w obrÍbie architektury systemu (rysunek~\ref{fig:architektura-systemu}).
+\subsection{Technologie}
+
+Uøyto nastÍpujπcych technologii: \texttt{PostgreSQL}, \texttt{MongoDB}, \texttt{Spring}, \texttt{Keycloak}, \texttt{NGINX}, \texttt{React}, \texttt{Typescript},
+\texttt{Redux}, \texttt{MUI}.
+
+Wybrane technologie mogπ byÊ przyporzπdkowane do poszczegÛlnych warstw systemu (Rys.~\ref{fig:wybrane-technologie}).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.8\linewidth]{rys03/glowne-technologie}
-	\caption{G≥Ûwne technologie}
-	\label{fig:glowne-technologie}
+	\includegraphics[width=.8\linewidth]{rys03/wybrane-technologie}
+	\caption{Uøyte technologie}
+	\label{fig:wybrane-technologie}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
-G≥Ûwne technologie mogπ byÊ przyporzπdkowane do poszczegÛlnych warstw systemu:
-
-\subsection{Baza danych}
+\subsubsection{Baza danych}
 Jako system zarzπdzania obiektowo-relacyjnπ bazπ danych wybrano PostgreSQL. PostgreSQL jest systemem darmowym, otwarto-ürÛd≥owym oraz niezwykle popularnym. PostgreSQL to najpopularniejszy RDBMS (ang.\ \emph{Relational Database Managment System}) tego typu, jak i jeden z najpopularniejszych otwartych RDBMS dostÍpnych na rynku. System ten ciπgle siÍ rozwija oraz jest niezawodny z powodu dosyÊ licznej spo≥ecznoúci zorientowanej wokÛ≥ niego. Stanowi silnπ konkurencjÍ dla innych baz danych pod wzglÍdem bezpieczeÒstwa. Innπ waønπ zaletπ tej technologii jest jej wysoka skalowalnoúÊ.
 
 Jako system zarzπdzania nierelacyjnπ bazπ danych opartπ na dokumentach wybrano MongoDB. MongoDB jest to otwarty i popularny system. MongoDB pozwala na wygodne przechowywanie danych w postaci klucz-wartoúÊ i nie wymaga uøycia schematÛw, ale jest to zalecane. Dane sπ przechowywane jako dokumenty w postaci JSON. Duøymi zaletami tej technologii jest ≥atwoúÊ tworzenia danych oraz skalowalnoúÊ. Z powodu wykorzystywanego formatu JSON, technologia ta jest wprost stworzona do uøycia razem z jÍzykiem JavaScript, ktÛry jest wykorzystywany podczas realizacji tej pracy.
 
-\subsection{Aplikacja serwerowa - Backend}
+\subsubsection{Aplikacja serwerowa - Backend}
 Do realizacji aplikacji serwerowej wybrano jÍzyk Java. Java jest wieloplatformowym, obiektowym i opartym na maszynie wirtualnej niezwykle popularnym jÍzykiem programowania. JavÍ wykorzystuje siÍ w bardzo wielu dziedzinach, jednak najczÍúciej sπ to aplikacje webowe oraz mobilne. Z powodu popularnoúci tej technologii oraz jej d≥ugiego czasu na rynku (od 1996 roku), zebra≥a siÍ dosyÊ duøa spo≥ecznoúÊ wokÛ≥ niej. Java posiada duøπ liczbÍ bibliotek oraz frameworkÛw, ktÛre przyspieszajπ pracÍ programisty.
 
 Do realizacji aplikacji wykorzystano popularny Javowy framework Spring. Spring pozwala g≥Ûwnie na tworzenie backendu aplikacji webowych i jest obecnie bezkonkurencyjny w przypadku aplikacji tego typu. Pisanie aplikacji w Springu jest proste. Spring posiada bogatπ i czytelnπ dokumentacjÍ wraz z przyk≥adami uøycia. WokÛ≥ Springa zebra≥a siÍ duøa spo≥ecznoúÊ. Innπ zaletπ tego frameworka jest to, øe tak samo jak w przypadku Javy, dostÍpna jest duøa liczba rÛønych bibliotek. Wadπ tej technologii jest dosyÊ skomplikowana konfiguracja startowa aplikacji, lecz na szczÍúcie istniejπ technologie, ktÛre dostarczajπ tÍ konfiguracjÍ za programistÍ. Jednπ z takich technologii jest framework Spring Boot, ktÛry dostarcza ca≥π konfiguracjÍ aplikacji ≥πcznie serwerem i od razu moøliwe jest uruchomienie prostego backendu.
 
-\subsection{Klient - Frontend}
+\subsubsection{Klient - Frontend}
 Do realizacji aplikacji klienckiej wybrano JavaScriptowπ bibliotekÍ React. React jest to popularna technologia pozwalajπca tworzyÊ interfejsy graficzne aplikacji webowych. 
 G≥Ûwnym zastosowaniem tej technologii sπ aplikacje typu SPA. Tworzenie interfejsu graficznego w Reactcie jest proste i intuicyjne. Interfejs graficzny uøytkownika tworzy siÍ z tzw. komponentÛw. Komponenty pozwalajπ m.in. na ich ponowne uøycie i dziÍki temu moøna uniknπÊ niepotrzebnego powielania kodu.
 
@@ -36,11 +39,29 @@ W realizowanej aplikacji przewidziano system logowania oparty na tokenach na oka
 
 Do tworzenia ≥adnego interfejsu uøytkownika wykorzystano popularnπ bibliotekÍ gotowych komponentÛw MUI. MUI zawiera bardzo duøπ liczbÍ gotowych komponentÛw, ktÛrych uøycie jest proste. Biblioteka wspiera m.in. internacjonalizacjÍ, czy lokalizacjÍ.
 
-\subsection{Serwer webowy}
+\subsubsection{Serwer webowy}
 Do realizacji serwera webowego klienta wybrano serwer NGINX. NGINX jest to darmowy i popularny serwer webowy, proxy oraz IMAP/POP3. Serwer ten oparty jest na zdarzeniach (ang.\ \emph{event-driven approach}), co oznacza, øe moøe obs≥uøyÊ wiele øπdaÒ na jednym wπtku. Serwer ten jest czÍsto wykorzystywany przez duøe serwisy, jak np. Netflix, Instagram, czy GitHub.
 
-\subsection{Warstwa bezpieczeÒstwa}
+\subsubsection{Warstwa bezpieczeÒstwa}
 Do realizacji warstwy bezpieczeÒstwa wybrano technologiÍ Keycloak. Keycloak jest to otwarty system, ktÛry implementuje uwierzytelnianie i autoryzacje. Keycloak wspiera logowanie SSO (ang.\ \emph{single sign-on}), ktÛre umoøliwia zalogowanie siÍ do wielu serwisÛw za pomocπ jednego konta. Keycloak jest najczÍúciej wykorzystywany w formie osobnego serwera.
+
+\subsection{NarzÍdzia}
+
+Uøyto nastÍpujπcych narzÍdzi:
+\begin{enumerate}
+	\item \texttt{LaTeX} - napisanie dokumentacji,
+	\item \texttt{Visual Paradigm} - sporzπdzenie diagramÛw,
+	\item \texttt{Figma} - zaprojektowanie interfejsu uøytkownika,
+	\item \texttt{pgAdmin} - zarzπdzanie bazπ PostgreSQL,
+	\item \texttt{MongoDBCompass} - zarzπdzanie bazπ MongoDB,
+	\item \texttt{Visual Studio Code} - úrodowisko programistyczne dla frontendu,
+	\item \texttt{Itellij} - úrodowisko programistyczne dla backendu,
+	\item \texttt{REST-assured} - testy integracyjne backendu,
+	\item \texttt{Selenium Web Driver} - testy automatyczne frontendu,
+	\item \texttt{Docker} - stworzenie i umieszczenie kontenerÛw aplikacji w rejestrze kontenerÛw,
+	\item \texttt{MongoDB Cloud} - hostowanie bazy MongoDB,
+	\item \texttt{Azure} - hostowanie ca≥ego systemu oprÛcz bazy MongoDB.
+\end{enumerate}
 
 \section{Aplikacja serwerowa}
 

@@ -1,132 +1,84 @@
 \chapter{Projektowanie}
 
-\section{Architektura systemu}
-
-Realizowany system jest rozproszonym serwisem webowym, który w du¿ym uogólnieniu mo¿na opisaæ jako system typu klient-serwer. Klient wysy³a ¿¹danie do serwera 
-aplikacji, a nastêpnie serwer odpowiednio przetwarza otrzymane ¿¹danie i zwraca klientowi odpowiedŸ, któr¹ klient interpretuje i przedstawia u¿ytkownikowi.
-
-Szczegó³ow¹ architekturê systemu przedstawiono na rysunku~\ref{fig:architektura-systemu}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.8\linewidth]{rys02/architektura-systemu}
-	\caption{Architektura systemu}
-	\label{fig:architektura-systemu}
-	\caption*{ród³o: opracowanie w³asne}
-\end{figure}
-
-Zdecydowano siê na zaimplementowanie systemu w postaci serwisu webowego, gdy¿ taka forma aplikacji zapewnia du¿¹ wygodê u¿ytkowania z powodu braku koniecznoœci jej zainstalowania przez u¿ytkownika oraz serwisy webowe s¹ obecnie najpopularniejszym typem systemu i implementacja takiej aplikacji pozwoli na zdobycie wartoœciowego doœwiadczenia.
-
-Komunikacja w systemie przebiega g³ównie poprzez protokó³ HTTP (ang.\ \emph{Hypertext Transfer Protocol}). Protokó³ ten jest oparty na komunikacji typu klient-serwer, przy czym klientem jest najczêœciej przegl¹darka. Klientem wysy³a ¿¹danie do serwera, a serwer wysy³a do klienta odpowiedŸ. Zawartoœæ wiadomoœci HTTP mo¿na przede wszystkim podzieliæ na nag³ówek (ang.\ \emph{Header}) oraz ³adunek (ang.\ \emph{Body}). W nag³ówku znajduj¹ siê pola typu klucz-wartoœæ. Nag³ówek ¿¹dania ró¿ni siê od nag³ówka odpowiedzi poprzez dostêpne opcje, ale maj¹ one równie¿ wspólne pola np. informacja o hoœcie docelowym, czy format wiadomoœci. W nag³ówku ¿¹dania mo¿na wyró¿niæ jeszcze np. nag³ówek \texttt{Authorization}, w którym umieszczane s¹ poœwiadczenia uwierzytelnienia i autoryzacji. W nag³ówku odpowiedzi mo¿na za to wyró¿niæ m.in. status odpowiedzi, który np. informuje o tym, czy ¿¹danie zosta³o wykonane pomyœlnie (np. status 200), czy te¿ wyst¹pi³ b³¹d, a jeœli wyst¹pi³, to z jakiego powodu (np. status 401 oznaczaj¹cy nieudane uwierzytelnienie u¿ytkownika). £adunek jest opcjonalnym polem, które stanowi treœæ wiadomoœci HTTP i np. w przypadku odpowiedzi mo¿e zawieraæ listê wyszukanych artyku³ów.
-
-Komunikacja w systemie jest zgodna ze stylem architektury oprogramowania REST (ang.\ \emph{Representational state transfer}). \texttt{REST} jest to sposób i format w jaki komunikuje siê klient z serwerem. Serwer udostêpnia klientowi punkty koñcowe (end-pointy), do których klient mo¿e wys³aæ ¿¹dania HTTP przesy³aj¹c przy tym jakieœ dane np. tytu³ wyszukiwanego artyku³u. W skrócie komunikacja REST odznacza siê nastêpuj¹cymi cechami:
-\begin{itemize}
-	\item bezstanowoœæ (nie przechowuje informacji o poprzednich wymianach wiadomoœci),
-	\item architektura klient-serwer,
-	\item jednolity interfejs komunikacyjny – dziêki temu mo¿liwe jest np. komunikowanie siê systemów zaimplementowanych w ró¿nych jêzykach programowania, czy zainstalowanych na ró¿nych platformach (np. mobilna),
-	\item wykorzystywanie protoko³u \texttt{HTTP}.
-\end{itemize}
-
-\subsection{Baza danych}
-Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. Za³o¿ono, ¿e w systemie zostan¹ wykorzystane dwie ró¿nego typu bazy danych: obiektowo-relacyjna (SQL) oraz nierelacyjna oparta na dokumentach (NoSQL). 
-
-Jako g³ówn¹ bazê danych wybrano bazê obiektowo-relacyjn¹, gdy¿ bazy relacyjne charakteryzuj¹ siê tym, ¿e zapewniaj¹ integralnoœæ danych poprzez tworzenie relacji np. poprzez powi¹zanie tabel kluczem obcym, a w realizowanym systemie wykryto wiele przypadków, w których mo¿na utworzyæ relacje np. w³aœciciel artyku³u jest powi¹zaniem miêdzy encjami u¿ytkownika i artyku³u, historia modyfikacji technologii jest do³¹czona do danej technologii, czy te¿ recenzent ma przypisane do siebie technologie, w których siê specjalizuje. Zdecydowano siê na obiektow¹ warstwê bazy danych, gdy¿ upraszcza ona pracê z kilkoma wykorzystywanymi narzêdziami (np. Jav'owy framework Hibernate), które s¹ oparte na programowaniu obiektowym.
-
-Artyku³y maj¹ z³o¿on¹ zagnie¿d¿on¹ strukturê, zawieraj¹ rozdzia³y, podrozdzia³y, komentarze oraz opinie. Nierelacyjna baza dokumentowa wydaje siê byæ idealnym pomys³em do przechowywania takich informacji. Baza ta pozwala na przechowywanie struktur typu klucz-wartoœæ, co zapewnia du¿¹ elastycznoœæ w przechowywaniu danych, gdy¿ pozwala na m.in. przechowywanie zagnie¿d¿onych struktur oraz umo¿liwia pobranie danych w postaci zagnie¿d¿onej struktury nawet poprzez jedno zapytanie. W przypadku relacyjnej bazy danych nale¿a³oby wykonaæ wiele klauzuli JOIN, aby pobraæ te same dane (np. w przypadku komentarzy o danym artykule), co jest mniej efektywne ni¿ w przypadku nierelacyjnej bazy dokumentowej, przy której wystarczy³oby tylko jedno zapytanie.
-
-\subsection{Aplikacja serwerowa - Backend}
-Backend jest odpowiedzialny za przyjmowanie ¿¹dañ od klienta, odpowiednie przetwarzanie tych ¿¹dañ, wykonywanie pewnych operacji na danych przechowywanych w bazie danych na podstawie otrzymanych przez klienta danych i przekazywanie klientowi adekwatnej odpowiedzi. Backend udostêpnia klientowi punkty koñcowe (ang.\ \emph{API endpoints}) do których klient mo¿e przes³aæ ¿¹danie. Punkty koñcowe posiadaj¹ adresy URL np. http://localhost:9000/user. Adresy URL sk³adaj¹ siê nazwy protoko³u, nazwy hosta docelowego, portu docelowego oraz reszty, która identyfikuje punkt koñcowy oraz jego przeznaczenie. Wa¿nym elementem w przypadku backendu jest równie¿ wys³anie klientowi odpowiedniego statusu odpowiedzi oraz ewentualne do³¹czenie informacji zwrotnej. Dziêki temu klient bêdzie móg³ odpowiednio zareagowaæ na otrzyman¹ odpowiedŸ (np. w przypadku otrzymania negatywnej odpowiedzi, klient wyœwietli u¿ytkownikowi komunikat o b³êdzie, a w przypadku otrzymania odpowiedzi negatywnej, klient wyœwietli komunikat o sukcesie). Punkty koñcowe backendu s¹ chronione przez warstwê bezpieczeñstwa. Klient bêdzie móg³ wys³aæ ¿¹danie na dany endpoint tylko wtedy, gdy u¿ytkownik po stronie klienta bêdzie mia³ wymagane przez ten endpoint uprawnienia (role). Warstwa ta jest œciœle powi¹zana z warstw¹ bazy danych.
-
-\subsection{Klient - Frontend}
-Frontend jest odpowiedzialny za wysy³anie ¿¹dañ do warstwy backendowej i nastêpnie odpowiednie przetwarzanie oraz wyœwietlanie danych otrzymanych w odpowiedzi od backendu. W systemie tym klientem jest strona internetowa renderowana po stronie u¿ytkownika. Klient jest aplikacj¹ typu SPA (ang.\ \emph{Single Page Application}), co oznacza, ¿e aplikacja sk³ada siê z jednej strony HTML, a jej zawartoœæ jest zmieniana dynamiczne poprzez JavaScript. Zdecydowano siê na aplikacjê typu SPA, a nie MPA (ang.\ \emph{Multi Page Application}) g³ównie dlatego, ¿e aplikacje SPA dzia³aj¹ szybciej z powodu tylko jednej strony HTML. Kolejnymi kryteriami na korzyœæ SPA by³y ³atwiejsze wdro¿enie, gdy¿ wystarcz¹ do tego jedynie 3 pliki (HTML, CSS i JavaScript), ³atwiejsze wprowadzenie dynamicznej zawartoœci oraz u³atwione tworzenie aplikacji. Frontend jest równie¿ chroniony przez warstwê bezpieczeñstwa. U¿ytkownik bêdzie mia³ dostêp do podstron oraz funkcji systemu jedynie w zakresie posiadanych przez niego uprawnieñ (ról).
-
-\subsection{Serwer webowy}
-Warstwa odpowiedzialna za obs³ugiwanie ¿¹dañ protoko³u HTTP dla klienta.
-
-\subsection{Warstwa bezpieczeñstwa}
-Warstwa bezpieczeñstwa jest osobnym serwerem, który odpowiada za uwierzytelnienie i autoryzacjê. Warstwa ta zabezpiecza zarówno warstwê klienck¹, jak i serwer aplikacji. Warstwa kliencka jest chroniona poprzez blokowanie niektórych podstron, jak i funkcji systemu, które nie powinny byæ dostêpne dla danego u¿ytkownika. Mechanizmem bezpieczeñstwa dla aplikacji serwerowej jest wymóg dostarczania prawid³owego tokenu dostêpu (ang.\ \emph{Access token}) oraz posiadania odpowiednich uprawnieñ przy wysy³aniu przez klienta ¿¹dania do zabezpieczonego punktu koñcowego tego serwera.
-
-Klient mo¿e uzyskaæ token dostêpu poprzez zalogowanie siê do serwera bezpieczeñstwa. Logowanie mo¿e byæ wykonane poprzez wys³anie przez klienta ¿¹dania z danymi do logowania na odpowiedni endpoint serwera bezpieczeñstwa. W przypadku pomyœlnego logowania, klient otrzymuje od serwera bezpieczeñstwa m.in. wygenerowane tokeny dostêpu oraz odœwie¿ania wraz z datami wa¿noœci tych tokenów. Token dostêpu jest póŸniej dostarczany przez klienta w nag³ówku wiadomoœci w polu przeznaczonym do autoryzacji: \texttt{Authorization: Bearer <token>}. Przed wys³aniem ¿¹dania do backendu klient sprawdza, czy token dostêpu straci³ swoj¹ wa¿noœæ (zwykle kilka minut) i jeœli token ten straci³ swoj¹ wa¿noœæ, to klient wysy³a ¿¹danie z do³¹czonym tokenem odœwie¿ania o wygenerowanie nowego tokenu dostêpu, do którego do³¹czony bêdzie równie¿ aktualny token odœwie¿ania. Token odœwie¿ania mo¿e straciæ swoj¹ wa¿noœæ jedynie w przypadku wylogowania albo nieaktywnoœci u¿ytkownika. Opisany proces uwierzytelnienia nazywa siê uwierzytelnianiem na okaziciela (ang.\ \emph{Bearer authentication}). Zastosowany serwer bezpieczeñstwa przeprowadza autoryzacjê u¿ytkowników w oparciu o ich role.
-
 \section{Wymagania funkcjonalne}
 
 Pierwszym etapem realizacji pracy jest okreœlenie wymagañ funkcjonalnych i niefunkcjonalnych. W tym celu konieczne jest wprowadzenie pojêæ, które bêd¹ wykorzystywane w dalszej czêœci pracy.
 
 \subsection{S³ownik pojêæ}
 
-Przed zdefiniowaniem wymagañ funkcjonalnych, potrzebne by³o okreœlenie definicji, które bêd¹ u¿ywane zarówno przy wymaganiach funkcjonalnych, jak i w reszcie pracy.
+Przed zdefiniowaniem wymagañ funkcjonalnych, potrzebne by³o okreœlenie pojêæ, które bêd¹ u¿ywane zarówno przy wymaganiach funkcjonalnych, jak i w reszcie pracy.
 \newline
 \newline
 W pracy bêd¹ wykorzystywane nastêpuj¹ce pojêcia:
 \begin{itemize}
-	\item \texttt{Technologia} - pakiet oprogramowania wykorzystywany przez informatyków, a w szczególnoœci przez programistów. 
+	\item \texttt{Technologia} - pakiet oprogramowania lub narzêdzia developerskie wykorzystywane przez informatyków, a w szczególnoœci przez programistów. 
 		Technologia bêdzie opisywana nastêpuj¹cymi atrybutami:
 		\begin{itemize}
-			\item Nazwa,
-			\item Opis,
-			\item Dostawca (opcjonalne),
-			\item Ikona (opcjonalne),
-			\item Kategoria,
-			\item Data pierwszego wydania (opcjonalne),
-			\item Data ostatniego wydania (opcjonalne),
-			\item Daty edycji.
+			\item \texttt{Nazwa},
+			\item \texttt{Opis},
+			\item \texttt{Dostawca} (opcjonalne),
+			\item \texttt{Ikona} (opcjonalne),
+			\item \texttt{Kategoria},
+			\item \texttt{Data pierwszego wydania} (opcjonalne),
+			\item \texttt{Data ostatniego wydania} (opcjonalne),
+			\item \texttt{Daty edycji}.
 		\end{itemize}
 	\item \texttt{Podzia³ technologii} - hierarchiczny podzia³ technologii na kategorie ze wzglêdu na ich architekturê. Klasyfikacjê tê mo¿na przedstawiæ w postaci 
 				nastêpuj¹cego drzewa:
 				\begin{itemize}
-					\item Technologie informatyczne
+					\item \texttt{Technologie informatyczne}
 							\begin{itemize}
-								\item Jêzyk programowania (np. Java, C++)
+								\item \texttt{Jêzyk programowania} (np. Java, C++)
 									\begin{itemize}
-										\item Biblioteka (np. SFMl, SDL, OpenGL),
-										\item Framework (np. Spring, Spring Boot, React, Angular)
+										\item \texttt{Biblioteka} (np. SFMl, SDL, OpenGL),
+										\item \texttt{Framework} (np. Spring, Spring Boot, React, Angular)
 									\end{itemize}
-								\item Jêzyk znaczników (np. TeX, HTML, XML)
-								\item Jêzyk bazy danych (np. SQL, GraphQL)
+								\item \texttt{Jêzyk znaczników} (np. TeX, HTML, XML)
+								\item \texttt{Jêzyk bazy danych} (np. SQL, GraphQL)
 									\begin{itemize}
-										\item Relacyjna (np. MySQL, Oracle Database, SQLLite)
-										\item Obiektowo-relacyjna (np. PostgreSQL)
-										\item NoSQL (np. MongoDB, Cassandra)
+										\item \texttt{Relacyjna} (np. MySQL, Oracle Database, SQLLite)
+										\item \texttt{Obiektowo-relacyjna} (np. PostgreSQL)
+										\item \texttt{NoSQL} (np. MongoDB, Cassandra)
 									\end{itemize}
 							\end{itemize}
-					\item Œrodowiska uruchomieniowe
+					\item \texttt{Œrodowiska uruchomieniowe}
 						\begin{itemize}
-							\item System operacyjny (np. Windows, Linux)
-							\item Œrodowiska wirtualizowane (JVM, .NET, node.js)
-							\item Systemy wbudowane (np. Arduino, Rasberry Pi)	
+							\item \texttt{System operacyjny} (np. Windows, Linux)
+							\item \texttt{Œrodowiska wirtualizowane} (JVM, .NET, node.js)
+							\item \texttt{Systemy wbudowane} (np. Arduino, Rasberry Pi)	
 						\end{itemize}
-					\item Narzêdzia developerskie
+					\item \texttt{Narzêdzia developerskie}
 						\begin{itemize}
-							\item Œrodowisko programistyczne (np. Netbeans, Eclipse, Visual Studio Code, Visual Studio, Itellij)
-							\item System kontroli wersji (np. git)
+							\item \texttt{Œrodowisko programistyczne} (np. Netbeans, Eclipse, Visual Studio Code, Visual Studio, Itellij)
+							\item \texttt{System kontroli wersji} (np. git)
 								\begin{itemize}
-									\item Serwisy hostuj¹ce gita (np. GitLab, GitHub)
+									\item \texttt{Serwisy hostuj¹ce gita} (np. GitLab, GitHub)
 								\end{itemize}
-							\item CI/CD - ci¹g³a integracja/ci¹g³e dostarczanie (np. Jenkins, GitlLab CI)
-							\item Konteneryzacja (np. docker)
-							\item Orkiestracja (system do zarz¹dzania, organizacji i planowania zasobów systemu – np. Docker Compose, Kubernetes)
+							\item \texttt{CI/CD} - ci¹g³a integracja/ci¹g³e dostarczanie (np. Jenkins, GitlLab CI)
+							\item \texttt{Konteneryzacja} (np. docker)
+							\item \texttt{Orkiestracja} (system do zarz¹dzania, organizacji i planowania zasobów systemu – np. Docker Compose, Kubernetes)
 						\end{itemize}
-					\item Inne (oprogramowanie, które nie zosta³o przypisane do ¿adnej z ww. kategorii)
+					\item \texttt{Inne} (oprogramowanie, które nie zosta³o przypisane do ¿adnej z ww. kategorii)
 				\end{itemize}
 	\item \texttt{Artyku³} - opis danej technologii przygotowany przez u¿ytkownika systemu. 
 		Artyku³ bêdzie opisywany nastêpuj¹cymi atrybutami:
 		\begin{itemize}
-			\item Status (mo¿liwe wartoœci: nowy, przypisywany do weryfikacji, weryfikowany, przedawniona weryfikacja, odrzucony, opublikowany, edytowany),
-			\item Tytu³,
-			\item Autor,
-			\item Data utworzenia,
-			\item Data modyfikacji,
-			\item Kategoria technologii wraz z ca³¹ hierarchiczna œcie¿k¹ prowadz¹ca do tej kategorii (np. dla Javy bêdzie to: 
-						Technologie Informatyczne / Jêzyk Programowania / Java),
-			\item Dostawca technologii (opcjonalne),
-			\item Ikona technologii (opcjonalne),
-			\item Tekst artyku³u,
-			\item Lista opinii o artykule,
-			\item Œrednia ocena z co najmniej 5-ciu opinii o artykule,
-			\item Data przypisania artyku³u do weryfikacji,
-			\item Recenzent przypisany do weryfikacji artyku³u.
+			\item \texttt{Status} (mo¿liwe wartoœci: nowy, przypisywany do weryfikacji, weryfikowany, przedawniona weryfikacja, odrzucony, opublikowany, edytowany),
+			\item \texttt{Tytu³},
+			\item \texttt{Autor},
+			\item \texttt{Data utworzenia},
+			\item \texttt{Data modyfikacji},
+			\item \texttt{Kategoria technologii} wraz z ca³¹ hierarchiczna œcie¿k¹ prowadz¹ca do tej kategorii (np. dla Javy bêdzie to: 
+						\texttt{Technologie Informatyczne / Jêzyk Programowania / Java}),
+			\item \texttt{Dostawca} technologii (opcjonalne),
+			\item \texttt{Ikona} technologii (opcjonalne),
+			\item \texttt{Tekst} artyku³u,
+			\item \texttt{Lista opinii o artykule},
+			\item \texttt{Œrednia ocena} z co najmniej 5-ciu opinii o artykule,
+			\item \texttt{Data przypisania} artyku³u do weryfikacji,
+			\item \texttt{Recenzent} przypisany do weryfikacji artyku³u.
 		\end{itemize}
-		Artyku³y podlegaj¹ cyklowi ¿ycia, który jest przedstawiony na diagramie~\ref{fig:cykl-zycia-artykulu}:
+		Artyku³y podlegaj¹ cyklowi ¿ycia, który jest przedstawiony na rysunku~\ref{fig:cykl-zycia-artykulu}:
 		
 		\begin{figure}[H]
 			\centering
@@ -136,19 +88,20 @@ W pracy bêd¹ wykorzystywane nastêpuj¹ce pojêcia:
 			\caption*{ród³o: opracowanie w³asne}
 		\end{figure}
 		
-		Diagram~\ref{fig:cykl-zycia-artykulu} przedstawia przejœcia do odpowiednich statusów artyku³u (zaokr¹glone prostok¹ty) w wyniku podjêtych przez u¿ytkowników 
-		dzia³añ.
+		Na rysunku~\ref{fig:cykl-zycia-artykulu} zosta³y przestawione przejœcia do odpowiednich statusów artyku³u (zaokr¹glone prostok¹ty) w wyniku podjêtych przez 
+		u¿ytkowników dzia³añ.
 		
 	\item \texttt{Weryfikacja artyku³u} - informacja o tym, czy artyku³ powinien zostaæ opublikowany w serwisie (zaakceptowanie artyku³u) albo wymaga jeszcze korekty (
 				odrzucenie artyku³u),
-	\item \texttt{Dostêpnoœæ u¿ytkownika} - informacja o tym, czy recenzent mo¿e weryfikowaæ artyku³y w danym czasie,
+	\item \texttt{Dostêpnoœæ recenzenta} - informacja o tym, czy recenzent mo¿e weryfikowaæ artyku³y w danym czasie,
 	\item \texttt{Komentarz do artyku³u} - tekstowa informacja zwrotna zalogowanego u¿ytkownika o danym artykule,
-	\item \texttt{Ocena artyku³u} - ocena wystawiona przez zalogowanego u¿ytkownika na temat danego artyku³u. Ocena ta jest w postaci gwiazdek bêd¹ca wartoœci¹ od 1 do,		przy czym wartoœæ 1 oznacza ocenê negatywn¹ i wskazuje, ¿e artyku³ posiada ra¿¹ce b³êdy i powinien zostaæ edytowany albo usuniêty, a wartoœæ 5 oznacza ocenê pozytywn¹ i 
-				wskazuje, ¿e artyku³ nie posiada ra¿¹cych b³êdów oraz informacje w nim zawarte s¹ niezwykle przydatne dla u¿ytkowników,
+	\item \texttt{Ocena artyku³u} - ocena wystawiona przez zalogowanego u¿ytkownika na temat danego artyku³u. Ocena ta jest w postaci gwiazdek bêd¹ca wartoœci¹ od 1 do,		
+				przy czym wartoœæ 1 oznacza ocenê negatywn¹ i wskazuje, ¿e artyku³ posiada ra¿¹ce b³êdy i powinien zostaæ edytowany albo usuniêty, a wartoœæ 5 oznacza ocenê 
+				pozytywn¹ i wskazuje, ¿e artyku³ nie posiada ra¿¹cych b³êdów oraz informacje w nim zawarte s¹ niezwykle przydatne dla u¿ytkowników,
 	\item \texttt{Opinia o artykule} - oceniaj¹ca informacja zwrotna zalogowanego u¿ytkownika na temat danego artyku³u, która zawiera tekstowy komentarz oraz 
 				ocenê tego artyku³u,
-	\item \texttt{Akceptacja opinii o artykule} - ocena wystawiona przez zalogowanego u¿ytkownika dotycz¹ca opinii o artykule. Przyjmuje ona dwie wartoœci: ocena pozytywna (³apka w 
-				górê) oznaczaj¹ca, ¿e u¿ytkownik zgadza siê z opini¹ i ocena negatywna (³apka w dó³) oznaczaj¹ca, i¿ u¿ytkownik nie zgadza siê z opini¹.
+	\item \texttt{Akceptacja opinii o artykule} - ocena wystawiona przez zalogowanego u¿ytkownika dotycz¹ca opinii o artykule. Przyjmuje ona dwie wartoœci: ocena pozytywna (
+				³apka w górê) oznaczaj¹ca, ¿e u¿ytkownik zgadza siê z opini¹ i ocena negatywna (³apka w dó³) oznaczaj¹ca, i¿ u¿ytkownik nie zgadza siê z opini¹.
 	\item \texttt{Rola} - zestaw uprawnieñ u¿ytkownika, które okreœlaj¹ jego zakres dostêpu do systemu oraz okreœlonych funkcji tego systemu. Mo¿liwe jest przypisanie danemu 
 				u¿ytkownikowi ról, co jest równoznaczne z uzyskaniem przez tego u¿ytkownika uprawnieñ zdefiniowanych w tych rolach. Wyró¿niono w systemie nastêpuj¹ce 
 				role:
@@ -162,20 +115,18 @@ W pracy bêd¹ wykorzystywane nastêpuj¹ce pojêcia:
 			\item \texttt{Autor opinii o artykule} - zalogowany u¿ytkownik mog¹cy edytowaæ oraz usun¹æ utworzon¹ przez siebie opiniê o artykule,
 			\item \texttt{Autor akceptacji opinii o artykule} - zalogowany u¿ytkownik mog¹cy usun¹æ utworzon¹ przez siebie akceptacjê opinii o artykule,
 			\item \texttt{Recenzent} (ekspert od technologii) - zalogowany u¿ytkownik, który otrzyma³ od administratora rolê recenzenta. Jego g³ównym zadaniem jest 
-						weryfikacja artyku³ów przed ich opublikowaniem w serwisie. Na podstawie utworzonej przez administratora listy technologii, w których dany recenzent jest 
-						ekspertem, przydzielane s¹ temu recenzentowi odpowiednie artyku³y do zrecenzowania (zweryfikowania). Innym uprawnieniem tego u¿ytkownika jest m.in. 
-						zarz¹dzanie klasyfikacj¹ technologii.
+						weryfikacja artyku³ów przed ich opublikowaniem w serwisie. Innym uprawnieniem tego u¿ytkownika jest m.in. zarz¹dzanie klasyfikacj¹ technologii.
 			\item \texttt{Administrator} (utrzymuje porz¹dek w serwisie) - zalogowany u¿ytkownik, który otrzyma³ od innego administratora rolê administratora. Odpowiada 
-						on  przede wszystkim za przydzielanie ról u¿ytkownikom, ustalanie listy technologii, w których dany recenzent jest ekspertem oraz utrzymywanie porz¹dku w 
-						serwisie poprzez edytowanie i usuwanie niew³aœciwych treœci (np. wirusy lub spam). Przy instalacji systemu powinno byæ tworzone co najmniej jedno konto 
-						u¿ytkownika z rol¹ administratora, gdy¿ to w³aœnie administrator odpowiada za przydzielanie ról innym u¿ytkownikom,
-			\item \texttt{System} - sprzêt, który odpowiada za automatyczne przypisywanie recenzenta do weryfikacji artyku³ów oraz automatyczne ponowne przypisanie artyku³u do 
-						weryfikacji innemu recenzentowi, jeœli up³yn¹³ 1-tygodniowy termin weryfikacji artyku³u przez aktualnego recenzenta.
+						on przede wszystkim za przydzielanie ról u¿ytkownikom oraz utrzymywanie porz¹dku w serwisie poprzez edytowanie i usuwanie niew³aœciwych treœci (np. wirusy lub 
+						spam). Przy instalacji systemu powinno byæ tworzone co najmniej jedno konto u¿ytkownika z rol¹ administratora, gdy¿ to w³aœnie administrator odpowiada za 
+						przydzielanie ról innym u¿ytkownikom,
+			\item \texttt{System} - wbudowane procedury, które umo¿liwiaj¹ automatyczne przypisywanie recenzenta do weryfikacji artyku³ów oraz automatyczne ponowne przypisanie 
+						artyku³u do weryfikacji innemu recenzentowi, jeœli up³yn¹³ 1-tygodniowy termin weryfikacji artyku³u przez aktualnego recenzenta.
 		\end{itemize}
 \end{itemize}
 				
-\subsection{Wymagania funkcjonalne poszczególnych ról u¿ytkowników}
-	Po zdefiniowaniu pojêæ, przyst¹piono do okreœlenia wymagañ funkcjonalnych poszczególnych ról u¿ytkowników.
+\subsection{Wymagania funkcjonalne dla systemu IT-Tech}
+	Po zdefiniowaniu pojêæ, przyst¹piono do okreœlenia wymagañ funkcjonalnych dla poszczególnych u¿ytkowników.
 	\newline
 	\newline
 	Zdefiniowano nastêpuj¹ce wymagania funkcjonalne:
@@ -184,38 +135,41 @@ W pracy bêd¹ wykorzystywane nastêpuj¹ce pojêcia:
 			\begin{itemize}
 				\item wyszukiwania artyku³ów po nastêpuj¹cych kryteriach:
 					\begin{itemize}
-						\item Tytu³,
-						\item Autor,
-						\item Kategoria technologii,
-						\item Dostawca technologii,
-						\item Zakres dat, w których mieœci siê data powstania artyku³u,
-						\item Zakres dat, w których mieœci siê data modyfikacji artyku³u,
-						\item W³asne artyku³y.
+						\item \texttt{Tytu³},
+						\item \texttt{Autor},
+						\item \texttt{Kategoria technologii},
+						\item \texttt{Technologia},
+						\item \texttt{Dostawca technologii}
+						\item Zakres dat, w których mieœci siê \texttt{data powstania} artyku³u,
+						\item Zakres dat, w których mieœci siê \texttt{data modyfikacji} artyku³u.
 					\end{itemize}
 				\item sortowania artyku³ów wed³ug nastêpuj¹cych kryteriów:
 					\begin{itemize}
-						\item Popularnoœæ (liczba opinii),
-						\item Data powstania,
-						\item Data modyfikacji,
-						\item Œrednia ocena.
+						\item \texttt{Nazwa},
+						\item \texttt{Nazwa technologii},
+						\item \texttt{Autor},
+						\item \texttt{Data powstania},
+						\item \texttt{Data modyfikacji},
+						\item \texttt{Œrednia ocena},
+						\item \texttt{Liczba opinii}.
 					\end{itemize}
 				\item wyœwietlenia zawartoœci artyku³u,
 				\item przegl¹dania komentarzy o artykule,
 				\item przegl¹dania opinii o artykule,
 				\item wyszukiwania technologii po nastêpuj¹cych kryteriach:
 					\begin{itemize}
-						\item Nazwa
-						\item Kategoria,
-						\item Zastosowania,
-						\item Dostawca,
-						\item Zakres dat, w których mieœci siê data pierwszego wydania,
-						\item Zakres dat, w których mieœci siê data ostatniego wydania.
+						\item \texttt{Nazwa},
+						\item \texttt{Kategoria},
+						\item \texttt{Dostawca},
+						\item Zakres dat, w których mieœci siê \texttt{data pierwszego wydania},
+						\item Zakres dat, w których mieœci siê \texttt{data ostatniego wydania}.
 					\end{itemize}
 				\item sortowania technologii wed³ug nastêpuj¹cych kryteriów:
 					\begin{itemize}
-						\item Popularnoœæ (liczba opinii),
-						\item Data pierwszego wydania,
-						\item Data ostatniego wydania.
+						\item \texttt{Nazwa},
+						\item \texttt{Kategoria},
+						\item \texttt{Data pierwszego wydania},
+						\item \texttt{Data ostatniego wydania}.
 					\end{itemize}
 				\item wyœwietlenia opisu technologii,
 			\end{itemize}
@@ -225,13 +179,13 @@ W pracy bêd¹ wykorzystywane nastêpuj¹ce pojêcia:
 					\begin{itemize}
 						\item Podczas rejestracji u¿ytkownik bêdzie podawa³ nastêpuj¹ce informacje:
 							\begin{itemize}
-								\item Nazwa u¿ytkownika,
-								\item Pseudonim (nazwa, pod któr¹ u¿ytkownik bêdzie móg³ byæ rozpoznany w serwisie przez innych u¿ytkowników)
-								\item Imiê,
-								\item Nazwisko,
-								\item Adres e-mail,
-								\item (Opcjonalnie) Awatar,
-								\item Has³o.
+								\item \texttt{Nazwa u¿ytkownika},
+								\item \texttt{Pseudonim} (nazwa, pod któr¹ u¿ytkownik bêdzie móg³ byæ rozpoznany w serwisie przez innych u¿ytkowników)
+								\item \texttt{Imiê},
+								\item \texttt{Nazwisko},
+								\item \texttt{Adres e-mail},
+								\item (Opcjonalnie) \texttt{Awatar},
+								\item \texttt{Has³o}.
 							\end{itemize}
 						\item Po rejestracji i zalogowaniu, u¿ytkownik uzyskuje uprawnienia zalogowanego u¿ytkownika, a aby uzyskaæ uprawnienia recenzenta lub administratora, nale¿y 
 								  w tym celu skontaktowaæ siê z administratorem, który bêdzie w stanie nadaæ tak¹ rolê,
@@ -248,9 +202,8 @@ W pracy bêd¹ wykorzystywane nastêpuj¹ce pojêcia:
 				\item wylogowania siê,
 				\item stworzenia artyku³u, przy czym aby artyku³ zosta³ opublikowany w serwisie, to artyku³ ten musi przejœæ pozytywnie weryfikacjê przeprowadzan¹ przez recenzenta,
 				\item dodania komentarza o artykule,
-				\item dodania opinii o artykule którego u¿ytkownik nie jest autorem. U¿ytkownik bêdzie móg³ zostawiæ tylko jedn¹ opiniê dla danego artyku³u,
-				\item dodania akceptacji opinii o artykule. U¿ytkownik bêdzie móg³ zostawiæ akceptacjê opinii, której opinii nie jest autorem oraz bêdzie móg³ zostawiæ tylko 
-							jedn¹ akceptacjê dla danej opinii o artykule.
+				\item dodania jednej opinii o artykule którego u¿ytkownik nie jest autorem,
+				\item dodania jednej akceptacji opinii o artykule wystawionej przez innego u¿ytkownika. 
 			\end{itemize}
 		\item \texttt{Autor artyku³u} powinien mieæ mo¿liwoœæ:
 			\begin{itemize}
@@ -284,25 +237,18 @@ W pracy bêd¹ wykorzystywane nastêpuj¹ce pojêcia:
 		\item \texttt{Recenzent} powinien mieæ mo¿liwoœæ:
 			\begin{itemize}
 				\item edycji rodziny technologii,
-				\item ustawienia w³asnej dostêpnoœci na ,,dostêpny'' albo ,,niedostêpny''. W przypadku ustawionej niedostêpnoœci nie bêd¹ takiemu recenzentowi przypisywane 
-							artyku³y do zweryfikowania.
-				\item weryfikacji artyku³ów
+				\item ustawienia w³asnej dostêpnoœci,
+				\item weryfikacji artyku³ów wed³ug nastêpuj¹cych za³o¿eñ:
 					\begin{itemize}
-						\item Powinna byæ mo¿liwoœæ automatycznego przypisywania artyku³ów do weryfikacji recenzentom na podstawie ich dostêpnoœci, posiadanych przez nich list 
-									technologii, w których s¹ ekspertami oraz liczby zrecenzowanych przez nich artyku³ów. W pierwszej kolejnoœci nie bêd¹ brani pod uwagê 
-									niedostêpni recenzenci, nastêpnie bêd¹ wybierani recenzenci, którzy s¹ ekspertami w jak najbardziej szczegó³owej technologii (np. 
-									Java jest bardziej szczegó³owa ni¿ jêzyki programowania), której dotyczy artyku³ oraz w trzeciej kolejnoœci bêd¹ wybierani recenzenci, którzy 
-									zrecenzowali najmniejsz¹ liczbê artyku³ów.
-						\item Weryfikacjê danego artyku³u bêdzie móg³ przeprowadziæ jedynie jeden recenzent,
-						\item Nastêpnie po przypisaniu artyku³u do zrecenzowania danemu recenzentowi, recenzent ten bêdzie mia³ tydzieñ na akceptacjê lub odrzucenie artyku³u. W 
-									przypadku przekroczenia terminu zostanie usuniête przypisanie artyku³u do weryfikacji i bêdzie to skutkowa³o ponownym przypisaniem artyku³u do 
-									weryfikacji innemu recenzentowi. Przy akceptacji artyku³u opcjonalne jest za³¹czenie wiadomoœci (np. drobne uwagi), ale przy odrzuceniu artyku³u 
-									za³¹czenie wiadomoœci jest obowi¹zkowe i powinna ona zawieraæ informacje o tym, dlaczego artyku³ zosta³ odrzucony.
+						\item po przypisaniu artyku³u do weryfikacji danemu recenzentowi, recenzent ten bêdzie mia³ tydzieñ na akceptacje lub odrzucenie artyku³u,
+						\item przy akceptacji artyku³u opcjonalne jest za³¹czenie wiadomoœci (np. drobne uwagi), ale przy odrzuceniu artyku³u za³¹czenie wiadomoœci jest 
+									obowi¹zkowe i powinna ona zawieraæ informacje o tym, dlaczego artyku³ zosta³ odrzucony
+						\item jeœli recenzent nie zweryfikuje artyku³u w ci¹gu tygodnia, wtenczas artyku³ ten zostanie przypisany do weryfikacji innemu recenzentowi.
 					\end{itemize}
 			\end{itemize}
 		\item \texttt{Administrator} powinien mieæ mo¿liwoœæ:
 			\begin{itemize}
-				\item edycji danych innych u¿ytkowników,
+				\item edycji danych innych u¿ytkowników,F
 				\item zarz¹dzania artyku³ami w nastêpuj¹cym zakresie:
 					\begin{itemize}
 						\item	edytowanie,
@@ -311,32 +257,14 @@ W pracy bêd¹ wykorzystywane nastêpuj¹ce pojêcia:
 				\item usuwania komentarzy o artykule,
 				\item usuwania opinii o artykule,
 				\item przypisywania innym u¿ytkownikom ról,
-				\item usuwania przypisanych ról innych u¿ytkowników,
-				\item wyszukiwania technologii spoœród listy technologii, w których recenzent jest ekspertem,
-				\item zarz¹dzania listami technologii, w których recenzenci s¹ ekspertami. Administrator powinien mieæ mo¿liwoœæ:
-					\begin{itemize}
-						\item	dodawania technologii,
-						\item usuwania technologii.
-					\end{itemize}
+				\item usuwania przypisanych ról innych u¿ytkowników.
 			\end{itemize}
-		\item \texttt{System} powinien mieæ mo¿liwoœæ:
+		\item \texttt{System} powinien mieæ co 24 godziny mo¿liwoœæ automatycznego:
 			\begin{itemize}
-				\item edycji danych innych u¿ytkowników,
-				\item zarz¹dzania artyku³ami w nastêpuj¹cym zakresie:
-					\begin{itemize}
-						\item	edytowanie,
-						\item usuwanie.
-					\end{itemize}
-				\item usuwania komentarzy o artykule,
-				\item usuwania opinii o artykule,
-				\item przypisywania innym u¿ytkownikom ról,
-				\item usuwania przypisanych ról innych u¿ytkowników,
-				\item wyszukiwania technologii spoœród listy technologii, w których recenzent jest ekspertem,
-				\item zarz¹dzania listami technologii, w których recenzenci s¹ ekspertami. Administrator powinien mieæ mo¿liwoœæ:
-					\begin{itemize}
-						\item	dodawania technologii,
-						\item usuwania technologii.
-					\end{itemize}
+				\item przypisywania artyku³ów do weryfikacji dostêpnym recenzentom, którzy w ci¹gu ostatnich 30 dni zrecenzowali najmniejsz¹ liczbê 
+							artyku³ów,
+				\item wyszukiwania artyku³ów z przedawnion¹ weryfikacj¹,
+				\item usuniêcia przedawnionych weryfikacji artyku³ów oraz przypisania tych artyku³ów do ponownej weryfikacji.
 			\end{itemize}
 \end{itemize}
 
@@ -358,26 +286,6 @@ Na podstawie celu oraz zakresu pracy zdefiniowano nastêpuj¹ce wymagania niefunkc
 					\item Co najmniej jedna cyfra.
 				\end{itemize}
 		\end{itemize}
-	\item Wymagania dotycz¹ce obci¹¿enia systemu
-		\begin{enumerate}
-			\item Ca³kowita liczba u¿ytkowników - 200000 (liczba przyjêta z góry),
-			\item Œredni dzienny czas spêdzania u¿ytkowników w serwisie - 1 godzina (liczba przyjêta z góry),
-			\item Œrednia liczba zalogowanych u¿ytkowników w jednym momencie - 8333 (1. / (24 / 2.)),
-			\item Liczba artyku³ów - 600000 (liczba przyjêta z góry),
-			\item Œredni rozmiar artyku³u - 8.2 KB (œrednia waga ikony technologii - 4.2 KB, œrednia waga zawartoœci artyku³u - 4 KB (sam tekst) - (przyjêto, 
-						¿e zostan¹ wziête pod uwagê najbardziej znacz¹ce dane)),
-			\item Œredni czas spêdzania u¿ytkownika na jednym artykule - 2 minuty
-			\item Œrednia liczba zapytañ do \texttt{Bazy danych 1} na minutê dla jednego u¿ytkownika - 2.5 (Za³o¿ono, ¿e u¿ytkownik œrednio spêdza 2 minuty 
-						na jednym artykule, a aby wyœwietliæ kolejny artyku³, to u¿ytkownik najczêœciej wpisuje tytu³ tego artyku³u, artyku³ jest nastêpnie 
-						wyszukiwany (1 zapytanie), a nastêpnie do wyœwietlenia otrzymanego artyku³u wywo³ywane s¹ 4 zapytania (zapytanie o podstawowe dane o 
-						artykule (tytu³, autor, itp.), zapytanie o komentarze oraz zapytanie o opinie o artykule, zapytanie o opinie o technologii), czyli ³¹cznie 5 
-						zapytañ co 2 minuty)
-			\item Œrednia liczba zapytañ do \texttt{Bazy danych 1} na sekundê - 347 (7. / 60 * 3.),
-			\item Œrednia liczba zapytañ do \texttt{Bazy danych 2} na minutê dla jednego u¿ytkownika - 0.5 (Za³o¿ono, ¿e u¿ytkownik œrednio spêdza 2 minuty na 
-						jednym artykule, a z powodu tego, ¿e w tej bazie danych przechowywane s¹ jedynie zawartoœci artyku³ów, zatem mo¿na uznaæ, ¿e co 2 minuty 
-						wywo³ywane jest 1 zapytanie)
-			\item Œrednia liczba zapytañ do \texttt{Bazy danych 2} na sekundê - 69 (9. / 60 * 3.),
-		\end{enumerate}
 	\item Wykorzystywane technologie i narzêdzia
 		\begin{itemize}
 			\item Backend - \texttt{Spring Boot},
@@ -388,6 +296,54 @@ Na podstawie celu oraz zakresu pracy zdefiniowano nastêpuj¹ce wymagania niefunkc
 			\item Dokumentacja - \texttt{LaTeX}.
 		\end{itemize}
 \end{itemize}
+
+\section{Architektura systemu}
+
+Na podstawie analizy wymagañ funkcjonalnych i niefunkcjonalnych, opracowano architekturê systemu. Realizowany system jest rozproszonym serwisem webowym, który w du¿ym uogólnieniu mo¿na opisaæ jako system typu klient-serwer. Klient wysy³a ¿¹danie do serwera aplikacji, a nastêpnie serwer odpowiednio przetwarza otrzymane ¿¹danie i zwraca klientowi odpowiedŸ, któr¹ klient interpretuje i przedstawia u¿ytkownikowi. Zdecydowano siê na rozproszon¹ architekturê systemu, gdy¿ taka architektura zapewnia wiêksz¹ niezawodnoœæ i skalowalnoœæ ni¿ w przypadku systemów scentralizowanych.
+
+Szczegó³ow¹ architekturê systemu przedstawiono na rysunku~\ref{fig:architektura-systemu}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\linewidth]{rys02/architektura-systemu}
+	\caption{Architektura systemu}
+	\label{fig:architektura-systemu}
+	\caption*{ród³o: opracowanie w³asne}
+\end{figure}
+
+Zdecydowano siê na zaimplementowanie systemu w postaci serwisu webowego g³ównie dlatego, ¿e taka forma aplikacji zapewnia du¿¹ wygodê u¿ytkowania z powodu braku koniecznoœci jej zainstalowania przez u¿ytkownika. Innym powodem jest to, ¿e serwisy webowe s¹ obecnie najpopularniejszym typem systemu i implementacja takiej aplikacji pozwoli na zdobycie wartoœciowego doœwiadczenia.
+
+Komunikacja w systemie przebiega g³ównie poprzez protokó³ HTTP (ang.\ \emph{Hypertext Transfer Protocol}). Protokó³ ten jest oparty na komunikacji typu klient-serwer, przy czym klientem jest najczêœciej przegl¹darka. Klientem wysy³a ¿¹danie do serwera, a serwer wysy³a do klienta odpowiedŸ. Zawartoœæ wiadomoœci HTTP mo¿na przede wszystkim podzieliæ na nag³ówek (ang.\ \emph{Header}) oraz ³adunek (ang.\ \emph{Body}). W nag³ówku znajduj¹ siê pola typu klucz-wartoœæ. Nag³ówek ¿¹dania ró¿ni siê od nag³ówka odpowiedzi poprzez dostêpne opcje, ale maj¹ one równie¿ wspólne pola np. informacja o hoœcie docelowym, czy format wiadomoœci. W nag³ówku ¿¹dania mo¿na wyró¿niæ jeszcze np. nag³ówek \texttt{Authorization}, w którym umieszczane s¹ poœwiadczenia uwierzytelnienia i autoryzacji. W nag³ówku odpowiedzi mo¿na za to wyró¿niæ m.in. status odpowiedzi, który np. informuje o tym, czy ¿¹danie zosta³o wykonane pomyœlnie (np. status 200), czy te¿ wyst¹pi³ b³¹d, a jeœli wyst¹pi³, to z jakiego powodu (np. status 401 oznaczaj¹cy nieudane uwierzytelnienie u¿ytkownika). £adunek jest opcjonalnym polem, które stanowi treœæ wiadomoœci HTTP i np. w przypadku odpowiedzi mo¿e zawieraæ listê wyszukanych artyku³ów.
+
+Komunikacja w systemie jest zgodna ze stylem architektury oprogramowania REST (ang.\ \emph{Representational state transfer}). \texttt{REST} jest to sposób i format w jaki komunikuje siê klient z serwerem. Serwer udostêpnia klientowi punkty koñcowe (end-pointy), do których klient mo¿e wys³aæ ¿¹dania HTTP przesy³aj¹c przy tym jakieœ dane np. tytu³ wyszukiwanego artyku³u. W skrócie komunikacja REST odznacza siê nastêpuj¹cymi cechami:
+\begin{itemize}
+	\item bezstanowoœæ (nie przechowuje informacji o poprzednich wymianach wiadomoœci),
+	\item architektura klient-serwer,
+	\item jednolity interfejs komunikacyjny – dziêki temu mo¿liwe jest np. komunikowanie siê systemów zaimplementowanych w ró¿nych jêzykach programowania, czy zainstalowanych na ró¿nych platformach (np. mobilna),
+	\item wykorzystywanie protoko³u \texttt{HTTP}.
+\end{itemize}
+
+\subsection{Baza danych}
+Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. Za³o¿ono, ¿e w systemie zostan¹ wykorzystane dwie bazy danych ró¿nego typu: obiektowo-relacyjna (SQL) oraz nierelacyjna oparta na dokumentach (NoSQL). 
+
+Jako g³ówn¹ bazê danych wybrano bazê obiektowo-relacyjn¹, gdy¿ bazy relacyjne charakteryzuj¹ siê tym, ¿e zapewniaj¹ integralnoœæ danych poprzez tworzenie relacji np. poprzez powi¹zanie tabel kluczem obcym, a w realizowanym systemie wykryto wiele przypadków, w których mo¿na utworzyæ relacje. Przyk³adowo w³aœciciel artyku³u jest powi¹zaniem miêdzy encjami u¿ytkownika i artyku³u oraz historia modyfikacji technologii jest do³¹czona do danej technologii. Zdecydowano siê na obiektow¹ warstwê bazy danych, gdy¿ upraszcza ona pracê z kilkoma wykorzystywanymi narzêdziami (np. framework Hibernate jêzyka Java), które s¹ oparte na programowaniu obiektowym.
+
+Artyku³y maj¹ z³o¿on¹ zagnie¿d¿on¹ strukturê, zawieraj¹ rozdzia³y, podrozdzia³y, komentarze oraz opinie. Nierelacyjna baza dokumentowa wydaje siê byæ idealnym pomys³em do przechowywania takich informacji. Baza ta pozwala na przechowywanie struktur typu klucz-wartoœæ, co zapewnia du¿¹ elastycznoœæ w przechowywaniu danych, gdy¿ pozwala na m.in. przechowywanie zagnie¿d¿onych struktur oraz umo¿liwia pobranie danych w postaci zagnie¿d¿onej struktury nawet poprzez jedno zapytanie. Dla porównania w przypadku relacyjnej bazy danych nale¿a³oby wykonaæ wiele klauzuli JOIN aby pobraæ te same dane i przez co traci³oby siê na efektywnoœci.
+
+\subsection{Aplikacja serwerowa - Backend}
+Backend jest odpowiedzialny za przyjmowanie ¿¹dañ od klienta, odpowiednie przetwarzanie tych ¿¹dañ, wykonywanie pewnych operacji na danych przechowywanych w bazie danych na podstawie otrzymanych przez klienta danych i przekazywanie klientowi adekwatnej odpowiedzi. Backend udostêpnia klientowi punkty koñcowe (ang.\ \emph{API endpoints}) do których klient mo¿e przes³aæ ¿¹danie. Punkty koñcowe posiadaj¹ adresy URL np. http://localhost:9000/user. Adresy URL sk³adaj¹ siê nazwy protoko³u, nazwy hosta docelowego, portu docelowego oraz reszty, która identyfikuje punkt koñcowy oraz jego przeznaczenie. Wa¿nym elementem w przypadku backendu jest równie¿ wys³anie klientowi odpowiedniego statusu odpowiedzi oraz ewentualne do³¹czenie informacji zwrotnej. Dziêki temu klient bêdzie móg³ odpowiednio zareagowaæ na otrzyman¹ odpowiedŸ (np. w przypadku otrzymania negatywnej odpowiedzi, klient wyœwietli u¿ytkownikowi komunikat o b³êdzie, a w przypadku otrzymania odpowiedzi negatywnej, klient wyœwietli komunikat o sukcesie). Punkty koñcowe backendu s¹ chronione przez warstwê bezpieczeñstwa. Klient bêdzie móg³ wys³aæ ¿¹danie na dany endpoint tylko wtedy, gdy u¿ytkownik po stronie klienta bêdzie mia³ wymagane przez ten endpoint uprawnienia (role). Warstwa ta jest œciœle powi¹zana z warstw¹ bazy danych.
+
+\subsection{Klient - Frontend}
+Frontend jest odpowiedzialny za wysy³anie ¿¹dañ do warstwy backendowej i nastêpnie odpowiednie przetwarzanie oraz wyœwietlanie danych otrzymanych w odpowiedzi od backendu. W systemie tym klientem jest strona internetowa renderowana po stronie u¿ytkownika. Klient jest aplikacj¹ typu SPA (ang.\ \emph{Single Page Application}), co oznacza, ¿e aplikacja sk³ada siê z jednej strony HTML, a jej zawartoœæ jest zmieniana dynamiczne poprzez JavaScript. Zdecydowano siê na aplikacjê typu SPA, a nie MPA (ang.\ \emph{Multi Page Application}) g³ównie dlatego, ¿e aplikacje SPA dzia³aj¹ szybciej z powodu tylko jednej strony HTML. Kolejnymi kryteriami na korzyœæ SPA by³y ³atwiejsze wdro¿enie, gdy¿ wystarcz¹ do tego jedynie 3 pliki (HTML, CSS i JavaScript), ³atwiejsze wprowadzenie dynamicznej zawartoœci oraz u³atwione tworzenie aplikacji. Frontend jest równie¿ chroniony przez warstwê bezpieczeñstwa. U¿ytkownik bêdzie mia³ dostêp do podstron oraz funkcji systemu jedynie w zakresie posiadanych przez niego uprawnieñ (ról).
+
+\subsection{Serwer webowy}
+Warstwa odpowiedzialna za dostarczenie treœci strony WWW w odpowiedzi na ¿¹dania HTTP u¿ytkownika. U¿ytkownik jest po³¹czony z tym serwerem poprzez swoj¹ przegl¹darkê. 
+Innymi zadaniami tej warstwy s¹ przekierowywanie ¿¹dañ oraz zapewnienie bezpieczeñstwa poprzez m.in. mo¿liwoœæ okreœlenia dozwolonych nag³ówków w wysy³anych do tego serwera ¿¹daniach.
+
+\subsection{Warstwa bezpieczeñstwa}
+Warstwa bezpieczeñstwa jest osobnym serwerem, który odpowiada za uwierzytelnienie i autoryzacjê. Warstwa ta zabezpiecza zarówno warstwê klienck¹, jak i serwer aplikacji. Warstwa kliencka jest chroniona poprzez blokowanie niektórych podstron, jak i funkcji systemu, które nie powinny byæ dostêpne dla danego u¿ytkownika. Mechanizmem bezpieczeñstwa dla aplikacji serwerowej jest wymóg dostarczania prawid³owego tokenu dostêpu (ang.\ \emph{Access token}) oraz posiadania odpowiednich uprawnieñ przy wysy³aniu przez klienta ¿¹dania do zabezpieczonego punktu koñcowego tego serwera.
+
+Klient mo¿e uzyskaæ token dostêpu poprzez zalogowanie siê do serwera bezpieczeñstwa. Logowanie mo¿e byæ wykonane poprzez wys³anie przez klienta ¿¹dania z danymi do logowania na odpowiedni endpoint serwera bezpieczeñstwa. W przypadku pomyœlnego logowania, klient otrzymuje od serwera bezpieczeñstwa m.in. wygenerowane tokeny dostêpu oraz odœwie¿ania wraz z datami wa¿noœci tych tokenów. Token dostêpu jest póŸniej dostarczany przez klienta w nag³ówku wiadomoœci w polu przeznaczonym do autoryzacji: \texttt{Authorization: Bearer <token>}. Przed wys³aniem ¿¹dania do backendu klient sprawdza, czy token dostêpu straci³ swoj¹ wa¿noœæ (zwykle kilka minut) i jeœli token ten straci³ swoj¹ wa¿noœæ, to klient wysy³a ¿¹danie z do³¹czonym tokenem odœwie¿ania o wygenerowanie nowego tokenu dostêpu, do którego do³¹czony bêdzie równie¿ aktualny token odœwie¿ania. Token odœwie¿ania mo¿e straciæ swoj¹ wa¿noœæ jedynie w przypadku wylogowania albo nieaktywnoœci u¿ytkownika. Opisany proces uwierzytelnienia nazywa siê uwierzytelnianiem na okaziciela (ang.\ \emph{Bearer authentication}). Zastosowany serwer bezpieczeñstwa przeprowadza autoryzacjê u¿ytkowników w oparciu o ich role.
 
 \section{Diagramy przypadków u¿ycia}
 
@@ -542,7 +498,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		U¿ytkownik anuluje rejestracjê
 		\begin{enumerate}[label=\arabic*a.]
 			\setcounter{enumi}{2}
-			\item U¿ytkownik klika przycisk ,,X'' lub klika w obszar poza formularzem,
+			\item U¿ytkownik klika przycisk ,,X'' albo klika w obszar poza formularzem,
 			\item Wy³¹czenie formularza.
 		\end{enumerate} \\ \hline
 	Alternatywny przebieg: &
@@ -556,7 +512,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		U¿ytkownik nie akceptuje regulaminu
 		\begin{enumerate}[label=\arabic*c.]
 			\setcounter{enumi}{6}
-			\item U¿ytkownik klika w pole wyboru po lewej stronie od napisu ,,Nie akceptuje regulaminu'' lub klika przycisk ,,X''
+			\item U¿ytkownik nie akceptuje regulaminu poprzez klikniêcie w pole wyboru ,,Nie akceptuje regulaminu'', klika przycisk ,,X'' albo klika w obszar poza formularzem,
 			\item Wy³¹czenie formularza.
 		\end{enumerate}
 	\\ \hline
@@ -592,7 +548,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	Nazwa: & Logowanie \\ \hline
 	Cel: & Zalogowanie siê u¿ytkownika \\ \hline
 	Aktorzy: & Niezalogowany u¿ytkownik \\ \hline
-	Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
+	Warunki pocz¹tkowe: & U¿ytkownik jest niezalogowany \\ \hline
 	Warunki koñcowe: & Zalogowanie siê u¿ytkownika \\ \hline
 	Przebieg: & 
 		\begin{enumerate}
@@ -830,7 +786,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 		\begin{enumerate}[label=\arabic*b.]
 			\setcounter{enumi}{10}
 			\item U¿ytkownik klika przycisk ,,Anuluj'',
-			\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys.~\ref{fig:prototyp-ui-naglowek-administrator}).
+			\item Aplikacja wyœwietla panel z danymi u¿ytkownika (Rys.~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych}).
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
@@ -886,7 +842,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	Przebieg: &
 		Inny u¿ytkownik posiada wybran¹ rolê (np. Recenent na Rys~\ref{fig:prototyp-ui-zarzadzanie-uzytkownikami-edycja-danych})
 		\begin{enumerate}
-			\item U¿ytkownik klika na pole wyboru po prawej stronie od wybranej roli (jeœli przy roli jest zaznaczone pole wyboru, to oznacza to, ¿e inny u¿ytkownik ma przypisan¹
+			\item U¿ytkownik klika na pole wyboru przy wybranej roli (jeœli przy roli jest zaznaczone pole wyboru, to oznacza to, ¿e inny u¿ytkownik ma przypisan¹
 						tak¹ rolê, a jeœli pole wyboru bêdzie puste, to oznacza, ¿e inny u¿ytkownik nie posiada takiej roli),
 			\item Pole wyboru staje siê puste,
 			\item Aplikacja usuwa przypisanie roli innego u¿ytkownika.
@@ -908,7 +864,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	Nazwa: & Zmiana w³asnej dostêpnoœci \\ \hline
 	Cel: & Zmiana w³asnej dostêpnoœci w przypadku przypisywania artyku³ów do weryfikacji \\ \hline
 	Aktorzy: & Recenzent \\ \hline
-	Warunki pocz¹tkowe: & U¿ytkownik jest zalogowany \\ \hline
+	Warunki pocz¹tkowe: & U¿ytkownik posiadaj¹cy rolê recenzenta jest zalogowany \\ \hline
 	Warunki koñcowe: & Zmiana dostêpnoœci u¿ytkownika \\ \hline
 	Przebieg: & 
 		U¿ytkownik ma w³asn¹ dostêpnoœæ ustawion¹ na ,,Dostêpny''
@@ -965,7 +921,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-ustawienie-nieobecnosci-otwarte}
-	\caption{Formularz z ustawieniem daty, do której ma byæ ustawiona nieobecnoœæ u¿ytkownika razem z otwartym oknem wyboru daty}
+	\caption{Formularz z ustawieniem daty, do której ma byæ ustawiona nieobecnoœæ recenzenta razem z otwartym oknem wyboru daty}
 	\label{fig:prototyp-ui-ustawienie-nieobecnosci-otwarte}
 	\caption*{ród³o: opracowanie w³asne}
 \end{figure}
@@ -1016,7 +972,7 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{tab:opis-przypadku-uzycia-sortowanie-artykulow}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Sortowanie artyku³ów \\ \hline
-		Cel: & Posortowanie wyszukanych artyku³ów wed³ug opcji sortowania wybranej przez u¿ytkownika oraz wyœwietlenie listy posortowanych tych artyku³ów \\ \hline
+		Cel: & Posortowanie wyszukanych artyku³ów wed³ug opcji sortowania wybranej przez u¿ytkownika oraz wyœwietlenie listy tych posortowanych artyku³ów \\ \hline
 		Aktorzy: & U¿ytkownik \\ \hline
 		Warunki pocz¹tkowe: & Wyœwietlona lista wyszukanych artyku³ów (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}) \\ \hline
 		Warunki koñcowe: & Wyœwietlenie listy posortowanych artyku³ów \\ \hline
@@ -1065,6 +1021,8 @@ Dla ka¿dego przypadku u¿ycia zrobiono jeszcze prototypy ekranu u¿ytkownika, aby 
 	\label{fig:prototyp-ui-artykul}
 	\caption*{ród³o: opracowanie w³asne}
 \end{figure}
+
+\newpage
 
 \begin{longtable}{| m{0.3\linewidth} | m{0.65\linewidth} |}
 	\caption{Opis przypadku u¿ycia - utworzenie artyku³u} 
