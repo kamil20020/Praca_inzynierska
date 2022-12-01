@@ -98,9 +98,7 @@ Struktura aplikacji serwerowej jest przedstawiona na rysunku~\ref{fig:backend-st
 	\caption*{ród³o: opracowanie w³asne}
 \end{figure}
 
-Struktura aplikacji serwerowej jest zgodna z przedstawion¹ architektur¹ (Rys.~\ref{fig:backend-architektura}). Backend jest oparty na narzêdziu automatyzuj¹cym budowanie aplikacji \texttt{Maven}. 
-
-Konfiguracja aplikacji (np. link do bazy danych, czy numer portu na jakim dzia³a aplikacja) jest zapisana w plikach o rozszerzeniu \texttt{properties}. Mo¿na wyró¿niæ 3 ró¿ne profile konfiguracyjne aplikacji: lokalny, produkcyjny oraz do testowania. Profil lokalny jest wykorzystywany w trakcie rozwoju aplikacji i w konfiguracji tej u¿ywane s¹ lokalne bazy danych oraz jest mo¿liwoœæ modyfikowania struktury tabel (schematów dokumentów). Profil produkcyjny jest wykorzystywany przez wdro¿on¹ aplikacjê i w konfiguracji tej u¿ywane s¹ zdalne bazy danych oraz nie ma mo¿liwoœci modyfikowania struktury tabel (schematów dokumentów). Profil do testowania jest wykorzystywany do testów aplikacji i w konfiguracji tej u¿ywana jest baza danych \texttt{h2}, która jest przechowywana w pamiêci.
+Struktura aplikacji serwerowej jest zgodna z przedstawion¹ architektur¹ (Rys.~\ref{fig:backend-architektura}). Backend jest oparty na narzêdziu automatyzuj¹cym budowanie aplikacji \texttt{Maven}. Konfiguracja aplikacji (np. link do bazy danych, czy numer portu na jakim dzia³a aplikacja) jest zapisana w plikach o rozszerzeniu \texttt{properties}. Mo¿na wyró¿niæ 3 ró¿ne profile konfiguracyjne aplikacji: lokalny, produkcyjny oraz do testowania. Profil lokalny jest wykorzystywany w trakcie rozwoju aplikacji i w konfiguracji tej u¿ywane s¹ lokalne bazy danych oraz jest mo¿liwoœæ modyfikowania struktury tabel (schematów dokumentów). Profil produkcyjny jest wykorzystywany przez wdro¿on¹ aplikacjê i w konfiguracji tej u¿ywane s¹ zdalne bazy danych oraz nie ma mo¿liwoœci modyfikowania struktury tabel (schematów dokumentów). Profil do testowania jest wykorzystywany do testów aplikacji i w konfiguracji tej u¿ywana jest baza danych \texttt{h2}, która jest przechowywana w pamiêci.
 
 Przyk³adowy profil lokalny jest przedstawiony na listingu~\ref{lst:profil-lokalny}.
 
@@ -287,7 +285,7 @@ public class ArticleServiceImpl implements ArticleService {
 }
 \end{lstlisting}
 
-Aby interfejsy by³y interpretowane jako repozytoria, musz¹ byæ one oznaczone adnotacj¹ \texttt{Service}. Serwis artyku³ów (listing~\ref{lst:serwis-artykulow}) korzysta z repozytoriów artyku³ów, komentarzy, u¿ytkowników oraz technologii. W serwisach zaimplementowana jest obs³uga wyj¹tków i np. w przypadku nie podania id artyku³u w metodzie \texttt{getArticleById}, zostanie rzucony wyj¹tek z komunikatem ,,Nie istnieje artyku³ o takim id''. Wyj¹tki rzucane przez serwisy s¹ póŸniej obs³ugiwane przez kontrolery.
+Aby interfejsy by³y interpretowane jako repozytoria, musz¹ byæ one oznaczone adnotacj¹ \texttt{Service}. Serwis artyku³ów (~\ref{lst:serwis-artykulow}) korzysta z repozytoriów artyku³ów, komentarzy, u¿ytkowników oraz technologii. W serwisach zaimplementowana jest obs³uga wyj¹tków i np. w przypadku nie podania id artyku³u w metodzie \texttt{getArticleById}, zostanie rzucony wyj¹tek z komunikatem ,,Nie istnieje artyku³ o takim id''. Wyj¹tki rzucane przez serwisy s¹ póŸniej obs³ugiwane przez kontrolery.
 
 Fragment przyk³adowego kontrolera artyku³ów przedstawiono na listingu~\ref{lst:kontroler-artykulow}.
 
