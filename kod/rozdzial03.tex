@@ -2,7 +2,7 @@
 
 \section{Technologie i narzÍdzia}
 
-W celu zaimplementowania zaprojektowanego systemu dokonano wyboru technologii i narzÍdzi. Przy ich wyborze kierowano siÍ g≥Ûwnie ich odpowiednioúciπ do realizowanego systemu, popularnoúciπ oraz w≥asnym doúwiadczeniem uzyskanym w trakcie studiÛw. Z powodu tego, iø nie jest to projekt komercyjny, to poszukiwano darmowych rozwiπzaÒ. Innymi waønymi czynnikami wyboru by≥y rÛwnieø rozbudowana i czytelna dokumentacja, niezbyt duøy poziom skomplikowania oraz bogata i aktywna spo≥ecznoúÊ wokÛ≥ danego oprogramowania.
+W celu zaimplementowania zaprojektowanego systemu dokonano wyboru technologii i narzÍdzi. Przy ich wyborze kierowano siÍ g≥Ûwnie ich odpowiednioúciπ do realizowanego systemu, popularnoúciπ oraz w≥asnym doúwiadczeniem uzyskanym w trakcie studiÛw. Poszukiwano przede wszystkim darmowych rozwiπzaÒ, gdyø realizowany w ramach tej pracy projekt jest niekomercyjny. Innymi waønymi czynnikami wyboru by≥y rÛwnieø rozbudowana i czytelna dokumentacja, niezbyt duøy poziom skomplikowania oraz bogata i aktywna spo≥ecznoúÊ wokÛ≥ danego oprogramowania.
 
 \subsection{Technologie}
 
@@ -56,6 +56,7 @@ Uøyto nastÍpujπcych narzÍdzi:
 	\item \texttt{MongoDBCompass} - zarzπdzanie bazπ MongoDB,
 	\item \texttt{Visual Studio Code} - úrodowisko programistyczne dla frontendu,
 	\item \texttt{Itellij} - úrodowisko programistyczne dla backendu,
+	\item \texttt{Postman} - testowanie wysy≥ania øπdaÒ do backendu,
 	\item \texttt{REST-assured} - testy integracyjne backendu,
 	\item \texttt{Selenium Web Driver} - testy automatyczne frontendu,
 	\item \texttt{Docker} - stworzenie i umieszczenie kontenerÛw aplikacji w rejestrze kontenerÛw,
@@ -65,129 +66,9 @@ Uøyto nastÍpujπcych narzÍdzi:
 
 \section{Aplikacja serwerowa}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys03/backend/backend-architektura}
-	\caption{Architektura aplikacji serwerowej}
-	\label{fig:backend-architektura}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.5\linewidth]{rys03/backend/backend-struktura-projektu}
-	\caption{Struktura projektu aplikacji serwerowej}
-	\label{fig:backend-struktura-projektu}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.7\linewidth]{rys03/backend/backend-model-komentarza}
-	\caption{Model komentarza w aplikacji serwerowej}
-	\label{fig:backend-model-komentarza}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys03/backend/backend-serwis-komentarza}
-	\caption{Serwis dla komentarzy w aplikacji serwerowej}
-	\label{fig:backend-serwis-komentarza}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys03/backend/backend-kontroler-komentarza}
-	\caption{Kontroler dla komentarzy w aplikacji serwerowej}
-	\label{fig:backend-kontroler-komentarza}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys03/backend/backend-mapper-komentarza}
-	\caption{Mapowanie miÍdzy modelem komentarza, a dto w aplikacji serwerowej}
-	\label{fig:backend-mapper-komentarza}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys03/backend/backend-api-1}
-	\caption{Endpointy dla uøytkownikÛw, komnetarzy oraz artyku≥Ûw w aplikacji serwerowej}
-	\label{fig:backend-api-1}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys03/backend/backend-api-2}
-	\caption{Endpointy dla weryfikacji artyku≥Ûw, dostÍpnoúci uøytkownikÛw oraz technologii, w ktÛrych specjalizujπ siÍ recenzenci w aplikacji serwerowej}
-	\label{fig:backend-api-2}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys03/backend/backend-api-3}
-	\caption{Endpointy dla technologii i kategorii technologii w aplikacji serwerowej}
-	\label{fig:backend-api-3}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
 \section{Aplikacja kliencka}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.5\linewidth]{rys03/frontend/frontend-struktura-projektu}
-	\caption{Struktura projektu aplikacji klienckiej}
-	\label{fig:frontend-struktura-projektu}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.6\linewidth]{rys03/frontend/frontend-model-technologii}
-	\caption{Model technologii w aplikacji klienckiej}
-	\label{fig:frontend-model-technologii}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.8\linewidth]{rys03/frontend/frontend-slice-uzytkownika}
-	\caption{Slice zalogowanego uøytkownika w aplikacji klienckiej}
-	\label{fig:frontend-slice-uzytkownika}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys03/frontend/frontend-komponent-nawigacja}
-	\caption{Komponent nawigacja w aplikacji klienckiej}
-	\label{fig:frontend-komponent-nawigacja}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.8\linewidth]{rys03/frontend/frontend-serwis-api-technologii}
-	\caption{Serwis API dla technologii w aplikacji klienckiej}
-	\label{fig:frontend-serwis-api-technologii}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
 \section{Warstwa bezpieczeÒstwa}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys03/keycloak}
-	\caption{Panel administratora Keycloka}
-	\label{fig:keycloak}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
 
 
 

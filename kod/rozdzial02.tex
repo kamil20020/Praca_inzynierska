@@ -121,11 +121,11 @@ W pracy bÍdπ wykorzystywane nastÍpujπce pojÍcia:
 						spam). Przy instalacji systemu powinno byÊ tworzone co najmniej jedno konto uøytkownika z rolπ administratora, gdyø to w≥aúnie administrator odpowiada za 
 						przydzielanie rÛl innym uøytkownikom,
 			\item \texttt{System} - wbudowane procedury, ktÛre umoøliwiajπ automatyczne przypisywanie recenzenta do weryfikacji artyku≥Ûw oraz automatyczne ponowne przypisanie 
-						artyku≥u do weryfikacji innemu recenzentowi, jeúli up≥ynπ≥ 1-tygodniowy termin weryfikacji artyku≥u przez aktualnego recenzenta.
+						artyku≥u do weryfikacji innemu recenzentowi, jeúli up≥ynπ≥ 1-tygodniowy termin weryfikacji artyku≥u przeprowadzanej przez aktualnego recenzenta.
 		\end{itemize}
 \end{itemize}
 				
-\subsection{Wymagania funkcjonalne dla systemu IT-Tech}
+\subsection{Wymagania funkcjonalne dla systemu IT Tech}
 	Po zdefiniowaniu pojÍÊ, przystπpiono do okreúlenia wymagaÒ funkcjonalnych dla poszczegÛlnych uøytkownikÛw.
 	\newline
 	\newline
@@ -326,7 +326,7 @@ Komunikacja w systemie jest zgodna ze stylem architektury oprogramowania REST (a
 \subsection{Baza danych}
 Baza danych to warstwa systemu odpowiedzialna za przechowywanie danych. Za≥oøono, øe w systemie zostanπ wykorzystane dwie bazy danych rÛønego typu: obiektowo-relacyjna (SQL) oraz nierelacyjna oparta na dokumentach (NoSQL). 
 
-Jako g≥Ûwnπ bazÍ danych wybrano bazÍ obiektowo-relacyjnπ, gdyø bazy relacyjne charakteryzujπ siÍ tym, øe zapewniajπ integralnoúÊ danych poprzez tworzenie relacji np. poprzez powiπzanie tabel kluczem obcym, a w realizowanym systemie wykryto wiele przypadkÛw, w ktÛrych moøna utworzyÊ relacje. Przyk≥adowo w≥aúciciel artyku≥u jest powiπzaniem miÍdzy encjami uøytkownika i artyku≥u oraz historia modyfikacji technologii jest do≥πczona do danej technologii. Zdecydowano siÍ na obiektowπ warstwÍ bazy danych, gdyø upraszcza ona pracÍ z kilkoma wykorzystywanymi narzÍdziami (np. framework Hibernate jÍzyka Java), ktÛre sπ oparte na programowaniu obiektowym.
+Jako g≥Ûwnπ bazÍ danych wybrano bazÍ obiektowo-relacyjnπ, gdyø bazy relacyjne charakteryzujπ siÍ tym, øe zapewniajπ integralnoúÊ danych poprzez tworzenie relacji np. poprzez powiπzanie tabel kluczem obcym. W realizowanym systemie wykryto wiele przypadkÛw, w ktÛrych moøna utworzyÊ relacje np. w≥aúciciel artyku≥u jest powiπzaniem miÍdzy encjami uøytkownika i artyku≥u oraz historia modyfikacji technologii jest do≥πczona do danej technologii. Zdecydowano siÍ na obiektowπ warstwÍ bazy danych, gdyø upraszcza ona pracÍ z kilkoma wykorzystywanymi narzÍdziami (np. framework Hibernate jÍzyka Java), ktÛre sπ oparte na programowaniu obiektowym.
 
 Artyku≥y majπ z≥oøonπ zagnieødøonπ strukturÍ, zawierajπ rozdzia≥y, podrozdzia≥y, komentarze oraz opinie. Nierelacyjna baza dokumentowa wydaje siÍ byÊ idealnym pomys≥em do przechowywania takich informacji. Baza ta pozwala na przechowywanie struktur typu klucz-wartoúÊ, co zapewnia duøπ elastycznoúÊ w przechowywaniu danych, gdyø pozwala na m.in. przechowywanie zagnieødøonych struktur oraz umoøliwia pobranie danych w postaci zagnieødøonej struktury nawet poprzez jedno zapytanie. Dla porÛwnania w przypadku relacyjnej bazy danych naleøa≥oby wykonaÊ wiele klauzuli JOIN aby pobraÊ te same dane i przez co traci≥oby siÍ na efektywnoúci.
 
@@ -1067,7 +1067,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-artykulu}
-	\caption{Panel z formularzem dodania lub edytowania artyku≥u}
+	\caption{Panel z formularzem dodania albo edytowania artyku≥u}
 	\label{fig:prototyp-ui-dodawanie-edytowanie-artykulu}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -1128,7 +1128,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 		Anulowanie usuniÍcia artyku≥u
 		\begin{enumerate}[label=\arabic*ca.]
 			\setcounter{enumi}{5}
-			\item Uøytkownik wybiera opcjÍ ,,Nie'' albo w obszar poza formularzem,
+			\item Uøytkownik wybiera opcjÍ ,,Nie'' albo klika w obszar poza formularzem,
 			\item Uøytkownik zostaje przekierowany do strony z wyszukiwaniem artyku≥Ûw (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-artykulow-wyniki}).
 		\end{enumerate}
 	\\ \hline
@@ -1138,14 +1138,14 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\caption{Opis przypadku uøycia - wyúwietlenie listy przypisanych artyku≥Ûw} 
 	\label{tab:opis-przypadku-uzycia-wyswietlenie-listy-przypisanych-artykulow}  \\ \hline
 	Nazwa: & Wyúwietlenie listy przypisanych artyku≥Ûw \\ \hline
-	Cel: & Wyúwietlenie listy przypisanych artyku≥Ûw recenzentowi do weryfikacji \\ \hline
+	Cel: & Wyúwietlenie listy artyku≥Ûw przypisanych recenzentowi do weryfikacji \\ \hline
 	Aktorzy: & Recenzent \\ \hline
 	Warunki poczπtkowe: & Uøytkownik bÍdπcy recenzentem jest zalogowany \\ \hline
 	Warunki koÒcowe: & Wyúwietlenie listy przypisanych artyku≥Ûw \\ \hline
 	Przebieg: & 
 		\begin{enumerate}
 			\item Uøytkownik klika przycisk ,,Weryfikacja artyku≥Ûw'' znajdujπcy siÍ w menu g≥Ûwnym aplikacji (Rys.~\ref{fig:prototyp-ui-naglowek-recenzent}),
-			\item Aplikacja wyúwietla panel z listπ przypisanych uøytkownikowi artyku≥Ûw do weryfikacji (Rys.~\ref{fig:prototyp-ui-artykuly-weryfikowane}),
+			\item Aplikacja wyúwietla panel z listπ artyku≥Ûw przypisanych uøytkownikowi do weryfikacji (Rys.~\ref{fig:prototyp-ui-artykuly-weryfikowane}),
 		\end{enumerate}
 	\\ \hline
 \end{longtable}
@@ -1199,7 +1199,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	Nazwa: & Akceptacja artyku≥u \\ \hline
 	Cel: & Akceptacja artyku≥u, co bÍdzie skutkowa≥o tym, øe artyku≥ zostanie opublikowany w serwisie \\ \hline
 	Aktorzy: & Recenzent \\ \hline
-	Warunki poczπtkowe: & Wyúwietlony formularz s≥uøπcy do weryfikacji artyku≥u (Rys.~\ref{fig:prototyp-ui-weryfikacja-artykulu}) \\ \hline
+	Warunki poczπtkowe: & Wyúwietlony formularz weryfikacji artyku≥u (Rys.~\ref{fig:prototyp-ui-weryfikacja-artykulu}) \\ \hline
 	Warunki koÒcowe: & Akceptacja artyku≥u \\ \hline
 	Przebieg: & 
 		\begin{enumerate}
@@ -1413,7 +1413,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule}
-	\caption{Formularz dodania lub edytowania komentarza o artykule}
+	\caption{Formularz dodania albo edytowania komentarza o artykule}
 	\label{fig:prototyp-ui-dodawanie-edytowanie-komentarza-o-artykule}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -1423,7 +1423,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasnym-komentarzem-o-artykule} \\ \hline
 	Nazwa: & Zarzπdzanie w≥asnym komentarzem o artykule \\ \hline
 	Cel: & Modyfikacja lub usuniÍcie w≥asnego komentarza do artyku≥u \\ \hline
-	Aktorzy: & Zalogowany uøytkownik \\ \hline
+	Aktorzy: & Autor komentarza o artykule \\ \hline
 	Warunki poczπtkowe: & Wyúwietlone komentarze o artykule (Rys.~\ref{fig:prototyp-ui-komentarze-o-artykule}) \\ \hline
 	Warunki koÒcowe: & Modyfikacja lub usuniÍcie komentarza do artyku≥u \\ \hline
 	Przebieg: & 
@@ -1478,7 +1478,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\linewidth]{rys02/prototypy-ui/prototyp-ui-opcje-komentarza}
-	\caption{DostÍpne opcje do zarzπdzania komentarzem}
+	\caption{DostÍpne opcje zarzπdzania komentarzem}
 	\label{fig:prototyp-ui-opcje-komentarza}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -1530,7 +1530,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	Przebieg: & 
 		\begin{enumerate}
 			\item Uøytkownik przewija artyku≥ na sam dÛ≥,
-			\item Uøytkownik klika przycisk ,,Opinie'',
+			\item Uøytkownik klika na przycisk ,,Opinie'',
 			\item Aplikacja wyúwietla opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule}).
 		\end{enumerate}
 	\\ \hline
@@ -1550,7 +1550,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	Nazwa: & Dodanie opinii o artykule \\ \hline
 	Cel: & Dodanie opinii o artykule \\ \hline
 	Aktorzy: & Zalogowany uøytkownik, ktÛry nie jest autorem artyku≥u \\ \hline
-	Warunki poczπtkowe: & Wyúwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule-administrator}) \\ \hline
+	Warunki poczπtkowe: & Wyúwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule}) \\ \hline
 	Warunki koÒcowe: & Dodanie opinii o artykule\\ \hline
 	Przebieg: & 
 		Dodanie opinii
@@ -1584,7 +1584,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-opinii-o-artykule}
-	\caption{Uzupe≥niony przyk≥adowymi danymi formularz dodania lub edytowania opinii o artykule}
+	\caption{Formularz dodania albo edytowania opinii o artykule}
 	\label{fig:prototyp-ui-dodawanie-edytowanie-opinii-o-artykule}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -1594,8 +1594,8 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasna-opinia-o-artykule} \\ \hline
 	Nazwa: & Zarzπdzanie w≥asnπ opiniπ o artykule \\ \hline
 	Cel: & Modyfikacja lub usuniÍcie w≥asnej opinii do artyku≥u \\ \hline
-	Aktorzy: & Autor opinii \\ \hline
-	Warunki poczπtkowe: & Wyúwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule-administrator}) \\ \hline
+	Aktorzy: & Autor opinii o artykule \\ \hline
+	Warunki poczπtkowe: & Wyúwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule}) \\ \hline
 	Warunki koÒcowe: & Modyfikacja lub usuniÍcie w≥asnej opinii do artyku≥u \\ \hline
 	Przebieg: & 
 		Edytowanie opinii
@@ -1688,10 +1688,10 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	Nazwa: & Dodanie akceptacji opinii o artykule \\ \hline
 	Cel: & Dodanie akceptacji opinii o artykule \\ \hline
 	Aktorzy: & Zalogowany uøytkownik, ktÛry nie jest autorem opinii o artykule oraz autorem akceptacji opinii o artykule \\ \hline
-	Warunki poczπtkowe: & Wyúwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule-administrator}) \\ \hline
+	Warunki poczπtkowe: & Wyúwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule}) \\ \hline
 	Warunki koÒcowe: & Wyúwietlenie opinii z zaktualizowanym stanem akceptacji pozytywnych i negatywnych \\ \hline
 	Przebieg: & 
-		Dodanie kciuka w gÛrÍ
+		Dodanie pozytywnej akceptacji
 		\begin{enumerate}
 			\item Uøytkownik klika przy jednej z opinii kciuk w gÛrÍ,
 			\item Aplikacja zwiÍksza o 1 liczbÍ pozytywnych akceptacji wybranej opinii,
@@ -1700,7 +1700,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
-		Dodanie kciuka w dÛ≥
+		Dodanie negatywnej akceptacji
 		\begin{enumerate}[label=\arabic*a.]
 			\setcounter{enumi}{0}
 			\item Uøytkownik klika przy jednej z opinii kciuk w dÛ≥,
@@ -1717,7 +1717,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	Nazwa: & UsuniÍcie akceptacji opinii o artykule \\ \hline
 	Cel: & UsuniÍcie akceptacji opinii o artykule \\ \hline
 	Aktorzy: & Autor akceptacji opinii o artykule \\ \hline
-	Warunki poczπtkowe: & Wyúwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule-administrator}) \\ \hline
+	Warunki poczπtkowe: & Wyúwietlone opinie o artykule (Rys.~\ref{fig:prototyp-ui-opinie-o-artykule}) \\ \hline
 	Warunki koÒcowe: & Wyúwietlenie opinii z zaktualizowanym stanem akceptacji pozytywnych i negatywnych \\ \hline
 	Przebieg: & 
 		\begin{enumerate}
@@ -1729,28 +1729,25 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\\ \hline
 \end{longtable}
 
-\begin{table}[H] \small
-	\centering
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku uøycia - wyszukiwanie technologii}
-	\label{tab:opis-przypadku-uzycia-wyszukiwanie-technologii}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Wyszukiwanie technologii \\ \hline
-		Opis: & Wyszukiwanie technologii wed≥ug podanych przez uøytkownika kryteriÛw i wyúwietlenie wynikÛw tego wyszukiwania w postaci listy technologii \\ \hline
-		Aktorzy: & Uøytkownik \\ \hline
-		Warunki poczπtkowe: & Brak \\ \hline
-		Warunki koÒcowe: & Wyúwietlenie listy wyszukanych technologii \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item Uøytkownik klika przycisk ,,Technologie'' znajdujπcy siÍ w panelu nawigacji strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}),
-				\item Aplikacja wyúwietla panel do wyszukiwania technologii,
-				\item Uøytkownik uzupe≥nia kryteria wyszukiwania,
-				\item Uøytkownik klika przycisk ,,Szukaj'',
-				\item Serwis wyszukuje technologii,
-				\item Aplikacja wyúwietla listÍ wyszukanych technologii (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-technologii-wyniki}).
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
+	\label{tab:opis-przypadku-uzycia-wyszukiwanie-technologii} \\ \hline
+	Nazwa: & Wyszukiwanie technologii \\ \hline
+	Opis: & Wyszukiwanie technologii wed≥ug podanych przez uøytkownika kryteriÛw i wyúwietlenie wynikÛw tego wyszukiwania w postaci listy technologii \\ \hline
+	Aktorzy: & Uøytkownik \\ \hline
+	Warunki poczπtkowe: & Brak \\ \hline
+	Warunki koÒcowe: & Wyúwietlenie listy wyszukanych technologii \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item Uøytkownik klika przycisk ,,Technologie'' znajdujπcy siÍ w panelu nawigacji strony (Rys.~\ref{fig:prototyp-ui-naglowek-niezalogowany}),
+			\item Aplikacja wyúwietla panel do wyszukiwania technologii,
+			\item Uøytkownik uzupe≥nia kryteria wyszukiwania,
+			\item Uøytkownik klika przycisk ,,Szukaj'',
+			\item Serwis wyszukuje technologii,
+			\item Aplikacja wyúwietla listÍ wyszukanych technologii (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-technologii-wyniki}).
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \begin{figure}[H]
 	\centering
@@ -1760,26 +1757,23 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
-\begin{table}[H] \small
-	\centering
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku uøycia - sortowanie technologii}
-	\label{tab:opis-przypadku-uzycia-sortowanie-technologii}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Sortowanie technologii \\ \hline
-		Opis: & Posortowanie wyszukanych technologii wed≥ug opcji sortowania wybranej przez uøytkownika oraz wyúwietlenie listy tych posortowanych technologii \\ \hline
-		Aktorzy: & Uøytkownik \\ \hline
-		Warunki poczπtkowe: & Wyúwietlona lista wyszukanych technologii (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-technologii-wyniki}) \\ \hline
-		Warunki koÒcowe: & Wyúwietlenie listy posortowanych technologii \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item Uøytkownik klika na rozsuwanπ listÍ ,,Sortowanie'',
-				\item Uøytkownik wybiera jednπ z opcji sortowania (Rys.~\ref{fig:prototyp-ui-sortowanie-technologii-opcje}),
-				\item Aplikacja sortuje listÍ technologii wed≥ug wybranej opcji sortowania,
-				\item Aplikacja wyúwietla listÍ posortowanych technologii.
-			\end{enumerate}
-		\\ \hline
-	\end{tabularx}
-\end{table}
+	\label{tab:opis-przypadku-uzycia-sortowanie-technologii} \\ \hline
+	Nazwa: & Sortowanie technologii \\ \hline
+	Opis: & Posortowanie wyszukanych technologii wed≥ug opcji sortowania wybranej przez uøytkownika oraz wyúwietlenie listy tych posortowanych technologii \\ \hline
+	Aktorzy: & Uøytkownik \\ \hline
+	Warunki poczπtkowe: & Wyúwietlona lista wyszukanych technologii (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-technologii-wyniki}) \\ \hline
+	Warunki koÒcowe: & Wyúwietlenie listy posortowanych technologii \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item Uøytkownik klika na rozsuwanπ listÍ ,,Sortowanie'',
+			\item Uøytkownik wybiera jednπ z opcji sortowania (Rys.~\ref{fig:prototyp-ui-sortowanie-technologii-opcje}),
+			\item Aplikacja sortuje listÍ technologii wed≥ug wybranej opcji sortowania,
+			\item Aplikacja wyúwietla listÍ posortowanych technologii.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \begin{figure}[H]
 	\centering
@@ -1789,35 +1783,31 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
-\begin{table}[H] \small
-	\centering
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku uøycia - wyúwietlenie opisu technologii}
-	\label{tab:opis-przypadku-uzycia-wyswietlenie-opisu-technologii}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Wyúwietlenie opisu technologii \\ \hline
-		Cel: & Wyúwietlenie opisu technologii \\ \hline
-		Aktorzy: & Uøytkownik \\ \hline
-		Warunki poczπtkowe: & Brak \\ \hline
-		Warunki koÒcowe: & Wyúwietlenie opisu technologii \\ \hline
-		Przebieg: & 
-			\begin{enumerate}
-				\item Uøytkownik wyszukuje technologie (Tab.~\ref{tab:opis-przypadku-uzycia-wyszukiwanie-technologii})
-				\item Uøytkownik klika na jednπ z wyszukanych technologii,
-				\item Aplikacja wyúwietla opis technologii (Rys.~\ref{fig:prototyp-ui-technologia}).
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			Uøytkownik wyúwietla opis technologii poprzez artyku≥
-			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{0}
-				\item Uøytkownik wyszukuje artyku≥y (Tab.~\ref{tab:opis-przypadku-uzycia-wyszukiwanie-artykulow}),
-				\item Uøytkownik wyúwietla zawartoúÊ artyku≥u (Tab.~\ref{tab:opis-przypadku-uzycia-wyswietlenie-zawartosci-artykulu}),
-				\item Uøytkownik klika przycisk ,,Opis technologii'',
-				\item PowrÛt do punktu 3.
-			\end{enumerate}
+	\label{tab:opis-przypadku-uzycia-wyswietlenie-opisu-technologii} \\ \hline
+	Nazwa: & Wyúwietlenie opisu technologii \\ \hline
+	Cel: & Wyúwietlenie opisu technologii \\ \hline
+	Aktorzy: & Uøytkownik \\ \hline
+	Warunki poczπtkowe: & Brak \\ \hline
+	Warunki koÒcowe: & Wyúwietlenie opisu technologii \\ \hline
+	Przebieg: & 
+		\begin{enumerate}
+			\item Uøytkownik wyszukuje technologie (Tab.~\ref{tab:opis-przypadku-uzycia-wyszukiwanie-technologii})
+			\item Uøytkownik klika na jednπ z wyszukanych technologii,
+			\item Aplikacja wyúwietla opis technologii (Rys.~\ref{fig:prototyp-ui-technologia}).
+		\end{enumerate}
 	\\ \hline
-	\end{tabularx}
-\end{table}
+	Alternatywny przebieg: &
+		Uøytkownik wyúwietla opis technologii poprzez artyku≥
+		\begin{enumerate}[label=\arabic*a.]
+			\setcounter{enumi}{0}
+			\item Uøytkownik wyszukuje artyku≥y (Tab.~\ref{tab:opis-przypadku-uzycia-wyszukiwanie-artykulow}),
+			\item Uøytkownik wyúwietla zawartoúÊ artyku≥u (Tab.~\ref{tab:opis-przypadku-uzycia-wyswietlenie-zawartosci-artykulu}) zawierajπcπ na poczπtku opis technologii, 
+						ktÛrej artyku≥ dotyczy.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \begin{figure}[H]
 	\centering
@@ -1831,10 +1821,10 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\caption{Opis przypadku uøycia - edycja klasyfikacji technologii}
 	\label{tab:opis-przypadku-uzycia-edycja-klasyfikacji-technologii} \\ \hline
 	Nazwa: & Edycja klasyfikacji technologii \\ \hline
-	Cel: & Dodanie nowej technologii, modyfikacja lub usuniÍcie istniejπcej technologii \\ \hline
+	Cel: & Dodanie nowej technologii, modyfikacja albo usuniÍcie istniejπcej technologii \\ \hline
 	Aktorzy: & Recenzent \\ \hline
-	Warunki poczπtkowe: & Wyúwietlony panel do wyszukiwania technologii (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-technologii-wyniki-recenzent}) \\ \hline \\ \hline
-	Warunki koÒcowe: & Dodanie nowej technologii, modyfikacja lub usuniÍcie istniejπcej technologii \\ \hline
+	Warunki poczπtkowe: & Wyúwietlony panel do wyszukiwania technologii (Rys.~\ref{fig:prototyp-ui-wyszukiwanie-technologii-wyniki-recenzent}) \\ \hline
+	Warunki koÒcowe: & Dodanie nowej technologii, modyfikacja albo usuniÍcie istniejπcej technologii \\ \hline
 	Przebieg: &
 		Dodawanie technologii
 		\begin{enumerate}
@@ -1856,7 +1846,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
-		Uøytkownik nie uzupe≥nia wszystkich pÛl formularza podczas dodawania artyku≥u
+		Uøytkownik nie uzupe≥nia wszystkich pÛl formularza podczas dodawania technologii
 		\begin{enumerate}[label=\arabic*b.]
 			\setcounter{enumi}{5}
 			\item Aplikacja zmienia kolor obramowania pÛl, ktÛre nie przesz≥y walidacji, na czerwono oraz wyúwietla pod tymi polami adekwatny komunikat o b≥Ídzie, 
@@ -1886,7 +1876,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
-		Uøytkownik nie uzupe≥nia wszystkich pÛl formularza podczas edytowania artyku≥u
+		Uøytkownik nie uzupe≥nia wszystkich pÛl formularza podczas edytowania technologii
 		\begin{enumerate}[label=\arabic*cb.]
 			\setcounter{enumi}{7}
 			\item Aplikacja zmienia kolor obramowania pÛl, ktÛre nie przesz≥y walidacji, na czerwono oraz wyúwietla pod tymi polami adekwatny komunikat o b≥Ídzie, 
@@ -1915,17 +1905,17 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-technologii}
-	\caption{Panel z formularzem dodania lub modyfikacji technologii}
-	\label{fig:prototyp-ui-dodawanie-edytowanie-technologii}
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-technologii-wyniki-recenzent}
+	\caption{Panel do wyszukiwania technologii z podanymi kryteriami wyszukiwania oraz listπ wyszukanych technologii widziany z perspektywy recenzenta}
+	\label{fig:prototyp-ui-wyszukiwanie-technologii-wyniki-recenzent}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-technologii-wyniki-recenzent}
-	\caption{Panel do wyszukiwania technologii z podanymi kryteriami wyszukiwania i listπ technologii widziany z perspektywy recenzenta}
-	\label{fig:prototyp-ui-wyszukiwanie-technologii-wyniki-recenzent}
+	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-dodawanie-edytowanie-technologii}
+	\caption{Panel z formularzem dodania albo modyfikacji technologii}
+	\label{fig:prototyp-ui-dodawanie-edytowanie-technologii}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
@@ -1935,11 +1925,11 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	Nazwa: & Wyszukiwanie artyku≥Ûw z przeterminowanπ weryfikacjπ \\ \hline
 	Cel: & Wyszukanie artyku≥Ûw z przeterminowanπ weryfikacjπ \\ \hline
 	Aktorzy: & System \\ \hline
-	Warunki poczπtkowe: & MinÍ≥a godzina od ostatniego wyszukania artyku≥Ûw z przeterminowanπ weryfikacjπ  \\ \hline
+	Warunki poczπtkowe: & MinÍ≥y 24 godziny od ostatniego wyszukania artyku≥Ûw z przeterminowanπ weryfikacjπ  \\ \hline
 	Warunki koÒcowe: & ZwrÛcenie artyku≥Ûw z przeterminowanπ weryfikacjπ \\ \hline
 	Przebieg: &
 		\begin{enumerate}
-			\item Sprawdzenie artyku≥Ûw, ktÛre artyku≥y majπ przedawnionπ weryfikacjÍ,
+			\item Wyszukanie artyku≥Ûw z przedawnionπ weryfikacjπ,
 			\item Zapisanie artyku≥Ûw z przedawnionπ weryfikacjπ do kolejki artyku≥Ûw do weryfikacji (jeúli nie sπ jeszcze w tej kolejce),
 			\item ZwrÛcenie artyku≥Ûw znajdujπcych siÍ w kolejce artyku≥Ûw do weryfikacji.
 		\end{enumerate}
@@ -1957,11 +1947,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	Przebieg: &
 		Jest przynajmniej jeden dostÍpny recenzent
 		\begin{enumerate}
-			\item Przypisanie wybranemu recenzentowi artyku≥u do weryfikacji (Artyku≥y sπ przypisywane recenzentom na podstawie ich dostÍpnoúci, posiadanych przez nich list 
-						technologii, w ktÛrych sπ ekspertami oraz liczby zrecenzowanych przez nich artyku≥Ûw. W pierwszej kolejnoúci nie bÍdπ brani pod uwagÍ 
-						niedostÍpni recenzenci, nastÍpnie bÍdπ wybierani recenzenci, ktÛrzy sπ ekspertami w jak najbardziej szczegÛ≥owej technologii (np. 
-						Java jest bardziej szczegÛ≥owa niø jÍzyki programowania), ktÛrej dotyczy artyku≥ oraz w trzeciej kolejnoúci bÍdπ wybierani recenzenci, ktÛrzy 
-						zrecenzowali najmniejszπ liczbÍ artyku≥Ûw),
+			\item Przypisanie wybranemu dostÍpnemu recenzentowi artyku≥u do weryfikacji,
 		\end{enumerate}
 	\\ \hline
 	Alternatywny przebieg: &
@@ -1969,7 +1955,7 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 		\begin{enumerate}[label=\arabic*a.]
 			\setcounter{enumi}{0}
 			\item System zapisuje artyku≥ do kolejki artyku≥Ûw do weryfikacji,
-			\item System czeka 1 godzinÍ na pojawienie siÍ co najmniej 1 dostÍpnego recenzenta,
+			\item System sprawdza co 24 godziny, czy pojawi≥ siÍ dostÍpny recenzenta,
 			\item Nie ma dalej dostÍpnych recenzentÛw.
 		\end{enumerate}
 	\\ \hline	
@@ -1982,110 +1968,21 @@ Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby 
 	\\ \hline
 \end{longtable}
 
-\begin{table}[H] \small
-	\centering
+\begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku uøycia - przypisanie artyku≥u do weryfikacji innemu recenzentowi}
-	\label{tab:opis-przypadku-uzycia-przypisanie-artykulu-do-weryfikacji-innemu-recenzentowi}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Przypisanie artyku≥u do weryfikacji innemu recenzentowi \\ \hline
-		Cel: & Przypisanie artyku≥u do weryfikacji innemu recenzentowi \\ \hline
-		Aktorzy: & System \\ \hline
-		Warunki poczπtkowe: & Zalogowany uøytkownik utworzy≥ artyku≥ lub autor artyku≥u dokona≥ modyfikacji istniejπcego artyku≥u \\ \hline
-		Warunki koÒcowe: & Przypisanie wybranemu recenzentowi artyku≥u do weryfikacji lub oczekiwanie na dostÍpnego recenzenta \\ \hline
-		Przebieg: &
-			\begin{enumerate}
-				\item Mija termin weryfikacji artyku≥u,
-				\item Przypisanie artyku≥u do weryfikacji innemu recenzentowi (Tab~\ref{tab:opis-przypadku-uzycia-przypisanie-recenzentowi-artykulu-do-weryfikacji}).
-			\end{enumerate}
-		\\ \hline
-		\end{tabularx}
-\end{table}
-
-\begin{table}[H] \small
-	\centering
-	\caption{Opis przypadku uøycia - wyszukiwanie technologii, w ktÛrych recenzent jest ekspertem}
-	\label{tab:opis-przypadku-uzycia-wyszukiwanie-technologii-w-ktorych-recenzent-jest-ekspertem}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Wyszukiwanie technologii, w ktÛrych recenzent jest ekspertem \\ \hline
-		Cel: & Wyszukiwanie technologii, w ktÛrych recenzent jest ekspertem oraz wyúwietlenie tych technologii \\ \hline
-		Aktorzy: & Administrator \\ \hline
-		Warunki poczπtkowe: & Wyúwietlony panel z danymi wybranego recenzenta (Rys~\ref{fig:prototyp-ui-wyszukiwanie-technologii-ekspert}) \\ \hline
-		Warunki koÒcowe: & Wyúwietlenie technologii, w ktÛrych recenzent jest ekspertem \\ \hline
-		Przebieg: &
-			\begin{enumerate}
-				\item Uøytkownik wprowadza kryteria wyszukiwania,
-				\item Aplikacja wyúwietla wyszukane technologie (Rys~\ref{fig:prototyp-ui-wyszukiwanie-technologii-ekspert}).
-			\end{enumerate}
-		\\ \hline
-		\end{tabularx}
-\end{table}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-wyszukiwanie-technologii-ekspert}
-	\caption{Panel do wyszukiwania technologii, w ktÛrych recenzent jest ekspertem}
-	\label{fig:prototyp-ui-wyszukiwanie-technologii-ekspert}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
-
-\begin{table}[H] \small
-	\centering
-	\caption{Opis przypadku uøycia - zarzπdzanie listπ technologii, w ktÛrych recenzent jest ekspertem}
-	\label{tab:opis-przypadku-uzycia-zarzadzanie-lista-technologii-w-ktorych-recenzent-jest-ekspertem}
-	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
-	  Nazwa: & Zarzπdzanie listπ technologii, w ktÛrych recenzent jest ekspertem \\ \hline
-		Cel: & Przypisanie lub usuniÍcie technologii, w ktÛrych recenzent jest ekspertem \\ \hline
-		Aktorzy: & Administrator \\ \hline
-		Warunki poczπtkowe: & Wyúwietlony panel z wyszukanymi technologiami, w ktÛrych recenzent jest ekspertem 
-			(Rys~\ref{fig:prototyp-ui-wyszukiwanie-technologii-ekspert}) \\ \hline
-		Warunki koÒcowe: & Wyúwietlenie zaktualizowanej listy technologii recenzenta \\ \hline
-		Przebieg: &
-			Przypisanie technologii
-			\begin{enumerate}
-				\item Uøytkownik klika przycisk ,,Dodaj'',
-				\item Aplikacja wyúwietla formularz z dodaniem technologii,
-				\item Uøytkownik wybiera technologiÍ (Rys~\ref{fig:prototyp-ui-przypisanie-technologii}),
-				\item Uøytkownik klika przycisk ,,Zatwierdü'',
-				\item Serwis sprawdza, czy uøytkownik poda≥ technologiÍ,
-				\item Uøytkownik poda≥ technologiÍ, zatem aplikacja przypisuje technologiÍ recenzentowi,
-				\item Aplikacja wyúwietla zaktualizowane technologie.
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			Uøytkownik anuluje dodanie technologii
-			\begin{enumerate}[label=\arabic*a.]
-				\setcounter{enumi}{2}
-				\item Uøytkownik klika przycisk ,,Anuluj'' lub klika w obszar poza formularzem,
-				\item Wy≥πczenie formularza dodania technologii.
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			Uøytkownik nie poda≥ technologii
-			\begin{enumerate}[label=\arabic*b.]
-				\setcounter{enumi}{5}
-				\item Aplikacja wyúwietla komunikat o koniecznoúci podania technologii,
-				\item PowrÛt do punktu 2.
-			\end{enumerate}
-		\\ \hline
-		Alternatywny przebieg: &
-			UsuniÍcie przypisania technologii
-			\begin{enumerate}[label=\arabic*c.]
-				\setcounter{enumi}{0}
-				\item Uøytkownik klika przy jednej z technologii przycisk ,,UsuÒ''
-				\item Aplikacja usuwa recenzentowi przypisanie wybranej technologii,
-				\item PowrÛt do punktu 7.
-			\end{enumerate}
-		\\ \hline
-		\end{tabularx}
-\end{table}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\linewidth]{rys02/prototypy-ui/prototyp-ui-przypisanie-technologii}
-	\caption{Formularz przypisania technologii do recenzenta}
-	\label{fig:prototyp-ui-przypisanie-technologii}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
-\end{figure}
+	\label{tab:opis-przypadku-uzycia-przypisanie-artykulu-do-weryfikacji-innemu-recenzentowi} \\ \hline
+	Nazwa: & Przypisanie artyku≥u do weryfikacji innemu recenzentowi \\ \hline
+	Cel: & Przypisanie artyku≥u do weryfikacji innemu recenzentowi \\ \hline
+	Aktorzy: & System \\ \hline
+	Warunki poczπtkowe: & Minπ≥ termin koÒcowy weryfikacji artyku≥u \\ \hline
+	Warunki koÒcowe: & Przypisanie innemu recenzentowi artyku≥u do weryfikacji albo oczekiwanie na pojawienie siÍ dostÍpnego recenzenta \\ \hline
+	Przebieg: &
+		\begin{enumerate}
+			\item Mija termin weryfikacji artyku≥u,
+			\item Przypisanie artyku≥u do weryfikacji innemu recenzentowi.
+		\end{enumerate}
+	\\ \hline
+\end{longtable}
 
 \section{Projekt baz danych}
 Na podstawie zdefiniowanych wymagaÒ funkcjonalnych oraz szczegÛ≥owych opisÛw przypadkÛw uøycia, zaprojektowano diagram zwiπzkÛw encji (ERD) dla g≥Ûwnej bazy danych (obiektowo-relacyjna baza) oraz utworzono schematy danych dla bazy artyku≥Ûw (nierelacyjna dokumentowa baza). Do sporzπdzenia diagramu ERD wykorzystano narzÍdzie 
@@ -2099,7 +1996,7 @@ Na podstawie zdefiniowanych wymagaÒ funkcjonalnych oraz szczegÛ≥owych opisÛw prz
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
-Dla bazy danych artyku≥Ûw utworzono osobne schematy danych w postaci formatu JSON dla nastÍpujπcych kolekcji: artyku≥, komentarz oraz opinia. Nie zdecydowano siÍ na tylko jednπ kolekcjÍ zawierajπcπ te wszystkie informacje, gdyø za≥oøono, øe uøytkownik bÍdzie mÛg≥ w jednym momencie przeglπdaÊ albo komentarze albo opinie i nie ma potrzeby pobierania razem obu tych informacji. Dla zdefiniowanych schematÛw danych bazy artyku≥Ûw utworzono rÛwnieø po jednym przyk≥adowym dokumencie w formacie JSON.
+Dla bazy danych artyku≥Ûw utworzono osobne schematy danych w postaci formatu JSON dla nastÍpujπcych kolekcji: artyku≥, komentarz oraz opinia. Nie zdecydowano siÍ na tylko jednπ kolekcjÍ zawierajπcπ te wszystkie informacje, gdyø za≥oøono, øe uøytkownik bÍdzie mÛg≥ w jednym momencie przeglπdaÊ komentarze albo opinie i nie ma potrzeby pobierania razem obu tych informacji. Dla zdefiniowanych schematÛw danych bazy artyku≥Ûw utworzono rÛwnieø po jednym przyk≥adowym dokumencie w formacie JSON.
 
 Kod ürÛd≥owy schematu artyku≥Ûw znajduje siÍ na listingu~\ref{lst:schemat-danych-baza-danych-2-artykul}.
 
