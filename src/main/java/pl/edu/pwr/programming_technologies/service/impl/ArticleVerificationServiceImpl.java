@@ -11,6 +11,7 @@ import pl.edu.pwr.programming_technologies.model.entity.*;
 import pl.edu.pwr.programming_technologies.repository.*;
 import pl.edu.pwr.programming_technologies.service.ArticleService;
 import pl.edu.pwr.programming_technologies.service.ArticleVerificationService;
+import pl.edu.pwr.programming_technologies.service.UserService;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -26,11 +27,8 @@ import java.util.stream.Collectors;
 public class ArticleVerificationServiceImpl implements ArticleVerificationService {
 
     private final ArticleVerificationRepository articleVerificationRepository;
-    private final ArticleRepository articleRepository;
-    private final UserRepository userRepository;
-    private final TechnologyExpertRepository technologyExpertRepository;
-    private final TechnologyRepository technologyRepository;
     private final ArticleService articleService;
+    private final UserService userService;
 
     @Override
     public ArticleVerificationEntity getById(Integer articleVerificationId) throws EntityNotFoundException{
@@ -52,7 +50,7 @@ public class ArticleVerificationServiceImpl implements ArticleVerificationServic
     )
         throws EntityNotFoundException
     {
-        if(!userRepository.existsById(reviewerId)){
+        if(!userService.existsById(reviewerId)){
             throw new EntityNotFoundException("Nie istnieje recenzent o takim id");
         }
 
@@ -61,45 +59,19 @@ public class ArticleVerificationServiceImpl implements ArticleVerificationServic
         );
     }
 
-    @Override
-    public UserEntity getReviewerWithLowestNumberOfReviewedArticles(List<UserEntity> reviewers){
-
-        int lowestNumberOfReviewedArticles = Integer.MAX_VALUE;
-        UserEntity reviewerWithLowestNumberOfReviewedArticles = null;
-
-        for(int i=0; i < reviewers.size(); i++){
-
-            UserEntity reviewer = reviewers.get(i);
-
-            int numberOfReviewedArticles =
-                    articleVerificationRepository.countAllByUserEntityIdAndStatusOrStatus(
-                            reviewer.getId(),
-                            ArticleVerificationEntity.Status.ACCEPTED,
-                            ArticleVerificationEntity.Status.REJECTED
-                    );
-
-            if(numberOfReviewedArticles < lowestNumberOfReviewedArticles){
-                lowestNumberOfReviewedArticles = numberOfReviewedArticles;
-                reviewerWithLowestNumberOfReviewedArticles = reviewer;
-            }
-        }
-
-        return reviewerWithLowestNumberOfReviewedArticles;
-    }
-
     @Transactional
     @Override
-    public void assignArticleToReviewer(UserEntity reviewerEntity, ObjectId articleId){
+    public void assignArticleToReviewer(UserEntity reviewerEntity, ObjectId articleId) throws EntityNotFoundException{
 
-        ArticleEntity foundArticleEntity = articleRepository.findById(articleId).get();
+        ArticleEntity foundArticleEntity = articleService.getArticleById(articleId);
 
         articleVerificationRepository.save(
-                ArticleVerificationEntity.builder()
-                        .articleId(foundArticleEntity.getId().toHexString())
-                        .userEntity(reviewerEntity)
-                        .status(ArticleVerificationEntity.Status.CREATED)
-                        .assignmentDate(LocalDateTime.now())
-                        .build()
+            ArticleVerificationEntity.builder()
+                .articleId(foundArticleEntity.getId().toHexString())
+                .userEntity(reviewerEntity)
+                .status(ArticleVerificationEntity.Status.CREATED)
+                .assignmentDate(LocalDateTime.now())
+                .build()
         );
 
         foundArticleEntity.setStatus(ArticleEntity.Status.VERIFICATION);
@@ -109,79 +81,45 @@ public class ArticleVerificationServiceImpl implements ArticleVerificationServic
     @Override
     public void tryAssignArticlesToVerification(){
 
-        List<ArticleEntity> toVerificationArticles = articleRepository.findAllByStatusOrStatus(
-                ArticleEntity.Status.NEW, ArticleEntity.Status.ASSIGNING_TO_VERIFICATION
-        );
+        List<ArticleEntity> toVerificationArticles = articleService.getArticlesDuringAssigningToVerification();
 
-        toVerificationArticles.forEach(articleEntity -> {
+        if(toVerificationArticles.isEmpty()){
+            return;
+        }
 
-            boolean isArticleAssigned = false;
+        List<UserEntity> availableReviewers = userService.getAvailableReviewers();
+
+        if(availableReviewers.isEmpty()){
+            return;
+        }
+
+        List<Integer> verifiedReviewersArticles = availableReviewers.stream()
+            .map(reviewer -> countVerifiedArticlesInLast30DaysByReviewerId(reviewer.getId()))
+            .collect(Collectors.toList());
+
+        toVerificationArticles.forEach((articleEntity) -> {
 
             if(articleVerificationRepository.existsByArticleIdAndStatus(
-                    articleEntity.getId().toHexString(),
-                    ArticleVerificationEntity.Status.CREATED
+                articleEntity.getId().toHexString(),
+                ArticleVerificationEntity.Status.CREATED
             )){
                 return;
             }
 
-            List<TechnologyExpertEntity> technologyExpertsWithTechnology =
-                    technologyExpertRepository.findAllByTechnologyEntityIdAndUserEntityIdNot(
-                            articleEntity.getTechnologyId(), articleEntity.getAuthorId()
-                    );
+            int min = Integer.MAX_VALUE;
+            int reviewerIndex = -1;
 
-            if (!technologyExpertsWithTechnology.isEmpty()) {
+            for(int i=0; i < verifiedReviewersArticles.size(); i++){
 
-                UserEntity reviewerWithLowestNumberOfReviewerArticles =
-                        getReviewerWithLowestNumberOfReviewedArticles(
-                                technologyExpertsWithTechnology.stream()
-                                        .map(technologyExpertEntity -> technologyExpertEntity.getUserEntity())
-                                        .collect(Collectors.toList())
-                        );
+                Integer numberOfVerifiedArticles = verifiedReviewersArticles.get(i);
 
-                assignArticleToReviewer(reviewerWithLowestNumberOfReviewerArticles, articleEntity.getId());
-                isArticleAssigned = true;
-            } else {
-
-                TechnologyCategoryEntity articleTechnologyCategoryEntity = technologyRepository.findById(
-                        articleEntity.getTechnologyId()
-                ).get().getTechnologyCategoryEntity();
-
-                while (true) {
-
-                    List<TechnologyExpertEntity> foundTechnologyExperts =
-                            technologyExpertRepository.findAllByTechnologyEntityTechnologyCategoryEntityIdAndUserEntityIdNot(
-                                    articleTechnologyCategoryEntity.getId(), articleEntity.getAuthorId()
-                            );
-
-                    if (!foundTechnologyExperts.isEmpty()) {
-
-                        UserEntity reviewerWithLowestNumberOfReviewerArticles =
-                                getReviewerWithLowestNumberOfReviewedArticles(
-                                        foundTechnologyExperts.stream()
-                                                .map(technologyExpertEntity -> technologyExpertEntity.getUserEntity())
-                                                .collect(Collectors.toList())
-                                );
-
-                        assignArticleToReviewer(reviewerWithLowestNumberOfReviewerArticles, articleEntity.getId());
-                        isArticleAssigned = true;
-                        break;
-                    }
-
-                    if (articleTechnologyCategoryEntity.getParentTechnologyCategoryEntity() == null) {
-                        break;
-                    }
-
-                    articleTechnologyCategoryEntity =
-                            articleTechnologyCategoryEntity.getParentTechnologyCategoryEntity();
+                if(numberOfVerifiedArticles < min){
+                    min = numberOfVerifiedArticles;
+                    reviewerIndex = i;
                 }
             }
 
-            if(!isArticleAssigned && articleEntity.getStatus().toString().equals(ArticleEntity.Status.NEW)){
-
-                articleService.updateArticleStatus(
-                    articleEntity.getId(), ArticleEntity.Status.ASSIGNING_TO_VERIFICATION
-                );
-            }
+            assignArticleToReviewer(availableReviewers.get(reviewerIndex), articleEntity.getId());
         });
     }
 
@@ -226,7 +164,7 @@ public class ArticleVerificationServiceImpl implements ArticleVerificationServic
 
     @Transactional
     @Override
-    public void updateArticlesVerification(){
+    public void updateArticlesVerification() throws EntityNotFoundException{
 
         LocalDateTime actualDate = LocalDateTime.now();
 
@@ -237,9 +175,17 @@ public class ArticleVerificationServiceImpl implements ArticleVerificationServic
 
                     String articleIdStr = articleVerificationEntity.getArticleId();
                     ObjectId articleId = new ObjectId(articleIdStr);
-                    ArticleEntity foundArticleEntity = articleRepository.findById(articleId).get();
+                    ArticleEntity foundArticleEntity = articleService.getArticleById(articleId);
                     foundArticleEntity.setStatus(ArticleEntity.Status.ASSIGNING_TO_VERIFICATION);
                 }
             });
+    }
+
+    @Override
+    public int countVerifiedArticlesInLast30DaysByReviewerId(Integer reviewerId) {
+
+        return articleVerificationRepository.countByUserEntityIdAndVerificationDateAfter(
+            reviewerId, LocalDateTime.now().minusDays(30)
+        );
     }
 }

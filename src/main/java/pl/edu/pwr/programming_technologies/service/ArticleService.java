@@ -9,13 +9,16 @@ import pl.edu.pwr.programming_technologies.model.api.request.UpdateArticle;
 import pl.edu.pwr.programming_technologies.model.entity.ArticleEntity;
 import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
 
+import java.util.List;
+
 public interface ArticleService {
 
     Page<ArticleEntity> searchByCriteria(
             ArticleSearchCriteria articleSearchCriteria, Pageable pageable, String role,
             String loggedUserId);
-    Page<ArticleEntity> getAll(Pageable pageable);
     ArticleEntity getArticleById(ObjectId articleId);
+    Page<ArticleEntity> getAll(Pageable pageable);
+    List<ArticleEntity> getArticlesDuringAssigningToVerification();
     ArticleEntity addArticle(CreateArticle createArticle);
     ArticleEntity updateArticle(ObjectId articleId, UpdateArticle updateArticle);
     void updateArticleStatus(ObjectId articleId, ArticleEntity.Status articleStatus);

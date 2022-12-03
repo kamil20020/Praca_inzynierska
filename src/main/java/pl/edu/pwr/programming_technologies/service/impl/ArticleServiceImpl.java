@@ -165,12 +165,10 @@ public class ArticleServiceImpl implements ArticleService {
         else if(role.equals(UserEntity.Role.LOGGED_USER.toString()) || role.equals(UserEntity.Role.REVIEWER.toString())) {
 
             Integer loggedUserId = Integer.valueOf(loggedUserIdStr);
-            System.out.println("123456");
-            System.out.println(loggedUserIdStr);
-            System.out.println(loggedUserId);
 
             query.addCriteria(
-                Criteria.where("status").is(ArticleEntity.Status.PUBLISHED).orOperator(
+                new Criteria().orOperator(
+                    Criteria.where("status").is(ArticleEntity.Status.PUBLISHED),
                     Criteria.where("authorId").is(loggedUserId)
                 )
             );
@@ -184,7 +182,14 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     public Page<ArticleEntity> getAll(Pageable pageable){
+
         return articleRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<ArticleEntity> getArticlesDuringAssigningToVerification() {
+
+        return articleRepository.findAllByStatus(ArticleEntity.Status.ASSIGNING_TO_VERIFICATION);
     }
 
     @Override
@@ -274,6 +279,13 @@ public class ArticleServiceImpl implements ArticleService {
             }
 
             foundArticleEntity.setContent(updateArticle.getContent());
+        }
+
+        if(foundArticleEntity.getStatus() == ArticleEntity.Status.PUBLISHED ||
+           foundArticleEntity.getStatus() == ArticleEntity.Status.ASSIGNING_TO_VERIFICATION ||
+           foundArticleEntity.getStatus() == ArticleEntity.Status.REFUSED
+        ){
+            foundArticleEntity.setStatus(ArticleEntity.Status.EDITED);
         }
 
         return articleRepository.save(foundArticleEntity);

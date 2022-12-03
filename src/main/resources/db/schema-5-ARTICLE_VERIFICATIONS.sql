@@ -4,5 +4,6 @@ CREATE TABLE IF NOT EXISTS ARTICLE_VERIFICATIONS (
     status VARCHAR(30) NOT NULL,
     verification_feedback TEXT,
     assignment_date TIMESTAMP NOT NULL,
+    verification_date TIMESTAMP,
     author_id INT NOT NULL REFERENCES USERS (user_id)
 );

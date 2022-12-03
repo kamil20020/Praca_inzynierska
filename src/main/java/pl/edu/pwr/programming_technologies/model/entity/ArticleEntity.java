@@ -26,7 +26,8 @@ public class ArticleEntity {
         VERIFICATION("Weryfikacja"),
         EXPIRED_VERIFICATION("Przedawniona weryfikacja"),
         REFUSED("Odrzucony"),
-        PUBLISHED("Opublikowany");
+        PUBLISHED("Opublikowany"),
+        EDITED("Edytowany");
 ;
         private String value;
 

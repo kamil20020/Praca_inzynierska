@@ -1,16 +1,15 @@
 package pl.edu.pwr.programming_technologies.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Builder
-@Data
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="USERS")
@@ -57,11 +56,10 @@ public class UserEntity {
     @Column(name = "avatar")
     private Byte[] avatar;
 
-    @Transient
-    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
-    private List<TechnologyExpertEntity> technologyExpertEntityList;
+    @Column(name = "is_reviewer", nullable = false)
+    private Boolean isReviewer;
 
-    @Transient
+    @JsonIgnoreProperties
     @OneToOne(mappedBy = "userEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
     private UserInaccessibilityEntity userAvailabilityEntity;
 

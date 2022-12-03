@@ -5,5 +5,6 @@ CREATE TABLE IF NOT EXISTS USERS (
     firstname VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
     email VARCHAR(80) NOT NULL,
-    avatar bytea
+    avatar bytea,
+    is_reviewer BOOLEAN NOT NULL DEFAULT FALSE
 );

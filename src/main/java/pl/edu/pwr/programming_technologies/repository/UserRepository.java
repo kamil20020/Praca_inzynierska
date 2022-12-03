@@ -12,7 +12,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
     Optional<UserEntity> findByUserAccountId(String userAccountId);
     List<UserEntity> findAllByNicknameContainsIgnoreCase(String nickname);
-    List<UserEntity> findAllByIdNotIn(Iterable<Integer> usersIds);
     boolean existsByUserAccountId(String userAccountId);
     boolean existsByNickname(String nickname);
+    List<UserEntity> findAllByIsReviewerIsTrueAndUserAvailabilityEntityIsNull();
 }

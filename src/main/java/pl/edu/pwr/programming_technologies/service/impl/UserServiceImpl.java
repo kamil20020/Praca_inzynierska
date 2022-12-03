@@ -10,6 +10,7 @@ import pl.edu.pwr.programming_technologies.repository.UserRepository;
 import pl.edu.pwr.programming_technologies.service.UserService;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -29,6 +30,18 @@ public class UserServiceImpl implements UserService {
         }
 
         return foundUserAccountId.get();
+    }
+
+    @Override
+    public List<UserEntity> getAvailableReviewers() {
+
+        return userRepository.findAllByIsReviewerIsTrueAndUserAvailabilityEntityIsNull();
+    }
+
+    @Override
+    public boolean existsById(Integer id) {
+
+        return userRepository.existsById(id);
     }
 
     @Override
@@ -59,6 +72,8 @@ public class UserServiceImpl implements UserService {
         if(userRepository.existsByNickname(userEntity.getNickname())){
             throw new EntityConflictException("Istnieje już użytkownik o takim pseudonimie");
         }
+
+        userEntity.setIsReviewer(false);
 
         return userRepository.save(userEntity);
     }
@@ -103,6 +118,10 @@ public class UserServiceImpl implements UserService {
 
         if(userEntity.getAvatar() != null){
             foundUser.setAvatar(userEntity.getAvatar());
+        }
+
+        if(userEntity.getIsReviewer() != null){
+            foundUser.setIsReviewer(userEntity.getIsReviewer());
         }
 
         return foundUser;

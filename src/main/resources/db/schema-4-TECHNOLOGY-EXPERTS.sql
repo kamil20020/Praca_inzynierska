@@ -1,5 +1,0 @@
-CREATE TABLE IF NOT EXISTS TECHNOLOGY_EXPERTS (
-    technology_expert_id SERIAL NOT NULL PRIMARY KEY,
-    technology_id INT NOT NULL REFERENCES TECHNOLOGIES (technology_id),
-    reviewer_id INT NOT NULL REFERENCES USERS (user_id)
-);

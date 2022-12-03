@@ -161,6 +161,25 @@ public class ArticleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdArticleDTO);
     }
 
+    @PatchMapping("/{articleId}/send-to-verification")
+    public ResponseEntity sendArticleToVerification(@PathVariable("articleId") String articleIdStr){
+
+        if(!ObjectId.isValid(articleIdStr)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Podano niewłasciwe id artykułu");
+        }
+
+        ObjectId articleId = new ObjectId(articleIdStr);
+
+        try{
+            articleService.updateArticleStatus(articleId, ArticleEntity.Status.ASSIGNING_TO_VERIFICATION);
+        }
+        catch(EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
+        return ResponseEntity.ok().build();
+    }
+
     @PutMapping("/{articleId}")
     public ResponseEntity updateArticleById(
             @PathVariable("articleId") String articleIdStr, @RequestBody UpdateArticle updateArticle

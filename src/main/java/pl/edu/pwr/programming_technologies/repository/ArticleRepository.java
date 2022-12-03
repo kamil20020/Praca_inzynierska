@@ -11,5 +11,5 @@ import java.util.List;
 public interface ArticleRepository extends MongoRepository <ArticleEntity, ObjectId> {
 
     boolean existsByTitleIgnoreCase(String title);
-    List<ArticleEntity> findAllByStatusOrStatus(ArticleEntity.Status status1, ArticleEntity.Status status2);
+    List<ArticleEntity> findAllByStatus(ArticleEntity.Status status);
 }

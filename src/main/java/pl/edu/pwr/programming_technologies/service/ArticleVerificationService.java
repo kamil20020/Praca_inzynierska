@@ -15,7 +15,6 @@ public interface ArticleVerificationService {
 
     ArticleVerificationEntity getById(Integer articleVerificationId);
     Page<ArticleVerificationEntity> getCreatedArticleVerificationsByReviewerId(Integer reviewerId, Pageable pageable);
-    UserEntity getReviewerWithLowestNumberOfReviewedArticles(List<UserEntity> reviewers);
     void assignArticleToReviewer(UserEntity reviewerEntity, ObjectId articleId);
 
     void tryAssignArticlesToVerification();
@@ -25,4 +24,6 @@ public interface ArticleVerificationService {
     );
 
     void updateArticlesVerification();
+
+    int countVerifiedArticlesInLast30DaysByReviewerId(Integer reviewerId);
 }

@@ -49,8 +49,4 @@ public class TechnologyEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "technology_category_id")
     private TechnologyCategoryEntity technologyCategoryEntity;
-
-    @Transient
-    @OneToMany(mappedBy = "technologyEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
-    private List<TechnologyExpertEntity> technologyExpertEntityList;
 }

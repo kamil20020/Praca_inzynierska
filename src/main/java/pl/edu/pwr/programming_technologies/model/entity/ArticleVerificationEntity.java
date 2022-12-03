@@ -50,6 +50,9 @@ public class ArticleVerificationEntity {
     @Column(name = "assignment_date", nullable = false)
     private LocalDateTime assignmentDate;
 
+    @Column(name = "verification_date")
+    private LocalDateTime verificationDate;
+
     @Column(name = "verification_feedback")
     private String verificationFeedback;
 
