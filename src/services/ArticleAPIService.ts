@@ -60,6 +60,10 @@ class ArticleAPIService {
         return axios.post(this.apiUrl, article)
     }
 
+    sendArticleToVerification = (articleId: string) => {
+        return axios.patch(`${this.apiUrl}/${articleId}/send-to-verification`)
+    }
+
     updateArticleById = (articleId: string, article: CreateArticle) => {
         return axios.put(`${this.apiUrl}/${articleId}`, article)
     }

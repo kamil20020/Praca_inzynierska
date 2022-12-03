@@ -7,7 +7,8 @@ export interface UpdateUserModel {
     firstname?: string,
     surname?: string,
     email?: string,
-    avatar?: string
+    avatar?: string,
+    isReviewer?: boolean
 } 
 
 class UserAPIService {

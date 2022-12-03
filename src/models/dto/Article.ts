@@ -1,4 +1,4 @@
-﻿import { Status } from "./Status"
+﻿import { ArticleStatus } from "./ArticleStatus"
 import { Technology } from "./Technology"
 import User from "./User"
 
@@ -8,7 +8,7 @@ export default interface Article {
     technologyDTO: Technology,
     title: string,
     content: string,
-    status: Status,
+    status: ArticleStatus,
     creationDate: Date,
     modificationDate: Date,
     averageRating?: number

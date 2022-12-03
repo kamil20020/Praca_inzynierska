@@ -66,6 +66,10 @@ const SearchUsers = () => {
 
         KeycloakService.searchUserAccountByUsername(username)
         .then((userAccounts) => {
+            if((userAccounts as Array<any>).length == 0){
+                setUsersData([])
+                return;
+            }
             (userAccounts as Array<any>).forEach((u: any) => {
                 UserAPIService.getUserByUserAccountId(u.id)
                 .then((response) => {

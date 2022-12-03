@@ -11,13 +11,11 @@ import Home from "./pages/home/Home";
 import NavBar from "./components/layout/navigation/NavBar";
 import Header from "./components/layout/header/Header";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { plPL } from '@mui/material/locale';
 import { AppBar } from "@mui/material";
 import axios from "axios";
 import Notification from "./components/common/Notification";
 import Content from "./components/layout/content/Content";
 import Footer from "./components/layout/footer/Footer";
-import Articles from "./pages/articles/Articles";
 import Technologies from "./pages/technologies/Technologies";
 import NotFound from "./pages/error/NotFound";
 import ProtectedRoute from "./keycloak/ProtectedRoute";
@@ -29,8 +27,14 @@ import { roles } from './keycloak/KeycloakService';
 import SearchArticles from './pages/articles/SearchArticles';
 import ArticleView from './pages/articles/ArticleView';
 import CreateUpdateArticle from './pages/articles/CreateUpdateArticle';
-import ArticleVerification from './pages/articles-verification/ArticleVerificationView';
 import ArticleVerificationView from './pages/articles-verification/ArticleVerificationView';
+import 'moment/locale/pl'
+import moment from 'moment';
+import { plPL as plPLLocale } from '@mui/material/locale';
+import { plPL as plPLGrid} from '@mui/x-data-grid';
+import { plPL as plPLDatePickers } from '@mui/x-date-pickers';
+
+moment.locale("pl")
 
 const theme = createTheme(
   {
@@ -59,7 +63,9 @@ const theme = createTheme(
       }
     },
   },
-  plPL
+  plPLLocale,
+  plPLGrid,
+  plPLDatePickers
 )
 
 function App() {

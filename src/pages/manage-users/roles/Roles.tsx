@@ -5,10 +5,12 @@ import KeycloakService, { roles } from "../../../keycloak/KeycloakService";
 import { RootState } from "../../../redux/store";
 import { Role } from "../../../keycloak/KeycloakService";
 import { ManageUserChildProps } from "../ManageUser";
+import UserAPIService from "../../../services/UserAPIService";
 
 export interface RolesProps {
     actualRoles: string[],
     loadUserRoles: () => void,
+    userId: number,
     userAccountId: string
 }
 
@@ -31,13 +33,19 @@ const Roles = (props: RolesProps) => {
         if(checked){
             KeycloakService.addRoleToUser(props.userAccountId, toUpdateRole)
             .then(() => {
-                props.loadUserRoles()
+                UserAPIService.updateUser(props.userId, {isReviewer: true})
+                .then(() => {
+                    props.loadUserRoles()
+                })
             })
         }
         else{
             KeycloakService.removeRoleFromUser(props.userAccountId, toUpdateRole)
             .then(() => {
-                props.loadUserRoles()
+                UserAPIService.updateUser(props.userId, {isReviewer: false})
+                .then(() => {
+                    props.loadUserRoles()
+                })
             })
         }
     }

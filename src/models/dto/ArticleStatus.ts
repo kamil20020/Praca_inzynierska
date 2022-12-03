@@ -1,9 +1,9 @@
-﻿export enum Status{
+﻿export enum ArticleStatus{
     new = "_new",
-    assigning_to_verification = "assigning_to_verification",
+    assigning_to_verification = "Przypisywany do weryfikacji",
     verification = "verification",
     expired_verification = "expired_verification",
     refused = "refused",
     published = "published",
-    editing = "editing"
+    edited = "edited"
 }

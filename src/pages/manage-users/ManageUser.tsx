@@ -3,7 +3,6 @@ import { Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import UserDetails from "./user-details/UserDetails";
 import Roles from "./roles/Roles";
-import ReviewerTechnologies from "./reviewer-technologies/ReviewerTechnologies";
 import KeycloakService, { roles } from "../../keycloak/KeycloakService";
 
 export interface ManageUserChildProps {
@@ -39,14 +38,10 @@ const ManageUser = () => {
                 xs={8} 
                 container 
                 alignItems="center" 
-                justifyContent={actualRoles.includes(roles.reviewer.name) ? "space-between" : "center"} 
+                justifyContent={"center"} 
                 sx={{marginTop: 6}}
             >
-                <Roles actualRoles={actualRoles} loadUserRoles={loadUserRoles} userAccountId={userAccountId}/>
-                {actualRoles.includes(roles.reviewer.name) ?
-                    <ReviewerTechnologies userId={userId}/>
-                : null
-                }
+                <Roles actualRoles={actualRoles} loadUserRoles={loadUserRoles} userId={userId} userAccountId={userAccountId}/>
             </Grid>
         </React.Fragment>
     );

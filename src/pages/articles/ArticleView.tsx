@@ -16,6 +16,7 @@ import Opinions from "./opinions/Opinions";
 import ConfirmationDialog from "../../components/common/ConfirmationDialog";
 import { ArticleContent } from "./ArticleContent";
 import { roles } from "../../keycloak/KeycloakService";
+import { ArticleStatus } from "../../models/dto/ArticleStatus";
 
 export const ArticleHeader = (props: {article: Article}) => {
 
@@ -106,15 +107,47 @@ const ArticleView = () => {
         })
     }
 
+    const handleSendToVerification = () => {
+
+        ArticleAPIService.sendArticleToVerification(articleId)
+        .then(() => {
+            dispatch(setNotificationMessage("Wysłano artykuł do weryfikacji"))
+            dispatch(setNotificationType('success'))
+            dispatch(setNotificationStatus(true))
+
+            setArticle({...article, status: ArticleStatus.assigning_to_verification})
+        })
+        .catch((error) => {
+            dispatch(setNotificationMessage(error.response.data))
+            dispatch(setNotificationType('error'))
+            dispatch(setNotificationStatus(true))
+        })
+    }
+
+    const isUserArticleAuthor = (): boolean => {
+        return userId === (article as Article).authorDTO.id
+    }
+
     return (
         <Grid item xs={12} container alignItems="start" justifyContent="center" marginTop={4}>
             <Grid item xs={10.5} container justifyContent="space-between" direction="row">
                 <ArticleHeader article={article}/>
-                {(userId === (article as Article).authorDTO.id || actualRoles.includes(roles.administrator.name)) &&
+                {(isUserArticleAuthor() || actualRoles.includes(roles.administrator.name)) &&
                     <Grid item xs={5} container justifyContent="end" alignItems="start" spacing={3}>     
                         <Grid item>
                             <Typography textAlign="center" variant="h6">Status: {article.status}</Typography>
                         </Grid>
+                        {article.status == ArticleStatus.new || article.status == ArticleStatus.edited || article.status == ArticleStatus.refused &&
+                            <Grid item>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={handleSendToVerification}
+                                >
+                                    Wyślij do weryfikacji
+                                </Button>
+                            </Grid>
+                        }
                         <Grid item>
                             <Button
                                 variant="contained"
