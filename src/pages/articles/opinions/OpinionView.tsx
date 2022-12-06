@@ -25,6 +25,8 @@ export interface OpinionViewProps {
 
 const OpinionView = (props: OpinionViewProps) => {
 
+    const userId = useSelector((state: RootState) => state.user).user.id as number
+
     const opinion = props.opinion
     const author = opinion.author
 
@@ -134,7 +136,7 @@ const OpinionView = (props: OpinionViewProps) => {
                 <Typography textAlign="center" variant="h6">
                     {new Date(opinion.creationDate).toLocaleString()}
                 </Typography>
-                {actualRoles.includes(roles.logged_user.name) &&
+                {((actualRoles.includes(roles.logged_user.name) && userId == opinion.author.id) || actualRoles.includes(roles.administrator.name)) &&
                     <React.Fragment>
                         <Tooltip title="Opcje opinii">
                             <IconButton onClick={handleOpenOpinionOptions} sx={{marginTop: -0.5}}>

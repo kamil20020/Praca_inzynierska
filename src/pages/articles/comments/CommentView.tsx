@@ -28,6 +28,8 @@ enum Modes{
 
 const CommentView = (props: CommentViewProps) => {
 
+    const userId = useSelector((state: RootState) => state.user).user.id as number
+
     const comment = props.comment
     const author = comment.authorDTO
 
@@ -174,7 +176,7 @@ const CommentView = (props: CommentViewProps) => {
                 <Typography textAlign="center" variant="h6">
                     {new Date(comment.modificationDate).toLocaleString()}
                 </Typography>
-                {actualRoles.includes(roles.logged_user.name) &&
+                {((actualRoles.includes(roles.logged_user.name) && userId == comment.authorDTO.id) || actualRoles.includes(roles.administrator.name)) &&
                     <React.Fragment>
                         <Tooltip title="Opcje komentarza">
                             <IconButton onClick={handleOpenCommentOptions} sx={{marginTop: -0.5}}>

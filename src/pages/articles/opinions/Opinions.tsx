@@ -45,7 +45,6 @@ const Opinions = (props: {article: Article}) => {
     }
 
     const editOpinion = (opinion: Opinion, index: number) => {
-        console.log('A')
         let updatedOpinions = [...opinions]
         updatedOpinions[index] = opinion
         setOpinions(updatedOpinions)
@@ -60,6 +59,8 @@ const Opinions = (props: {article: Article}) => {
     if(canCreate == null){
         <div>Ładowanie...</div>
     }
+
+    console.log(actualRoles.includes(roles.logged_user.name), canCreate, userId != props.article.authorDTO.id)
 
     return(
         <Grid item xs={6} container direction="column" marginLeft={3} rowSpacing={4}>
