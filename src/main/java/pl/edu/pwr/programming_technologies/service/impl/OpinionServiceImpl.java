@@ -118,9 +118,6 @@ public class OpinionServiceImpl implements OpinionService {
 
         Optional<OpinionEntity> foundOpinionOpt = opinionRepository.findById(id);
 
-        System.out.println("ABC");
-        System.out.println(id.toHexString());
-
         if(foundOpinionOpt.isEmpty()){
             throw new EntityNotFoundException("Nie istnieje opinia o takim id");
         }
