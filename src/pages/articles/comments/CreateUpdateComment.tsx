@@ -104,10 +104,10 @@ const CreateUpdateComment = (props: CreateUpdateCommentProps) => {
                     color="secondary"
                     rows={2}
                     value={content}
-                    error={contentError != ''}
+                    error={contentError !== ''}
                     onChange={(event: any) => handleChangeContent(event.target.value)}
                     InputLabelProps={{
-                        style: { color: contentError !== '' ? 'red' : '#5CA8EE' },
+                        style: { color: contentError !== '' ? 'red' : '#5CA8EE'},
                     }}
                 />
                 <FormHelperText error>{contentError + ' '}</FormHelperText>

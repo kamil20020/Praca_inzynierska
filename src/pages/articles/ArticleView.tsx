@@ -137,7 +137,7 @@ const ArticleView = () => {
                         <Grid item>
                             <Typography textAlign="center" variant="h6">Status: {article.status}</Typography>
                         </Grid>
-                        {article.status == ArticleStatus.new || article.status == ArticleStatus.edited || article.status == ArticleStatus.refused &&
+                        {(article.status === ArticleStatus.new || article.status === ArticleStatus.edited || article.status === ArticleStatus.refused) &&
                             <Grid item>
                                 <Button
                                     variant="contained"
@@ -214,7 +214,7 @@ const ArticleView = () => {
                     </Grid>
                 </Grid>
                 <Grid container marginTop={3} spacing={2}>
-                    {isSelectedComments ? <Comments articleId={articleId}/> : <Opinions articleId={articleId}/>}
+                    {isSelectedComments ? <Comments articleId={articleId}/> : <Opinions article={article}/>}
                 </Grid>
             </Grid>
         </Grid>

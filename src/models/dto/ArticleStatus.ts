@@ -1,9 +1,9 @@
 ﻿export enum ArticleStatus{
-    new = "_new",
+    new = "Utworzony",
     assigning_to_verification = "Przypisywany do weryfikacji",
-    verification = "verification",
-    expired_verification = "expired_verification",
-    refused = "refused",
-    published = "published",
-    edited = "edited"
+    verification = "Weryfikacja",
+    expired_verification = "Przedawniony",
+    refused = "Odrzucony",
+    published = "Opublikowany",
+    edited = "Edytowany"
 }

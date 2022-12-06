@@ -1,70 +1,51 @@
 ﻿import { Grid, Button } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { roles } from "../../../keycloak/KeycloakService";
+import Article from "../../../models/dto/Article";
 import Opinion from "../../../models/dto/Opinion";
 import { RootState } from "../../../redux/store";
+import OpinionAPIService from "../../../services/OpinionAPIService";
 import CreateUpdateOpinion from "./CreateUpdateOpinion";
 import OpinionView from "./OpinionView";
 
-const opinions1: Opinion[] = [
-    {
-        id: '1',
-        articleId: '2',
-        authorDTO: {
-            nickname: 'kamil.dywan',
-            firstname: 'Kamil',
-            surname: 'Dywan',
-            email: 'kamil.dywan@mail.com'
-        },
-        content: "Dobry artykuł",
-        rating: 4,
-        creationDate: new Date(),
-        modificationDate: new Date()
-    },
-    {
-        id: '2',
-        articleId: '2',
-        authorDTO: {
-            nickname: 'adam.nowak',
-            firstname: 'Adam',
-            surname: 'Nowak',
-            email: 'adam.nowak@mail.com'
-        },
-        content: "Wspaniały artykuł",
-        rating: 5,
-        creationDate: new Date(),
-        modificationDate: new Date()
-    },
-    {
-        id: '3',
-        articleId: '2',
-        authorDTO: {
-            nickname: 'jan.kowalski',
-            firstname: 'Jan',
-            surname: 'Kowalski',
-            email: 'jan.kowalski@mail.com'
-        },
-        content: "Niezbyt dobry artykuł",
-        rating: 3,
-        creationDate: new Date(),
-        modificationDate: new Date()
-    }
-]
-
-const Opinions = (props: {articleId: string}) => {
+const Opinions = (props: {article: Article}) => {
 
     const actualRoles = useSelector((state: RootState) => state.keycloak).roles
+    const userId = useSelector((state: RootState) => state.user).user.id as number
+
     const [opinions, setOpinions] = React.useState<Opinion[]>([]);
     const [createUpdateOpinion, setCreateUpdateOpinion] = React.useState<boolean>(false);
+
     const pageSize: number = 6;
     const [page, setPage] = React.useState<number>(0);
+
+    const [canCreate, setCanCreate] = React.useState<boolean | null>(userId == null ? false : null)
+
+    useEffect(() => {
+        OpinionAPIService.getAllByArticleId(props.article.id)
+        .then((response) => {
+            setOpinions(response.data)
+
+            OpinionAPIService.existsByAuthorId(userId)
+            .then((response) => {
+                setCanCreate(!response.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }, [])
 
     const createOpinion = (opinion: Opinion) => {
         setOpinions([opinion, ...opinions])
     }
 
     const editOpinion = (opinion: Opinion, index: number) => {
+        console.log('A')
         let updatedOpinions = [...opinions]
         updatedOpinions[index] = opinion
         setOpinions(updatedOpinions)
@@ -76,9 +57,13 @@ const Opinions = (props: {articleId: string}) => {
         setOpinions(updatedOpinions)
     }
 
+    if(canCreate == null){
+        <div>Ładowanie...</div>
+    }
+
     return(
         <Grid item xs={6} container direction="column" marginLeft={3} rowSpacing={4}>
-            {actualRoles.includes(roles.logged_user.name) &&
+            {actualRoles.includes(roles.logged_user.name) && canCreate && userId != props.article.authorDTO.id &&
                 <Grid item>
                     {!createUpdateOpinion ? 
                         <Button
@@ -89,7 +74,7 @@ const Opinions = (props: {articleId: string}) => {
                             Dodaj opinię
                         </Button>
                         : <CreateUpdateOpinion 
-                            articleId={props.articleId} 
+                            articleId={props.article.id} 
                             onCancel={() => setCreateUpdateOpinion(false)}
                             createOpinion={createOpinion}
                         />
@@ -97,7 +82,7 @@ const Opinions = (props: {articleId: string}) => {
                 </Grid>
             }
             <Grid item container direction="column" spacing={5} marginBottom={5}>
-                {opinions1.map((o: Opinion, index: number) => (
+                {opinions.map((o: Opinion, index: number) => (
                     <OpinionView key={o.id} opinion={o} index={index} editOpinion={editOpinion} removeOpinion={removeOpinion}/>
                 ))}
             </Grid>

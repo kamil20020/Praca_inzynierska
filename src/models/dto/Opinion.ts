@@ -2,10 +2,13 @@
 
 export default interface Opinion {
     id: string,
+    author: User,
     articleId: string,
-    authorDTO: User,
-    content: string,
     rating: number,
+    content: string,
     creationDate: Date,
-    modificationDate: Date
+    modificationDate: Date,
+    positiveAcceptancesCount: number,
+    negativeAcceptancesCount: number,
+    loggedUserAcceptance: number
 }

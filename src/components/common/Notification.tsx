@@ -19,7 +19,7 @@ const Notification = () => {
                 severity={notification.type as AlertColor}
                 sx={{ width: '100%' }}
             >
-                {notification.message}
+                {typeof notification.message === 'object' ? "Wystąpił nieznany błąd" : notification.message}
             </Alert>
         </Snackbar>
     );
