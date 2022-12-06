@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.edu.pwr.programming_technologies.model.entity.OpinionEntity;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Builder
@@ -15,10 +16,13 @@ import java.util.List;
 public class OpinionDTO {
 
     private String id;
-    private UserDTO authorId;
+    private UserDTO author;
+    private String articleId;
     private Integer rating;
     private String content;
-    private LocalDateTime creationDate;
-    private LocalDateTime modificationDate;
-    private List<OpinionEntity.Acceptance> acceptanceList;
+    private OffsetDateTime creationDate;
+    private OffsetDateTime modificationDate;
+    private Integer positiveAcceptancesCount;
+    private Integer negativeAcceptancesCount;
+    private Integer loggedUserAcceptance; //1 - positive, -1 - negative, 0 - not given
 }

@@ -42,7 +42,7 @@ public class DoAfter24HoursThread {
                         e.printStackTrace();
                     }
                 }
-            });//.run();
+            }).run();
         };
     }
 }
