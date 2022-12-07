@@ -111,6 +111,10 @@ public class ArticleVerificationServiceImpl implements ArticleVerificationServic
 
             for(int i=0; i < verifiedReviewersArticles.size(); i++){
 
+                if(availableReviewers.get(i).getId() == articleEntity.getAuthorId()){
+                    continue;
+                }
+
                 Integer numberOfVerifiedArticles = verifiedReviewersArticles.get(i);
 
                 if(numberOfVerifiedArticles < min){
@@ -119,7 +123,10 @@ public class ArticleVerificationServiceImpl implements ArticleVerificationServic
                 }
             }
 
-            assignArticleToReviewer(availableReviewers.get(reviewerIndex), articleEntity.getId());
+            if(reviewerIndex != -1){
+                
+                assignArticleToReviewer(availableReviewers.get(reviewerIndex), articleEntity.getId());
+            }
         });
     }
 
