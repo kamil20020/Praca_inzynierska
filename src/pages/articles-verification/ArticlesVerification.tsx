@@ -122,7 +122,6 @@ const ArticlesVerification = () => {
                         onPageChange={(page: number) => setPage(page)}
                         onPageSizeChange={(pageSize: number) => setPageSize(pageSize)}
                         onSelectionModelChange={(id) => {
-                            console.log(articleVerifications, +id+1)
                             const articleVerification = articleVerifications
                                 .filter(a => a.id ==  +id)[0]
                             navigate(`${articleVerification.id}`)

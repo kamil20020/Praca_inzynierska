@@ -1,6 +1,7 @@
 ﻿import { Label } from "@mui/icons-material";
 import { Button, FormControl, FormControlLabel, FormHelperText, Grid, Hidden, Input, InputLabel, OutlinedInput, TextField } from "@mui/material";
 import { Stack } from "@mui/system";
+import axios from "axios";
 import React, { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import KeycloakService from "../../../keycloak/KeycloakService";
@@ -86,8 +87,8 @@ const Login = () => {
             const accessTokenExpiresIn = data.expires_in
             const refreshToken = data.refresh_token
             const refreshTokenExpiresIn = data.refresh_expires_in
-            dispatch(setAccessToken({token: accessToken, expires_in: accessTokenExpiresIn}))
             dispatch(setRefreshToken({token: refreshToken, expires_in: refreshTokenExpiresIn}))
+            dispatch(setAccessToken({token: accessToken, expires_in: accessTokenExpiresIn}))
 
             dispatch(setNotificationMessage('Zalogowano pomyślnie'))
             dispatch(setNotificationType('success'))
@@ -102,37 +103,6 @@ const Login = () => {
                 dispatch(setUser(response.data))
                 dispatch(setUsername(form.username))
             })
-
-            const handleTokensExpiring = () => {
-
-                setTimeout(() => {
-                    console.log('A')
-                    if(!keycloak.authenticated){
-                        dispatch(logout())
-                    }
-                    console.log('B')
-                    KeycloakService.getAccessTokenOnRefreshToken(keycloak.refresh_token as string)
-                    .then((response) => {
-                        const data = response.data
-                        const accessToken = data.access_token
-                        const accessTokenExpiresIn = data.expires_in
-                        const refreshToken = data.refresh_token
-                        const refreshTokenExpiresIn = data.refresh_expires_in
-                        dispatch(setAccessToken({token: accessToken, expires_in: accessTokenExpiresIn}))
-                        dispatch(setRefreshToken({token: refreshToken, expires_in: refreshTokenExpiresIn}))
-                        handleTokensExpiring()
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                    })
-                }, accessTokenExpiresIn*1000)
-
-                setTimeout(() => {
-                    dispatch(logout())
-                }, refreshTokenExpiresIn*1000)
-            }
-
-            handleTokensExpiring()
         })
         .catch((error) => {
             if(error.response.status == 401){
@@ -206,3 +176,18 @@ const Login = () => {
 }
 
 export default Login;
+
+/*
+axios.interceptors.response.use((response) => {
+    if(response.status === 401) {
+        console.log('A')
+        alert("You are not authorized");
+    }
+    return response;
+}, (error) => {
+    console.log('A')
+    if (error.response && error.response.data) {
+        return Promise.reject(error.response.data);
+    }
+    return Promise.reject(error.message);
+});*/

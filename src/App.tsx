@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import keycloak from "./keycloak/Keycloak";
 import {
   Route,
   BrowserRouter,
   Routes,
-  Outlet
+  Outlet,
+  useNavigate
 } from "react-router-dom";
 import { Box, Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import Home from "./pages/home/Home";
@@ -23,7 +24,7 @@ import UserDetails from "./pages/user-details/UserDetails";
 import SearchUsers from "./pages/manage-users/SearchUsers";
 import ManageUser from "./pages/manage-users/ManageUser";
 import ArticlesVerification from './pages/articles-verification/ArticlesVerification';
-import { roles } from './keycloak/KeycloakService';
+import KeycloakService, { roles } from './keycloak/KeycloakService';
 import SearchArticles from './pages/articles/SearchArticles';
 import ArticleView from './pages/articles/ArticleView';
 import CreateUpdateArticle from './pages/articles/CreateUpdateArticle';
@@ -33,6 +34,10 @@ import moment from 'moment';
 import { plPL as plPLLocale } from '@mui/material/locale';
 import { plPL as plPLGrid} from '@mui/x-data-grid';
 import { plPL as plPLDatePickers } from '@mui/x-date-pickers';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from './redux/store';
+import { logout, setAccessToken, setRefreshToken } from './redux/slices/keycloakSlice';
+import { setNotificationMessage, setNotificationType, setNotificationStatus } from './redux/slices/notificationSlice';
 
 moment.locale("pl")
 
@@ -69,6 +74,80 @@ const theme = createTheme(
 )
 
 function App() {
+
+  const authData = useSelector((state: RootState) => state.keycloak)
+  const dispatch = useDispatch()
+
+  const [doExtendSession, setDoExtendSession] = React.useState<any>(false)
+
+  const handleMoveEvent = (e: any) => {
+
+    document.removeEventListener('mousemove', handleMoveEvent)
+
+    if(authData.access_token == ''){
+      return;
+    }
+
+    setDoExtendSession(true)
+
+    KeycloakService.getAccessTokenOnRefreshToken(authData.refresh_token as string)
+    .then((response) => {
+      const data = response.data
+      const accessToken =  data.access_token
+      const accessTokenExpiresIn = data.expires_in
+      const refreshToken = data.refresh_token
+      const refreshTokenExpiresIn = data.refresh_expires_in
+      dispatch(setAccessToken({token: accessToken, expires_in: accessTokenExpiresIn}))
+      dispatch(setRefreshToken({token: refreshToken, expires_in: refreshTokenExpiresIn}))
+      dispatch(setNotificationMessage('Przedłużono sesję logowania'))
+      dispatch(setNotificationType('info'))
+      dispatch(setNotificationStatus(true))
+    })
+  }
+
+  React.useEffect(() => {
+
+    if(authData.access_token != ''){
+
+      KeycloakService.setAxiosHeader(authData.access_token as string);
+
+      setTimeout(() => {
+
+        if(authData.access_token == ''){
+          return;
+        }
+
+        dispatch(setNotificationMessage('Została minuta do końca sesji logowania. Poruszenie myszą przedłuży sesję'))
+        dispatch(setNotificationType('info'))
+        dispatch(setNotificationStatus(true))
+
+        document.addEventListener('mousemove', handleMoveEvent);
+
+        setTimeout(() => {
+          if(authData.access_token == ''){
+            return;
+          }
+          let doExtendSession
+          setDoExtendSession((value: boolean) => {
+            console.log(value)
+            doExtendSession = value
+            return value
+          })
+          if(!doExtendSession){
+            dispatch(logout())
+            dispatch(setNotificationMessage('Sesja logowania została zakończona'))
+            dispatch(setNotificationType('info'))
+            dispatch(setNotificationStatus(true))
+          }
+          else{
+            setDoExtendSession(false)
+          }
+        }, 10000)
+
+      }, (authData.access_token_expires_in - authData.access_token_expires_in / 10) * 1000)
+    }
+  }, [authData.access_token])
+
   return (
     <React.StrictMode>
       <BrowserRouter>
