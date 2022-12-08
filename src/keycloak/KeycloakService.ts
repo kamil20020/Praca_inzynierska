@@ -429,6 +429,10 @@ class KeycloakService {
         })
     }
 
+    resetUserPassword = (userAccountId: string) => {
+        return this.updateUserAccount(userAccountId, {password: '1'})
+    }
+
     setAxiosHeader = (access_token: string) => {
         axios.defaults.headers.common = {
             'Authorization': `Bearer ${access_token}`

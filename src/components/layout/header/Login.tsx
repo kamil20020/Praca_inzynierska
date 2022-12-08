@@ -2,8 +2,10 @@
 import { Button, FormControl, FormControlLabel, FormHelperText, Grid, Hidden, Input, InputLabel, OutlinedInput, TextField } from "@mui/material";
 import { Stack } from "@mui/system";
 import axios from "axios";
+import { userInfo } from "os";
 import React, { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import KeycloakService from "../../../keycloak/KeycloakService";
 import { keycloakSlice, logout, setAccessToken, setRefreshToken, setRoles, setUsername } from "../../../redux/slices/keycloakSlice";
 import { setNotificationMessage, setNotificationStatus, setNotificationType } from "../../../redux/slices/notificationSlice";
@@ -12,6 +14,7 @@ import { RootState, store } from "../../../redux/store";
 import FormValidator from "../../../services/FormValidator";
 import UserAPIService from "../../../services/UserAPIService";
 import XCloeasableDialog from "../../common/XCloeasableDialog";
+import SetPassword from "./SetPassword";
 
 interface FormFields {
     username: string,
@@ -33,6 +36,8 @@ const Login = () => {
         password: ''
     })
 
+    const navigate = useNavigate()
+
     const validateForm = () => {
 
         let success = true
@@ -44,25 +49,24 @@ const Login = () => {
             success = false
         }
 
-        if(!FormValidator.checkIfIsRequired(form.password)){
-            newErrorsState.password = FormValidator.requiredMessage
-            success = false
-        }
-        else if(!FormValidator.checkMinLength(form.password, 8)){
-            newErrorsState.password = FormValidator.minLengthMessage
-            success = false
-        }
-        else if(!FormValidator.checkContainsSmallLetter(form.password)){
-            newErrorsState.password = FormValidator.smallLetterMessage
-            success = false
-        }
-        else if(!FormValidator.checkContainsUpperLetter(form.password)){
-            newErrorsState.password = FormValidator.upperLetterMessage
-            success = false
-        }
-        else if(!FormValidator.checkContainsDigit(form.password)){
-            newErrorsState.password = FormValidator.digitMessage
-            success = false
+        if(FormValidator.checkIfIsRequired(form.password)){
+
+            if(!FormValidator.checkMinLength(form.password, 8)){
+                newErrorsState.password = FormValidator.minLengthMessage
+                success = false
+            }
+            else if(!FormValidator.checkContainsSmallLetter(form.password)){
+                newErrorsState.password = FormValidator.smallLetterMessage
+                success = false
+            }
+            else if(!FormValidator.checkContainsUpperLetter(form.password)){
+                newErrorsState.password = FormValidator.upperLetterMessage
+                success = false
+            }
+            else if(!FormValidator.checkContainsDigit(form.password)){
+                newErrorsState.password = FormValidator.digitMessage
+                success = false
+            }
         }
 
         setErrors(newErrorsState)
@@ -80,7 +84,7 @@ const Login = () => {
         if(!validateForm())
             return
 
-        KeycloakService.login(form)
+        KeycloakService.login({username: form.username, password: form.password !== '' ? form.password : '1'})
         .then((response: any) => {
             const data = response.data
             const accessToken =  data.access_token
@@ -102,6 +106,10 @@ const Login = () => {
             .then((response) => {
                 dispatch(setUser(response.data))
                 dispatch(setUsername(form.username))
+
+                if(form.password == ''){
+                    navigate('/set-password')
+                }
             })
         })
         .catch((error) => {

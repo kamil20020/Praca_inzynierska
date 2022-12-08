@@ -1,7 +1,9 @@
 ﻿import { Grid, Button } from "@mui/material";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import KeycloakService from "../../../keycloak/KeycloakService";
 import User from "../../../models/dto/User";
+import { setNotificationMessage, setNotificationType, setNotificationStatus } from "../../../redux/slices/notificationSlice";
 import { RootState } from "../../../redux/store";
 import { FormLabel } from "./UserDetails";
 
@@ -15,6 +17,24 @@ const NonEditMode = (props: NonEditModeProps) => {
 
     const user = props.user
     const username = props.username
+
+    const dispatch = useDispatch()
+
+    const resetUserPassword = () => {
+        
+        KeycloakService.resetUserPassword(user.userAccountId as string)
+        .then((response) => {
+            dispatch(setNotificationMessage("Pomyślnie zresetowano hasło"))
+            dispatch(setNotificationType('success'))
+            dispatch(setNotificationStatus(true))
+        })
+        .catch((error) => {
+            console.log(error)
+            dispatch(setNotificationMessage("Nie udało się zresetować hasła"))
+            dispatch(setNotificationType('error'))
+            dispatch(setNotificationStatus(true))
+        })
+    }
 
     if(!user || !username)
         return <div></div>
@@ -67,6 +87,7 @@ const NonEditMode = (props: NonEditModeProps) => {
                         <Button
                             variant="contained"
                             color="info"
+                            onClick={resetUserPassword}
                         >
                             Reset hasła
                         </Button>

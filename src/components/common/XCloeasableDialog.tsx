@@ -64,7 +64,7 @@ const XCloeasableDialog = (props: XCloeasableDialogProps) => {
                 >
                     <CloseIcon fontSize="large"/>
                 </IconButton>
-                <DialogTitle textAlign="center" sx={{mt: 4, mb: 2}}>{props.title}</DialogTitle>
+                <DialogTitle textAlign="center" variant="h4" sx={{mt: 4, mb: 2}}>{props.title}</DialogTitle>
                 {props.form}
                 <div style={{paddingBottom: 50}}></div>
             </Dialog>

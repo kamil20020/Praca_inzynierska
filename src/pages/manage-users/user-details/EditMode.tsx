@@ -167,6 +167,22 @@ const EditMode = (props: EditModeProps) => {
         }
     }
 
+    const resetUserPassword = () => {
+
+        KeycloakService.resetUserPassword(user.userAccountId as string)
+        .then((response) => {
+            dispatch(setNotificationMessage("Pomyślnie zresetowano hasło"))
+            dispatch(setNotificationType('success'))
+            dispatch(setNotificationStatus(true))
+        })
+        .catch((error) => {
+            console.log(error)
+            dispatch(setNotificationMessage("Nie udało się zresetować hasła"))
+            dispatch(setNotificationType('error'))
+            dispatch(setNotificationStatus(true))
+        })
+    }
+
     if(!user || !username)
         return <div></div>
 
@@ -263,6 +279,7 @@ const EditMode = (props: EditModeProps) => {
                         <Button
                             variant="contained"
                             color="info"
+                            onClick={resetUserPassword}
                         >
                             Reset hasła
                         </Button>

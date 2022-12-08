@@ -10,6 +10,7 @@ import { RootState } from "../../../../redux/store";
 import CustomAvatar from "../../../common/CustomAvatar";
 import { roles } from "../../../../keycloak/KeycloakService";
 import UserAvialibility from "./UserAvialibility";
+import ChangePassword from "./ChangePassword";
 
 const AccountSettings = () => {
 
@@ -20,6 +21,8 @@ const AccountSettings = () => {
     const dispatch = useDispatch()
 
     const [anchorElUserSettings, setAnchorElUserSettings] = React.useState<null | HTMLElement>(null);
+
+    const [showChangePassword, setShowChangePassword] = React.useState<boolean>(false)
 
     const handleOpenUserSettings = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUserSettings(event.currentTarget)
@@ -34,7 +37,13 @@ const AccountSettings = () => {
         navigate('/user-details')
     }
 
+    const handleChangePassword = () => {
+        handleCloseUseSettings()
+        setShowChangePassword(true);
+    }
+
     const handleLogout = () => {
+        handleCloseUseSettings()
         dispatch(logout())
         dispatch(setUser({}))
         
@@ -66,9 +75,10 @@ const AccountSettings = () => {
                     <MenuItem><UserAvialibility/></MenuItem>
                 }
                 <MenuItem onClick={handleUserDetails}>Dane użytkownika</MenuItem>
-                <MenuItem>Zmień hasło</MenuItem>
+                <MenuItem onClick={handleChangePassword}>Zmień hasło</MenuItem>
                 <MenuItem onClick={handleLogout}>Wyloguj się</MenuItem>
             </Menu>
+            <ChangePassword open={showChangePassword} onClose={() => setShowChangePassword(false)}/>
         </React.Fragment>
     );
 }

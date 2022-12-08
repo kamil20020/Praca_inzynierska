@@ -38,6 +38,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import { logout, setAccessToken, setRefreshToken } from './redux/slices/keycloakSlice';
 import { setNotificationMessage, setNotificationType, setNotificationStatus } from './redux/slices/notificationSlice';
+import SetPassword from './components/layout/header/SetPassword';
 
 moment.locale("pl")
 
@@ -193,6 +194,11 @@ function App() {
                   <Route index element={<SearchUsers/>} />
                   <Route path="user/:userId/:userAccountId" element={<ManageUser/>} />
                 </Route>
+                <Route path="/set-password" element={
+                  <ProtectedRoute requiredLogin={true}>
+                    <SetPassword/>
+                  </ProtectedRoute>
+                } />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Content>
