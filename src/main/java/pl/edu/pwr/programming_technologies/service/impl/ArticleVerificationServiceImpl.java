@@ -124,7 +124,7 @@ public class ArticleVerificationServiceImpl implements ArticleVerificationServic
             }
 
             if(reviewerIndex != -1){
-                
+
                 assignArticleToReviewer(availableReviewers.get(reviewerIndex), articleEntity.getId());
             }
         });
