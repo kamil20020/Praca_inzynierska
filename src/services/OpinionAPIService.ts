@@ -20,8 +20,10 @@ class OpinionAPIService {
         return axios.get(`${this.apiUrl}/opinion/author/${authorId}`)
     }
 
-    getAllByArticleId(articleId: string){
-        return axios.get(`${this.apiUrl}/opinions/article/${articleId}`)
+    getAllByArticleId(articleId: string, userId: number){
+        return axios.get(`${this.apiUrl}/opinions/article/${articleId}`, {
+            params: userId ? {userId: userId} : {}
+        })
     }
 
     create(opinion: CreateOpinion){

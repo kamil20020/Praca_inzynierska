@@ -1,4 +1,5 @@
 ﻿export interface Pagination {
     page: number,
-    size: number
+    size: number,
+    sort?: string
 }

@@ -23,10 +23,14 @@ const Opinions = (props: {article: Article}) => {
     const [canCreate, setCanCreate] = React.useState<boolean | null>(userId == null ? false : null)
 
     useEffect(() => {
-        OpinionAPIService.getAllByArticleId(props.article.id)
+        OpinionAPIService.getAllByArticleId(props.article.id, userId)
         .then((response) => {
             setOpinions(response.data)
 
+            if(!userId){
+                return;
+            }
+            
             OpinionAPIService.existsByAuthorId(userId)
             .then((response) => {
                 setCanCreate(!response.data)
@@ -59,8 +63,6 @@ const Opinions = (props: {article: Article}) => {
     if(canCreate == null){
         <div>Ładowanie...</div>
     }
-
-    console.log(actualRoles.includes(roles.logged_user.name), canCreate, userId != props.article.authorDTO.id)
 
     return(
         <Grid item xs={6} container direction="column" marginLeft={3} rowSpacing={4}>

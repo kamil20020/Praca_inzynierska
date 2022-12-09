@@ -132,7 +132,7 @@ const ArticleView = () => {
         <Grid item xs={12} container alignItems="start" justifyContent="center" marginTop={4}>
             <Grid item xs={10.5} container justifyContent="space-between" direction="row">
                 <ArticleHeader article={article}/>
-                {(isUserArticleAuthor() || actualRoles.includes(roles.administrator.name)) &&
+                {userId && (isUserArticleAuthor() || actualRoles.includes(roles.administrator.name)) &&
                     <Grid item xs={5} container justifyContent="end" alignItems="start" spacing={3}>     
                         <Grid item>
                             <Typography textAlign="center" variant="h6">Status: {article.status}</Typography>

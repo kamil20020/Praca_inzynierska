@@ -15,6 +15,7 @@ import ConfirmationDialog from "../../../components/common/ConfirmationDialog";
 import CreateUpdateOpinion from "./CreateUpdateOpinion";
 import OpinionAPIService from "../../../services/OpinionAPIService";
 import { setNotificationMessage, setNotificationType, setNotificationStatus } from "../../../redux/slices/notificationSlice";
+import AcceptanceAPIService from "../../../services/AcceptanceAPIService";
 
 export interface OpinionViewProps {
     opinion: Opinion,
@@ -29,6 +30,10 @@ const OpinionView = (props: OpinionViewProps) => {
 
     const opinion = props.opinion
     const author = opinion.author
+
+    const [acceptance, setAcceptance] = React.useState<number>(props.opinion.loggedUserAcceptance)
+    const [positiveAcceptances, setPositiveAcceptances] = React.useState<number>(props.opinion.positiveAcceptancesCount)
+    const [negativeAcceptances, setNegativeAcceptances] = React.useState<number>(props.opinion.negativeAcceptancesCount)
 
     const actualRoles = useSelector((state: RootState) => state.keycloak).roles
     const [anchorElOpinionOptions, setAnchorElOpinionOptions] = React.useState<null | HTMLElement>(null);
@@ -126,6 +131,54 @@ const OpinionView = (props: OpinionViewProps) => {
         }
     }
 
+    const handleRemoveAcceptation = () => {
+
+        AcceptanceAPIService.deleteAcceptance({opinionId: opinion.id, userId: userId})
+        .then(() => {
+
+            if(acceptance == 1){
+                setPositiveAcceptances(positiveAcceptances-1)
+            }
+            else{
+                setNegativeAcceptances(negativeAcceptances-1)
+            }
+
+            setAcceptance(0)
+        })
+        .catch((error) => {
+            dispatch(setNotificationMessage(error.response.data))
+            dispatch(setNotificationType('error'))
+            dispatch(setNotificationStatus(true))
+        })
+    }
+
+    const handleAddAcceptation = (value: number) => {
+
+        if(acceptance != 0 || !userId || userId == opinion.author.id){
+            return;
+        }
+
+        AcceptanceAPIService.createAcceptance({opinionId: opinion.id, userId: userId, value: value})
+        .then((response) => {
+
+            if(value == 1){
+                setPositiveAcceptances(positiveAcceptances+1)
+            }
+            else{
+                setNegativeAcceptances(negativeAcceptances+1)
+            }
+
+            setAcceptance(value)
+        })
+        .catch((error) => {
+            dispatch(setNotificationMessage(error.response.data))
+            dispatch(setNotificationType('error'))
+            dispatch(setNotificationStatus(true))
+        })
+    }
+
+    console.log(acceptance)
+
     return (
         <Grid item container spacing={2}>
             <Grid item xs={6} container alignItems="center" justifyContent="space-between">
@@ -162,12 +215,34 @@ const OpinionView = (props: OpinionViewProps) => {
                         <Grid item xs={12} marginLeft={2}>
                             <Typography>{opinion.content}</Typography>
                         </Grid>
-                        {actualRoles.includes(roles.logged_user.name) &&
-                            <Grid item container columnSpacing={1} marginLeft={1} marginTop={0.2}>
-                                {renderAcceptances()}
-                            </Grid>
-                        }
-                    </React.Fragment>
+                        <Grid item container alignItems="center" marginLeft={1} marginTop={0.2}>
+                            {acceptance == 1 ?
+                                <IconButton>
+                                    <ThumbUpAltIcon htmlColor="black"/>
+                                </IconButton>
+                            : 
+                                <IconButton onClick={() => handleAddAcceptation(1)}>
+                                    <ThumbUpOffAltIcon htmlColor="black"/>
+                                </IconButton>
+                            }
+                            <Typography marginRight={2}>{positiveAcceptances ? positiveAcceptances : ''}</Typography>
+                            {acceptance == -1 ? 
+                                <IconButton>
+                                    <ThumbDownAltIcon htmlColor="black"/>
+                                </IconButton>
+                            :
+                                <IconButton onClick={() => handleAddAcceptation(-1)}>
+                                    <ThumbDownOffAltIcon htmlColor="black"/>
+                                </IconButton>
+                            }
+                            <Typography>{negativeAcceptances ? negativeAcceptances : ''}</Typography>
+                            {acceptance != 0 &&
+                                <IconButton onClick={handleRemoveAcceptation}>
+                                    <CloseIcon color="secondary"/>
+                                </IconButton>
+                            }
+                        </Grid>
+                </React.Fragment>
                 :
                     <CreateUpdateOpinion 
                         articleId={opinion.articleId}

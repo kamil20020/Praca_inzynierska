@@ -39,6 +39,7 @@ import { RootState } from './redux/store';
 import { logout, setAccessToken, setRefreshToken } from './redux/slices/keycloakSlice';
 import { setNotificationMessage, setNotificationType, setNotificationStatus } from './redux/slices/notificationSlice';
 import SetPassword from './components/layout/header/SetPassword';
+import { setUser } from './redux/slices/userSlice';
 
 moment.locale("pl")
 
@@ -130,11 +131,11 @@ function App() {
           }
           let doExtendSession
           setDoExtendSession((value: boolean) => {
-            console.log(value)
             doExtendSession = value
             return value
           })
           if(!doExtendSession){
+            dispatch(setUser({}))
             dispatch(logout())
             dispatch(setNotificationMessage('Sesja logowania została zakończona'))
             dispatch(setNotificationType('info'))

@@ -1,4 +1,4 @@
-﻿import { Button, Card, FormControlLabel, Grid, OutlinedInput, Pagination, Rating, Switch, Typography } from "@mui/material";
+﻿import { Button, Card, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, OutlinedInput, Pagination as PaginationView, Rating, Select, SelectChangeEvent, Switch, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { roles } from "../../keycloak/KeycloakService";
@@ -18,6 +18,11 @@ import moment from "moment";
 import { ArticleSearchCriteria } from "../../models/ArticleSearchCriteria";
 import SelectTechnologyCategory from "../../components/common/SelectTechnologyCategory";
 import SelectTechnology from "../../components/common/SelectTechnology";
+import { ArticleSortParam } from "../../models/dto/ArticleSort";
+import { SortType } from "../../models/dto/SortType";
+import { SortParams } from "../../models/dto/SortParams";
+import { Pagination } from "../../models/Pagination";
+import SortService from "../../services/SortService";
 
 interface FormFields {
     title?: string,
@@ -91,11 +96,19 @@ const ArticleHeader = (props: ArticleHeaderProps) => {
     );
 }
 
+interface ArticleSortProps {
+    index: number,
+    name: string,
+    dir: string,
+    value: string
+}
+
 const SearchArticles = () => {
 
     const actualRoles = useSelector((state: RootState) => state.keycloak).roles
 
     const [form, setForm] = React.useState<FormFields>({})
+    const [sort, setSort] = React.useState<ArticleSortProps | null>(null);
     const [showSearchCriteria, switchShowSearchCriteria] = React.useState<boolean>(true);
     const [page, setPage] = React.useState<number>(0)
     const [pageSize, setPageSize] = React.useState<number>(5)
@@ -114,6 +127,13 @@ const SearchArticles = () => {
 
     const isLoggedUser: boolean = highestRole !== roles.user
 
+    const articleSortOptions = {
+        title: "Tytuł",
+        creationDate: "Data utworzenia",
+        modificationDate: "Data modyfikacji",
+        averageScore: "Średnia ocena",
+    }
+
     useEffect(() => {
         ArticleAPIService.search({}, {page: page, size: pageSize}, highestRole, isLoggedUser ? userId : undefined)
         .then((response) => {
@@ -126,8 +146,15 @@ const SearchArticles = () => {
     const CustomPagination = () => {
 
         const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+
+            let pagination: Pagination = {page: value-1, size: pageSize}
+
+            if(sort != null){
+                pagination.sort = SortService.generateArticleSort({name: sort.name, dir: sort.dir})
+            }
+
             if(value-1 != page){
-                ArticleAPIService.search(searchCriteria, {page: value-1, size: pageSize}, highestRole, isLoggedUser ? userId : undefined)
+                ArticleAPIService.search(searchCriteria, pagination, highestRole, isLoggedUser ? userId : undefined)
                 .then((response) => {
                     const page: Page = response.data
                     setPage(value-1)
@@ -137,16 +164,55 @@ const SearchArticles = () => {
             }
         };
 
+        const getMenuItemsValues = () => {
+
+            let articleSortParams: any[] = []
+            let index = -1
+
+            Object.keys(ArticleSortParam)
+                .forEach((value: string) => {
+                    articleSortParams.push({index: ++index, name: value, dir: SortType.ASC, value: `${(ArticleSortParam as any)[value]}: malejąco`})
+                    articleSortParams.push({index: ++index, name: value, dir: SortType.DESC, value: `${(ArticleSortParam as any)[value]}: rosnąco`})
+                })
+
+            return articleSortParams
+        }
+
+        const menuItemsValues = getMenuItemsValues()
+
         return (
-            <Grid item container justifyContent="center" sx={{marginTop: 2, marginBottom: 4}}>
-                <Pagination 
-                    count={totalPages} 
-                    page={page+1}
-                    onChange={handleChangePage} 
-                    variant="outlined" 
-                    color="secondary" 
-                    shape="rounded" 
-                />
+            <Grid item container justifyContent="center" alignItems="center" sx={{marginTop: 2, marginBottom: 4}}>
+                <Grid item xs={6} container justifyContent="end">
+                    <Grid item xs={5}>
+                        <FormControl fullWidth>
+                            <InputLabel id="article-sort-label" color="secondary">Sortowanie</InputLabel>
+                            <Select
+                                labelId="article-sort-label"
+                                value={sort ? sort.index.toString() : ''}
+                                color="secondary"
+                                label="Age"
+                                onChange={(event: SelectChangeEvent) => {
+                                    setSort(event.target.value ? menuItemsValues[+event.target.value] : '')
+                                }}
+                            >
+                                <MenuItem value={''}>-</MenuItem>
+                                {menuItemsValues.map((value: any, index: number) => (
+                                    <MenuItem key={index} value={index.toString()}>{value.value}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                </Grid>
+                <Grid item xs={6} container justifyContent="center">
+                    <PaginationView 
+                        count={totalPages} 
+                        page={page+1}
+                        onChange={handleChangePage} 
+                        variant="outlined" 
+                        color="secondary" 
+                        shape="rounded" 
+                    />
+                </Grid>
             </Grid>
         )
     }
@@ -162,9 +228,15 @@ const SearchArticles = () => {
             role: highestRole
         }
 
+        let pagination: Pagination = {page: page, size: pageSize}
+
+        if(sort != null){
+            pagination.sort = SortService.generateArticleSort({name: sort.name, dir: sort.dir})
+        }
+
         setSearchCriteria(newSearchCriteria)
 
-        ArticleAPIService.search(newSearchCriteria, {page: page, size: pageSize}, highestRole, isLoggedUser ? userId : undefined)
+        ArticleAPIService.search(newSearchCriteria, pagination, highestRole, isLoggedUser ? userId : undefined)
         .then((response) => {
             const page: Page = response.data
             setPage(0)
@@ -245,13 +317,13 @@ const SearchArticles = () => {
                 </Button>
             </Grid>
             <Grid item xs={10} container direction="column" alignItems="stretch" justifyContent="center" spacing={0} sx={{marginTop: 5}}>
-                {articles.length > 7 && <CustomPagination/>}
+                <CustomPagination/>
                 {articles
                     .map((a: Article, index: number) => (
                         <ArticleHeader key={index} article={a}/>
                     ))
                 }
-                <CustomPagination/>
+                {articles.length > 7 && <CustomPagination/>}
             </Grid>
         </Grid>
     );
