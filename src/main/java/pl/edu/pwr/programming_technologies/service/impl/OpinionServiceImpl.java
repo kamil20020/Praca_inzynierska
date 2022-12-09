@@ -16,6 +16,7 @@ import pl.edu.pwr.programming_technologies.service.OpinionService;
 import pl.edu.pwr.programming_technologies.service.UserService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,12 +46,21 @@ public class OpinionServiceImpl implements OpinionService {
         }
 
         if(!userRepository.existsById(userId)){
+            throw new EntityNotFoundException("Nie istnieje użytkownik o takim id");
+        }
+
+        List<OpinionEntity.Acceptance> foundOpinionAcceptancesByAuthorId = foundOpinionEntityOpt.get()
+            .getAcceptanceList().stream()
+            .filter(acceptance -> acceptance.getAuthorId() == userId)
+            .collect(Collectors.toList());
+
+        System.out.println(foundOpinionAcceptancesByAuthorId.get(0).getValue());
+
+        if(foundOpinionAcceptancesByAuthorId.isEmpty()){
             return 0;
         }
 
-        return foundOpinionEntityOpt.get().getAcceptanceList().stream()
-            .filter(acceptance -> acceptance.getAuthorId() == userId)
-            .collect(Collectors.toList()).get(0).getValue();
+        return foundOpinionAcceptancesByAuthorId.get(0).getValue();
     }
 
     @Override
@@ -104,6 +114,10 @@ public class OpinionServiceImpl implements OpinionService {
             .rating(opinionEntity.getRating())
             .content(opinionEntity.getContent())
             .creationDate(LocalDateTime.now())
+            .modificationDate(LocalDateTime.now())
+            .acceptanceList(new ArrayList<>())
+            .positiveAcceptancesCount(0)
+            .negativeAcceptancesCount(0)
         .build();
 
         return opinionRepository.save(toCreateOpinionEntity);
@@ -136,6 +150,8 @@ public class OpinionServiceImpl implements OpinionService {
         if(updateOpinion.getContent() != null){
             foundOpinion.setContent(updateOpinion.getContent());
         }
+
+        foundOpinion.setModificationDate(LocalDateTime.now());
 
         return opinionRepository.save(foundOpinion);
     }

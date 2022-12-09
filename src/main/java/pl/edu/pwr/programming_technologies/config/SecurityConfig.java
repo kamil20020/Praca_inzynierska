@@ -67,7 +67,10 @@ public class SecurityConfig {
                 .hasRole("logged_user")
                 .antMatchers(HttpMethod.DELETE, "/comment/*")
                 .hasRole("logged_user")
-
+                
+                .antMatchers(HttpMethod.GET, "/opinions/**")
+                .permitAll()
+                
                 .antMatchers(HttpMethod.GET, "/article/**")
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/article/search")

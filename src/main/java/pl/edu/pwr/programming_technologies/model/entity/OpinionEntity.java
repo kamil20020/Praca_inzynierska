@@ -27,7 +27,7 @@ public class OpinionEntity {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public class Acceptance {
+    public static class Acceptance {
 
         @Id
         @MongoId(FieldType.OBJECT_ID)
@@ -42,6 +42,11 @@ public class OpinionEntity {
         @Min(-1)
         @Max(1)
         private Integer value;
+
+        public Acceptance(Integer authorId, Integer value){
+            this.authorId = authorId;
+            this.value = value;
+        }
     }
 
     @Id
