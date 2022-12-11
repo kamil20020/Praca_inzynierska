@@ -1,5 +1,5 @@
 \chapter{Wdroøenie systemu IT Tech}
-Ostatnim etapem prac tego projektu jest wdroøenie ca≥ego systemu oraz przetestowanie, czy wszystkie zaimplementowane funkcjonalnoúci dzia≥ajπ w tak sam sposÛb jak w úrodowisku lokalnym. Przy wyborze platformy do wdroøenia systemu kierowano siÍ przede wszystkim jak najniøszπ cenπ us≥ug, popularnoúciπ, stopniem wsparcia dla uøytych w ramach tego projektu technologii, ≥atwoúciπ wdroøenia oraz w≥asnym doúwiadczeniem. Poczπtkowo zak≥adano wdroøenie ca≥ego systemu na Google Cloud Platform, gdyø jest to popularna platforma, moøliwe jest darmowe wdroøenie systemu dziÍki zarejestrowaniu siÍ przez konto studenckie oraz mia≥em doúwiadczenie z tπ platformπ w ramach realizacji projektu zespo≥owego. Z powodu problemÛw z konfiguracjπ aplikacji, porzucono ten pomys≥ i postanowiono wdroøyÊ system na innej platformie. Kolejnym wyborem by≥a platforma Azure, ktÛra jest popularnym serwisem wdroøeniowym firmy Microsoft. Wybrano tÍ platformÍ, gdyø podobnie jak poprzednio moøliwe jest darmowe wdroøenie systemu dziÍki koncie, do ktÛrego przypisany jest e-mail studencki, zawiera prosty i intuicyjny interfejs, moøna w ≥atwy sposÛb wdroøyÊ aplikacje, jest popularniejszym rozwiπzaniem niø Google Cloud Platform oraz mia≥em juø doúwiadczenie z tπ platformπ. Do wdroøenia bazy danych PostgreSQL, aplikacji serwerowej, aplikacji klienckiej postawionej na serwerze NGINX oraz serwera do uwierzytelniania i autoryzacji uøytkownikÛw uøyto platformy Azure. Azure nie posiada bogatego wsparcia dla bazy danych MongoDB, dlatego zdecydowano siÍ na uøycie innej platformy do wdroøenia tej bazy. Wybrano platformÍ MongoDB Cloud, gdyø jest to jeden z popularniejszych serwisÛw do wdraøania baz MongoDB oraz moøliwe jest darmowe wdroøenie bazy danych.
+Ostatnim etapem prac tego projektu jest wdroøenie ca≥ego systemu. Przy wyborze platformy do wdroøenia systemu kierowano siÍ przede wszystkim jak najniøszπ cenπ us≥ug, popularnoúciπ, stopniem wsparcia dla uøytych w ramach tego projektu technologii, ≥atwoúciπ wdroøenia oraz w≥asnym doúwiadczeniem. Poczπtkowo zak≥adano wdroøenie ca≥ego systemu na Google Cloud Platform, gdyø jest to popularna platforma, moøliwe jest darmowe wdroøenie systemu dziÍki zarejestrowaniu siÍ przez konto studenckie oraz mia≥em doúwiadczenie z tπ platformπ w ramach realizacji projektu zespo≥owego. Z powodu problemÛw z konfiguracjπ aplikacji, porzucono ten pomys≥ i postanowiono wdroøyÊ system na innej platformie. Kolejnym wyborem by≥a platforma Azure, ktÛra jest popularnym serwisem wdroøeniowym firmy Microsoft. Wybrano tÍ platformÍ, gdyø podobnie jak poprzednio moøliwe jest darmowe wdroøenie systemu dziÍki koncie, do ktÛrego przypisany jest e-mail studencki, zawiera prosty i intuicyjny interfejs, moøna w ≥atwy sposÛb wdroøyÊ aplikacje, jest popularniejszym rozwiπzaniem niø Google Cloud Platform oraz mia≥em juø doúwiadczenie z tπ platformπ. Do wdroøenia bazy danych PostgreSQL, aplikacji serwerowej, aplikacji klienckiej postawionej na serwerze NGINX oraz serwera do uwierzytelniania i autoryzacji uøytkownikÛw uøyto platformy Azure. Azure nie posiada bogatego wsparcia dla bazy danych MongoDB, dlatego zdecydowano siÍ na uøycie innej platformy do wdroøenia tej bazy. Wybrano platformÍ MongoDB Cloud, gdyø jest to jeden z popularniejszych serwisÛw do wdraøania baz MongoDB oraz moøliwe jest darmowe wdroøenie bazy danych.
 
 \section{Baza danych PostgreSQL}
 
@@ -40,7 +40,7 @@ Kolejnym krokiem by≥o ustawienie regu≥ zapory dla bazy danych i wybrano publiczn
 
 Do wdroøenia aplikacji klienckiej postawionej na serwerze webowym NGINX wykorzystano us≥ugÍ \texttt{App Service}. 
 
-Na poczπtku przypisano us≥ugÍ do subskrypcji studenckiej oraz grupy zasobÛw \texttt{inzynierka}, wybrano wdroøenie aplikacji poprzez kontener Docker, lokalizacjÍ serwera, a pozosta≥e podstawowe opcje pozostawiono jako domyúlne. Podstawowa konfiguracja jest przedstawiona na rysunku~\ref{fig:wdrozenie-aplikacji-klienckiej}.
+Na poczπtku przypisano us≥ugÍ do subskrypcji studenckiej oraz grupy zasobÛw \texttt{inzynierka}, ustalono nazwÍ serwera, wybrano wdroøenie aplikacji poprzez kontener Docker, lokalizacjÍ serwera, a pozosta≥e podstawowe opcje pozostawiono jako domyúlne. Podstawowa konfiguracja jest przedstawiona na rysunku~\ref{fig:wdrozenie-aplikacji-klienckiej}.
 
 \begin{figure}[H]
 	\centering
@@ -68,16 +68,16 @@ ResztÍ opcji pozostawiono z wartoúciami domyúlnymi i zaakceptowano konfiguracjÍ.
 	\includegraphics[width=.8\linewidth]{rys05/wdrozenie-aplikacji-klienckiej-2}
 	\caption{Utworzona us≥uga App Service dla aplikacji klienckiej}
 	\label{fig:wdrozenie-aplikacji-klienckiej-2}
-	\caption*{èrÛd≥o: https://portal.azure.com/\#create/Microsoft.WebSite}
+	\caption*{èrÛd≥o: https://portal.azure.com/\#@student.pwr.edu.pl/resource/subscriptions/632dcbcb-684b-4de7-a4ae-2cacb45609fe/resourceGroups/inzynierka/providers/Microsoft.Web/sites/inzynierka-test/appServices}
 \end{figure}
 
 Po tych krokach us≥uga by≥a skonfigurowana do automatycznego pobierania z rejestru kontenerÛw obrazu aplikacji.
 
 Kolejnymi krokami by≥o przygotowanie obrazu aplikacji wraz z serwerem webowym oraz wrzucenie tego obrazu na odpowiedni rejestr kontenerÛw.
 
-Na poczπtku zalogowano siÍ do rejestru kontenerÛw Azure (~\ref{lst:logowanie-rejestr-kontenerow}).
+Na poczπtku zalogowano siÍ do rejestru kontenerÛw Azure (rysunek~\ref{lst:logowanie-rejestr-kontenerow-frontend}).
 
-\begin{lstlisting}[language=Dockerfile, style=JavaStyle, caption=Logowanie siÍ do rejestru kontenerÛw Azure, label=lst:logowanie-rejestr-kontenerow]
+\begin{lstlisting}[language=Dockerfile, style=JavaStyle, caption=Logowanie siÍ do rejestru kontenerÛw Azure dla frontendu, label=lst:logowanie-rejestr-kontenerow-frontend]
 docker login inzynierkakeycloak.azurecr.io
 \end{lstlisting}
 
@@ -119,37 +119,162 @@ server {
 }
 \end{lstlisting}
 
-Po skonfigurowaniu aplikacji klienckiej oraz serwera webowego, moøna by≥o przystπpiÊ do zbudowania obrazu Dockerowego. Za pomocπ komendy~\ref{lst:budowanie-obrazu} zbudowano obraz o nazwie ,,frontend''.
+Po skonfigurowaniu aplikacji klienckiej oraz serwera webowego, moøna by≥o przystπpiÊ do zbudowania obrazu Dockerowego. Za pomocπ 
+komendy~\ref{lst:budowanie-obrazu-frontendu} zbudowano obraz o nazwie ,,frontend''.
 
-\begin{lstlisting}[style=json-style, caption=Budowanie obrazu dockerowego, label=lst:budowanie-obrazu]
+\begin{lstlisting}[style=json-style, caption=Budowanie obrazu dockerowego frontendu, label=lst:budowanie-obrazu-frontendu]
 docker build . -t frontend
 \end{lstlisting}
 
 NastÍpnym krokiem by≥o powiπzanie zbudowanego obrazu z nazwπ jakπ bÍdzie mia≥ ten obraz w rejestrze kontenerÛw. Do tego celu uøyto komendy~\ref{lst:tagowanie-obrazu}
 
-\begin{lstlisting}[style=json-style, caption=Powiπzanie zbudowanego obrazu z rejestrem kontenerÛw , label=lst:tagowanie-obrazu]
+\begin{lstlisting}[style=json-style, caption=Powiπzanie zbudowanego obrazu frontendu z rejestrem kontenerÛw , label=lst:tagowanie-obrazu-frontendu]
 docker tag frontend inzynierkakeycloak.azurecr.io/technologie-programistyczne:latest
 \end{lstlisting}
 
-Ostatnim krokiem by≥o wrzucenie tak skonfigurowanego obrazu do rejestru kontenerÛw, gdzie na podstawie tego obrazu zostanie utworzony kontener aplikacji. Do tego celu uøyto komendy~\ref{lst:pushowanie-obrazu}.
+Ostatnim krokiem by≥o wrzucenie tak skonfigurowanego obrazu do rejestru kontenerÛw, gdzie na podstawie tego obrazu zostanie utworzony kontener aplikacji. Do tego celu uøyto komendy~\ref{lst:pushowanie-obrazu-frontendu}.
 
-\begin{lstlisting}[style=json-style, caption=Wys≥anie obrazu do rejestru kontenerÛw, label=lst:pushowanie-obrazu]
+\begin{lstlisting}[style=json-style, caption=Wys≥anie obrazu frontendu do rejestru kontenerÛw, label=lst:pushowanie-obrazu-frontendu]
 docker push inzynierkakeycloak.azurecr.io/technologie-programistyczne:latest
 \end{lstlisting}
 
-Po kilku minutach aplikacja zosta≥a wdroøona i po przejúciu do adresu strony https://technologie-programistyczne.azurewebsites.net/, moøna by≥o zauwaøyÊ widok strony g≥Ûwnej (rysunek~\ref{fig:wdrozenie-aplikacji-klienckiej-2}).
+Po kilku minutach aplikacja zosta≥a wdroøona i po przejúciu do adresu strony https://technologie-programistyczne.azurewebsites.net/, moøna by≥o zauwaøyÊ widok strony g≥Ûwnej (rysunek~\ref{fig:wdrozenie-aplikacji-klienckiej-3}).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.8\linewidth]{rys05/wdrozenie-aplikacji-klienckiej-2}
+	\includegraphics[width=.6\linewidth]{rys05/wdrozenie-aplikacji-klienckiej-3}
 	\caption{Widok strony g≥Ûwnej aplikacji po jej wdroøeniu}
-	\label{fig:wdrozenie-aplikacji-klienckiej-2}
-	\caption*{èrÛd≥o: opracowanie w≥asne}
+	\label{fig:wdrozenie-aplikacji-klienckiej-3}
+	\caption*{èrÛd≥o: https://inzynierka-test.azurewebsites.net/}
 \end{figure}
 
 \section{Aplikacja serwerowa}
 
+Do wdroøenia aplikacji serwerowej wykorzystano us≥ugÍ \texttt{Api App} z zak≥adki ,,Marketplace''.
+
+Konfiguracja wdroøeniowa backendu po stronie Azure jest prawie identyczna jak w przypadku aplikacji klienckiej i rÛøni siÍ jedynie nazwπ aplikacji oraz nazwπ obrazu. 
+
+Podsumowanie konfiguracji wdroøeniowej aplikacji serwerowej jest przedstawione na rysunku~\ref{fig:wdrozenie-aplikacji-serwerowej}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\linewidth]{rys05/wdrozenie-aplikacji-serwerowej}
+	\caption{Podsumowanie konfigurcji aplikacji wdroøeniowej}
+	\label{fig:wdrozenie-aplikacji-serwerowej}
+	\caption*{èrÛd≥o: https://portal.azure.com/\#create/Microsoft.ApiApp}
+\end{figure}
+
+Po tych krokach us≥uga by≥a skonfigurowana do automatycznego pobierania z rejestru kontenerÛw obrazu aplikacji.
+
+Kolejnymi krokami by≥o przygotowanie obrazu backendu oraz wrzucenie tego obrazu na odpowiedni rejestr kontenerÛw.
+
+Na poczπtku zalogowano siÍ do rejestru kontenerÛw Azure (rysunek~\ref{lst:logowanie-rejestr-kontenerow-backend}).
+
+\begin{lstlisting}[language=Dockerfile, style=JavaStyle, caption=Logowanie siÍ do rejestru kontenerÛw Azure dla backendu, label=lst:logowanie-rejestr-kontenerow-backend]
+docker login inzynierkakeycloak.azurecr.io
+\end{lstlisting}
+
+NastÍpnie utworzono i odpowiednio skonfigurowano plik \texttt{Dockerfile}, tak aby na jego podstawie by≥ tworzony obraz aplikacji serwerowej uruchomionej na profilu produkcyjnym. Konfiguracja obrazu dockerowego jest przedstawiona na listingu~\ref{lst:dockerfile-aplikacji-serwerowej}.
+
+\begin{lstlisting}[language=Dockerfile,style=JavaStyle, caption=Konfiguracja Dockerfile dla aplikacji serwerowej, label=lst:dockerfile-aplikacji-serwerowej]
+ARG PROFILE
+FROM maven:3.8.4-openjdk-17
+WORKDIR /backend
+COPY . .
+EXPOSE $PORT
+CMD mvn spring-boot:run -Dspring.profiles.active=${PROFILE}
+\end{lstlisting}
+
+NastÍpnym krokiem by≥o zbudowanie obrazu Dockerowego za pomocπ komendy~\ref{lst:budowanie-obrazu-backendu}.
+
+\begin{lstlisting}[style=json-style, caption=Budowanie obrazu dockerowego aplikacji serwerowej, label=lst:budowanie-obrazu-backendu]
+docker build . -t backend
+\end{lstlisting}
+
+NastÍpnie powiπzano zbudowany obraz z nazwπ jakπ bÍdzie mia≥ ten obraz w rejestrze kontenerÛw. Do tego celu uøyto komendy~\ref{lst:tagowanie-obrazu-backendu}
+
+\begin{lstlisting}[style=json-style, caption=Powiπzanie zbudowanego obrazu backendu z rejestrem kontenerÛw , label=lst:tagowanie-obrazu-backendu]
+docker tag backend inzynierkakeycloak.azurecr.io/technologie-programistyczne-backend:latest
+\end{lstlisting}
+
+Ostatnim krokiem by≥o wrzucenie tak skonfigurowanego obrazu do rejestru kontenerÛw, gdzie na podstawie tego obrazu zostanie utworzony kontener aplikacji. Do tego celu uøyto komendy~\ref{lst:pushowanie-obrazu-backend}.
+
+\begin{lstlisting}[style=json-style, caption=Wys≥anie obrazu backendu do rejestru kontenerÛw, label=lst:pushowanie-obrazu-backend]
+docker push inzynierkakeycloak.azurecr.io/technologie-programistyczne-backend:latest
+\end{lstlisting}
+
+Po kilkunastu minutach aplikacja zosta≥a wdroøona i moøna juø by≥o wys≥aÊ do niej øπdania. Przyk≥adowe øπdanie pobierajπce wszystkie technologie i uzyskana odpowiedü od wdroøonego backendu sπ przedstawione na rysunku~\ref{fig:wdrozenie-aplikacji-serwerowej-1}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys05/wdrozenie-aplikacji-serwerowej-1}
+	\caption{Przyk≥adowe øπdanie pobierajπce wszystkie technologie i uzyskana odpowiedü od wdroøonego backendu}
+	\label{fig:wdrozenie-aplikacji-serwerowej-1}
+	\caption*{èrÛd≥o: Postman}
+\end{figure}
+
 \section{Warstwa bezpieczeÒstwa}
+
+Do wdroøenia warstwy bezpieczeÒstwa wykorzystano us≥ugÍ \texttt{App Service}. Konfiguracja wdroøeniowa warstwy bezpieczeÒstwa po stronie Azure rÛwnieø jest prawie identyczna jak w przypadku aplikacji klienckiej i rÛøni siÍ jedynie nazwπ aplikacji oraz ürÛd≥em i nazwπ obrazu. 
+
+Podsumowanie konfiguracji wdroøeniowej serwera uwierzytelniajπcego i autoryzujπcego jest przedstawione na rysunku~\ref{fig:wdrozenie-aplikacji-bezpieczenstwa}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\linewidth]{rys05/wdrozenie-warstwy-bezpieczenstwa}
+	\caption{Podsumowanie konfigurcji serwera uwierzytelniajπcego i autoryzujπcego}
+	\label{fig:wdrozenie-warstwy-bezpieczenstwa}
+	\caption*{èrÛd≥o: https://portal.azure.com/\#create/Microsoft.WebSite}
+\end{figure}
+
+Po tych krokach us≥uga by≥a skonfigurowana do automatycznego pobierania z rejestru kontenerÛw obrazu aplikacji. 
+
+Uøyty obraz \texttt{quay.io/keycloak/keycloak:18.0.1} zawiera gotowπ do uruchomienia aplikacjÍ Keycloak, ktÛrπ wystarczy jeszcze jedynie skonfigurowaÊ do swoich potrzeb.
+KonfiguracjÍ aplikacji przeprowadzono w zak≥adce ,,Konfiguracja'' w sekcji ,,Ustawienia''. Uøyta konfiguracja jest przedstawiona na 
+rysunku~\ref{fig:wdrozenie-aplikacji-bezpieczenstwa-1}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys05/wdrozenie-warstwy-bezpieczenstwa-1}
+	\caption{Konfiguracja serwera Keycloak}
+	\label{fig:wdrozenie-warstwy-bezpieczenstwa-1}
+	\caption*{èrÛd≥o: https://portal.azure.com/\#@student.pwr.edu.pl/resource/subscriptions/632dcbcb-684b-4de7-a4ae-2cacb45609fe/resourcegroups/inzynierka/providers/Microsoft.Web/sites/inzynierka-test-keycloak1/appServices}
+\end{figure}
+
+Po kilkudziesiÍciu sekundach aplikacja zosta≥a wdroøona i po przejúciu pod adres https://inzynierka-test-keycloak1.azurewebsites.net/ moøna by≥o zobaczyÊ interfejs uøytkownika (rysunek~\ref{fig:wdrozenie-warstwy-bezpieczenstwa-2}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys05/wdrozenie-warstwy-bezpieczenstwa-2}
+	\caption{Interfejs uøytkownika dla wdroøonego serwera Keycloak}
+	\label{fig:wdrozenie-warstwy-bezpieczenstwa-2}
+	\caption*{èrÛd≥o: https://inzynierka-test-keycloak1.azurewebsites.net/}
+\end{figure}
 
 \section{Baza danych MongoDB}
 
+Pierwszym krokiem wdroøenia bazy danych MongoDB by≥o skonfigurowanie i stworzenie klastra. Wybrano darmowy typ klastra, Azure jako dostawcÍ chmury oraz lokalizacjÍ bazy danych w Holandii (rysunek~\ref{fig:wdrozenie-bazy-mongodb}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{rys05/wdrozenie-bazy-mongodb}
+	\caption{Podstawowa konfiguracja wdroøeniowa bazy danych MongoDB}
+	\label{fig:wdrozenie-bazy-mongodb}
+	\caption*{èrÛd≥o: https://cloud.mongodb.com/v2/63322815dadae81bf1ca9139\#clusters/edit?from=ctaClusterHeader}
+\end{figure}
+
+Kolejnym krokiem by≥o ustawienie zasobÛw bazy, wersji MongoDB oraz nazwy klastra (rysunek~\ref{fig:wdrozenie-bazy-mongodb-1}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{rys05/wdrozenie-bazy-mongodb-1}
+	\caption{Dodatkowa konfiguracja wdroøeniowa bazy danych MongoDB}
+	\label{fig:wdrozenie-bazy-mongodb-1}
+	\caption*{èrÛd≥o: https://cloud.mongodb.com/v2/63322815dadae81bf1ca9139\#clusters/edit?from=ctaClusterHeader}
+\end{figure}
+
+NastÍpnie klikniÍto przycisk ,,Create Cluster'' i baza danych MongoDB zosta≥a wdroøona.
+
+\section{Podsumowanie}
+
+Po wdroøeniu systemu konieczne jest jego przetestowanie, czy wszystkie zaimplementowane funkcjonalnoúci dzia≥ajπ w tak sam sposÛb jak w úrodowisku lokalnym. Dog≥Íbnie przetestowano kaødy z wdroøonych segmentÛw i wszystko dzia≥a zgodnie z oczekiwaniami.
