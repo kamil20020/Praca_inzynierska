@@ -1,1 +1,155 @@
-\chapter{Wdro≈ºenie}
+\chapter{Wdroøenie systemu IT Tech}
+Ostatnim etapem prac tego projektu jest wdroøenie ca≥ego systemu oraz przetestowanie, czy wszystkie zaimplementowane funkcjonalnoúci dzia≥ajπ w tak sam sposÛb jak w úrodowisku lokalnym. Przy wyborze platformy do wdroøenia systemu kierowano siÍ przede wszystkim jak najniøszπ cenπ us≥ug, popularnoúciπ, stopniem wsparcia dla uøytych w ramach tego projektu technologii, ≥atwoúciπ wdroøenia oraz w≥asnym doúwiadczeniem. Poczπtkowo zak≥adano wdroøenie ca≥ego systemu na Google Cloud Platform, gdyø jest to popularna platforma, moøliwe jest darmowe wdroøenie systemu dziÍki zarejestrowaniu siÍ przez konto studenckie oraz mia≥em doúwiadczenie z tπ platformπ w ramach realizacji projektu zespo≥owego. Z powodu problemÛw z konfiguracjπ aplikacji, porzucono ten pomys≥ i postanowiono wdroøyÊ system na innej platformie. Kolejnym wyborem by≥a platforma Azure, ktÛra jest popularnym serwisem wdroøeniowym firmy Microsoft. Wybrano tÍ platformÍ, gdyø podobnie jak poprzednio moøliwe jest darmowe wdroøenie systemu dziÍki koncie, do ktÛrego przypisany jest e-mail studencki, zawiera prosty i intuicyjny interfejs, moøna w ≥atwy sposÛb wdroøyÊ aplikacje, jest popularniejszym rozwiπzaniem niø Google Cloud Platform oraz mia≥em juø doúwiadczenie z tπ platformπ. Do wdroøenia bazy danych PostgreSQL, aplikacji serwerowej, aplikacji klienckiej postawionej na serwerze NGINX oraz serwera do uwierzytelniania i autoryzacji uøytkownikÛw uøyto platformy Azure. Azure nie posiada bogatego wsparcia dla bazy danych MongoDB, dlatego zdecydowano siÍ na uøycie innej platformy do wdroøenia tej bazy. Wybrano platformÍ MongoDB Cloud, gdyø jest to jeden z popularniejszych serwisÛw do wdraøania baz MongoDB oraz moøliwe jest darmowe wdroøenie bazy danych.
+
+\section{Baza danych PostgreSQL}
+
+Do wdroøenia bazy danych PostgreSQL wybrano us≥ugÍ \texttt{Azure Database for PostgreSQL}, ktÛra zapewnia w pe≥ni zarzπdzanπ oraz elastycznπ bazÍ danych PostgreSQL. Podczas konfiguracji bazy danych wybrano przede wszystkim domyúlne opcje.
+
+Na poczπtku przypisano us≥ugÍ do subskrypcji studenckiej oraz grupy zasobÛw \texttt{inzynierka}, podano nazwÍ serwera bazy, lokalizacjÍ bazy danych, uøywanπ wersjÍ PostgreSQL oraz typ obciπøenia. Konfiguracja ta jest przedstawiona na rysunku~\ref{fig:wdrozenie-bazy-postgresql}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys05/wdrozenie-bazy-postgresql}
+	\caption{Podstawowa konfiguracja wdroøeniowa bazy danych PostgreSQL}
+	\label{fig:wdrozenie-bazy-postgresql}
+	\caption*{èrÛd≥o: https://portal.azure.com/\#create/Microsoft.PostgreSQLServer}
+\end{figure} 
+ 
+NastÍpnie podano login oraz has≥o administratora, a resztÍ opcji podstawowych pozostawiono z wartoúciami domyúlnymi. Konfiguracja ta jest przedstawiona na 
+rysunku~\ref{fig:wdrozenie-bazy-postgresql-1}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys05/wdrozenie-bazy-postgresql-1}
+	\caption{Konfiguracja danych do logowania administratora  bazy danych PostgreSQL}
+	\label{fig:wdrozenie-bazy-postgresql-1}
+	\caption*{èrÛd≥o: https://portal.azure.com/\#create/Microsoft.PostgreSQLServer}
+\end{figure}
+
+Kolejnym krokiem by≥o ustawienie regu≥ zapory dla bazy danych i wybrano publiczny dostÍp z dowolnej us≥ugi platformy Azure. Pozosta≥e opcje pozostawiono z wartoúciami domyúlnymi i zaakceptowano konfiguracjÍ. Po kilkunastu sekundach baza danych zosta≥a wdroøona, co zosta≥o przedstawione na rysunku~\ref{fig:wdrozenie-bazy-postgresql-2}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{rys05/wdrozenie-bazy-postgresql-2}
+	\caption{Wdroøona baza danych PostgreSQL}
+	\label{fig:wdrozenie-bazy-postgresql-2}
+	\caption*{èrÛd≥o: https://portal.azure.com/\#create/Microsoft.PostgreSQLServer}
+\end{figure}
+
+\section{Aplikacja kliencka oraz serwer webowy}
+
+Do wdroøenia aplikacji klienckiej postawionej na serwerze webowym NGINX wykorzystano us≥ugÍ \texttt{App Service}. 
+
+Na poczπtku przypisano us≥ugÍ do subskrypcji studenckiej oraz grupy zasobÛw \texttt{inzynierka}, wybrano wdroøenie aplikacji poprzez kontener Docker, lokalizacjÍ serwera, a pozosta≥e podstawowe opcje pozostawiono jako domyúlne. Podstawowa konfiguracja jest przedstawiona na rysunku~\ref{fig:wdrozenie-aplikacji-klienckiej}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.7\linewidth]{rys05/wdrozenie-aplikacji-klienckiej}
+	\caption{Podstawowa konfiguracja wdroøeniowa aplikacji klienckiej oraz serwera webowego}
+	\label{fig:wdrozenie-aplikacji-klienckiej}
+	\caption*{èrÛd≥o: https://portal.azure.com/\#create/Microsoft.WebSite}
+\end{figure}
+
+Kolejnym krokiem by≥o podanie opcji dla Dockera. Wybrano jeden kontener, ürÛd≥o obrazu ustawiono jako rejestr kontenerÛw Azure i na koÒcu podano nazwÍ rejestru oraz nazwÍ obrazu, na podstawie ktÛrego bÍdzie tworzony kontener aplikacji. Konfiguracja Dockera po stronie Azure jest przedstawiona na 
+rysunku~\ref{fig:wdrozenie-aplikacji-klienckiej-1}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\linewidth]{rys05/wdrozenie-aplikacji-klienckiej-1}
+	\caption{Konfiguracja Dockera po stronie Azure dla aplikacji klienckiej}
+	\label{fig:wdrozenie-aplikacji-klienckiej-1}
+	\caption*{èrÛd≥o: https://portal.azure.com/\#create/Microsoft.WebSite}
+\end{figure}
+
+ResztÍ opcji pozostawiono z wartoúciami domyúlnymi i zaakceptowano konfiguracjÍ. Po kilku sekundach us≥uga zosta≥a utworzona i moøna by≥o zauwaøyÊ widok przedstawiony na rysunku~\ref{fig:wdrozenie-aplikacji-klienckiej-2}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\linewidth]{rys05/wdrozenie-aplikacji-klienckiej-2}
+	\caption{Utworzona us≥uga App Service dla aplikacji klienckiej}
+	\label{fig:wdrozenie-aplikacji-klienckiej-2}
+	\caption*{èrÛd≥o: https://portal.azure.com/\#create/Microsoft.WebSite}
+\end{figure}
+
+Po tych krokach us≥uga by≥a skonfigurowana do automatycznego pobierania z rejestru kontenerÛw obrazu aplikacji.
+
+Kolejnymi krokami by≥o przygotowanie obrazu aplikacji wraz z serwerem webowym oraz wrzucenie tego obrazu na odpowiedni rejestr kontenerÛw.
+
+Na poczπtku zalogowano siÍ do rejestru kontenerÛw Azure (~\ref{lst:logowanie-rejestr-kontenerow}).
+
+\begin{lstlisting}[language=Dockerfile, style=JavaStyle, caption=Logowanie siÍ do rejestru kontenerÛw Azure, label=lst:logowanie-rejestr-kontenerow]
+docker login inzynierkakeycloak.azurecr.io
+\end{lstlisting}
+
+NastÍpnie utworzono i odpowiednio skonfigurowano plik \texttt{Dockerfile}, tak aby na jego podstawie by≥ tworzony obraz aplikacji klienckiej wystawionej na serwerze webowym. Konfiguracja obrazu dockerowego jest przedstawiona na listingu~\ref{lst:dockerfile-aplikacji-klienckiej}.
+
+\begin{lstlisting}[language=Dockerfile,style=JavaStyle, caption=Konfiguracja Dockerfile dla aplikacji klienckiej i serwera webowego, 
+label=lst:dockerfile-aplikacji-klienckiej]
+FROM node:16.14.0 as build
+WORKDIR /frontend
+COPY . .
+RUN npm install
+RUN npm run build
+
+FROM nginx:stable-alpine
+COPY --from=build /frontend/build /usr/share/nginx/html
+COPY --from=build /frontend/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE $PORT
+CMD ["nginx", "-g", "daemon off;"] 
+\end{lstlisting}
+
+Zdefiniowany plik \texttt{Dockerfile} jest typu \texttt{Multi-stage build}, gdyø zawiera wiele dyrektyw \texttt{FROM} i tym samym moøliwe jest skonfigurowanie kilku technologii na raz. Na poczπtku budowana jest aplikacja kliencka, a nastÍpnie aplikacja ta zostanie wystawiona na skonfigurowanym serwerze webowym NGINX. 
+
+Konfiguracja serwera NGINX jest podstawowa i znajduje siÍ w pliku \texttt{default.conf}. Serwer NGINX zosta≥ skonfigurowany za pomocπ pliku \texttt{default.conf}. Konfiguracja ta jest bardzo podstawowa, gdyø ustawiono jedynie niezbÍdne opcje do renderowania aplikacji \texttt{SPA} oraz regu≥y CORS (ang.\ \emph{Cross-Origin Resource Sharing}) zezwalajπce na dostÍp z kaødego ürÛd≥a. Konfiguracja ta jest przedstawiona na listingu~\ref{lst:konfiguracja-nginx}.
+
+\begin{lstlisting}[style=json-style, caption=Konfiguracja serwera webowego NGINX, label=lst:konfiguracja-nginx]
+server {
+
+	add_header 'Access-Control-Allow-Origin' '*';
+
+	location / {
+		root /usr/share/nginx/html;
+		index index.html index.htm;
+		try_files $uri $uri/ /index.html;
+		add_header 'Access-Control-Allow-Origin' '*';
+		add_header 'Access-Control-Allow-Credentials' 'true';
+		add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';
+		add_header 'Access-Control-Allow-Headers' 'Access-Control-Allow-Headers, AUTHORIZATION, CONTENT-TYPE';
+	}
+}
+\end{lstlisting}
+
+Po skonfigurowaniu aplikacji klienckiej oraz serwera webowego, moøna by≥o przystπpiÊ do zbudowania obrazu Dockerowego. Za pomocπ komendy~\ref{lst:budowanie-obrazu} zbudowano obraz o nazwie ,,frontend''.
+
+\begin{lstlisting}[style=json-style, caption=Budowanie obrazu dockerowego, label=lst:budowanie-obrazu]
+docker build . -t frontend
+\end{lstlisting}
+
+NastÍpnym krokiem by≥o powiπzanie zbudowanego obrazu z nazwπ jakπ bÍdzie mia≥ ten obraz w rejestrze kontenerÛw. Do tego celu uøyto komendy~\ref{lst:tagowanie-obrazu}
+
+\begin{lstlisting}[style=json-style, caption=Powiπzanie zbudowanego obrazu z rejestrem kontenerÛw , label=lst:tagowanie-obrazu]
+docker tag frontend inzynierkakeycloak.azurecr.io/technologie-programistyczne:latest
+\end{lstlisting}
+
+Ostatnim krokiem by≥o wrzucenie tak skonfigurowanego obrazu do rejestru kontenerÛw, gdzie na podstawie tego obrazu zostanie utworzony kontener aplikacji. Do tego celu uøyto komendy~\ref{lst:pushowanie-obrazu}.
+
+\begin{lstlisting}[style=json-style, caption=Wys≥anie obrazu do rejestru kontenerÛw, label=lst:pushowanie-obrazu]
+docker push inzynierkakeycloak.azurecr.io/technologie-programistyczne:latest
+\end{lstlisting}
+
+Po kilku minutach aplikacja zosta≥a wdroøona i po przejúciu do adresu strony https://technologie-programistyczne.azurewebsites.net/, moøna by≥o zauwaøyÊ widok strony g≥Ûwnej (rysunek~\ref{fig:wdrozenie-aplikacji-klienckiej-2}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\linewidth]{rys05/wdrozenie-aplikacji-klienckiej-2}
+	\caption{Widok strony g≥Ûwnej aplikacji po jej wdroøeniu}
+	\label{fig:wdrozenie-aplikacji-klienckiej-2}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+\section{Aplikacja serwerowa}
+
+\section{Warstwa bezpieczeÒstwa}
+
+\section{Baza danych MongoDB}
+

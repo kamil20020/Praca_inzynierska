@@ -1,4 +1,4 @@
-\chapter{Projektowanie}
+\chapter{Projekt aplikacji IT Tech}
 
 \section{Wymagania funkcjonalne}
 
@@ -6,9 +6,6 @@ Pierwszym etapem realizacji pracy jest okreúlenie wymagaÒ funkcjonalnych i niefu
 
 \subsection{S≥ownik pojÍÊ}
 
-Przed zdefiniowaniem wymagaÒ funkcjonalnych, potrzebne by≥o okreúlenie pojÍÊ, ktÛre bÍdπ uøywane zarÛwno przy wymaganiach funkcjonalnych, jak i w reszcie pracy.
-\newline
-\newline
 W pracy bÍdπ wykorzystywane nastÍpujπce pojÍcia:
 \begin{itemize}
 	\item \texttt{Technologia} - pakiet oprogramowania lub narzÍdzia developerskie wykorzystywane przez informatykÛw, a w szczegÛlnoúci przez programistÛw. 
@@ -275,9 +272,8 @@ Na podstawie celu oraz zakresu pracy zdefiniowano nastÍpujπce wymagania niefunkc
 	\item Wymagania dotyczπce bezpieczeÒstwa systemu
 		\begin{itemize}
 			\item Uøytkownik o posiadanej przez siebie roli bÍdzie mia≥ dostÍp do systemu jedynie w zakresie uprawnieÒ przypisanych do tej roli,
-			\item Uøywanie zewnÍtrznego serwera uwierzytelniajπcego i autoryzacyjnego,
-			\item Uøywanie tokenu na okaziciela (ang.\ \emph{Bearer token}) przy wykonywaniu zapytaÒ do \texttt{Backendu},
-			\item Nieprzesy≥anie has≥a, jeúli nie jest to konieczne,
+			\item ZewnÍtrzny serwer do uwierzytelniania i autoryzacji,
+			\item Do≥πczane tokenu na okaziciela (ang.\ \emph{Bearer token}) przy wykonywaniu zapytaÒ do \texttt{Backendu},
 			\item Tworzone has≥a powinny spe≥niaÊ nastÍpujπce kryteria:
 				\begin{itemize}
 					\item Minimalna d≥ugoúÊ - 8,
@@ -471,7 +467,7 @@ Dla kaødego przypadku uøycia zdefiniowanego w poprzednim punkcie, zrobiono szcze
 	\item Alternatywne przebiegi.
 \end{itemize}
 
-Dla kaødego przypadku uøycia zrobiono jeszcze prototypy ekranu uøytkownika, aby zaplanowaÊ wyglπd interfejsu uøytkownika oraz aby ≥atwiej moøna by≥o pojπÊ opisy przypadkÛw uøycia.
+Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, aby zaplanowaÊ wyglπd interfejsu uøytkownika oraz aby ≥atwiej moøna by≥o pojπÊ opisy przypadkÛw uøycia.
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
 	\caption{Opis przypadku uøycia - rejestracja}
@@ -1995,7 +1991,7 @@ Na podstawie zdefiniowanych wymagaÒ funkcjonalnych oraz szczegÛ≥owych opisÛw prz
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
-Dla bazy danych artyku≥Ûw utworzono osobne schematy danych w postaci formatu JSON dla nastÍpujπcych kolekcji: artyku≥, komentarz oraz opinia. Nie zdecydowano siÍ na tylko jednπ kolekcjÍ zawierajπcπ te wszystkie informacje, gdyø za≥oøono, øe uøytkownik bÍdzie mÛg≥ w jednym momencie przeglπdaÊ komentarze albo opinie i nie ma potrzeby pobierania razem obu tych informacji. Dla zdefiniowanych schematÛw danych bazy artyku≥Ûw utworzono rÛwnieø po jednym przyk≥adowym dokumencie w formacie JSON.
+Dla NoSQLowej bazy danych utworzono osobne schematy danych w postaci formatu JSON dla nastÍpujπcych kolekcji: artyku≥, komentarz oraz opinia. Komentarze i opinie sπ przechowywane w oddzielnych kolekcjach, gdyø za≥oøono, øe uøytkownik bÍdzie mÛg≥ w jednym momencie przeglπdaÊ komentarze albo opinie. Dla zdefiniowanych schematÛw danych bazy NoSQL utworzono rÛwnieø po jednym przyk≥adowym dokumencie w formacie JSON.
 
 Kod ürÛd≥owy schematu artyku≥Ûw znajduje siÍ na listingu~\ref{lst:schemat-danych-baza-danych-2-artykul}.
 
@@ -2040,7 +2036,8 @@ Kod ürÛd≥owy schematu artyku≥Ûw znajduje siÍ na listingu~\ref{lst:schemat-danych
                "VERIFICATION",
                "EXPIRED_VERIFICATION",
                "REFUSED",
-               "PUBLISHED"
+               "PUBLISHED",
+               "EDITED"
             ]
          },
          "creationDate":{
@@ -2070,7 +2067,7 @@ Na podstawie schematu artyku≥Ûw (listing~\ref{lst:schemat-danych-baza-danych-2-a
    },
    "authorId":27,
    "technologyId":1,
-   "title":"Podstawy Javy1",
+   "title":"Podstawy Javy",
    "content":"<p style=\"text-align: justify;\">Java jest to wsp&oacute;≥bieøny, opaty na klasach i mocno typowany obiektowy jÍzyk programowania...",
    "status":"NEW",
    "creationDate":{
@@ -2090,37 +2087,37 @@ Kod ürÛd≥owy schematu komentarzy znajduje siÍ na listingu~\ref{lst:schemat-danyc
 
 \begin{lstlisting}[style=json-style, caption=Schemat kolekcji komentarzy w postaci JSON dla bazy danych artyku≥Ûw, label=lst:schemat-danych-baza-danych-2-komentarz]
 {
-  $jsonSchema: {
-    bsonType: 'object',
-    title: 'comment',
-    required: [
-      'articleId',
-      'authorId',
-      'content',
-      'creationDate',
-      'modificationDate'
+  "$jsonSchema": {
+    "bsonType": "object",
+    "title": "comment",
+    "required": [
+      "articleId",
+      "authorId",
+      "content",
+      "creationDate",
+      "modificationDate"
     ],
-    properties: {
-      _id: {
-        bsonType: 'objectId'
+    "properties": {
+      "_id": {
+        "bsonType": "objectId"
       },
-      articleId: {
-        bsonType: 'objectId'
+      "articleId": {
+        "bsonType": "objectId"
       },
-      parentCommentId: {
-        bsonType: 'objectId'
+      "parentCommentId": {
+        "bsonType": "objectId"
       },
-      authorId: {
-        bsonType: 'int'
+      "authorId": {
+        "bsonType": "int"
       },
-      content: {
-        bsonType: 'string'
+      "content": {
+       "bsonType": "string"
       },
-      creationDate: {
-        bsonType: 'date'
+      "creationDate": {
+        "bsonType": "date"
       },
-      modificationDate: {
-        bsonType: 'date'
+      "modificationDate": {
+        "bsonType": "date"
       }
     }
   }
@@ -2142,7 +2139,7 @@ Na podstawie schematu komentarzy (listing~\ref{lst:schemat-danych-baza-danych-2-
     "$oid": "63617ca71676af3917d483fd"
   },
   "authorId": 27,
-  "content": "111",
+  "content": "Bardzo dobry artyku≥. Napisa≥byú moøe coú na temat Springa?",
   "creationDate": {
     "$date": {
       "$numberLong": "1667336873772"
@@ -2162,70 +2159,74 @@ Kod ürÛd≥owy schematu opinii znajduje siÍ na listingu~\ref{lst:schemat-danych-ba
 
 \begin{lstlisting}[style=json-style, caption=Schemat kolekcji opinii w postaci JSON dla bazy danych artyku≥Ûw, label=lst:schemat-danych-baza-danych-2-opinia]
 {
-  $jsonSchema: {
-    bsonType: 'object',
-    title: 'opinion',
-    required: [
-      'author_id',
-      'rating',
-      'content',
-      'creationDate',
-      'modificationDate'
-    ],
-    properties: {
-      _id: {
-        bsonType: 'objectId'
-      },
-      author_id: {
-        bsonType: 'int'
-      },
-      rating: {
-        bsonType: 'int',
-        minimum: 1,
-        maximum: 5
-      },
-      content: {
-        bsonType: 'string'
-      },
-      creationDate: {
-        bsonType: 'timestamp'
-      },
-      modificationDate: {
-        bsonType: 'timestamp'
-      },
-      acceptances: {
-        bsonType: 'array',
-        items: {
-          bsonType: 'object',
-          required: [
-            'author_id',
-            'value'
-          ],
-          properties: {
-            _id: {
-              bsonType: 'objectId'
-            },
-            author_id: {
-              bsonType: 'int'
-            },
-            value: {
-              bsonType: 'int',
-              'enum': [
-                -1,
-                1
-              ]
+   "$jsonSchema":{
+      "bsonType":"object",
+      "title":"opinion",
+      "required":[
+         "authorId",
+         "articleId",
+         "rating",
+         "content",
+         "creationDate",
+         "modificationDate"
+      ],
+      "properties":{
+         "_id":{
+            "bsonType":"objectId"
+         },
+         "authorId":{
+            "bsonType":"int"
+         },
+         "articleId":{
+            "bsonType":"objectId"
+         },
+         "rating":{
+            "bsonType":"int",
+            "minimum":1,
+            "maximum":5
+         },
+         "content":{
+            "bsonType":"string"
+         },
+         "creationDate":{
+            "bsonType":"date"
+         },
+         "modificationDate":{
+            "bsonType":"date"
+         },
+         "acceptances":{
+            "bsonType":"array",
+            "items":{
+               "bsonType":"object",
+               "required":[
+                  "authorId",
+                  "value"
+               ],
+               "properties":{
+                  "_id":{
+                     "bsonType":"objectId"
+                  },
+                  "authorId":{
+                     "bsonType":"int"
+                  },
+                  "value":{
+                     "bsonType":"int",
+                     "enum":[
+                        -1,
+                        1
+                     ]
+                  }
+               }
             }
-          }
-        }
-      },
-      positiveAcceptancesCount: {
-        bsonType: 'int'
-      },
-      negativeAcceptancesCount: {
-        bsonType: 'int'
+         },
+         "positiveAcceptancesCount":{
+            "bsonType":"int"
+         },
+         "negativeAcceptancesCount":{
+            "bsonType":"int"
+         }
       }
-    }
-  }
+   }
 }
 \end{lstlisting}
 
@@ -2234,39 +2235,42 @@ Na podstawie schematu opinii (listing~\ref{lst:schemat-danych-baza-danych-2-opin
 
 \begin{lstlisting}[style=json-style, caption=Przyk≥adowy dokument dla kolekcji opinii zgodny ze zdefiniowanym schematem, label=lst:przykladowa-opinia-json]
 {
-  "_id": {
-    "$oid": "6333266e3a8c25217485239c"
-  },
-  "author_id": 1,
-  "rating": 4,
-  "content": "Dobry artyku≥, ale brakuje trochÍ o wersjach",
-  "creationDate": {
-    "$timestamp": {
-      "t": 323,
-      "i": 3128182693
-    }
-  },
-  "modificationDate": {
-    "$timestamp": {
-      "t": 323,
-      "i": 3128182693
-    }
-  },
-  "acceptances": [
-    {
-      "_id": {
-        "$oid": "6333266e3a8c25217485239c"
+   "_id":{
+      "$oid":"639271358c5f5e6eaf655d54"
+   },
+   "author_id":1,
+   "articleId":{
+      "$oid":"6391195fafa6bb0ab87cbda3"
+   },
+   "rating":4,
+   "content":"Dobry artyku≥, ale brakuje trochÍ informacji o wersjach tej technologii",
+   "creationDate":{
+      "$date":{
+         "$numberLong":"1670541621467"
+      }
+   },
+   "modificationDate":{
+      "$date":{
+         "$numberLong":"1670541630198"
+      }
+   },
+   "acceptances":[
+      {
+         "_id":{
+            "$oid":"6333266e3a8c25217485239c"
+         },
+         "author_id":2
       },
-      "author_id": 2
-    },
-    {
-      "_id": {
-        "$oid": "6333266e3a8c25217485239d"
-      },
-      "author_id": 3,
-      "value": -1
-    }
-  ]
+      {
+         "_id":{
+            "$oid":"6333266e3a8c25217485239d"
+         },
+         "author_id":3,
+         "value":-1
+      }
+   ],
+   "positiveAcceptancesCount":0,
+   "negativeAcceptancesCount":0
 }
 \end{lstlisting}
 

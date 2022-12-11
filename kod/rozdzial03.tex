@@ -1,4 +1,4 @@
-\chapter{Implementacja}
+\chapter{Implementacja systemu IT Tech}
 
 \section{Technologie i narzêdzia}
 
@@ -20,9 +20,9 @@ Wybrane technologie mog¹ byæ przyporz¹dkowane do poszczególnych warstw systemu (
 \end{figure}
 
 \subsubsection{Baza danych}
-Jako system zarz¹dzania obiektowo-relacyjn¹ baz¹ danych wybrano PostgreSQL. PostgreSQL jest systemem darmowym, otwarto-Ÿród³owym oraz niezwykle popularnym. PostgreSQL to najpopularniejszy RDBMS (ang.\ \emph{Relational Database Managment System}) tego typu, jak i jeden z najpopularniejszych otwartych RDBMS dostêpnych na rynku. System ten ci¹gle siê rozwija oraz jest niezawodny z powodu dosyæ licznej spo³ecznoœci zorientowanej wokó³ niego. Stanowi siln¹ konkurencjê dla innych baz danych pod wzglêdem bezpieczeñstwa. Inn¹ wa¿n¹ zalet¹ tej technologii jest jej wysoka skalowalnoœæ.
+Jako system zarz¹dzania obiektowo-relacyjn¹ baz¹ danych wybrano PostgreSQL. PostgreSQL jest systemem darmowym, otwarto-Ÿród³owym oraz niezwykle popularnym. PostgreSQL to najpopularniejszy RDBMS (ang.\ \emph{Relational Database Managment System}) tego typu, jak i jeden z najpopularniejszych otwartych RDBMS dostêpnych na rynku. System ten ci¹gle siê rozwija oraz jest niezawodny dziêki dosyæ licznej spo³ecznoœci zorientowanej wokó³ niego. Stanowi siln¹ konkurencjê dla innych baz danych pod wzglêdem bezpieczeñstwa. Inn¹ wa¿n¹ zalet¹ tej technologii jest jej wysoka skalowalnoœæ.
 
-Jako system zarz¹dzania nierelacyjn¹ baz¹ danych opart¹ na dokumentach wybrano MongoDB. MongoDB jest to otwarty i popularny system. MongoDB pozwala na wygodne przechowywanie danych w postaci klucz-wartoœæ i nie wymaga u¿ycia schematów, ale jest to zalecane. Dane s¹ przechowywane jako dokumenty w postaci JSON. Du¿ymi zaletami tej technologii jest ³atwoœæ tworzenia danych oraz skalowalnoœæ. Z powodu wykorzystywanego formatu JSON, technologia ta jest wprost stworzona do u¿ycia razem z jêzykiem JavaScript, który jest wykorzystywany podczas realizacji tej pracy.
+Jako system zarz¹dzania nierelacyjn¹ baz¹ danych opart¹ na dokumentach wybrano MongoDB. MongoDB jest to otwarty i popularny system, który pozwala na wygodne przechowywanie danych w postaci klucz-wartoœæ i nie wymaga u¿ycia schematów, ale jest to zalecane. Dane s¹ przechowywane jako dokumenty w postaci JSON. Du¿ymi zaletami tej technologii jest ³atwoœæ tworzenia danych oraz skalowalnoœæ. Z powodu wykorzystywanego formatu JSON, technologia ta jest wprost stworzona do u¿ycia razem z jêzykiem JavaScript, który jest wykorzystywany podczas realizacji tej pracy.
 
 \subsubsection{Aplikacja serwerowa - Backend}
 Do realizacji aplikacji serwerowej wybrano jêzyk Java. Java jest wieloplatformowym, obiektowym i opartym na maszynie wirtualnej niezwykle popularnym jêzykiem programowania. Javê wykorzystuje siê w bardzo wielu dziedzinach, jednak najczêœciej s¹ to aplikacje webowe oraz mobilne. Z powodu popularnoœci tej technologii oraz jej d³ugiego czasu na rynku (od 1996 roku), zebra³a siê dosyæ du¿a spo³ecznoœæ wokó³ niej. Java posiada du¿¹ liczbê bibliotek oraz frameworków, które przyspieszaj¹ pracê programisty.
@@ -66,7 +66,7 @@ U¿yto nastêpuj¹cych narzêdzi:
 
 \section{Aplikacja serwerowa}
 
-Aplikacja serwerowa jest dosyæ z³o¿onym systemem, gdy¿ odpowiada za wiele ró¿nych funkcji np. udostêpnianie endpointów klientowi, czy zarz¹dzanie baz¹ danych. Z powodu tej z³o¿onoœci niezbêdnym by³o podzielenie aplikacji serwerowej na warstwy (Rys.~\ref{fig:backend-architektura}). Ka¿da warstwa odpowiada za odrêbne funkcje. Komunikacja mo¿e siê odbywaæ tylko pomiêdzy s¹siednimi warstwami.
+Aplikacja serwerowa jest dosyæ z³o¿onym systemem, który odpowiada za wiele ró¿nych funkcji np. udostêpnianie endpointów klientowi, czy zarz¹dzanie baz¹ danych. Z powodu tej z³o¿onoœci aplikacja serwerowa zosta³a podzielona na warstwy (Rys.~\ref{fig:backend-architektura}). Ka¿da warstwa odpowiada za odrêbne funkcje. Komunikacja mo¿e siê odbywaæ tylko pomiêdzy s¹siednimi warstwami.
 
 \begin{figure}[H]
 	\centering
@@ -78,13 +78,13 @@ Aplikacja serwerowa jest dosyæ z³o¿onym systemem, gdy¿ odpowiada za wiele ró¿nyc
 
 Aplikacja serwerowa wykorzystuje mapowanie obiektowo-relacyjne (ang.\ \emph{ORM}) poprzez framework \texttt{Hibernate} i dziêki temu mo¿liwe jest wygodne operowanie na obiektach zamiast rêcznego wywo³ywania mniej czytelnych i mniej intuicyjnych zapytañ do bazy danych.
 
-Warstwa bazy danych odpowiada za zarz¹dzanie baz¹ danych. Warstwa ta operuje na tzw. encjach (modelach), czyli odpowiednio oznaczonych klasach Javy, które odpowiadaj¹ tabelom albo dokumentom w bazie danych. W zaprojektowanym systemie mo¿na wyró¿niæ dwa rodzaje encji: przechowywane przez bazê PostgreSQL oraz MongoDB.
+Warstwa bazy danych odpowiada za zarz¹dzanie baz¹ danych. Warstwa ta operuje na tzw. encjach (modelach), czyli odpowiednio oznaczonych klasach Javy, które odpowiadaj¹ tabelom albo dokumentom w bazie danych. W systemie mo¿na wyró¿niæ dwa rodzaje encji: encje przechowywane przez bazê PostgreSQL oraz encje przechowywane przez bazê MongoDB.
 
-Repozytorium jest œciœle powi¹zane z warstw¹ bazy danych. Warstwa ta nak³ada na bazê danych abstrakcjê (logikê persystencji), która pozwala programiœcie na wywo³ywanie metod zamiast rêcznego pisania zapytañ do bazy danych. Do repozytorium jest przypisana jedna encja wraz z jej kluczem podstawowym i repozytorium operuje jedynie na tej jednej encji. Tak samo jak w przypadku modeli, mo¿na wyró¿niæ dwa rodzaje repozytoriów: operuj¹ce na bazie PostgreSQL oraz MongoDB.
+Repozytorium jest œciœle powi¹zane z warstw¹ bazy danych. Warstwa ta nak³ada na bazê danych abstrakcjê (logikê persystencji), która pozwala programiœcie na wywo³ywanie metod zamiast rêcznego pisania zapytañ do bazy danych. Do repozytorium jest przypisana jedna encja wraz z jej kluczem podstawowym i repozytorium operuje jedynie na tej jednej encji. Tak samo jak w przypadku modeli, mo¿na wyró¿niæ dwa rodzaje repozytoriów: repozytoria operuj¹ce na bazie PostgreSQL oraz repozytoria operuj¹ce MongoDB.
 
 Warstwa serwisu implementuje logikê biznesow¹ systemu. Serwisy s¹ to odpowiednio oznaczone klasy Javy, których metody implementuj¹ poszczególne funkcjonalnoœci systemu od strony backendu. Serwisy korzystaj¹ z repozytoriów.
 
-Warstwa kontrolera odpowiada za udostêpnianie klientowi us³ug (np. utworzenie artyku³u) dostarczanych przez serwisy. Kontroler udostêpnia grupê endpointów, z których ka¿dy z nich dostarcza jedn¹ z us³ug. Klient mo¿e skorzystaæ z danej us³ugi poprzez wys³anie ¿¹dania na endpoint powi¹zany z t¹ us³ug¹.
+Warstwa kontrolera odpowiada za udostêpnianie klientowi us³ug dostarczanych przez serwisy (np. utworzenie artyku³u). Kontroler reprezentuje grupê endpointów i ka¿dy endpoint dostarcza jedn¹ z us³ug. Klient mo¿e skorzystaæ z danej us³ugi poprzez wys³anie ¿¹dania na endpoint powi¹zany z t¹ us³ug¹.
 
 Warstwa kliencka jest to aplikacja kliencka, która wysy³a ¿¹dania do kontrolera, w celu skorzystania z udostêpnionych przez niego us³ug.
 
@@ -118,7 +118,8 @@ spring.data.mongodb.password=mongodb
 
 spring.jpa.hibernate.ddl-auto = update
 
-keycloak.auth-server-url=http://localhost:8080
+spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://localhost:8080/realms/Programming_technologies/protocol/openid-connect/certs
+
 frontend.url=http://localhost:3000
 \end{lstlisting}
 
@@ -156,7 +157,7 @@ public class TechnologyEntity {
 \end{lstlisting}
 
 Aby klasy by³y interpretowane jako encje i mog³y byæ przechowywane w bazie PostgreSQL, nale¿y nadaæ takiej klasie adnotacjê \texttt{Entity}. Wymagane jest równie¿, aby encje posiada³y zdefiniowane klucze podstawowe (\texttt{Id}). Klucze podstawowe s¹ generowane automatycznie przez PostgreSQL i oznaczono to za pomoc¹ wartoœci 
-\texttt{Identity}. Za³o¿ono, ¿e encje bêd¹ oparte s¹ na zdefiniowanych wczeœniej schematach bazy danych, dlatego ka¿dy z atrybutów encji nale¿a³o dostosowaæ do odpowiadaj¹cych im pól na schemacie za pomoc¹ odpowiedniej konfiguracji adnotacji \texttt{Column}. Przyk³adowo atrybut \texttt{creationDateTime} odpowiada polu o nazwie \texttt{creation\_date\_time} po stronie bazy danych. Wa¿nym elementem w przypadku stosowania \texttt{ORM} jest definiowanie relacji. U¿yte technologie pozwalaj¹ na proste definiowanie relacji miêdzy encjami, które ogranicza siê do zastosowania kilku adnotacji np. relacja wiele do jeden miêdzy technologiami i kategoriami technologii. W przypadku relacji, mo¿na równie¿ m.in. zdefiniowaæ kaskadowe aktualizowanie i usuwanie podrzêdnej encji (np. relacja jeden do wielu technologii wzglêdem kategorii technologii~\ref{lst:jeden-do-wielu}), co okazuje siê byæ bardzo przydatne.
+\texttt{Identity}. Za³o¿ono, ¿e encje bêd¹ oparte na zdefiniowanych wczeœniej schematach bazy danych, dlatego ka¿dy z atrybutów encji nale¿a³o dostosowaæ do odpowiadaj¹cych im pól na schemacie za pomoc¹ odpowiedniej konfiguracji adnotacji \texttt{Column}. Przyk³adowo atrybut \texttt{creationDateTime} odpowiada polu o nazwie \texttt{creation\_date\_time} po stronie bazy danych. Wa¿nym elementem w przypadku stosowania \texttt{ORM} jest definiowanie relacji. U¿yte technologie pozwalaj¹ na proste definiowanie relacji miêdzy encjami, które ogranicza siê do zastosowania kilku adnotacji np. relacja wiele do jeden miêdzy technologiami i kategoriami technologii. W przypadku relacji mo¿na równie¿ m.in. zdefiniowaæ kaskadowe aktualizowanie i usuwanie podrzêdnej encji (np. relacja jeden do wielu technologii wzglêdem kategorii technologii~\ref{lst:jeden-do-wielu}), co okaza³o siê byæ bardzo przydatne.
 
 \begin{lstlisting}[language=Java,style=JavaStyle, caption=Mapowanie jeden do wielu miêdzy technologiami i kategoriami technologii, label=lst:jeden-do-wielu]
 @Transient
@@ -214,7 +215,7 @@ public class ArticleEntity {
 
 Aby klasy by³y interpretowane jako encje i mog³y byæ przechowywane w bazie MongoDB, nale¿y nadaæ takiej klasie adnotacjê \texttt{Document}. Tak samo jak w przypadku PostgreSQL, wymagane jest aby encje posiada³y zdefiniowane klucze podstawowe, ale klucze te powinny byæ typu \texttt{ObjectId} oraz musz¹ byæ one jeszcze oznaczone adnotacj¹ \texttt{MongoId}. Klucze podstawowe s¹ równie¿ generowane automatycznie przez MongoDB. Podobnie i w tym przypadku encje s¹ oparte na zdefiniowanych wczeœniej schematach bazy danych i ka¿dy z atrybutów encji dostosowano do odpowiadaj¹cych im pól na schematach, ale s³u¿y³a do tego adnotacja \texttt{Field}, a nie \texttt{Column}. Niestety, ale przy u¿yciu frameworka \texttt{Spring} dla baz NoSQL, nie jest mo¿liwe tworzenie relacji opartych na ORM miêdzy encjami. Rozwi¹zaniem tego problemu jest przechowywanie identyfikatorów powi¹zanych encji (np. \texttt{authorId}) oraz zapewnienie integralnoœci danych po stronie backendu.
 
-Fragment przyk³adowego repozytorium technologii operuj¹cego na bazie PostgreSQL przedstawiono na listingu~\ref{lst:rezpozytorium-technologii}.
+Fragment przyk³adowego repozytorium technologii operuj¹cego na bazie PostgreSQL przedstawiono na listingu~\ref{lst:repozytorium-technologii}.
 
 \begin{lstlisting}[language=Java,style=JavaStyle, caption=Repozytorium technologii, label=lst:repozytorium-technologii]
 @Repository
@@ -241,11 +242,12 @@ public interface TechnologyRepository extends JpaRepository<TechnologyEntity, In
 }
 \end{lstlisting}
 
-Aby interfejsy by³y interpretowane jako repozytoria, musz¹ byæ one oznaczone adnotacj¹ \texttt{Repository}. Dziedziczenie repozytoriów po interfejsie \texttt{JpaRepository}, pozwala na uzyskanie dostêpu do kilku wygenerowanych metod np. metodê do pobierania wszystkich encji. Inn¹ funkcj¹ tego dziedziczenia jest mo¿liwoœæ wygenerowania metod na podstawie samych deklaracji. Przyk³adowo deklaracja \texttt{findAllByTechnologyCategoryEntityId} pozwoli na wygenerowanie metody zwracaj¹cej listê technologii o danej kategorii.
+Aby interfejsy by³y interpretowane jako repozytoria, musz¹ byæ one oznaczone adnotacj¹ \texttt{Repository}. Dla baz relacyjnych dziedziczenie repozytoriów po interfejsie 
+\texttt{JpaRepository}, pozwala na uzyskanie dostêpu do kilku automatycznie wygenerowanych metod np. metodê do pobierania wszystkich encji. Inn¹ funkcj¹ tego dziedziczenia jest mo¿liwoœæ wygenerowania metod na podstawie ich samych deklaracji. Przyk³adowo deklaracja \texttt{findAllByTechnologyCategoryEntityId} pozwoli na wygenerowanie definicji metody zwracaj¹cej listê technologii o danej kategorii.
 
-Fragment przyk³adowego repozytorium artyku³ów operuj¹cego na bazie MongoDB przedstawiono na listingu~\ref{lst:rezpozytorium-artykulow}.
+Fragment przyk³adowego repozytorium artyku³ów operuj¹cego na bazie MongoDB przedstawiono na listingu~\ref{lst:repozytorium-artykulow}.
 
-\begin{lstlisting}[language=Java,style=JavaStyle, caption=Repozytorium technologii, label=lst:repozytorium-technologii]
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Repozytorium artyku³ów, label=lst:repozytorium-artykulow]
 @Repository
 public interface ArticleRepository extends MongoRepository <ArticleEntity, ObjectId> {
 
@@ -258,7 +260,7 @@ Podobnie jest w przypadku repozytoriów operuj¹cych na bazie MongoDB. Jedyn¹ ró¿n
 
 Fragment przyk³adowego serwisu artyku³ów przedstawiono na listingu~\ref{lst:serwis-artykulow}.
 
-\begin{lstlisting}[language=Java,style=JavaStyle, caption=Repozytorium technologii, label=lst:repozytorium-technologii]
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Serwis artyku³ów, label=lst:serwis-artykulow]
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -287,11 +289,11 @@ public class ArticleServiceImpl implements ArticleService {
 }
 \end{lstlisting}
 
-Aby interfejsy by³y interpretowane jako repozytoria, musz¹ byæ one oznaczone adnotacj¹ \texttt{Service}. Serwis artyku³ów (listing~\ref{lst:serwis-artykulow}) korzysta z repozytoriów artyku³ów, komentarzy, u¿ytkowników oraz technologii. W serwisach zaimplementowana jest obs³uga wyj¹tków i np. w przypadku nie podania id artyku³u w metodzie \texttt{getArticleById}, zostanie rzucony wyj¹tek z komunikatem ,,Nie istnieje artyku³ o takim id''. Wyj¹tki rzucane przez serwisy s¹ póŸniej obs³ugiwane przez kontrolery.
+Aby interfejsy by³y interpretowane jako serwisy, musz¹ byæ one oznaczone adnotacj¹ \texttt{Service}. Serwis artyku³ów (listing~\ref{lst:serwis-artykulow}) korzysta z repozytoriów operuj¹cych na artyku³ach, komentarzach, u¿ytkownikach oraz technologiach. W serwisach zaimplementowana jest obs³uga wyj¹tków i np. w przypadku nie podania id artyku³u w metodzie \texttt{getArticleById}, zostanie rzucony wyj¹tek z komunikatem ,,Nie istnieje artyku³ o takim id''. Wyj¹tki rzucane przez serwisy s¹ póŸniej obs³ugiwane przez kontrolery.
 
 Fragment przyk³adowego kontrolera artyku³ów przedstawiono na listingu~\ref{lst:kontroler-artykulow}.
 
-\begin{lstlisting}[language=Java,style=JavaStyle, caption=Repozytorium technologii, label=lst:repozytorium-technologii]
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Kontroler artyku³ów, label=lst:kontroler-artykulow]
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000", "https://technologie-programistyczne.azurewebsites.net"})
 @RequiredArgsConstructor
