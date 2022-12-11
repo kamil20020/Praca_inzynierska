@@ -289,7 +289,7 @@ public class ArticleServiceImpl implements ArticleService {
 }
 \end{lstlisting}
 
-Aby interfejsy by≥y interpretowane jako serwisy, muszπ byÊ one oznaczone adnotacjπ \texttt{Service}. Serwis artyku≥Ûw (listing~\ref{lst:serwis-artykulow}) korzysta z repozytoriÛw operujπcych na artyku≥ach, komentarzach, uøytkownikach oraz technologiach. W serwisach zaimplementowana jest obs≥uga wyjπtkÛw i np. w przypadku nie podania id artyku≥u w metodzie \texttt{getArticleById}, zostanie rzucony wyjπtek z komunikatem ,,Nie istnieje artyku≥ o takim id''. Wyjπtki rzucane przez serwisy sπ pÛüniej obs≥ugiwane przez kontrolery.
+Aby klasy by≥y interpretowane jako serwisy, muszπ byÊ one oznaczone adnotacjπ \texttt{Service}. Serwis artyku≥Ûw (listing~\ref{lst:serwis-artykulow}) korzysta z repozytoriÛw operujπcych na artyku≥ach, komentarzach, uøytkownikach oraz technologiach. W serwisach zaimplementowana jest obs≥uga wyjπtkÛw i np. w przypadku nie podania id artyku≥u w metodzie \texttt{getArticleById}, zostanie rzucony wyjπtek z komunikatem ,,Nie istnieje artyku≥ o takim id''. Wyjπtki rzucane przez serwisy sπ pÛüniej obs≥ugiwane przez kontrolery.
 
 Fragment przyk≥adowego kontrolera artyku≥Ûw przedstawiono na listingu~\ref{lst:kontroler-artykulow}.
 
@@ -310,25 +310,155 @@ public class ArticleController {
 		
 		...
 		
-		@GetMapping
-    public ResponseEntity<Page<ArticleDTO>> getAll(Pageable pageable){
+		@GetMapping("/{articleId}")
+    public ResponseEntity getArticleById(@PathVariable("articleId") String articleIdStr){
 
-        if(pageable == null){
-            pageable = Pageable.unpaged();
+        if(!ObjectId.isValid(articleIdStr)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Podano niew≥asciwe id artyku≥u");
         }
 
-        Page<ArticleEntity> articleEntityPage = articleService.getAll(pageable);
-        List<ArticleDTO> articleDTOList = articleMapper.articleEntityListToArticleDTOList(
-                articleEntityPage.getContent(), userRepository, technologyRepository
-        );
-        Page<ArticleDTO> articleDTOPage = new PageImpl<>(articleDTOList, pageable, articleEntityPage.getTotalElements());
+        ObjectId articleId = new ObjectId(articleIdStr);
+        ArticleEntity foundArticle;
 
-        return ResponseEntity.ok(articleDTOPage);
+        try{
+            foundArticle = articleService.getArticleById(articleId);
+        }
+        catch(EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
+        ArticleDTO foundArticleDTO = articleMapper.articleEntityToArticleDTO(
+                foundArticle, userRepository, technologyRepository
+        );
+
+        return ResponseEntity.ok(foundArticleDTO);
     }
 		
 		...
 }
 \end{lstlisting}
+
+Aby klasy by≥y interpretowane jako kontrolery, muszπ byÊ one oznaczone adnotacjπ \texttt{Controller} albo \texttt{RestController}. Adnotacja \texttt{RestController} zawiera w sobie adnotacjÍ \texttt{Controller} oraz dodatkowo definiuje, øe cia≥a øπdaÒ i odpowiedzi bÍdπ w formacie JSON. Kontroler artyku≥Ûw 
+(listing~\ref{lst:serwis-artykulow}) korzysta przede wszystkim z serwisÛw operujπcych na repozytoriach artyku≥Ûw i repozytoriach komentarzy. Endpointy przedstawionego kontrolera artyku≥Ûw zaczynajπ siÍ od cz≥onu \texttt{article} i mogπ z nich korzystaÊ jedynie klient lokalny i produkcyjny (adnotacja \texttt{CrossOrigin}). W warstwie kontrolerÛw zosta≥a zaimplementowana obs≥uga b≥ÍdÛw (wyjπtkÛw) rzucanych przez serwisy. W przypadku otrzymania b≥Ídu zwracany jest status http odpowiadajπcy temu b≥Ídu wraz z wiadomoúciπ otrzymanπ z serwisu. Przyk≥adowo metoda \texttt{getArticleById} zwrÛci status 400 w przypadku podania niew≥aúciwego statusu artyku≥u. Kontrolery wysy≥ajπ uøytkownikowi w odpowiedzi encje zmapowane do DTO (ang.\ \emph{Data Transfer Object}), gdyø zazwyczaj obiekty poøπdane przez klienta rÛøniπ siÍ od encji, nie ma konieczonoúci wysy≥ania wszystkich danych z encji oraz potrzebne sπ mapowania pomiÍdzy datπ lokalnπ i datπ ze strefπ czasowπ.
+
+Fragment przyk≥adowego mappera artyku≥Ûw przedstawiono na listingu~\ref{lst:mapper-artykulow}.
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Mapper artyku≥Ûw, label=lst:mapper-artykulow]
+@Mapper(uses = {DateTimeMapper.class, UserMapper.class, TechnologyMapper.class, MongoObjectIDMapper.class})
+public interface ArticleMapper {
+
+    ArticleMapper INSTANCE = Mappers.getMapper(ArticleMapper.class);
+		
+		...
+
+    @Mapping(source = "id", target = "id", qualifiedByName = "objectIdToHexString")
+    @Mapping(
+            source = "creationDate",
+            target = "creationDate",
+            qualifiedByName = "localDateTimeToOffsetDateTime"
+    )
+    @Mapping(
+            source = "modificationDate",
+            target = "modificationDate",
+            qualifiedByName = "localDateTimeToOffsetDateTime"
+    )
+    @Mapping(source = "authorId", target = "authorDTO", qualifiedByName = "userIdToUserDTO")
+    @Mapping(
+            source = "technologyId",
+            target = "technologyDTO",
+            qualifiedByName = "technologyIdToTechnologyDTO"
+    )
+    @Mapping(source = "status", target = "status")
+    ArticleDTO articleEntityToArticleDTO(
+            ArticleEntity articleEntity,
+            @Context UserRepository userRepository,
+            @Context TechnologyRepository technologyRepository
+    );
+		...
+}
+\end{lstlisting}
+
+Do mapowania obiektÛw wykorzystano technologiÍ \texttt{Mapstruct}, ktÛra pozwala na m.in. automatyczne generowanie mapowania obiektÛw na podstawie jedynie deklaracji metod oraz adnotacji tych tych metod. Przyk≥adowo na listingu~\ref{lst:mapper-artykulow} przedstawiono mapowanie encji artyku≥u do DTO artyku≥u.
+
+Endpointy kontrolerÛw sπ zabezpieczone przez Keycloaka i przez to wys≥anie øπdania na dany endpoint bÍdzie moøliwe jedynie w przypadku posiadania przez uøytkownika odpowiedniej roli. Fragment konfiguracji zabezpieczeÒ dla endpointÛw przedstawiono na listingu~\ref{lst:zabezpieczenie-endpointow}.
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Zabezpieczenie endpointÛw, label=lst:zabezpieczenie-endpointow]
+@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+			CorsConfiguration configuration = new CorsConfiguration();
+			configuration.setAllowedOrigins(Arrays.asList(
+							"http://localhost:3000", "https://technologie-programistyczne.azurewebsites.net")
+			);
+			configuration.setAllowedMethods(Collections.singletonList("*"));
+			configuration.setAllowedHeaders(Collections.singletonList("*"));
+
+			http.csrf().disable().cors().configurationSource(request -> configuration);
+			http.authorizeRequests(authz -> authz
+							.antMatchers(HttpMethod.GET, "/user/**")
+							.permitAll()
+							.antMatchers(HttpMethod.POST, "/user")
+							.permitAll()
+							.antMatchers(HttpMethod.PUT, "/user/*")
+							.hasRole("logged_user")
+							...
+							.anyRequest()
+							.authenticated())
+					.oauth2ResourceServer()
+							.jwt()
+							.jwtAuthenticationConverter(jwtAuthenticationConverter());
+			return http.build();
+}
+\end{lstlisting}
+
+Keycloak przesy≥a role wewnπtrz tokenu JWT (ang.\ \emph{JSON Web Token}) w innym niø jest to zazwyczaj miejscu i przez to po stronie backendu naleøa≥o wskazaÊ, gdzie znajdujπ siÍ role. KonfiguracjÍ tÍ przedstawiono na listingu~\ref{lst:konfiguracja-jwt}.
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Konfiguracja JWT, label=lst:konfiguracja-jwt]
+private JwtAuthenticationConverter jwtAuthenticationConverter() {
+			Converter<Jwt, Collection<GrantedAuthority>> jwtGrantedAuthoritiesConverter = jwt -> {
+					Map<String, Collection<String>> realmAccess = jwt.getClaim("realm_access");
+					Collection<String> roles = realmAccess.get("roles");
+					return roles.stream()
+									.map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+									.collect(Collectors.toList());
+			};
+
+			var jwtAuthenticationConverter = new JwtAuthenticationConverter();
+			jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
+
+			return jwtAuthenticationConverter;
+	}
+\end{lstlisting}
+
+Dokumentacja wszystkich endpointÛw kontrolerÛw jest przedstawiona na rysunkach ~\ref{fig:backend-api-1}, ~\ref{fig:backend-api-2} oraz ~\ref{fig:backend-api-3}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{rys03/backend/backend-api-1}
+	\caption{Endpointy kontrolerÛw dla uøytkownikÛw, opinii oraz komentarzy}
+	\label{fig:backend-api-1}
+	\caption*{èrÛd≥o: Swagger}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{rys03/backend/backend-api-2}
+	\caption{Endpointy kontrolerÛw dla artyku≥Ûw oraz weryfikacji artyku≥Ûw}
+	\label{fig:backend-api-2}
+	\caption*{èrÛd≥o: Swagger}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{rys03/backend/backend-api-3}
+	\caption{Endpointy kontrolerÛw dla dostÍpnoúci uøytkownikÛw, akceptacji opinii, technologii oraz kategorii technologii}
+	\label{fig:backend-api-3}
+	\caption*{èrÛd≥o: Swagger}
+\end{figure}
+
+
+
+
+
 
 
 
