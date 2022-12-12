@@ -98,7 +98,48 @@ Struktura aplikacji serwerowej jest przedstawiona na rysunku~\ref{fig:backend-st
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
-Struktura aplikacji serwerowej jest zgodna z przedstawionπ architekturπ (Rys.~\ref{fig:backend-architektura}). Backend jest oparty na narzÍdziu automatyzujπcym budowanie aplikacji \texttt{Maven}. 
+Struktura aplikacji serwerowej jest zgodna z przedstawionπ architekturπ (Rys.~\ref{fig:backend-architektura}). Backend jest oparty na narzÍdziu automatyzujπcym budowanie aplikacji \texttt{Maven}. Zaleønoúci oraz konfiguracja uruchomieniowa aplikacji sπ zapisane w pliku \texttt{pom.xml}. Fragment zawartoúci pliku \texttt{pom.xml} przedstawiony jest na listingu~\ref{lst:fragment-pomxml}.
+
+\begin{lstlisting}[language=XML,style=JavaStyle, caption=Repozytorium technologii, label=lst:fragment-pomxml]
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	...
+	<groupId>pl.edu.pwr</groupId>
+	<artifactId>technologie-programistyczne</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>technologie-programistyczne</name>
+	<description>
+		Praca inzynierska - aplikacja internetowa do gromadzenia i udostepniania informacji o technologiach programistycznych
+	</description>
+	<properties>
+		<java.version>17</java.version>
+		<springboot.version>${project.parent.version}</springboot.version>
+		<org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
+		<org.projectlombok.version>1.18.24</org.projectlombok.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+	</properties>
+	<dependencies>
+		<!-- SPRING -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${springboot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${springboot.version}</version>
+			<scope>test</scope>
+		</dependency>
+		...
+	<dependencies>
+	...
+</project>
+\end{lstlisting}
+
+Na listingu~\ref{lst:fragment-pomxml} deklarowane sπ m.in. podstawowe parametry programu jak nazwa, czy wersja oraz ustalane sπ zaleønoúci wykorzystywane przez aplikacjÍ 
+(znacznik \texttt{dependency}).
 
 Konfiguracja aplikacji (np. link do bazy danych, czy numer portu na jakim dzia≥a aplikacja) jest zapisana w plikach o rozszerzeniu \texttt{properties}. Moøna wyrÛøniÊ 3 rÛøne profile konfiguracyjne aplikacji: lokalny, produkcyjny oraz do testowania. Profil lokalny jest wykorzystywany w trakcie rozwoju aplikacji i w konfiguracji tej uøywane sπ lokalne bazy danych oraz jest moøliwoúÊ modyfikowania struktury tabel (schematÛw dokumentÛw). Profil produkcyjny jest wykorzystywany przez wdroøonπ aplikacjÍ i w konfiguracji tej uøywane sπ zdalne bazy danych oraz nie ma moøliwoúci modyfikowania struktury tabel (schematÛw dokumentÛw). Profil do testowania jest wykorzystywany do testÛw aplikacji i w konfiguracji tej uøywana jest baza danych \texttt{h2}, ktÛra jest przechowywana w pamiÍci.
 
@@ -455,11 +496,327 @@ Dokumentacja wszystkich endpointÛw kontrolerÛw jest przedstawiona na rysunkach ~
 	\caption*{èrÛd≥o: Swagger}
 \end{figure}
 
+\section{Aplikacja kliencka}
 
+Aplikacji kliencka ma mniej restrykcyjnπ architekturÍ niø backend, ale moøna wyrÛøniÊ wiele elementÛw odpowiedzialnych jedynie za swojπ czÍúÊ funkcji. Zasada dzia≥ania frontendu zostanie opisana na podstawie struktury projektu oraz przyk≥adowych fragmentÛw kodu. Struktura aplikacji klienckiej jest przedstawiona na 
+rysunku~\ref{fig:frontend-struktura-projektu}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\linewidth]{rys03/frontend/frontend-struktura-projektu}
+	\caption{Struktura projektu aplikacji klienckiej}
+	\label{fig:frontend-struktura-projektu}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
 
+Tak samo jak w przypadku backendu zastosowano rÛøne profile konfiguracyjne aplikacji. Konfiguracja aplikacji (adresy backendu i serwera Keycloak) jest zapisana w osobnych plikach w folderze \texttt{environments}. Moøna wyrÛøniÊ 2 profile konfiguracyjne frontendu: lokalny oraz produkcyjny. Profil lokalny jest wykorzystywany w trakcie rozwijania aplikacji i w konfiguracji tej øπdania sπ wysy≥ane do lokalnego backendu oraz lokalnego serwera Keycloak. W tej konfiguracji aplikacja kliencka jest uruchamiana na serwerze webowym dostarczanym przez \texttt{create-react-app}, ktÛry jest przeznaczony jedynie do rozwoju aplikacji. Profil produkcyjny jest wykorzystywany przez wdroøonπ aplikacjÍ i w konfiguracji tej øπdania sπ wysy≥ane do zdalnego backendu oraz zdalnego serwera Keycloak. W profilu tym nie jest zapewniony serwer webowy, dlatego naleøy wdroøyÊ aplikacjÍ na odrÍbnym serwerze webowym. Przyk≥adowy profil lokalny jest przedstawiony na listingu~\ref{lst:frontend-profil-lokalny}.
 
+\begin{lstlisting}[language=JavaScript,style=JavaScriptStyle, caption=Konfiguracja profilu lokalnego dla aplikacji klienckiej, label=lst:frontend-profil-lokalny]
+REACT_APP_API=http://localhost:9000
+REACT_APP_KEYCLOAK_URL=http://localhost:8080
+\end{lstlisting}
 
+Odpowiednikiem pliku \texttt{pom.xml} uøywanego przez backend jest po stronie frontendu plik \texttt{package.json}, gdzie rÛwnieø sπ zapisane zaleønoúci oraz konfiguracja uruchomieniowa aplikacji. Fragment zawartoúci pliku \texttt{package.json} jest przedstawiony na listingu~\ref{lst:frontend-packagejson}.
+
+\begin{lstlisting}[style=json-style, caption=Fragment zawartoúci pliku package.json uøywanego przez frontend, label=lst:frontend-packagejson]
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/lab": "^5.0.0-alpha.102",
+	...
+	"scripts": {
+    "start": "env-cmd -f environments/.dev.env react-scripts start",
+    "build": "env-cmd -f environments/.prod.env react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+	...
+}
+\end{lstlisting}
+
+Na listingu~\ref{lst:frontend-packagejson} ustalane sπ m.in. nazwa i wersja aplikacji, zaleønoúci projektu (\texttt{dependencies}) oraz komendy uruchomieniowe dla poszczegÛlnych profili konfiguracyjnych (\texttt{scripts}).
+
+Wygenerowane zaleønoúci na podstawie pliku \texttt{package.json} sπ przechowywane w folderze \texttt{node\_modules}.
+
+W folderze \texttt{nginx} oraz plikach \texttt{Dockerfile} zapisana jest konfiguracja wdroøeniowa aplikacji, ktÛra jest opisana w rozdziale o wdroøeniu aplikacji.
+
+Zaimplementowana aplikacja jest typu \texttt{SPA}, co oznacza, øe jest jedynie jedna strona \texttt{HTML}, ktÛrej zawartoúÊ jest zmieniana dynamicznie. W folderze 
+\texttt{public} zawarta jest m.in. ta jedna strona.
+
+Folder \texttt{src} jest najwaønieszy w tym projekcie, gdyø znajduje siÍ w nim ca≥y kod aplikacji i dlatego zawartoúÊ tego foldera zostanie opisana najdok≥adniej. 
+
+W folderze \texttt{assets} znajdujπ siÍ mapy bitowe wykorzystywane przez projekt oraz regulamin serwisu. 
+
+W \texttt{components} sπ zamieszczone pojedyncze komponenty, ktÛre sπ powszechnie wykorzystywane w aplikacji (np. powiadomienia) lub stanowiπ uk≥ad strony (np. nag≥Ûwek, czy stopka strony). ZawartoúÊ przyk≥adowego komponentu dostarczajπcego awatar uøytkownika jest przedstawiona na listingu~\ref{lst:frontend-avatar}.
+
+\begin{lstlisting}[language=JavaScript, style=JavaScriptStyle, caption=Kod komponentu awatar uøytkownika, label=lst:frontend-avatar]
+import { Avatar, SxProps, Theme } from "@mui/material";
+import React, { useEffect } from "react";
+
+const CustomAvatar = (props: {file: any, sx?: SxProps<Theme>}) => {
+    const [img, setImg] = React.useState<any>('');
+
+    const loadImg = () => {
+
+        if(!props.file)
+            return
+
+        setImg(props.file);
+    }
+
+    useEffect(() => {
+        loadImg()
+    }, [props])
+
+    return (
+        <Avatar 
+					alt="Avatar" 
+					src={`data:image/jpeg;base64,${img}`} 
+					sx={{...props.sx}}
+				/>
+    );
+}
+
+export default CustomAvatar;
+\end{lstlisting}
+
+Wyglπd komponentu awatar uøytkownika jest aktualizowany za kaødym razem, gdy zmieni siÍ otrzymywany przez niego parametr \texttt{file}.
+
+W folderze \texttt{models} znajdujπ siÍ interfejsy obiektÛw uøywanych przez aplikacje. Przyk≥adowy model artyku≥u jest przedstawiony na listingu~\ref{lst:frontend-artykul}.
+
+\begin{lstlisting}[language=JavaScript, style=JavaScriptStyle, caption=Model artyku≥u w aplikacji klienckiej, label=lst:frontend-artykul]
+import { ArticleStatus } from "./ArticleStatus"
+import { Technology } from "./Technology"
+import User from "./User"
+
+export default interface Article {
+    id: string,
+    authorDTO: User,
+    technologyDTO: Technology,
+    title: string,
+    content: string,
+    status: ArticleStatus,
+    creationDate: Date,
+    modificationDate: Date,
+    averageRating?: number
+}
+\end{lstlisting}
+
+W interfejsach moøna m.in. zagnieødøaÊ obiekty powsta≥e na podstawie innych interfejsÛw.
+
+W \texttt{Pages} znajdujπ siÍ g≥Ûwne komponenty aplikacji, ktÛre pe≥niπ rolÍ osobnych podstron.
+
+W folderze \texttt{services} sπ zamieszczone serwisy, ktÛre sπ klasami udostÍpniajπcymi metody odpowiedzialne za wysy≥anie øπdaÒ do backendu. Metody te zwracajπ odpowiedzi otrzymane od backendu, ktÛre bÍdπ mog≥y byÊ pÛüniej obs≥uøone adekwatnie od otrzymanego statusu. Fragment przyk≥adowego serwisu artyku≥Ûw jest przedstawiony na listingu~\ref{lst:frontend-serwis-artykulow}.
+
+\begin{lstlisting}[language=JavaScript, style=JavaScriptStyle, caption=Fragment serwisu artyku≥Ûw, label=lst:frontend-serwis-artykulow]
+...
+class ArticleAPIService {
+
+    private apiUrl: string = `${process.env.REACT_APP_API as string}/article`
+
+    search = (searchCriteria: ArticleSearchCriteria, pagination: Pagination, role: string, loggedUserId?: number) => {
+
+        let params: any = {
+            ...pagination,
+            role: role,
+        }
+
+        if(loggedUserId){
+           params.loggedUserId = loggedUserId
+        }
+
+        return axios.post(`${this.apiUrl}/search`, searchCriteria, {
+            params: params
+        })
+    }
+		...
+}
+
+export default new ArticleAPIService();
+\end{lstlisting}
+
+W folderze \texttt{redux} znajduje siÍ kod odpowiedzialny za przechowywanie i zarzπdzanie globalnym stanem aplikacji. ZawartoúÊ tego folderu jest przedstawiona na 
+rysunku~\ref{fig:frontend-redux}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\linewidth]{rys03/frontend/frontend-redux}
+	\caption{Struktura folderu redux aplikacji klienckiej}
+	\label{fig:frontend-redux}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+W \texttt{slice} definiowane sπ pojedyncze i zarzπdzalne magazyny danych, w \texttt{rootReducer} grupowane sπ \texttt{slice} oraz w \texttt{store} jest tworzony i konfigurowany jeden globalny magazyn stanu aplikacji. Fragment przyk≥adowego kodu \texttt{slice} przechowujπcego dane o zalogowanym uøytkowniku jest przedstawiony na listingu~\ref{lst:frontend-userslice}.
+
+\begin{lstlisting}[language=JavaScript, style=JavaScriptStyle, caption=Fragment kodu slice zalogowanego uøytkownika, label=lst:frontend-userslice]
+...
+export interface UserState {
+    user: any,
+}
+
+const initialState: UserState = {
+    user: {},
+}
+
+export const userSlice = createSlice({
+    name: 'users',
+    initialState,
+    reducers: {
+        setUser(state, action: PayloadAction<User | {}>){
+            state.user = action.payload
+        }
+    }
+})
+...
+\end{lstlisting}
+
+Na listingu~\ref{lst:frontend-userslice} zdefiniowane sπ dane uøytkownika (\texttt{initialState}) oraz metoda \texttt{setUser}, ktÛrej wywo≥anie aktualizuje te dane.
+
+Frontend jest zgodnie z poczπtkowymi za≥oøeniami zabezpieczony poprzez zewnÍtrzny serwer do uwierzytelniania i autoryzacji o nazwie Keycloak. W folderze 
+\texttt{keycloak} znajduje siÍ kod odpowiedzialny za komunikacjÍ oraz bezpieczeÒstwo zapewniane przez serwer Keycloak. ZawartoúÊ tego folderu jest przedstawiona na rysunku~\ref{fig:frontend-keycloak}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.3\linewidth]{rys03/frontend/frontend-keycloak}
+	\caption{Kod zwiπzany z serwerem Keycloak po stronie frontendu}
+	\label{fig:frontend-keycloak}
+	\caption*{èrÛd≥o: opracowanie w≥asne}
+\end{figure}
+
+W pliku \texttt{Keycloak.ts} zdefiniowana jest komunikacja z serwerem Keycloak (~\ref{lst:frontend-keycloak-def}).
+
+\begin{lstlisting}[language=JavaScript, style=JavaScriptStyle, caption=Konfiguracja komunikacji z serwerem Keycloak, label=lst:frontend-keycloak-def]
+const keycloak = {
+    url: process.env.REACT_APP_KEYCLOAK_URL,
+    realm: "Programming_technologies",
+    clientId: "frontend"
+};
+\end{lstlisting}
+
+W pliku \texttt{KeycloakService.ts} znajduje siÍ serwis, ktÛry odpowiada za wysy≥anie øπdaÒ do serwera Keycloak oraz udostÍpnia metody pozwalajπce na m.in. zdekodowanie otrzymanego tokenu dostÍpu, czy ustawienie nag≥Ûwka autoryzacji. Na listingu~\ref{lst:frontend-keycloak-serwis} sπ przedstawione najwaøniejsze metody tego serwisu.
+
+\begin{lstlisting}[language=JavaScript, style=JavaScriptStyle, caption=Fragment kodu serwisu odpowiadajπcego za komunikacjÍ z serwerem Keycloak, 
+label=lst:frontend-keycloak-serwis]
+...
+export const roles = {
+    user: "user",
+    logged_user: {
+        id: "cec99090-10b9-4fc9-880c-9f72dca702eb",
+        name: "logged_user"
+    },
+    administrator: {
+        id: "dd8865ea-a3ee-4569-9298-5ea705f5c475",
+        name: "administrator"
+    },
+    reviewer: {
+        id: "c59b2c5e-c209-4e66-8c07-d4a5a0625552",
+        name: "reviewer"
+    }
+}
+class KeycloakService {
+
+    login(credentials: Credentials){
+
+        const body = new URLSearchParams({
+            client_id: keycloak.clientId as string,
+            username: credentials.username,
+            password: credentials.password,
+            grant_type: 'password'
+        });
+
+        const header = {
+            headers: { 
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        }
+
+        return axios.post(`${keycloak.url}/realms/${keycloak.realm}/protocol/openid-connect/token`, body, header)
+    }
+
+    getAccessTokenOnRefreshToken = (refreshToken: string) => {
+
+        const body = new URLSearchParams({
+            client_id: keycloak.clientId as string,
+            grant_type: 'refresh_token',
+            refresh_token: refreshToken
+        });
+
+        const header = {
+            headers: { 
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        }
+
+        return axios.post(`${keycloak.url}/realms/${keycloak.realm}/protocol/openid-connect/token`, body, header)
+    }
+
+    logout = (refreshToken: string) => {
+
+        const body = new URLSearchParams({
+            client_id: keycloak.clientId as string,
+            refresh_token: refreshToken
+        });
+
+        const header = {
+            headers: { 
+                ...axios.defaults.headers.common,
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        }
+
+        return axios.post(`${keycloak.url}/realms/${keycloak.realm}/protocol/openid-connect/logout`, body, header)
+    }
+		...
+}
+...
+\end{lstlisting}
+
+Na listingu~\ref{lst:frontend-keycloak-serwis} przedstawiono definicjÍ rÛl i metody odpowiedzialne za logowanie, wygenerowanie nowego tokenu dostÍpu oraz wylogowanie. Przy logowaniu podawane sπ przede wszystkim login i has≥o, a w odpowiedzi moøna otrzymaÊ status 401 w przypadku podania nieprawid≥owych danych logowania albo wygenerowane tokeny dostÍpu i odúwieøania. W przypadku pomyúlnego zalogowania siÍ uøytkownika, otrzymane role, tokeny dostÍpu oraz odúwieøania sπ zapisywane w globalnym stanie aplikacji i dziÍki temu dostÍp do tych danych jest moøliwy z poziomu kaødego komponentu. Aby wygenerowaÊ nowy token dostÍpu, naleøy do≥πczyÊ do wiadomoúci m.in. aktualny token dostÍpu. Do wylogowania siÍ jest przede wszystkim potrzebny aktualny token odúwieøania.
+
+W pliku \texttt{ProtectedRoute.ts} zdefiniowany jest komponent, ktÛry odpowiada za sprawdzenie i obs≥uøenie tego, czy dany uøytkownik ma dostÍp do øπdanego przez niego komponentu. Fragment kodu komponentu \texttt{ProtectedRoute} jest przedstawiony na listingu~\ref{lst:frontend-protectedroute}.
+
+\begin{lstlisting}[language=JavaScript, style=JavaScriptStyle, caption=Komponent ProtectedRoute, label=lst:frontend-protectedroute]
+const PrivateRoute = (props: PrivateRouteProps) => {
+
+    const keycloak = useSelector((state: RootState) => state.keycloak);
+
+    if(!props.requiredLogin){
+        return <React.Fragment>{props.children}</React.Fragment>
+    }
+
+    if(!props.requiredRole){
+        const isLoggedIn = keycloak.authenticated
+        return isLoggedIn ? <React.Fragment>{props.children}</React.Fragment> : <Forbidden/>
+    }
+
+    return keycloak.roles.includes(props.requiredRole) ? <React.Fragment>{props.children}</React.Fragment> : <Forbidden/>
+}
+\end{lstlisting}
+
+W przypadku kiedy uøytkownik bÍdzie øπda≥ dostÍpu do komponentu, do ktÛrego nie jest uprawniony (brak odpowiednich rÛl), to bÍdzie on przekierowywany do strony z napisem ,,Brak dostÍpu do zasobu''. Uøytkownikowi posiadajπcemu odpowiednie uprawnienia wyúwietlony zostanie øπdany przez niego komponent. Komponent \texttt{ProtectedRoute} jest uøywany w g≥Ûwnej nawigacji po stronach (listing~\ref{lst:frontend-nawigacja}).
+
+\begin{lstlisting}[language=JavaScript, style=JavaScriptStyle, caption=Zabezpieczona nawigacja, label=lst:frontend-nawigacja]
+ <Route path="/manage-users" element={
+		<ProtectedRoute requiredLogin={true} requiredRole={roles.administrator.name}>
+			<Outlet />
+		</ProtectedRoute>
+	}>
+		<Route index element={<SearchUsers/>} />
+		<Route path="user/:userId/:userAccountId" element={<ManageUser/>} />
+	</Route>
+	<Route path="/set-password" element={
+		<ProtectedRoute requiredLogin={true}>
+			<SetPassword/>
+		</ProtectedRoute>
+	} />
+\end{lstlisting}
+
+Na listingu~\ref{lst:frontend-nawigacja} przedstawiono przyk≥adowe przekierowania do komponentÛw na podstawie úcieøki url. Za≥oøono, øe dostÍp do podstrony z zarzπdzaniem uøytkownikami powinien mieÊ jedynie administrator oraz wylogowaÊ siÍ moøe jedynie zalogowany uøytkownik. Przekierowania te moøna rÛwnieø zagnieødøaÊ i przyk≥adowo dziÍki temu wystarczy≥o jedno uøycie komponentu \texttt{ProtectedRoute} do zabezpieczenia 2 komponentÛw \texttt{SearchUsers} oraz \texttt{ManageUser}.
 
 
 

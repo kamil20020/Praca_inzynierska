@@ -126,7 +126,8 @@ komendy~\ref{lst:budowanie-obrazu-frontendu} zbudowano obraz o nazwie ,,frontend
 docker build . -t frontend
 \end{lstlisting}
 
-Nastêpnym krokiem by³o powi¹zanie zbudowanego obrazu z nazw¹ jak¹ bêdzie mia³ ten obraz w rejestrze kontenerów. Do tego celu u¿yto komendy~\ref{lst:tagowanie-obrazu}
+Nastêpnym krokiem by³o powi¹zanie zbudowanego obrazu z nazw¹ jak¹ bêdzie mia³ ten obraz w rejestrze kontenerów. Do tego celu u¿yto 
+komendy~\ref{lst:tagowanie-obrazu-frontendu}
 
 \begin{lstlisting}[style=json-style, caption=Powi¹zanie zbudowanego obrazu frontendu z rejestrem kontenerów , label=lst:tagowanie-obrazu-frontendu]
 docker tag frontend inzynierkakeycloak.azurecr.io/technologie-programistyczne:latest
@@ -217,7 +218,7 @@ Po kilkunastu minutach aplikacja zosta³a wdro¿ona i mo¿na ju¿ by³o wys³aæ do nie
 
 Do wdro¿enia warstwy bezpieczeñstwa wykorzystano us³ugê \texttt{App Service}. Konfiguracja wdro¿eniowa warstwy bezpieczeñstwa po stronie Azure równie¿ jest prawie identyczna jak w przypadku aplikacji klienckiej i ró¿ni siê jedynie nazw¹ aplikacji oraz Ÿród³em i nazw¹ obrazu. 
 
-Podsumowanie konfiguracji wdro¿eniowej serwera uwierzytelniaj¹cego i autoryzuj¹cego jest przedstawione na rysunku~\ref{fig:wdrozenie-aplikacji-bezpieczenstwa}.
+Podsumowanie konfiguracji wdro¿eniowej serwera uwierzytelniaj¹cego i autoryzuj¹cego jest przedstawione na rysunku~\ref{fig:wdrozenie-warstwy-bezpieczenstwa}.
 
 \begin{figure}[H]
 	\centering
@@ -231,7 +232,7 @@ Po tych krokach us³uga by³a skonfigurowana do automatycznego pobierania z rejest
 
 U¿yty obraz \texttt{quay.io/keycloak/keycloak:18.0.1} zawiera gotow¹ do uruchomienia aplikacjê Keycloak, któr¹ wystarczy jeszcze jedynie skonfigurowaæ do swoich potrzeb.
 Konfiguracjê aplikacji przeprowadzono w zak³adce ,,Konfiguracja'' w sekcji ,,Ustawienia''. U¿yta konfiguracja jest przedstawiona na 
-rysunku~\ref{fig:wdrozenie-aplikacji-bezpieczenstwa-1}
+rysunku~\ref{fig:wdrozenie-warstwy-bezpieczenstwa-1}
 
 \begin{figure}[H]
 	\centering
