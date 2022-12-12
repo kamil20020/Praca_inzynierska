@@ -1,1 +1,530 @@
 \chapter{Testowanie}
+
+Kolejnym etapem realizacji pracy jest wykonanie testów zaimplementowanego systemu. Przeprowadzone zosta³y testy integracyjne backendu.
+
+Za³o¿eniem tych testów by³o dok³adne przetestowanie jak najwiêkszej liczby endpointów wszystkich kontrolerów. Testy te polega³y na wysy³aniu odpowiednio spreparowanych ¿¹dañ na poszczególne endpointy kontrolerów i nastêpnie sprawdzaniu otrzymanych odpowiedzi. Przeprowadzono zarówno testy sprawdzaj¹ce, czy dane funkcjonalnoœci dzia³aj¹, jak i sprawdzaj¹ce, czy zostanie zwrócony odpowiedni komunikat b³êdu w przypadku podania niepoprawnych danych. Do testów integracyjnych backendu wykorzystano przede wszystkim narzêdzia \texttt{REST-assured} oraz \texttt{JUnit}. Testy by³y przeprowadzane w profilu testowym, który charakteryzuje siê tym, ¿e w tym trybie u¿ywana jest baza danych \texttt{h2}. Baza danych \texttt{h2} jest zapisywana w pamiêci i dziêki temu mo¿liwe by³o przetestowanie funkcji backendu w œrodowisku bardzo podobnym do produkcyjnego.  Inn¹ zalet¹ stosowania bazy danych podczas testów jest to, ¿e mo¿na w ³atwy sposób korzystaæ z danych testowych poprzez zapisanie ich do bazy danych. W pierwszej kolejnoœci przetestowano najprostsze i najwa¿niejsze funkcje systemu.
+
+\section{Testy kontrolera u¿ytkowników}
+
+\subsection{Test sprawdzaj¹cy, czy mo¿na pobraæ dane u¿ytkownika na podstawie jego numeru konta}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny pobierania danych u¿ytkownika po jego id konta, label=lst:kontroler-user-test-1]
+@Test
+public void shouldGetUserByUserAccountId() {
+
+		UserEntity user = users.get(1);
+
+		Response response = given()
+						.when()
+						.get(url + "user-account-id/" + user.getUserAccountId());
+
+		response.then().statusCode(HttpStatus.OK.value());
+		UserDTO userDTO = response.as(UserDTO.class);
+		UserEntity userEntity = userMapper.userDTOToUserEntity(userDTO);
+
+		assertEquals(userEntity.getUserAccountId(), user.getUserAccountId());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na pobraæ danych u¿ytkownika na podstawie nieistniej¹cego numeru konta}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny pobierania danych u¿ytkownika po nieistniej¹cym id konta, label=lst:kontroler-user-test-2]
+@Test
+public void shouldNotGetUserByNotExistingUserAccountId() {
+
+		Response response = given()
+						.when()
+						.get(url + "user-account-id/-1");
+
+		response.then().statusCode(HttpStatus.NOT_FOUND.value());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy zostanie zwrócona prawda w przypadku istnienia u¿ytkownika o podanym pseudonimie}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny zwracania prawdy w przypadku istnienia u¿ytkownika o podanym pseudonimie, 
+label=lst:kontroler-user-test-3]
+@Test
+public void shouldReturnTrueWhenUserExistsByNickname() {
+
+		Response response = given()
+						.when()
+						.get(url + "nickname/" + users.get(1).getNickname());
+
+		response.then().statusCode(HttpStatus.OK.value());
+
+		boolean result = response.as(boolean.class);
+		assertTrue(result);
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy zostanie zwrócony fa³sz w przypadku nieistnienia u¿ytkownika o podanym pseudonimie}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny zwracania fa³szu w przypadku nie	istnienia u¿ytkownika o podanym pseudonimie, 
+label=lst:kontroler-user-test-4]
+@Test
+public void shouldReturnFalseWhenUserDoesntExistByNickname() {
+
+		Response response = given()
+						.when()
+						.get(url + "nickname/" + "a");
+
+		response.then().statusCode(HttpStatus.OK.value());
+		
+		boolean result = response.as(boolean.class);
+		assertFalse(result);
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy mo¿na utworzyæ u¿ytkownika}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny tworzenia u¿ytkownika, label=lst:kontroler-user-test-5]
+@Test
+public void shouldCreateUser(){
+
+		UserEntity userEntity = UserEntity.builder()
+				.userAccountId("10")
+				.nickname("10")
+				.firstname("10")
+				.surname("10")
+				.email("10@mail.pl")
+				.build();
+
+		UserDTO userDTO = userMapper.userEntityToUserDTO(userEntity);
+
+		Response response = given()
+						.when()
+						.contentType(ContentType.APPLICATION_JSON.toString())
+						.body(userDTO)
+						.post(url);
+
+		response.then().statusCode(HttpStatus.CREATED.value());
+		UserDTO createdUserDTO = response.as(UserDTO.class);
+		UserEntity createdUserEntity = userMapper.userDTOToUserEntity(createdUserDTO);
+
+		assertEquals(createdUserEntity.getUserAccountId(), userEntity.getUserAccountId());
+		userRepository.deleteById(createdUserEntity.getId());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na utworzyæ u¿ytkownika z podanym instniej¹cym ju¿ numerem konta}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny tworzenia u¿ytkownika z ju¿ istniej¹cym numerem konta, label=lst:kontroler-user-test-6]
+@Test
+public void shouldNotCreateUserWithConflictUserAccountId(){
+
+		UserEntity userEntity = UserEntity.builder()
+						.userAccountId("1")
+						.nickname("10")
+						.firstname("10")
+						.surname("10")
+						.email("10@mail.pl")
+						.build();
+
+		UserDTO userDTO = userMapper.userEntityToUserDTO(userEntity);
+
+		Response response = given()
+						.when()
+						.contentType(ContentType.APPLICATION_JSON.toString())
+						.body(userDTO)
+						.post(url);
+
+		response.then().statusCode(HttpStatus.CONFLICT.value());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na utworzyæ u¿ytkownika z podanym instniej¹cym ju¿ pseudonimem}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny tworzenia u¿ytkownika z ju¿ istniej¹cym pseudonimem, label=lst:kontroler-user-test-7]
+@Test
+public void shouldNotCreateUserWithConflictNickname(){
+
+		UserEntity userEntity = UserEntity.builder()
+						.userAccountId("10")
+						.nickname("1")
+						.firstname("10")
+						.surname("10")
+						.email("10@mail.pl")
+						.build();
+
+		UserDTO userDTO = userMapper.userEntityToUserDTO(userEntity);
+
+		Response response = given()
+						.when()
+						.contentType(ContentType.APPLICATION_JSON.toString())
+						.body(userDTO)
+						.post(url);
+
+		response.then().statusCode(HttpStatus.CONFLICT.value());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na utworzyæ u¿ytkownika z pustymi danymi}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny tworzenia u¿ytkownika z pustymi danymi, label=lst:kontroler-user-test-8]
+@Test
+public void shouldNotCreateUserWithEmptyData(){
+
+		Response response = given()
+						.when()
+						.contentType(ContentType.APPLICATION_JSON.toString())
+						.post(url);
+
+		response.then().statusCode(HttpStatus.BAD_REQUEST.value());
+}
+\end{lstlisting}
+
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na utworzyæ u¿ytkownika z pustym id konta}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny tworzenia u¿ytkownika z pustym id konta, label=lst:kontroler-user-test-9]
+@Test
+public void shouldNotCreateUserWithNotGivenUserAccountId(){
+
+		UserEntity userEntity = UserEntity.builder()
+						.nickname("10")
+						.firstname("10")
+						.surname("10")
+						.email("10@mail.pl")
+						.build();
+
+		UserDTO userDTO = userMapper.userEntityToUserDTO(userEntity);
+
+		Response response = given()
+						.when()
+						.body(userDTO)
+						.contentType(ContentType.APPLICATION_JSON.toString())
+						.post(url);
+
+		response.then().statusCode(HttpStatus.BAD_REQUEST.value());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na utworzyæ u¿ytkownika z pustym pseudonimem}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny tworzenia u¿ytkownika z pustym pseudonimem, label=lst:kontroler-user-test-10]
+@Test
+public void shouldNotCreateUserWithNotGivenNickname(){
+
+		UserEntity userEntity = UserEntity.builder()
+						.userAccountId("10")
+						.firstname("10")
+						.surname("10")
+						.email("10@mail.pl")
+						.build();
+
+		UserDTO userDTO = userMapper.userEntityToUserDTO(userEntity);
+
+		Response response = given()
+						.when()
+						.contentType(ContentType.APPLICATION_JSON.toString())
+						.body(userDTO)
+						.post(url);
+
+		response.then().statusCode(HttpStatus.BAD_REQUEST.value());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy mo¿na zaktualizowaæ dane u¿ytkownika o podanym id}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny aktualizowania danych u¿ytkownika po id, label=lst:kontroler-user-test-11]
+@Test
+public void shouldUpdateUser(){
+
+		UserEntity userEntity = UserEntity.builder()
+						.nickname("11")
+						.firstname("10")
+						.surname("10")
+						.email("10@mail.pl")
+						.build();
+
+		UserDTO userDTO = userMapper.userEntityToUserDTO(userEntity);
+
+		Response response = given()
+						.when()
+						.contentType(ContentType.APPLICATION_JSON.toString())
+						.body(userDTO)
+						.put(url + users.get(0).getId());
+
+		response.then().statusCode(HttpStatus.OK.value());
+		UserDTO updatedUserDTO = response.as(UserDTO.class);
+		UserEntity updatedUserEntity = userMapper.userDTOToUserEntity(updatedUserDTO);
+
+		assertEquals(updatedUserEntity.getId(), users.get(0).getId());
+		assertEquals(updatedUserEntity.getNickname(), userEntity.getNickname());
+		assertEquals(updatedUserEntity.getFirstname(), userEntity.getFirstname());
+		assertEquals(updatedUserEntity.getSurname(), userEntity.getFirstname());
+		assertEquals(updatedUserEntity.getEmail(), userEntity.getEmail());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na zaktualizowaæ danych u¿ytkownika o podanym niepoprawnym id}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny aktualizowania danych u¿ytkownika po niepoprawnym id, label=lst:kontroler-user-test-12]
+@Test
+public void shouldNotUpdateUserWithInvalidId(){
+
+		UserEntity userEntity = UserEntity.builder()
+						.nickname("10")
+						.firstname("10")
+						.surname("10")
+						.email("10@mail.pl")
+						.build();
+
+		UserDTO userDTO = userMapper.userEntityToUserDTO(userEntity);
+
+		Response response = given()
+						.when()
+						.contentType(ContentType.APPLICATION_JSON.toString())
+						.body(userDTO)
+						.put(url + "a");
+
+		response.then().statusCode(HttpStatus.BAD_REQUEST.value());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na zaktualizowaæ danych u¿ytkownika z podanymi pustymi danym}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny aktualizowania danych u¿ytkownika z podanymi pustymi danymi, label=lst:kontroler-user-test-13]
+@Test
+public void shouldNotUpdateUserWithEmptyData(){
+
+		Response response = given()
+						.when()
+						.contentType(ContentType.APPLICATION_JSON.toString())
+						.put(url + users.get(0).getId());
+
+		response.then().statusCode(HttpStatus.BAD_REQUEST.value());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na zaktualizowaæ danych u¿ytkownika z podanym nieistniej¹cym id}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny aktualizowania danych u¿ytkownika z podanym nieistniej¹cym id, label=lst:kontroler-user-test-14]
+@Test
+public void shouldNotUpdateUserWhenIdDoesntExist(){
+
+		UserEntity userEntity = UserEntity.builder()
+						.nickname("10")
+						.firstname("10")
+						.surname("10")
+						.email("10@mail.pl")
+						.build();
+
+		UserDTO userDTO = userMapper.userEntityToUserDTO(userEntity);
+
+		Response response = given()
+						.when()
+						.contentType(ContentType.APPLICATION_JSON.toString())
+						.body(userDTO)
+						.put(url + "11");
+
+		response.then().statusCode(HttpStatus.NOT_FOUND.value());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na zaktualizowaæ danych u¿ytkownika z podanym ju¿ istniej¹cym pseudonimem}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny aktualizowania danych u¿ytkownika z podanym ju¿ istniej¹cym pseudonimem, 
+label=lst:kontroler-user-test-15]
+@Test
+public void shouldNotUpdateUserWithConflictNickname(){
+
+		UserEntity userEntity = UserEntity.builder()
+						.nickname("1")
+						.firstname("10")
+						.surname("10")
+						.email("10@mail.pl")
+						.build();
+
+		UserDTO userDTO = userMapper.userEntityToUserDTO(userEntity);
+
+		Response response = given()
+						.when()
+						.contentType(ContentType.APPLICATION_JSON.toString())
+						.body(userDTO)
+						.put(url + users.get(0).getId());
+
+		response.then().statusCode(HttpStatus.CONFLICT.value());
+}
+\end{lstlisting}
+
+\section{Testy kontrolera kategorii technologii}
+
+\subsection{Test sprawdzaj¹cy, czy mo¿na pobraæ poprawne drzewo kategorii technologii}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny pobierania drzewa kategorii technologii, label=lst:kontroler-category-test-1]
+@Test
+public void shouldGetTreeOfTechnologyCategories(){
+
+		Response response = given()
+						.when()
+						.get(url + "tree");
+
+		response.then().statusCode(HttpStatus.OK.value());
+
+		List<ComplexTechnologyCategoryDTO> foundComplexTechnologyCategoryDTOs = Arrays.stream(
+						response.as(ComplexTechnologyCategoryDTO[].class)
+		).toList();
+		List<TechnologyCategoryEntity> foundTechnologyCategories =
+				technologyCategoryMapper.complexTechnologyCategoryDTOListToTechnologyCategoryEntityList(
+								foundComplexTechnologyCategoryDTOs
+				);
+
+		assertEquals(foundTechnologyCategories.get(0).getId(), technologyCategories.get(0).getId());
+		assertEquals(foundTechnologyCategories.get(1).getId(), technologyCategories.get(1).getId());
+		assertEquals(foundTechnologyCategories.get(2).getId(), technologyCategories.get(2).getId());
+
+		List<TechnologyCategoryEntity> childrenTechnologyCategories1 =
+						foundTechnologyCategories.get(0).getChildrenTechnologyCategoryEntityList();
+
+		assertEquals(childrenTechnologyCategories1.get(0).getId(), technologyCategories.get(3).getId());
+
+		List<TechnologyCategoryEntity> childrenTechnologyCategories2 =
+						foundTechnologyCategories.get(1).getChildrenTechnologyCategoryEntityList();
+
+		assertEquals(childrenTechnologyCategories2.get(0).getId(), technologyCategories.get(4).getId());
+		assertEquals(childrenTechnologyCategories2.get(1).getId(), technologyCategories.get(5).getId());
+
+		List<TechnologyCategoryEntity> childrenTechnologyCategories3 =
+						foundTechnologyCategories.get(2).getChildrenTechnologyCategoryEntityList();
+
+		assertEquals(childrenTechnologyCategories3.get(0).getId(), technologyCategories.get(6).getId());
+
+		List<TechnologyCategoryEntity> childrenTechnologyCategories11 =
+						childrenTechnologyCategories1.get(0).getChildrenTechnologyCategoryEntityList();
+
+		assertEquals(childrenTechnologyCategories11.get(0).getId(), technologyCategories.get(7).getId());
+		assertEquals(childrenTechnologyCategories11.get(1).getId(), technologyCategories.get(8).getId());
+		assertEquals(childrenTechnologyCategories11.get(2).getId(), technologyCategories.get(9).getId());
+
+		List<TechnologyCategoryEntity> childrenTechnologyCategories21 =
+						childrenTechnologyCategories2.get(0).getChildrenTechnologyCategoryEntityList();
+
+		assertEquals(childrenTechnologyCategories21.get(0).getId(), technologyCategories.get(10).getId());
+		assertEquals(childrenTechnologyCategories21.get(1).getId(), technologyCategories.get(11).getId());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy mo¿na pobraæ dane kategorii technologii o podanym id}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny pobierania kategorii technologii o podanym id, label=lst:kontroler-category-test-2]
+@Test
+public void shouldGetTechnologyCategoryById(){
+
+		Response response = given()
+						.when()
+						.get(url + "2");
+
+		response.then().statusCode(HttpStatus.OK.value());
+		TechnologyCategoryDTO technologyCategoryDTO = response.as(TechnologyCategoryDTO.class);
+
+		assertEquals(technologyCategoryDTO.getId(), technologyCategories.get(1).getId());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na pobraæ danych kategorii technologii o podanym niepoprawnym id}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny pobierania kategorii technologii o podanym id, label=lst:kontroler-category-test-3]
+@Test
+public void shouldNotGetTechnologyCategoryByInvalidId(){
+
+		Response response = given()
+						.when()
+						.get(url + "a");
+
+		response.then().statusCode(HttpStatus.BAD_REQUEST.value());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na pobraæ danych kategorii technologii o podanym nieistniej¹cym id}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny pobierania kategorii technologii o podanym nieistniej¹cym id, 
+label=lst:kontroler-category-test-4]
+@Test
+public void shouldNotGetTechnologyCategoryByNotExistingId(){
+
+		Response response = given()
+						.when()
+						.get(url + "13");
+
+		response.then().statusCode(HttpStatus.NOT_FOUND.value());
+}
+\end{lstlisting}
+
+\section{Testy kontrolera technologii}
+
+\subsection{Test sprawdzaj¹cy, czy mo¿na pobraæ dane wszystkich technologii}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny pobierania wszystkich technologii, label=lst:kontroler-technology-test-1]
+@Test
+public void shouldGetAll(){
+
+		List<Integer> technologiesIds = technologies.stream()
+				.map(technologyEntity -> technologyEntity.getId())
+				.collect(Collectors.toList());
+
+		Response response = given()
+						.when()
+						.get(url);
+
+		response.then().statusCode(HttpStatus.OK.value());
+		TechnologyDTO[] gotTechnologies = response.as(TechnologyDTO[].class);
+
+		for(int i=0; i < gotTechnologies.length; i++){
+				assertTrue(technologiesIds.contains(gotTechnologies[i].getId()));
+		}
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy mo¿na pobraæ listê technologii o podanym ich id kategorii}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny pobierania listy technologii o podanym ich id kategorii, label=lst:kontroler-technology-test-2]
+@Test
+public void shouldGetAllByTechnologyCategoryId(){
+
+		Integer technologyCategoryId = 1;
+		long numberOfTechnologiesWithTechnologyCategory = technologies.stream()
+						.filter(technologyEntity -> technologyEntity.getTechnologyCategoryEntity().getId() == technologyCategoryId)
+						.count();
+
+		Response response = given()
+						.when()
+						.get(url + "category/" + technologyCategoryId);
+
+		response.then().statusCode(HttpStatus.OK.value());
+		TechnologyDTO[] gotTechnologies = response.as(TechnologyDTO[].class);
+
+		assertEquals(gotTechnologies.length, numberOfTechnologiesWithTechnologyCategory);
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na pobraæ listy technologii o podanym niepoprawnym id kategorii}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny pobierania listy technologii o podanym niepoprawnym id kategorii, 
+label=lst:kontroler-technology-test-3]
+@Test
+public void shouldNotGetAllByInvalidTechnologyCategoryId(){
+
+		Response response = given()
+						.when()
+						.get(url + "category/a");
+
+		response.then().statusCode(HttpStatus.BAD_REQUEST.value());
+}
+\end{lstlisting}
+
+\subsection{Test sprawdzaj¹cy, czy nie mo¿na pobraæ listy technologii o podanym nieistniej¹cym id kategorii}
+
+\begin{lstlisting}[language=Java,style=JavaStyle, caption=Test integracyjny pobierania listy technologii o podanym nieistniej¹cym id kategorii, 
+label=lst:kontroler-technology-test-4]
+@Test
+public void shouldNotGetAllByNotExistingTechnologyCategoryId(){
+
+		Response response = given()
+						.when()
+						.get(url + "category/20");
+
+		response.then().statusCode(HttpStatus.NOT_FOUND.value());
+}
+\end{lstlisting}
