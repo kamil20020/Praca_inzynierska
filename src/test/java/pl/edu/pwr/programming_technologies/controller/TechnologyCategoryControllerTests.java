@@ -11,7 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import pl.edu.pwr.programming_technologies.mapper.TechnologyCategoryMapper;
 import pl.edu.pwr.programming_technologies.model.dto.ComplexTechnologyCategoryDTO;
+import pl.edu.pwr.programming_technologies.model.dto.TechnologyCategoryDTO;
+import pl.edu.pwr.programming_technologies.model.dto.UserDTO;
 import pl.edu.pwr.programming_technologies.model.entity.TechnologyCategoryEntity;
+import pl.edu.pwr.programming_technologies.model.entity.TechnologyEntity;
+import pl.edu.pwr.programming_technologies.model.entity.UserEntity;
 import pl.edu.pwr.programming_technologies.repository.TechnologyCategoryRepository;
 
 import java.util.Arrays;
@@ -149,5 +153,39 @@ public class TechnologyCategoryControllerTests {
 
         assertEquals(childrenTechnologyCategories21.get(0).getId(), technologyCategories.get(10).getId());
         assertEquals(childrenTechnologyCategories21.get(1).getId(), technologyCategories.get(11).getId());
+    }
+
+    @Test
+    public void shouldGetTechnologyCategoryById(){
+
+        Response response = given()
+                .when()
+                .get(url + "2");
+
+        response.then().statusCode(HttpStatus.OK.value());
+
+        TechnologyCategoryDTO technologyCategoryDTO = response.as(TechnologyCategoryDTO.class);
+
+        assertEquals(technologyCategoryDTO.getId(), technologyCategories.get(1).getId());
+    }
+
+    @Test
+    public void shouldNotGetTechnologyCategoryByInvalidId(){
+
+        Response response = given()
+                .when()
+                .get(url + "a");
+
+        response.then().statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    public void shouldNotGetTechnologyCategoryByNotExistingId(){
+
+        Response response = given()
+                .when()
+                .get(url + "13");
+
+        response.then().statusCode(HttpStatus.NOT_FOUND.value());
     }
 }

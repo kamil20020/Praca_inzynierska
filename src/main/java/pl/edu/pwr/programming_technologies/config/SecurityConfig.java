@@ -51,58 +51,7 @@ public class SecurityConfig {
         configuration.setAllowedHeaders(Collections.singletonList("*"));
 
         http.csrf().disable().cors().configurationSource(request -> configuration);
-        http.authorizeRequests(authz -> authz
-                .antMatchers(HttpMethod.GET, "/user/**")
-                .permitAll()
-                .antMatchers(HttpMethod.POST, "/user")
-                .permitAll()
-                .antMatchers(HttpMethod.PUT, "/user/*")
-                .hasRole("logged_user")
 
-                .antMatchers(HttpMethod.GET, "/comment/**")
-                .permitAll()
-                .antMatchers(HttpMethod.POST, "/comment")
-                .hasRole("logged_user")
-                .antMatchers(HttpMethod.PUT, "/comment/*")
-                .hasRole("logged_user")
-                .antMatchers(HttpMethod.DELETE, "/comment/*")
-                .hasRole("logged_user")
-                
-                .antMatchers(HttpMethod.GET, "/opinions/**")
-                .permitAll()
-                
-                .antMatchers(HttpMethod.GET, "/article/**")
-                .permitAll()
-                .antMatchers(HttpMethod.POST, "/article/search")
-                .permitAll()
-                .antMatchers(HttpMethod.POST, "/article")
-                .hasRole("logged_user")
-                .antMatchers(HttpMethod.PUT, "/article/*")
-                .hasRole("logged_user")
-                .antMatchers(HttpMethod.DELETE, "/article/*")
-                .hasRole("logged_user")
-
-                .antMatchers(HttpMethod.GET, "/article-verification/*")
-                .hasRole("logged_user")
-                .antMatchers(HttpMethod.PUT, "/article-verification/**")
-                .hasRole("reviewer")
-                .antMatchers(HttpMethod.GET, "/article-verification/to/**")
-                .hasRole("reviewer")
-
-                .antMatchers("/user-inaccessibility/**")
-                .hasRole("reviewer")
-
-                .antMatchers(HttpMethod.GET, "/technology/**")
-                .permitAll()
-
-                .antMatchers(HttpMethod.GET, "/technology-category/**")
-                .permitAll()
-
-                .anyRequest()
-                .authenticated())
-            .oauth2ResourceServer()
-                .jwt()
-                .jwtAuthenticationConverter(jwtAuthenticationConverter());
         return http.build();
     }
 }

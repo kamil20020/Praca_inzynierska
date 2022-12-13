@@ -51,6 +51,7 @@ public class UserControllerTests {
                     .firstname(str)
                     .surname(str)
                     .email(str + "@mail.pl")
+                    .isReviewer(i % 3 == 0)
                     .build();
 
             users.add(user);
