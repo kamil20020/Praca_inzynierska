@@ -275,6 +275,8 @@ class KeycloakService {
 
                 const userAccountData = {
                     username: userCredentials.username,
+                    email: user.email,
+                    emailVerified: true,
                     credentials: [{
                             type: "password",
                             value: userCredentials.password,

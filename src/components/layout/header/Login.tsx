@@ -137,7 +137,7 @@ const Login = () => {
                             <TextField
                                 id="username" 
                                 label={form.username !== '' ? 'Nazwa użytkownika' : ''}
-                                placeholder="Nazwa użytkownika"
+                                placeholder="Login lub E-mail"
                                 color="secondary"
                                 value={form.username}
                                 error={errors.username != ''}

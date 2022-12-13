@@ -17,6 +17,8 @@ import ConfirmationDialog from "../../components/common/ConfirmationDialog";
 import { ArticleContent } from "./ArticleContent";
 import { roles } from "../../keycloak/KeycloakService";
 import { ArticleStatus } from "../../models/dto/ArticleStatus";
+import XCloeasableDialog from "../../components/common/XCloeasableDialog";
+import VerificationMessageView from "./VerificationMessageView";
 
 export const ArticleHeader = (props: {article: Article}) => {
 
@@ -137,7 +139,7 @@ const ArticleView = () => {
                         <Grid item>
                             <Typography textAlign="center" variant="h6">Status: {article.status}</Typography>
                         </Grid>
-                        {(article.status === ArticleStatus.new || article.status === ArticleStatus.edited || article.status === ArticleStatus.refused) &&
+                        {(article.status === ArticleStatus.new || article.status === ArticleStatus.edited) &&
                             <Grid item>
                                 <Button
                                     variant="contained"
@@ -146,6 +148,11 @@ const ArticleView = () => {
                                 >
                                     Wyślij do weryfikacji
                                 </Button>
+                            </Grid>
+                        }
+                        {(article.status === ArticleStatus.refused || article.status === ArticleStatus.published) &&
+                            <Grid item>
+                                <VerificationMessageView articleId={article.id}/>
                             </Grid>
                         }
                         <Grid item>
@@ -171,6 +178,9 @@ const ArticleView = () => {
                 }
             </Grid>
             <Grid item xs={10.5} container spacing={2}>
+                <Grid item marginTop={4}>
+                    <Typography textAlign="start" variant="h4">Opis technologii</Typography>
+                </Grid>
                 <Grid item container justifyContent="center">
                     <CustomImage alt="Ikona technologii" img={article.technologyDTO.icon}/>
                 </Grid>

@@ -77,7 +77,7 @@ const CommentView = (props: CommentViewProps) => {
                             sx={{marginTop: 2}}
                             onClick={() => handleCommentAction(Modes.creationMode)}
                         >
-                            Dodaj komentarz
+                            Odpowiedz
                         </Button>
                     }
                 </React.Fragment> 

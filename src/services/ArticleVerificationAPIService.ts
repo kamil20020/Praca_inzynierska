@@ -10,6 +10,10 @@ class ArticleVerificationAPIService {
         return axios.get(`${this.apiUrl}/${articleVerificationId}`)
     }
 
+    getByArticleId = (articleId: string) => {
+        return axios.get(`${this.apiUrl}/article/${articleId}`)
+    }
+
     getCreatedArticleVerificationsByReviewerId = (reviewerId: number, pagination: Pagination) => {
         return axios.get(`${this.apiUrl}/to/${reviewerId}`, {
             params: {
@@ -26,12 +30,6 @@ class ArticleVerificationAPIService {
             }
         })
     }
-    
-
-
-
-
-
 }
 
 export default new ArticleVerificationAPIService();
