@@ -1,1 +1,27 @@
 \chapter{Instrukcja wdro¿eniowa}
+
+W tej instrukcji zostanie pokazana procedura uruchomienia systemu w trybie lokalnym.
+
+Do uruchomienia systemu s¹ wymagane nastêpuj¹ce narzêdzia:
+\begin{itemize}
+	\item \texttt{Node.js} (wersja v18.0.0) oraz \texttt{npm} (wersja 8.6.0) aby uruchomiæ frontend,
+	\item \texttt{Maven} (wersja 3.6.3) oraz \texttt{JDK} (minimum wersja 17) aby uruchomiæ backend,
+	\item \texttt{PostgreSQL} - postawiona baza danych o nazwie \texttt{programming\_technologies}, loginie \texttt{programming\_technologies} oraz haœle \texttt{postgres},
+	\item \texttt{MongoDB} - postawiona baza danych o nazwie \texttt{technologie-it}, loginie \texttt{programming\_technologies} oraz haœle \texttt{postgres}.
+\end{itemize}
+
+W folderze \texttt{aplikacja} znajduj¹ siê nastêpuj¹ce foldery:
+\begin{itemize}
+	\item \texttt{frontend} - przechowuj¹cy kod aplikacji klienckiej,
+	\item \texttt{backend} - zawieraj¹cy kod aplikacji serwerowej,
+	\item \texttt{keycloak} - zawieraj¹cy serwer Keycloak.
+\end{itemize}
+
+Aby uruchomiæ aplikacjê klienck¹, nale¿y z folderu \texttt{frontend} uruchomiæ w konsoli komendy \texttt{npm install} do zainstalowania zale¿noœci oraz 
+nastêpnie~\texttt{npm start} do uruchomienia aplikacji.
+
+W celu uruchomienia aplikacji serwerow¹, nale¿y z folderu \texttt{backend} uruchomiæ w konsoli komendê \texttt{mvn spring-boot:run}.
+
+Do uruchomienia serwera Keycloak, potrzebne bêdzie wywo³anie ze œcie¿ki \texttt{keycloak/bin} komendy \texttt{kc.bat start-dev}.
+
+Po tych czynnoœciach aplikacja bêdzie dostêpna pod adresem \texttt{localhost:3000}.
