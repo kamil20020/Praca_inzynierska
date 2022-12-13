@@ -15,6 +15,7 @@ public interface ArticleVerificationService {
 
     ArticleVerificationEntity getById(Integer articleVerificationId);
     Page<ArticleVerificationEntity> getCreatedArticleVerificationsByReviewerId(Integer reviewerId, Pageable pageable);
+    ArticleVerificationEntity getByArticleId(ObjectId articleId);
     void assignArticleToReviewer(UserEntity reviewerEntity, ObjectId articleId);
 
     void tryAssignArticlesToVerification();

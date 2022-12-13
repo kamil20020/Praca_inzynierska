@@ -1,11 +1,13 @@
 package pl.edu.pwr.programming_technologies.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwr.programming_technologies.exceptions.EntityNotFoundException;
 import pl.edu.pwr.programming_technologies.mapper.TechnologyMapper;
+import pl.edu.pwr.programming_technologies.model.api.request.TechnologySearchCriteria;
 import pl.edu.pwr.programming_technologies.model.dto.TechnologyDTO;
 import pl.edu.pwr.programming_technologies.model.entity.TechnologyEntity;
 import pl.edu.pwr.programming_technologies.service.TechnologyService;
@@ -24,6 +26,18 @@ public class TechnologyController {
     @GetMapping
     public ResponseEntity<List<TechnologyDTO>> getAll(){
 
+        List<TechnologyEntity> technologyEntityList = technologyService.getAll();
+        List<TechnologyDTO> technologyDTOList = technologyMapper.technologyEntityListToTechnologyDTOList(
+                technologyEntityList
+        );
+
+        return ResponseEntity.ok(technologyDTOList);
+    }
+
+    @PostMapping
+    public ResponseEntity<List<TechnologyDTO>> searchByCriteria(
+        @RequestBody TechnologySearchCriteria technologySearchCriteria, Pageable pageable
+    ){
         List<TechnologyEntity> technologyEntityList = technologyService.getAll();
         List<TechnologyDTO> technologyDTOList = technologyMapper.technologyEntityListToTechnologyDTOList(
                 technologyEntityList

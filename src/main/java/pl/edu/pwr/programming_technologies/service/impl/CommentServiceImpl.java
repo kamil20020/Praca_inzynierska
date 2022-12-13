@@ -33,12 +33,12 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Page<CommentEntity> getSubComments(ObjectId articleId, ObjectId parentCommentId, Pageable pageable) {
-        return commentRepository.findAllByArticleIdAndParentCommentId(articleId, parentCommentId, pageable);
+        return commentRepository.findAllByArticleIdAndParentCommentIdOrderByModificationDateDesc(articleId, parentCommentId, pageable);
     }
 
     @Override
     public Page<CommentEntity> getSubComments(ObjectId parentCommentId, Pageable pageable) {
-        return commentRepository.findAllByParentCommentId(parentCommentId, pageable);
+        return commentRepository.findAllByParentCommentIdOrderByModificationDateDesc(parentCommentId, pageable);
     }
 
     @Override

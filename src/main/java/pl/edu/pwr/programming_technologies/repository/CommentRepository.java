@@ -12,10 +12,10 @@ import java.util.List;
 @Repository
 public interface CommentRepository extends MongoRepository <CommentEntity, ObjectId> {
 
-    Page<CommentEntity> findAllByArticleIdAndParentCommentId(
+    Page<CommentEntity> findAllByArticleIdAndParentCommentIdOrderByModificationDateDesc(
         ObjectId articleId, ObjectId parentCommentId, Pageable pageable
     );
-    Page<CommentEntity> findAllByParentCommentId(
+    Page<CommentEntity> findAllByParentCommentIdOrderByModificationDateDesc(
             ObjectId parentCommentId, Pageable pageable
     );
     List<CommentEntity> findAllByParentCommentId(ObjectId parentCommentId);

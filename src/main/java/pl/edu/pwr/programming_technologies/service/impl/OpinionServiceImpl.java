@@ -7,18 +7,18 @@ import org.springframework.stereotype.Service;
 import pl.edu.pwr.programming_technologies.exceptions.EntityConflictException;
 import pl.edu.pwr.programming_technologies.exceptions.EntityNotFoundException;
 import pl.edu.pwr.programming_technologies.model.api.request.UpdateOpinion;
+import pl.edu.pwr.programming_technologies.model.entity.ArticleEntity;
 import pl.edu.pwr.programming_technologies.model.entity.OpinionEntity;
 import pl.edu.pwr.programming_technologies.repository.ArticleRepository;
 import pl.edu.pwr.programming_technologies.repository.OpinionRepository;
 import pl.edu.pwr.programming_technologies.repository.UserRepository;
-import pl.edu.pwr.programming_technologies.service.ArticleService;
 import pl.edu.pwr.programming_technologies.service.OpinionService;
-import pl.edu.pwr.programming_technologies.service.UserService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -53,8 +53,6 @@ public class OpinionServiceImpl implements OpinionService {
             .getAcceptanceList().stream()
             .filter(acceptance -> acceptance.getAuthorId() == userId)
             .collect(Collectors.toList());
-
-        System.out.println(foundOpinionAcceptancesByAuthorId.get(0).getValue());
 
         if(foundOpinionAcceptancesByAuthorId.isEmpty()){
             return 0;
@@ -120,6 +118,26 @@ public class OpinionServiceImpl implements OpinionService {
             .negativeAcceptancesCount(0)
         .build();
 
+        ArticleEntity foundArticleEntity = articleRepository.findById(opinionEntity.getArticleId()).get();
+
+        if(foundArticleEntity.getAverageRating() == null){
+            foundArticleEntity.setAverageRating(Double.valueOf(toCreateOpinionEntity.getRating()));
+        }
+        else{
+
+            AtomicReference<Double> sumOfRatings = new AtomicReference<>(Double.valueOf(0));
+
+            List<OpinionEntity> articleOpinions = getByArticleId(foundArticleEntity.getId());
+
+            articleOpinions.stream().forEach(opinionEntity1 -> {
+                sumOfRatings.updateAndGet(v -> v + opinionEntity1.getRating());
+            });
+
+            foundArticleEntity.setAverageRating(sumOfRatings.get() / articleOpinions.size());
+        }
+
+        articleRepository.save(foundArticleEntity);
+
         return opinionRepository.save(toCreateOpinionEntity);
     }
 
@@ -153,16 +171,51 @@ public class OpinionServiceImpl implements OpinionService {
 
         foundOpinion.setModificationDate(LocalDateTime.now());
 
+        ArticleEntity foundArticleEntity = articleRepository.findById(foundOpinion.getArticleId()).get();
+
+        AtomicReference<Double> sumOfRatings = new AtomicReference<>(Double.valueOf(0));
+
+        List<OpinionEntity> articleOpinions = getByArticleId(foundArticleEntity.getId());
+
+        articleOpinions.stream().forEach(opinionEntity1 -> {
+            sumOfRatings.updateAndGet(v -> v + opinionEntity1.getRating());
+        });
+
+        foundArticleEntity.setAverageRating(sumOfRatings.get() / articleOpinions.size());
+
+        articleRepository.save(foundArticleEntity);
+
         return opinionRepository.save(foundOpinion);
     }
 
     @Override
     public void deleteById(ObjectId id) throws EntityNotFoundException{
 
-        if(!opinionRepository.existsById(id)){
+        Optional<OpinionEntity> foundOpinionEntity = opinionRepository.findById(id);
+
+        if(foundOpinionEntity.isEmpty()){
             throw new EntityNotFoundException("Nie istnieje opinia o takim id");
         }
 
         opinionRepository.deleteById(id);
+
+        ArticleEntity foundArticleEntity = articleRepository.findById(foundOpinionEntity.get().getArticleId()).get();
+
+        List<OpinionEntity> articleOpinions = getByArticleId(foundArticleEntity.getId());
+
+        if(articleOpinions.isEmpty()){
+            foundArticleEntity.setAverageRating(null);
+        }
+        else{
+            AtomicReference<Double> sumOfRatings = new AtomicReference<>(Double.valueOf(0));
+
+            articleOpinions.stream().forEach(opinionEntity1 -> {
+                sumOfRatings.updateAndGet(v -> v + opinionEntity1.getRating());
+            });
+
+            foundArticleEntity.setAverageRating(sumOfRatings.get() / articleOpinions.size());
+        }
+
+        articleRepository.save(foundArticleEntity);
     }
 }

@@ -1,5 +1,6 @@
 package pl.edu.pwr.programming_technologies.repository;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +9,7 @@ import pl.edu.pwr.programming_technologies.model.entity.ArticleVerificationEntit
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ArticleVerificationRepository extends JpaRepository <ArticleVerificationEntity, Integer> {
@@ -21,6 +23,8 @@ public interface ArticleVerificationRepository extends JpaRepository <ArticleVer
         Integer userEntityId, ArticleVerificationEntity.Status status1, ArticleVerificationEntity.Status status2
     );
     boolean existsByArticleIdAndStatus(String articleId, ArticleVerificationEntity.Status status1);
+
+    Optional<ArticleVerificationEntity> findFirstByArticleIdOrderByAssignmentDateDesc(String articleId);
 
     int countByUserEntityIdAndVerificationDateAfter(Integer reviewerId, LocalDateTime verificationDate);
 }

@@ -13,6 +13,7 @@ import pl.edu.pwr.programming_technologies.service.ArticleService;
 import pl.edu.pwr.programming_technologies.service.ArticleVerificationService;
 import pl.edu.pwr.programming_technologies.service.UserService;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -57,6 +58,21 @@ public class ArticleVerificationServiceImpl implements ArticleVerificationServic
         return articleVerificationRepository.findAllByUserEntityIdAndStatus(
             reviewerId, ArticleVerificationEntity.Status.CREATED, pageable
         );
+    }
+
+    @Override
+    public ArticleVerificationEntity getByArticleId(ObjectId articleId) throws EntityNotFoundException{
+
+        ArticleEntity foundArticleEntity = articleService.getArticleById(articleId);
+
+        Optional<ArticleVerificationEntity> foundArticleVerificationEntityOpt =
+            articleVerificationRepository.findFirstByArticleIdOrderByAssignmentDateDesc(articleId.toHexString());
+
+        if(foundArticleVerificationEntityOpt.isEmpty()){
+            throw new EntityNotFoundException("Podany artykuł nie ma sfinalizowanej weryfikacji");
+        }
+
+        return foundArticleVerificationEntityOpt.get();
     }
 
     @Transactional

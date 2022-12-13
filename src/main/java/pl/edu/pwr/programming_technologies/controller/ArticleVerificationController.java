@@ -1,6 +1,7 @@
 package pl.edu.pwr.programming_technologies.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -91,6 +92,36 @@ public class ArticleVerificationController {
             ));
 
         return ResponseEntity.ok(foundArticleVerificationsDTOPage);
+    }
+
+    @GetMapping("/article/{articleId}")
+    public ResponseEntity getByArticleId(@PathVariable(name="articleId") String articleIdStr){
+
+        if(!ObjectId.isValid(articleIdStr)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Podano niewłasciwe id artykułu");
+        }
+
+        ObjectId articleId = new ObjectId(articleIdStr);
+
+        ArticleVerificationEntity foundArticleVerificationEntity;
+
+        try{
+            foundArticleVerificationEntity = articleVerificationService.getByArticleId(articleId);
+        }
+        catch(EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
+        String verificationFeedback;
+
+        if(foundArticleVerificationEntity.getVerificationFeedback() != null){
+            verificationFeedback = foundArticleVerificationEntity.getVerificationFeedback();
+        }
+        else{
+            verificationFeedback = "";
+        }
+
+        return ResponseEntity.ok(verificationFeedback);
     }
 
     @PutMapping("/{articleVerificationId}")

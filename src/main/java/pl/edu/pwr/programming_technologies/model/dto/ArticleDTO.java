@@ -24,5 +24,5 @@ public class ArticleDTO {
     private String status;
     private OffsetDateTime creationDate;
     private OffsetDateTime modificationDate;
-    private Double ratingAverage;
+    private Double averageRating;
 }

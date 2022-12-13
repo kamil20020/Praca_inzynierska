@@ -57,6 +57,7 @@ public interface ArticleMapper {
             qualifiedByName = "technologyIdToTechnologyDTO"
     )
     @Mapping(source = "status", target = "status")
+    @Mapping(source = "averageRating", target = "averageRating", ignore = true)
     ArticleDTO articleEntityToArticleDTO(
             ArticleEntity articleEntity,
             @Context UserRepository userRepository,
