@@ -349,6 +349,18 @@ public void shouldNotUpdateUserWithConflictNickname(){
 }
 \end{lstlisting}
 
+\subsection{Wyniki testów}
+
+Wszystkie testy zakoñczy³y siê pomyœlnie (rysunek~\ref{fig:test-backend-1}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\linewidth]{rys04/test-backend-1}
+	\caption{Wyniki testów integracyjnych backendu dla kontrolera u¿ytkowników}
+	\label{fig:test-backend-1}
+	\caption*{ród³o: opracowanie w³asne}
+\end{figure}
+
 \section{Testy kontrolera kategorii technologii}
 
 \subsection{Test sprawdzaj¹cy, czy mo¿na pobraæ poprawne drzewo kategorii technologii}
@@ -452,6 +464,18 @@ public void shouldNotGetTechnologyCategoryByNotExistingId(){
 }
 \end{lstlisting}
 
+\subsection{Wyniki testów}
+
+Wszystkie testy zakoñczy³y siê pomyœlnie (rysunek~\ref{fig:test-backend-2}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\linewidth]{rys04/test-backend-2}
+	\caption{Wyniki testów integracyjnych backendu dla kontrolera kategorii technologii}
+	\label{fig:test-backend-2}
+	\caption*{ród³o: opracowanie w³asne}
+\end{figure}
+
 \section{Testy kontrolera technologii}
 
 \subsection{Test sprawdzaj¹cy, czy mo¿na pobraæ dane wszystkich technologii}
@@ -528,3 +552,14 @@ public void shouldNotGetAllByNotExistingTechnologyCategoryId(){
 		response.then().statusCode(HttpStatus.NOT_FOUND.value());
 }
 \end{lstlisting}
+
+Wszystkie testy zakoñczy³y siê pomyœlnie (rysunek~\ref{fig:test-backend-3}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\linewidth]{rys04/test-backend-3}
+	\caption{Wyniki testów integracyjnych backendu dla kontrolera technologii}
+	\label{fig:test-backend-3}
+	\caption*{ród³o: opracowanie w³asne}
+\end{figure}
+
