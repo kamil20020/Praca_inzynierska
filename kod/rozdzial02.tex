@@ -7,8 +7,8 @@ Pierwszym etapem realizacji pracy jest okreúlenie wymagaÒ funkcjonalnych i niefu
 \subsection{S≥ownik pojÍÊ}
 
 W pracy bÍdπ wykorzystywane nastÍpujπce pojÍcia:
-\begin{itemize}
-	\item \texttt{Technologia} - pakiet oprogramowania lub narzÍdzia developerskie wykorzystywane przez informatykÛw, a w szczegÛlnoúci przez programistÛw. 
+\begin{description}
+	\item [Technologia] - pakiet oprogramowania lub narzÍdzia developerskie wykorzystywane przez informatykÛw, a w szczegÛlnoúci przez programistÛw. 
 		Technologia bÍdzie opisywana nastÍpujπcymi atrybutami:
 		\begin{itemize}
 			\item \texttt{Nazwa},
@@ -20,7 +20,7 @@ W pracy bÍdπ wykorzystywane nastÍpujπce pojÍcia:
 			\item \texttt{Data ostatniego wydania} (opcjonalne),
 			\item \texttt{Daty edycji}.
 		\end{itemize}
-	\item \texttt{Podzia≥ technologii} - hierarchiczny podzia≥ technologii na kategorie ze wzglÍdu na ich architekturÍ. KlasyfikacjÍ tÍ moøna przedstawiÊ w postaci 
+	\item [Podzia≥ technologii] - hierarchiczny podzia≥ technologii na kategorie ze wzglÍdu na ich architekturÍ. KlasyfikacjÍ tÍ moøna przedstawiÊ w postaci 
 				nastÍpujπcego drzewa:
 				\begin{itemize}
 					\item \texttt{Technologie informatyczne}
@@ -57,7 +57,7 @@ W pracy bÍdπ wykorzystywane nastÍpujπce pojÍcia:
 						\end{itemize}
 					\item \texttt{Inne} (oprogramowanie, ktÛre nie zosta≥o przypisane do øadnej z ww. kategorii)
 				\end{itemize}
-	\item \texttt{Artyku≥} - opis danej technologii przygotowany przez uøytkownika systemu. 
+	\item [Artyku≥] - opis danej technologii przygotowany przez uøytkownika systemu. 
 		Artyku≥ bÍdzie opisywany nastÍpujπcymi atrybutami:
 		\begin{itemize}
 			\item \texttt{Status} (moøliwe wartoúci: nowy, przypisywany do weryfikacji, weryfikowany, przedawniona weryfikacja, odrzucony, opublikowany, edytowany),
@@ -85,21 +85,18 @@ W pracy bÍdπ wykorzystywane nastÍpujπce pojÍcia:
 			\caption*{èrÛd≥o: opracowanie w≥asne}
 		\end{figure}
 		
-		Na rysunku~\ref{fig:cykl-zycia-artykulu} zosta≥y przestawione przejúcia do odpowiednich statusÛw artyku≥u (zaokrπglone prostokπty) w wyniku podjÍtych przez 
-		uøytkownikÛw dzia≥aÒ.
-		
-	\item \texttt{Weryfikacja artyku≥u} - informacja o tym, czy artyku≥ powinien zostaÊ opublikowany w serwisie (zaakceptowanie artyku≥u) albo wymaga jeszcze korekty (
+	\item [Weryfikacja artyku≥u] - informacja o tym, czy artyku≥ powinien zostaÊ opublikowany w serwisie (zaakceptowanie artyku≥u) albo wymaga jeszcze korekty (
 				odrzucenie artyku≥u),
-	\item \texttt{DostÍpnoúÊ recenzenta} - informacja o tym, czy recenzent moøe weryfikowaÊ artyku≥y w danym czasie,
-	\item \texttt{Komentarz do artyku≥u} - tekstowa informacja zwrotna zalogowanego uøytkownika o danym artykule,
-	\item \texttt{Ocena artyku≥u} - ocena wystawiona przez zalogowanego uøytkownika na temat danego artyku≥u. Ocena ta jest w postaci gwiazdek bÍdπca wartoúciπ od 1 do,		
+	\item [DostÍpnoúÊ recenzenta] - informacja o tym, czy recenzent moøe weryfikowaÊ artyku≥y w danym czasie,
+	\item [Komentarz do artyku≥u] - tekstowa informacja zwrotna zalogowanego uøytkownika o danym artykule,
+	\item [Ocena artyku≥u] - ocena wystawiona przez zalogowanego uøytkownika na temat danego artyku≥u. Ocena ta jest w postaci gwiazdek bÍdπca wartoúciπ od 1 do,		
 				przy czym wartoúÊ 1 oznacza ocenÍ negatywnπ i wskazuje, øe artyku≥ posiada raøπce b≥Ídy i powinien zostaÊ edytowany albo usuniÍty, a wartoúÊ 5 oznacza ocenÍ 
 				pozytywnπ i wskazuje, øe artyku≥ nie posiada raøπcych b≥ÍdÛw oraz informacje w nim zawarte sπ niezwykle przydatne dla uøytkownikÛw,
-	\item \texttt{Opinia o artykule} - oceniajπca informacja zwrotna zalogowanego uøytkownika na temat danego artyku≥u, ktÛra zawiera tekstowy komentarz oraz 
+	\item [Opinia o artykule] - oceniajπca informacja zwrotna zalogowanego uøytkownika na temat danego artyku≥u, ktÛra zawiera tekstowy komentarz oraz 
 				ocenÍ tego artyku≥u,
-	\item \texttt{Akceptacja opinii o artykule} - ocena wystawiona przez zalogowanego uøytkownika dotyczπca opinii o artykule. Przyjmuje ona dwie wartoúci: ocena pozytywna (
+	\item [Akceptacja opinii o artykule] - ocena wystawiona przez zalogowanego uøytkownika dotyczπca opinii o artykule. Przyjmuje ona dwie wartoúci: ocena pozytywna (
 				≥apka w gÛrÍ) oznaczajπca, øe uøytkownik zgadza siÍ z opiniπ i ocena negatywna (≥apka w dÛ≥) oznaczajπca, iø uøytkownik nie zgadza siÍ z opiniπ.
-	\item \texttt{Rola} - zestaw uprawnieÒ uøytkownika, ktÛre okreúlajπ jego zakres dostÍpu do systemu oraz okreúlonych funkcji tego systemu. Moøliwe jest przypisanie danemu 
+	\item [Rola] - zestaw uprawnieÒ uøytkownika, ktÛre okreúlajπ jego zakres dostÍpu do systemu oraz okreúlonych funkcji tego systemu. Moøliwe jest przypisanie danemu 
 				uøytkownikowi rÛl, co jest rÛwnoznaczne z uzyskaniem przez tego uøytkownika uprawnieÒ zdefiniowanych w tych rolach. WyrÛøniono w systemie nastÍpujπce 
 				role:
 		\begin{itemize}
@@ -120,7 +117,7 @@ W pracy bÍdπ wykorzystywane nastÍpujπce pojÍcia:
 			\item \texttt{System} - wbudowane procedury, ktÛre umoøliwiajπ automatyczne przypisywanie recenzenta do weryfikacji artyku≥Ûw oraz automatyczne ponowne przypisanie 
 						artyku≥u do weryfikacji innemu recenzentowi, jeúli up≥ynπ≥ 1-tygodniowy termin weryfikacji artyku≥u przeprowadzanej przez aktualnego recenzenta.
 		\end{itemize}
-\end{itemize}
+\end{description}
 				
 \subsection{Wymagania funkcjonalne dla systemu IT Tech}
 	Po zdefiniowaniu pojÍÊ, przystπpiono do okreúlenia wymagaÒ funkcjonalnych dla poszczegÛlnych uøytkownikÛw.
@@ -130,7 +127,7 @@ W pracy bÍdπ wykorzystywane nastÍpujπce pojÍcia:
 	\begin{itemize}
 		\item \texttt{Uøytkownik} powinien mieÊ moøliwoúÊ:
 			\begin{itemize}
-				\item wyszukiwania artyku≥Ûw po nastÍpujπcych kryteriach:
+				\item wyszukiwania artyku≥Ûw po nastÍpujπcych polach:
 					\begin{itemize}
 						\item \texttt{Tytu≥},
 						\item \texttt{Autor},
@@ -153,7 +150,7 @@ W pracy bÍdπ wykorzystywane nastÍpujπce pojÍcia:
 				\item wyúwietlenia zawartoúci artyku≥u,
 				\item przeglπdania komentarzy o artykule,
 				\item przeglπdania opinii o artykule,
-				\item wyszukiwania technologii po nastÍpujπcych kryteriach:
+				\item wyszukiwania technologii po nastÍpujπcych polach:
 					\begin{itemize}
 						\item \texttt{Nazwa},
 						\item \texttt{Kategoria},
@@ -265,6 +262,8 @@ W pracy bÍdπ wykorzystywane nastÍpujπce pojÍcia:
 			\end{itemize}
 \end{itemize}
 
+\newpage
+
 \section{Wymagania niefunkcjonalne}
 
 Na podstawie celu oraz zakresu pracy zdefiniowano nastÍpujπce wymagania niefunkcjonalne:
@@ -327,7 +326,7 @@ Jako g≥Ûwnπ bazÍ danych wybrano bazÍ obiektowo-relacyjnπ, gdyø bazy relacyjne ch
 Artyku≥y majπ z≥oøonπ zagnieødøonπ strukturÍ, zawierajπ rozdzia≥y, podrozdzia≥y, komentarze oraz opinie. Nierelacyjna baza dokumentowa wydaje siÍ byÊ idealnym pomys≥em do przechowywania takich informacji. Baza ta pozwala na przechowywanie struktur typu klucz-wartoúÊ, co zapewnia duøπ elastycznoúÊ w przechowywaniu danych, gdyø pozwala na m.in. przechowywanie zagnieødøonych struktur oraz umoøliwia pobranie danych w postaci zagnieødøonej struktury nawet poprzez jedno zapytanie. Dla porÛwnania w przypadku relacyjnej bazy danych naleøa≥oby wykonaÊ wiele klauzuli JOIN aby pobraÊ te same dane i przez co traci≥oby siÍ na efektywnoúci.
 
 \subsection{Aplikacja serwerowa - Backend}
-Backend jest odpowiedzialny za przyjmowanie øπdaÒ od klienta, odpowiednie przetwarzanie tych øπdaÒ, wykonywanie pewnych operacji na danych przechowywanych w bazie danych na podstawie otrzymanych przez klienta danych i przekazywanie klientowi adekwatnej odpowiedzi. Backend udostÍpnia klientowi punkty koÒcowe (ang.\ \emph{API endpoints}) do ktÛrych klient moøe przes≥aÊ øπdanie. Punkty koÒcowe posiadajπ adresy URL np. http://localhost:9000/user. Adresy URL sk≥adajπ siÍ nazwy protoko≥u, nazwy hosta docelowego, portu docelowego oraz reszty, ktÛra identyfikuje punkt koÒcowy oraz jego przeznaczenie. Waønym elementem w przypadku backendu jest rÛwnieø wys≥anie klientowi odpowiedniego statusu odpowiedzi oraz ewentualne do≥πczenie informacji zwrotnej. DziÍki temu klient bÍdzie mÛg≥ odpowiednio zareagowaÊ na otrzymanπ odpowiedü (np. w przypadku otrzymania negatywnej odpowiedzi, klient wyúwietli uøytkownikowi komunikat o b≥Ídzie, a w przypadku otrzymania odpowiedzi negatywnej, klient wyúwietli komunikat o sukcesie). Punkty koÒcowe backendu sπ chronione przez warstwÍ bezpieczeÒstwa. Klient bÍdzie mÛg≥ wys≥aÊ øπdanie na dany endpoint tylko wtedy, gdy uøytkownik po stronie klienta bÍdzie mia≥ wymagane przez ten endpoint uprawnienia (role). Warstwa ta jest úciúle powiπzana z warstwπ bazy danych.
+Backend jest odpowiedzialny za przyjmowanie øπdaÒ od klienta, odpowiednie przetwarzanie tych øπdaÒ, wykonywanie pewnych operacji na danych przechowywanych w bazie danych na podstawie otrzymanych przez klienta danych i przekazywanie klientowi adekwatnej odpowiedzi. Backend udostÍpnia klientowi punkty koÒcowe (ang.\ \emph{API endpoints}) do ktÛrych klient moøe przes≥aÊ øπdanie. Punkty koÒcowe posiadajπ adresy URL np. http://localhost:9000/user. Adresy URL sk≥adajπ siÍ nazwy protoko≥u, nazwy hosta docelowego, portu docelowego oraz reszty, ktÛra identyfikuje punkt koÒcowy oraz jego przeznaczenie. Waønym elementem w przypadku backendu jest rÛwnieø wys≥anie klientowi odpowiedniego statusu odpowiedzi oraz ewentualne do≥πczenie informacji zwrotnej. DziÍki temu klient bÍdzie mÛg≥ odpowiednio zareagowaÊ na otrzymanπ odpowiedü (np. w przypadku otrzymania negatywnej odpowiedzi, klient wyúwietli uøytkownikowi komunikat o b≥Ídzie, a w przypadku otrzymania odpowiedzi pozytywnej, klient wyúwietli komunikat o sukcesie). Punkty koÒcowe backendu sπ chronione przez warstwÍ bezpieczeÒstwa. Klient bÍdzie mÛg≥ wys≥aÊ øπdanie na dany endpoint tylko wtedy, gdy uøytkownik po stronie klienta bÍdzie mia≥ wymagane przez ten endpoint uprawnienia (role). Warstwa ta jest úciúle powiπzana z warstwπ bazy danych.
 
 \subsection{Klient - Frontend}
 Frontend jest odpowiedzialny za wysy≥anie øπdaÒ do warstwy backendowej i nastÍpnie odpowiednie przetwarzanie oraz wyúwietlanie danych otrzymanych w odpowiedzi od backendu. W systemie tym klientem jest strona internetowa renderowana po stronie uøytkownika. Klient jest aplikacjπ typu SPA (ang.\ \emph{Single Page Application}), co oznacza, øe aplikacja sk≥ada siÍ z jednej strony HTML, a jej zawartoúÊ jest zmieniana dynamiczne poprzez JavaScript. Zdecydowano siÍ na aplikacjÍ typu SPA, a nie MPA (ang.\ \emph{Multi Page Application}) g≥Ûwnie dlatego, øe aplikacje SPA dzia≥ajπ szybciej z powodu tylko jednej strony HTML. Kolejnymi kryteriami na korzyúÊ SPA by≥y ≥atwiejsze wdroøenie, gdyø wystarczπ do tego jedynie 3 pliki (HTML, CSS i JavaScript), ≥atwiejsze wprowadzenie dynamicznej zawartoúci oraz u≥atwione tworzenie aplikacji. Frontend jest rÛwnieø chroniony przez warstwÍ bezpieczeÒstwa. Uøytkownik bÍdzie mia≥ dostÍp do podstron oraz funkcji systemu jedynie w zakresie posiadanych przez niego uprawnieÒ (rÛl).
@@ -357,7 +356,8 @@ Na podstawie analizy wymagaÒ funkcjonalnych zdefiniowano nastÍpujπcych aktorÛw:
 	\item \texttt{Autor opinii o artykule},
 	\item \texttt{Autor akceptacji opinii o artykule},
 	\item \texttt{Recenzent},
-	\item \texttt{Administrator}.
+	\item \texttt{Administrator},
+	\item \texttt{System}.
 \end{itemize}
 
 \subsection{Diagramy przypadkÛw uøycia}
@@ -372,12 +372,12 @@ Na podstawie zdefiniowanych wczeúniej wymagaÒ funkcjonalnych oraz zidentyfikowan
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
 
-Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalnych i liczby rÛl, dla zachowania czytelnoúci, stworzono osobne diagramy dla kaødego aktora. Poniøej znajdujπ siÍ diagramy przypadkÛw uøycia dla poszczegÛlnych aktorÛw. 
+Z powodu duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalnych i liczby rÛl, dla zachowania czytelnoúci, stworzono osobne diagramy dla kaødego aktora. Poniøej znajdujπ siÍ diagramy przypadkÛw uøycia dla poszczegÛlnych aktorÛw. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-uzytkownik}
-	\caption{Diagram przypadkÛw uøycia dla kaødego uøytkownika}
+	\caption{Diagram przypadkÛw uøycia dla Uøytkownika}
 	\label{fig:diagram-przypadkow-uzycia-uzytkownik}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -385,7 +385,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{rys02/diagram-przypadkow-uzycia-niezalogowany-uzytkownik}
-	\caption{Diagram przypadkÛw uøycia dla niezalogowanego uøytkownika}
+	\caption{Diagram przypadkÛw uøycia dla Niezalogowanego uøytkownika}
 	\label{fig:diagram-przypadkow-uzycia-niezalogowany-uzytkownik}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -393,7 +393,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-zalogowany-uzytkownik}
-	\caption{Diagram przypadkÛw uøycia dla zalogowanego uøytkownika}
+	\caption{Diagram przypadkÛw uøycia dla Zalogowanego uøytkownika}
 	\label{fig:diagram-przypadkow-uzycia-zalogowany-uzytkownik}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -401,7 +401,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\linewidth]{rys02/diagram-przypadkow-uzycia-autor-artykulu}
-	\caption{Diagram przypadkÛw uøycia dla autora artyku≥u}
+	\caption{Diagram przypadkÛw uøycia dla Autora artyku≥u}
 	\label{fig:diagram-przypadkow-uzycia-autor-artykulu}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -409,7 +409,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-autor-komentarza-o-artykule}
-	\caption{Diagram przypadkÛw uøycia dla autora komentarza o artykule}
+	\caption{Diagram przypadkÛw uøycia dla Autora komentarza o artykule}
 	\label{fig:diagram-przypadkow-uzycia-autor-komentarza-o-artykule}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -417,7 +417,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{rys02/diagram-przypadkow-uzycia-autor-opinii-o-artykule}
-	\caption{Diagram przypadkÛw uøycia dla autora opinii o artykule}
+	\caption{Diagram przypadkÛw uøycia dla Autora opinii o artykule}
 	\label{fig:diagram-przypadkow-uzycia-autor-opinii-o-artykule}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -425,7 +425,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{rys02/diagram-przypadkow-uzycia-autor-akceptacji-opinii-o-artykule}
-	\caption{Diagram przypadkÛw uøycia dla autora akceptacji opinii artykule}
+	\caption{Diagram przypadkÛw uøycia dla Autora akceptacji opinii artykule}
 	\label{fig:diagram-przypadkow-uzycia-autor-akceptacji-opinii-o-artykule}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -433,7 +433,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-recenzent}
-	\caption{Diagram przypadkÛw uøycia dla recenzenta}
+	\caption{Diagram przypadkÛw uøycia dla Recenzenta}
 	\label{fig:diagram-przypadkow-uzycia-recenzent}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -441,7 +441,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/diagram-przypadkow-uzycia-administrator}
-	\caption{Diagram przypadkÛw uøycia dla administratora}
+	\caption{Diagram przypadkÛw uøycia dla Administratora}
 	\label{fig:diagram-przypadkow-uzycia-administrator}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -449,7 +449,7 @@ Z powody dosyÊ duøej z≥oøonoúci systemu pod wzglÍdem liczby wymagaÒ funkcjonalny
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{rys02/diagram-przypadkow-uzycia-system}
-	\caption{Diagram przypadkÛw uøycia dla systemu}
+	\caption{Diagram przypadkÛw uøycia dla Systemu}
 	\label{fig:diagram-przypadkow-uzycia-system}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -467,10 +467,10 @@ Dla kaødego przypadku uøycia zdefiniowanego w poprzednim punkcie, zrobiono szcze
 	\item Alternatywne przebiegi.
 \end{itemize}
 
-Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, aby zaplanowaÊ wyglπd interfejsu uøytkownika oraz aby ≥atwiej moøna by≥o pojπÊ opisy przypadkÛw uøycia.
+Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, aby zaplanowaÊ wyglπd interfejsu uøytkownika oraz aby opisy przypadkÛw uøycia by≥y bardziej zrozumia≥e.
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - rejestracja}
+	\caption{Opis przypadku uøycia - Rejestracja}
 	\label{tab:opis-przypadku-uzycia-rejestracja} \\ \hline
 	Nazwa: & Rejestracja \\ \hline
 	Cel: & Utworzenie konta zwyk≥ego uøytkownika\\ \hline
@@ -539,7 +539,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - logowanie}
+	\caption{Opis przypadku uøycia - Logowanie}
 	\label{tab:opis-przypadku-uzycia-logowanie} \\ \hline
 	Nazwa: & Logowanie \\ \hline
 	Cel: & Zalogowanie siÍ uøytkownika \\ \hline
@@ -616,7 +616,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - wylogowanie}
+	\caption{Opis przypadku uøycia - Wylogowanie}
 	\label{tab:opis-przypadku-uzycia-wylogowanie} \\ \hline
 	Nazwa: & Wylogowanie \\ \hline
 	Cel: & Wylogowanie siÍ uøytkownika \\ \hline
@@ -642,7 +642,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - edycja w≥asnych danych}
+	\caption{Opis przypadku uøycia - Edycja w≥asnych danych}
 	\label{tab:opis-przypadku-uzycia-edycja-wlasnych-danych} \\ \hline
 	Nazwa: & Edycja w≥asnych danych \\ \hline
 	Cel: & Zapisanie danych uøytkownika zgodnie z wprowadzonymi przez niego zmianami \\ \hline
@@ -697,7 +697,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |}
-	\caption{Opis przypadku uøycia - zmiana has≥a}
+	\caption{Opis przypadku uøycia - Zmiana has≥a}
 	\label{tab:opis-przypadku-uzycia-zmiana-hasla} \\ \hline
 	Nazwa: & Zmiana has≥a \\ \hline
 	Cel: & Zmiana has≥a zgodnie z wprowadzonπ przez uøytkownika wartoúciπ \\ \hline
@@ -743,7 +743,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |}
-	\caption{Opis przypadku uøycia - edycja danych innych uøytkownikÛw}
+	\caption{Opis przypadku uøycia - Edycja danych innych uøytkownikÛw}
 	\label{tab:opis-przypadku-uzycia-edycja-danych-innych-uzytkownikow} \\ \hline
 	Nazwa: & Edycja danych innych uøytkownikÛw \\ \hline
 	Opis: & Zapisanie danych innego uøytkownika zgodnie z wprowadzonymi zmianami \\ \hline
@@ -828,7 +828,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - zarzπdzanie rolami uøytkownika}
+	\caption{Opis przypadku uøycia - Zarzπdzanie rolami uøytkownika}
 	\label{tab:opis-przypadku-uzycia-zarzadzanie-rolami-uzytkownika} \\ \hline
 	Nazwa: & Zarzπdzanie rolami innego uøytkownika \\ \hline
 	Cel: & Zmiana przypisanych rÛl innego uøytkownika \\ \hline
@@ -855,7 +855,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{longtable}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - zmiana w≥asnej dostÍpnoúci}
+	\caption{Opis przypadku uøycia - Zmiana w≥asnej dostÍpnoúci}
 	\label{tab:opis-przypadku-uzycia-zmiana-wlasnej-dostepnosci} \\ \hline
 	Nazwa: & Zmiana w≥asnej dostÍpnoúci \\ \hline
 	Cel: & Zmiana w≥asnej dostÍpnoúci w przypadku przypisywania artyku≥Ûw do weryfikacji \\ \hline
@@ -932,7 +932,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 
 \begin{table}[H] \small
 	\centering
-	\caption{Opis przypadku uøycia - wyszukiwanie artyku≥Ûw}
+	\caption{Opis przypadku uøycia - Wyszukiwanie artyku≥Ûw}
 	\label{tab:opis-przypadku-uzycia-wyszukiwanie-artykulow}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 		Nazwa: & Wyszukiwanie artyku≥Ûw \\ \hline
@@ -964,7 +964,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 
 \begin{table}[H] \small
 	\centering
-	\caption{Opis przypadku uøycia - sortowanie artyku≥Ûw}
+	\caption{Opis przypadku uøycia - Sortowanie artyku≥Ûw}
 	\label{tab:opis-przypadku-uzycia-sortowanie-artykulow}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Sortowanie artyku≥Ûw \\ \hline
@@ -993,7 +993,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 
 \begin{table}[H] \small
 	\centering
-	\caption{Opis przypadku uøycia - wyúwietlenie zawartoúci artyku≥u}
+	\caption{Opis przypadku uøycia - Wyúwietlenie zawartoúci artyku≥u}
 	\label{tab:opis-przypadku-uzycia-wyswietlenie-zawartosci-artykulu}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Wyúwietlenie zawartoúci artyku≥u \\ \hline
@@ -1013,7 +1013,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys02/prototypy-ui/prototyp-ui-artykul}
-	\caption{Panel z zawartoúciπ artyku≥u}
+	\caption{Panel z przyk≥adowπ zawartoúciπ artyku≥u}
 	\label{fig:prototyp-ui-artykul}
 	\caption*{èrÛd≥o: opracowanie w≥asne}
 \end{figure}
@@ -1021,7 +1021,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \newpage
 
 \begin{longtable}{| m{0.3\linewidth} | m{0.65\linewidth} |}
-	\caption{Opis przypadku uøycia - utworzenie artyku≥u} 
+	\caption{Opis przypadku uøycia - Utworzenie artyku≥u} 
 	\label{tab:opis-przypadku-uzycia-utworzenie-artykulu}  \\ \hline
 	Nazwa: & Utworzenie artyku≥u \\ \hline
 	Cel: & Utworzenie artyku≥u i wyúwietlenie zawartoúci tego artyku≥u \\ \hline
@@ -1069,7 +1069,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.3\linewidth} | m{0.65\linewidth} |}
-	\caption{Opis przypadku uøycia - zarzπdzanie w≥asnym artyku≥em} 
+	\caption{Opis przypadku uøycia - Zarzπdzanie w≥asnym artyku≥em} 
 	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasnym-artykulem}  \\ \hline
 	Nazwa: & Zarzπdzanie w≥asnym artyku≥em \\ \hline
 	Cel: & Zmodyfikowanie lub usuniÍcie w≥asnego artyku≥u \\ \hline
@@ -1131,7 +1131,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{longtable}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - wyúwietlenie listy przypisanych artyku≥Ûw} 
+	\caption{Opis przypadku uøycia - Wyúwietlenie listy przypisanych artyku≥Ûw} 
 	\label{tab:opis-przypadku-uzycia-wyswietlenie-listy-przypisanych-artykulow}  \\ \hline
 	Nazwa: & Wyúwietlenie listy przypisanych artyku≥Ûw \\ \hline
 	Cel: & Wyúwietlenie listy artyku≥Ûw przypisanych recenzentowi do weryfikacji \\ \hline
@@ -1164,7 +1164,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 
 \begin{table}[H] \small
 	\centering
-	\caption{Opis przypadku uøycia - weryfikacja artyku≥u} 
+	\caption{Opis przypadku uøycia - Weryfikacja artyku≥u} 
 	\label{tab:opis-przypadku-uzycia-weryfikacja-artykulu}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 		Nazwa: & Weryfikacja przypisanych artykulÛw \\ \hline
@@ -1190,7 +1190,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - akceptacja artyku≥u} 
+	\caption{Opis przypadku uøycia - Akceptacja artyku≥u} 
 	\label{tab:opis-przypadku-uzycia-akceptacja-artykulu}  \\ \hline
 	Nazwa: & Akceptacja artyku≥u \\ \hline
 	Cel: & Akceptacja artyku≥u, co bÍdzie skutkowa≥o tym, øe artyku≥ zostanie opublikowany w serwisie \\ \hline
@@ -1232,7 +1232,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - odrzucenie artyku≥u}
+	\caption{Opis przypadku uøycia - Odrzucenie artyku≥u}
 	\label{tab:opis-przypadku-uzycia-odrzucenie-artykulu}  \\ \hline
 	Nazwa: & Odrzucenie artyku≥u \\ \hline
 	Cel: & Odrzucenie artyku≥u, co bÍdzie skutkowa≥o tym, øe artyku≥ nie zostanie opublikowany w serwisie, gdyø wymaga poprawek \\ \hline
@@ -1275,7 +1275,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - zarzπdzanie artyku≥ami} 
+	\caption{Opis przypadku uøycia - Zarzπdzanie artyku≥ami} 
 	\label{tab:opis-przypadku-uzycia-zarzadzanie-artykulami}  \\ \hline
 	Nazwa: & Zarzπdzanie artyku≥ami \\ \hline
 	Cel: & Modyfikacja lub usuniÍcie artyku≥u \\ \hline
@@ -1343,7 +1343,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 
 \begin{table}[H] \small
 	\centering
-	\caption{Opis przypadku uøycia - przeglπdanie komentarzy o artykule}
+	\caption{Opis przypadku uøycia - Przeglπdanie komentarzy o artykule}
 	\label{tab:opis-przypadku-uzycia-przeglπdanie-komentarzy-o-artykule}
 	\begin{tabularx}{\linewidth}{| m{0.35\linewidth} | m{0.6\linewidth} |} \hline\
 	  Nazwa: & Przeglπdanie komentarzy o artykule \\ \hline
@@ -1370,7 +1370,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - dodanie komentarza o artykule}
+	\caption{Opis przypadku uøycia - Dodanie komentarza o artykule}
 	\label{tab:opis-przypadku-uzycia-dodanie-komentarza-o-artykule} \\ \hline
 	Nazwa: & Dodanie komentarza o artykule \\ \hline
 	Cel: & Dodanie komentarza do artyku≥u \\ \hline
@@ -1415,7 +1415,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - zarzπdzanie w≥asnym komentarzem o artykule}
+	\caption{Opis przypadku uøycia - Zarzπdzanie w≥asnym komentarzem o artykule}
 	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasnym-komentarzem-o-artykule} \\ \hline
 	Nazwa: & Zarzπdzanie w≥asnym komentarzem o artykule \\ \hline
 	Cel: & Modyfikacja lub usuniÍcie w≥asnego komentarza do artyku≥u \\ \hline
@@ -1480,7 +1480,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - usuwanie komentarzy o artykule}
+	\caption{Opis przypadku uøycia - Usuwanie komentarzy o artykule}
 	\label{tab:opis-przypadku-uzycia-usuwanie-komentarzy-o-artykule} \\ \hline
 	Nazwa: & Usuwanie komentarzy o artykule \\ \hline
 	Cel: & UsuniÍcie wybranego komentarza o artykule \\ \hline
@@ -1516,7 +1516,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - przeglπdanie opinii o artykule}
+	\caption{Opis przypadku uøycia - Przeglπdanie opinii o artykule}
 	\label{tab:opis-przypadku-uzycia-przegladanie-opinii-o-artykule} \\ \hline
 	Nazwa: & Przeglπdanie opinii o artykule \\ \hline
 	Cel: & Wyúwietlenie opinii dotyczπcych danego artyku≥u \\ \hline
@@ -1541,7 +1541,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - dodanie opinii o artykule}
+	\caption{Opis przypadku uøycia - Dodanie opinii o artykule}
 	\label{tab:opis-przypadku-uzycia-dodanie-opinii-o-artykule} \\ \hline
 	Nazwa: & Dodanie opinii o artykule \\ \hline
 	Cel: & Dodanie opinii o artykule \\ \hline
@@ -1586,7 +1586,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - zarzπdzanie w≥asnπ opiniπ o artykule}
+	\caption{Opis przypadku uøycia - Zarzπdzanie w≥asnπ opiniπ o artykule}
 	\label{tab:opis-przypadku-uzycia-zarzadzanie-wlasna-opinia-o-artykule} \\ \hline
 	Nazwa: & Zarzπdzanie w≥asnπ opiniπ o artykule \\ \hline
 	Cel: & Modyfikacja lub usuniÍcie w≥asnej opinii do artyku≥u \\ \hline
@@ -1643,7 +1643,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{longtable}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - usuwanie opinii o artykule}
+	\caption{Opis przypadku uøycia - Usuwanie opinii o artykule}
 	\label{tab:opis-opinii-uzycia-usuwanie-opinii-o-artykule} \\ \hline
 	Nazwa: & Usuwanie komentarzy o artykule \\ \hline
 	Cel: & UsuniÍcie wybranej opinii o artykule \\ \hline
@@ -1679,7 +1679,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - dodanie akceptacji opinii o artykule}
+	\caption{Opis przypadku uøycia - Dodanie akceptacji opinii o artykule}
 	\label{tab:opis-przypadku-uzycia-dodanie-akceptacji-opinii-o-artykule} \\ \hline
 	Nazwa: & Dodanie akceptacji opinii o artykule \\ \hline
 	Cel: & Dodanie akceptacji opinii o artykule \\ \hline
@@ -1708,7 +1708,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{longtable}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - usuniÍcie akceptacji opinii o artykule}
+	\caption{Opis przypadku uøycia - UsuniÍcie akceptacji opinii o artykule}
 	\label{tab:opis-przypadku-uzycia-usuniecie-akceptacji-opinii-o-artykule} \\ \hline
 	Nazwa: & UsuniÍcie akceptacji opinii o artykule \\ \hline
 	Cel: & UsuniÍcie akceptacji opinii o artykule \\ \hline
@@ -1726,7 +1726,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{longtable}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - wyszukiwanie technologii}
+	\caption{Opis przypadku uøycia - Wyszukiwanie technologii}
 	\label{tab:opis-przypadku-uzycia-wyszukiwanie-technologii} \\ \hline
 	Nazwa: & Wyszukiwanie technologii \\ \hline
 	Opis: & Wyszukiwanie technologii wed≥ug podanych przez uøytkownika kryteriÛw i wyúwietlenie wynikÛw tego wyszukiwania w postaci listy technologii \\ \hline
@@ -1754,7 +1754,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - sortowanie technologii}
+	\caption{Opis przypadku uøycia - Sortowanie technologii}
 	\label{tab:opis-przypadku-uzycia-sortowanie-technologii} \\ \hline
 	Nazwa: & Sortowanie technologii \\ \hline
 	Opis: & Posortowanie wyszukanych technologii wed≥ug opcji sortowania wybranej przez uøytkownika oraz wyúwietlenie listy tych posortowanych technologii \\ \hline
@@ -1780,7 +1780,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - wyúwietlenie opisu technologii}
+	\caption{Opis przypadku uøycia - Wyúwietlenie opisu technologii}
 	\label{tab:opis-przypadku-uzycia-wyswietlenie-opisu-technologii} \\ \hline
 	Nazwa: & Wyúwietlenie opisu technologii \\ \hline
 	Cel: & Wyúwietlenie opisu technologii \\ \hline
@@ -1814,7 +1814,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - edycja klasyfikacji technologii}
+	\caption{Opis przypadku uøycia - Edycja klasyfikacji technologii}
 	\label{tab:opis-przypadku-uzycia-edycja-klasyfikacji-technologii} \\ \hline
 	Nazwa: & Edycja klasyfikacji technologii \\ \hline
 	Cel: & Dodanie nowej technologii, modyfikacja albo usuniÍcie istniejπcej technologii \\ \hline
@@ -1916,7 +1916,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{figure}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - wyszukiwanie artyku≥Ûw z przeterminowanπ weryfikacjπ}
+	\caption{Opis przypadku uøycia - Wyszukiwanie artyku≥Ûw z przeterminowanπ weryfikacjπ}
 	\label{tab:opis-przypadku-uzycia-wyszukiwanie-artykulow-z-przeterminowana-weryfikacja} \\ \hline
 	Nazwa: & Wyszukiwanie artyku≥Ûw z przeterminowanπ weryfikacjπ \\ \hline
 	Cel: & Wyszukanie artyku≥Ûw z przeterminowanπ weryfikacjπ \\ \hline
@@ -1933,7 +1933,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{longtable}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - przypisanie recenzentowi artyku≥u do weryfikacji}
+	\caption{Opis przypadku uøycia - Przypisanie recenzentowi artyku≥u do weryfikacji}
 	\label{tab:opis-przypadku-uzycia-przypisanie-recenzentowi-artykulu-do-weryfikacji} \\ \hline
 	Nazwa: & Przypisanie recenzentowi artyku≥u do weryfikacji \\ \hline
 	Cel: & Przypisanie recenzentowi artyku≥u do weryfikacji \\ \hline
@@ -1965,7 +1965,7 @@ Dla kaødego przypadku uøycia zrobiono dodatkowo prototypy ekranu uøytkownika, ab
 \end{longtable}
 
 \begin{longtable}{| m{0.35\linewidth} | m{0.6\linewidth} |} 
-	\caption{Opis przypadku uøycia - przypisanie artyku≥u do weryfikacji innemu recenzentowi}
+	\caption{Opis przypadku uøycia - Przypisanie artyku≥u do weryfikacji innemu recenzentowi}
 	\label{tab:opis-przypadku-uzycia-przypisanie-artykulu-do-weryfikacji-innemu-recenzentowi} \\ \hline
 	Nazwa: & Przypisanie artyku≥u do weryfikacji innemu recenzentowi \\ \hline
 	Cel: & Przypisanie artyku≥u do weryfikacji innemu recenzentowi \\ \hline

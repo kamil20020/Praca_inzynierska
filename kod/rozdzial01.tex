@@ -4,11 +4,23 @@
 
 Z powodu szybkiego rozwoju informatyki potrzebne jest ci¹g³e bycie na bie¿¹co z technologiami programistycznymi oraz obserwowanie trendów. Wa¿ne jest zatem aby publikowane treœci by³y jak najbardziej aktualne. Nieaktualne treœci najczêœciej wystêpuj¹ w ksi¹¿kach, gdy¿ pisanie ksi¹¿ki trwa zazwyczaj bardzo d³ugo np. rok. Czêsto zdarza siê sytuacja, ¿e ksi¹¿ka w dniu wydania ju¿ zawiera treœci przestarza³e.
 
-Programista, który chcia³by siê czegoœ dowiedzieæ o technologii, z któr¹ nie jest zaznajomiony, najczêœciej mo¿e skorzystaæ z dokumentacji tej technologii albo serwisu informacyjnego dostarczaj¹cego treœci z wielu dziedzin (np. Wikipedia). Problemem jest tutaj to, ¿e nie ma popularnych serwisów informacyjnych, które zawieraj¹ treœci bêd¹ce pomiêdzy dokumentacjami i ogólnymi serwisami informacyjnymi. Z jednej strony dokumentacje technologii zawieraj¹ szczegó³owe treœci oraz rzadko kiedy wplatane s¹ jakieœ przyk³ady, a z drugiej strony encyklopedyczne serwisy informacyjne zawieraj¹ jedynie treœci ogólne. Dokumentacja mo¿e byæ niezrozumia³a dla tego u¿ytkownika, a serwisy informacyjne obejmuj¹ce wiele dziedzin najczêœciej nie dostarcz¹ mu wystarczaj¹cych informacji.
+Programista, który chcia³by siê czegoœ dowiedzieæ o technologii, z któr¹ nie jest zaznajomiony, najczêœciej mo¿e skorzystaæ z dokumentacji tej technologii albo serwisu informacyjnego dostarczaj¹cego treœci z wielu dziedzin (np. Wikipedia~\cite{Wikipedia}). Z jednej strony dokumentacje technologii zawieraj¹ szczegó³owe treœci oraz rzadko kiedy wplatane s¹ jakieœ przyk³ady, a z drugiej strony encyklopedyczne serwisy informacyjne zawieraj¹ jedynie treœci ogólne. Dokumentacja mo¿e byæ niezrozumia³a dla tego u¿ytkownika, a serwisy informacyjne obejmuj¹ce wiele dziedzin najczêœciej nie dostarcz¹ mu wystarczaj¹cych informacji.
 
-Aktualnie nie ma popularnych serwisów informacyjnych zorientowanych jedynie na technologiach programistycznych, ale istnieje na rynku du¿o serwisów, które s¹ zorientowane na wiele dziedzin.
+Dobrym przyk³adem typowej dokumentacji jest specyfikacja jêzyka Java w wersji 17~\cite{JSR}. Fragment tej specyfikacji jest przedstawiony na rysunku~\ref{fig:jsr}.
 
-Jednym z takich serwisów jest niezwykle popularna Wikipedia~\ref{fig:wikipedia}~\cite{Wikipedia}. Wikipedia jest to serwis obejmuj¹cy bardzo wiele dziedzin, który umo¿liwia u¿ytkownikom publikowanie treœci w postaci artyku³ów. Treœci publikowane w tym serwisie zazwyczaj s¹ utrzymane w tonie encyklopedii. Serwis ten jest zorientowany na informacje i dlatego posiada s³abo rozwiniêt¹ formê spo³ecznoœciow¹. Przy ka¿dym z artyku³ów jest sekcja ,,Dyskusja'', w której mo¿na umieœciæ komentarz lub odpowiedzieæ na komentarz innego u¿ytkownika.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\linewidth]{rys01/jsr}
+	\caption{Fragment specyfikacji jêzyka Java w wersji 17}
+	\label{fig:jsr}
+	\caption*{ród³o: https://docs.oracle.com/javase/specs/jls/se17/jls17.pdf}
+\end{figure}
+
+Przedstawiony fragment dotyczy typów sparametryzowanych. Specyfikacja ta jest bardzo obszerna, szczegó³owa, rzadko kiedy wplatane s¹ przyk³ady oraz brak jest kolorowych grafik, które mog³yby poprawiæ czytelnoœæ tekstu oraz jego zrozumienie. Dokumentacja ta jest zbyt trudna w odbiorze dla u¿ytkowników, którzy nie s¹ ekspertami w tej technologii.
+
+Aktualnie nie ma popularnych serwisów informacyjnych zorientowanych jedynie na technologiach programistycznych, ale istnieje na rynku du¿o serwisów, które s¹ zorientowane na wiele dziedzin. 
+
+Jednym z takich serwisów jest niezwykle popularna Wikipedia, której przyk³adowy artyku³ jest przedstawiony na rysunku~\ref{fig:wikipedia}. Wikipedia jest to serwis obejmuj¹cy bardzo wiele dziedzin, który umo¿liwia u¿ytkownikom publikowanie treœci w postaci artyku³ów. Treœci publikowane w tym serwisie zazwyczaj s¹ utrzymane w tonie encyklopedii. Serwis ten jest zorientowany na informacje i dlatego posiada s³abo rozwiniêt¹ formê spo³ecznoœciow¹. Przy ka¿dym z artyku³ów jest sekcja ,,Dyskusja'', w której mo¿na umieœciæ komentarz lub odpowiedzieæ na komentarz innego u¿ytkownika.
 
 \begin{figure}[H]
 	\centering
@@ -68,10 +80,12 @@ Systemy umo¿liwiaj¹ce dostarczanie treœci ka¿demu u¿ytkownikowi s¹ szczególnie n
 				uzasadnienia do wystawionej oceny,
 	\item brak mo¿liwoœci ocenienia opinii innego u¿ytkownika.
 \end{itemize}
+ 
+Podsumowuj¹c, problemem jest to, ¿e nie ma popularnych serwisów informacyjnych, które zawieraj¹ treœci bêd¹ce pomiêdzy dokumentacjami oraz ogólnymi serwisami informacyjnymi.
 
 \section{Cel pracy}
 
-Celem pracy jest zaprojektowanie i implementacja responsywnej aplikacji webowej IT Tech, która bêdzie umo¿liwia³a u¿ytkownikom tworzenie artyku³ów o technologiach programistycznych (np. dotycz¹cych jêzyków programowania), przegl¹danie dostêpnych artyku³ów oraz zostawienie informacji zwrotnej o artykule w postaci komentarza lub opinii. Artyku³y bêd¹ mog³y byæ wyszukiwane po wielu kryteriach, bêdzie rozbudowany system opinii, prosty i intuicyjny interfejs u¿ytkownika oraz treœci opublikowane w serwisie bêd¹ dostêpne dla ka¿dego u¿ytkownika. Realizowana aplikacja bêdzie umo¿liwia³a szybkie zamieszczanie treœci ka¿demu u¿ytkownikowi i dziêki temu mo¿liwe bêdzie dostarczanie treœci aktualnych oraz nad¹¿anie za trendami. Aplikacja bêdzie rozwi¹zaniem rozwi¹zaniem poœrednim pomiêdzy dokumentacjami oraz serwisami informacyjnymi obejmuj¹cymi wiele dziedzin. Nie bêdzie nacisku na du¿¹ szczegó³owoœæ zamieszczanych treœci oraz serwis bêdzie zorientowany jedynie na technologie programistyczne i przez to treœci nie bêd¹ przez to zbyt ogólne.
+Celem pracy jest zaprojektowanie i implementacja responsywnej aplikacji webowej IT Tech, która bêdzie umo¿liwia³a u¿ytkownikom tworzenie artyku³ów o technologiach programistycznych (np. dotycz¹cych jêzyków programowania), przegl¹danie dostêpnych artyku³ów oraz zostawienie informacji zwrotnej o artykule w postaci komentarza lub opinii. Artyku³y bêd¹ mog³y byæ wyszukiwane po wielu kryteriach, bêdzie rozbudowany system opinii, prosty i intuicyjny interfejs u¿ytkownika oraz treœci opublikowane w serwisie bêd¹ dostêpne dla ka¿dego u¿ytkownika. Realizowana aplikacja bêdzie umo¿liwia³a szybkie zamieszczanie treœci ka¿demu u¿ytkownikowi i dziêki temu mo¿liwe bêdzie dostarczanie treœci aktualnych oraz nad¹¿anie za trendami. Aplikacja bêdzie rozwi¹zaniem poœrednim miêdzy dokumentacjami oraz serwisami informacyjnymi obejmuj¹cymi wiele dziedzin. Nie bêdzie nacisku na du¿¹ szczegó³owoœæ zamieszczanych treœci oraz serwis bêdzie zorientowany jedynie na technologie programistyczne i przez to treœci nie bêd¹ przez to zbyt ogólne.
 
 \section{Zakres pracy}
 

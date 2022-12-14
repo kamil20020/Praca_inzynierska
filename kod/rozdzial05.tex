@@ -75,11 +75,7 @@ Po tych krokach us≥uga by≥a skonfigurowana do automatycznego pobierania z rejest
 
 Kolejnymi krokami by≥o przygotowanie obrazu aplikacji wraz z serwerem webowym oraz wrzucenie tego obrazu na odpowiedni rejestr kontenerÛw.
 
-Na poczπtku zalogowano siÍ do rejestru kontenerÛw Azure (rysunek~\ref{lst:logowanie-rejestr-kontenerow-frontend}).
-
-\begin{lstlisting}[language=Dockerfile, style=JavaStyle, caption=Logowanie siÍ do rejestru kontenerÛw Azure dla frontendu, label=lst:logowanie-rejestr-kontenerow-frontend]
-docker login inzynierkakeycloak.azurecr.io
-\end{lstlisting}
+Na poczπtku za pomocπ komendy \texttt{docker login inzynierkakeycloak.azurecr.io} zalogowano siÍ do rejestru kontenerÛw Azure.
 
 NastÍpnie utworzono i odpowiednio skonfigurowano plik \texttt{Dockerfile}, tak aby na jego podstawie by≥ tworzony obraz aplikacji klienckiej wystawionej na serwerze webowym. Konfiguracja obrazu dockerowego jest przedstawiona na listingu~\ref{lst:dockerfile-aplikacji-klienckiej}.
 
@@ -120,24 +116,12 @@ server {
 \end{lstlisting}
 
 Po skonfigurowaniu aplikacji klienckiej oraz serwera webowego, moøna by≥o przystπpiÊ do zbudowania obrazu Dockerowego. Za pomocπ 
-komendy~\ref{lst:budowanie-obrazu-frontendu} zbudowano obraz o nazwie ,,frontend''.
-
-\begin{lstlisting}[style=json-style, caption=Budowanie obrazu dockerowego frontendu, label=lst:budowanie-obrazu-frontendu]
-docker build . -t frontend
-\end{lstlisting}
+komendy \texttt{docker build . -t frontend} zbudowano obraz o nazwie ,,frontend''.
 
 NastÍpnym krokiem by≥o powiπzanie zbudowanego obrazu z nazwπ jakπ bÍdzie mia≥ ten obraz w rejestrze kontenerÛw. Do tego celu uøyto 
-komendy~\ref{lst:tagowanie-obrazu-frontendu}
+komendy \texttt{docker tag frontend inzynierkakeycloak.azurecr.io/technologie-programistyczne:latest}.
 
-\begin{lstlisting}[style=json-style, caption=Powiπzanie zbudowanego obrazu frontendu z rejestrem kontenerÛw , label=lst:tagowanie-obrazu-frontendu]
-docker tag frontend inzynierkakeycloak.azurecr.io/technologie-programistyczne:latest
-\end{lstlisting}
-
-Ostatnim krokiem by≥o wrzucenie tak skonfigurowanego obrazu do rejestru kontenerÛw, gdzie na podstawie tego obrazu zostanie utworzony kontener aplikacji. Do tego celu uøyto komendy~\ref{lst:pushowanie-obrazu-frontendu}.
-
-\begin{lstlisting}[style=json-style, caption=Wys≥anie obrazu frontendu do rejestru kontenerÛw, label=lst:pushowanie-obrazu-frontendu]
-docker push inzynierkakeycloak.azurecr.io/technologie-programistyczne:latest
-\end{lstlisting}
+Ostatnim krokiem by≥o wrzucenie tak skonfigurowanego obrazu do rejestru kontenerÛw, gdzie na podstawie tego obrazu zostanie utworzony kontener aplikacji. Do tego celu uøyto komendy \texttt{docker push inzynierkakeycloak.azurecr.io/technologie-programistyczne:latest}.
 
 Po kilku minutach aplikacja zosta≥a wdroøona i po przejúciu do adresu strony https://technologie-programistyczne.azurewebsites.net/, moøna by≥o zauwaøyÊ widok strony g≥Ûwnej (rysunek~\ref{fig:wdrozenie-aplikacji-klienckiej-3}).
 
@@ -169,11 +153,7 @@ Po tych krokach us≥uga by≥a skonfigurowana do automatycznego pobierania z rejest
 
 Kolejnymi krokami by≥o przygotowanie obrazu backendu oraz wrzucenie tego obrazu na odpowiedni rejestr kontenerÛw.
 
-Na poczπtku zalogowano siÍ do rejestru kontenerÛw Azure (rysunek~\ref{lst:logowanie-rejestr-kontenerow-backend}).
-
-\begin{lstlisting}[language=Dockerfile, style=JavaStyle, caption=Logowanie siÍ do rejestru kontenerÛw Azure dla backendu, label=lst:logowanie-rejestr-kontenerow-backend]
-docker login inzynierkakeycloak.azurecr.io
-\end{lstlisting}
+Na poczπtku za pomocπ komendy \texttt{docker login inzynierkakeycloak.azurecr.io} zalogowano siÍ do rejestru kontenerÛw Azure.
 
 NastÍpnie utworzono i odpowiednio skonfigurowano plik \texttt{Dockerfile}, tak aby na jego podstawie by≥ tworzony obraz aplikacji serwerowej uruchomionej na profilu produkcyjnym. Konfiguracja obrazu dockerowego jest przedstawiona na listingu~\ref{lst:dockerfile-aplikacji-serwerowej}.
 
@@ -186,32 +166,21 @@ EXPOSE $PORT
 CMD mvn spring-boot:run -Dspring.profiles.active=${PROFILE}
 \end{lstlisting}
 
-NastÍpnym krokiem by≥o zbudowanie obrazu Dockerowego za pomocπ komendy~\ref{lst:budowanie-obrazu-backendu}.
+NastÍpnym krokiem by≥o zbudowanie obrazu Dockerowego za pomocπ komendy \texttt{docker build . -t backend}.
 
-\begin{lstlisting}[style=json-style, caption=Budowanie obrazu dockerowego aplikacji serwerowej, label=lst:budowanie-obrazu-backendu]
-docker build . -t backend
-\end{lstlisting}
+NastÍpnie powiπzano zbudowany obraz z nazwπ jakπ bÍdzie mia≥ ten obraz w rejestrze kontenerÛw. Do tego celu uøyto komendy 
+\texttt{docker tag backend inzynierkakeycloak.azurecr.io/technologie-programistyczne-backend:latest}.
 
-NastÍpnie powiπzano zbudowany obraz z nazwπ jakπ bÍdzie mia≥ ten obraz w rejestrze kontenerÛw. Do tego celu uøyto komendy~\ref{lst:tagowanie-obrazu-backendu}
+Ostatnim krokiem by≥o wrzucenie tak skonfigurowanego obrazu do rejestru kontenerÛw, gdzie na podstawie tego obrazu zostanie utworzony kontener aplikacji. Do tego celu uøyto komendy \texttt{docker push inzynierkakeycloak.azurecr.io/technologie-programistyczne-backend:latest}.
 
-\begin{lstlisting}[style=json-style, caption=Powiπzanie zbudowanego obrazu backendu z rejestrem kontenerÛw , label=lst:tagowanie-obrazu-backendu]
-docker tag backend inzynierkakeycloak.azurecr.io/technologie-programistyczne-backend:latest
-\end{lstlisting}
-
-Ostatnim krokiem by≥o wrzucenie tak skonfigurowanego obrazu do rejestru kontenerÛw, gdzie na podstawie tego obrazu zostanie utworzony kontener aplikacji. Do tego celu uøyto komendy~\ref{lst:pushowanie-obrazu-backend}.
-
-\begin{lstlisting}[style=json-style, caption=Wys≥anie obrazu backendu do rejestru kontenerÛw, label=lst:pushowanie-obrazu-backend]
-docker push inzynierkakeycloak.azurecr.io/technologie-programistyczne-backend:latest
-\end{lstlisting}
-
-Po kilkunastu minutach aplikacja zosta≥a wdroøona i moøna juø by≥o wys≥aÊ do niej øπdania. Przyk≥adowe øπdanie pobierajπce wszystkie technologie i uzyskana odpowiedü od wdroøonego backendu sπ przedstawione na rysunku~\ref{fig:wdrozenie-aplikacji-serwerowej-1}).
+Po kilkunastu minutach aplikacja zosta≥a wdroøona i moøna juø by≥o wys≥aÊ do niej øπdania. Przyk≥adowe øπdanie pobierajπce wszystkie technologie i uzyskana odpowiedü od wdroøonego backendu sπ przedstawione na rysunku~\ref{fig:wdrozenie-aplikacji-serwerowej-1}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{rys05/wdrozenie-aplikacji-serwerowej-1}
 	\caption{Przyk≥adowe øπdanie pobierajπce wszystkie technologie i uzyskana odpowiedü od wdroøonego backendu}
 	\label{fig:wdrozenie-aplikacji-serwerowej-1}
-	\caption*{èrÛd≥o: Postman}
+	\caption*{èrÛd≥o: Opracowanie w≥asne - zrzut ekranu z programu Postman}
 \end{figure}
 
 \section{Warstwa bezpieczeÒstwa}
@@ -276,6 +245,6 @@ Kolejnym krokiem by≥o ustawienie zasobÛw bazy, wersji MongoDB oraz nazwy klastra
 
 NastÍpnie klikniÍto przycisk ,,Create Cluster'' i baza danych MongoDB zosta≥a wdroøona.
 
-\section{Podsumowanie}
+\section{Podsumowanie wdroøenia}
 
 Po wdroøeniu systemu konieczne jest jego przetestowanie, czy wszystkie zaimplementowane funkcjonalnoúci dzia≥ajπ w tak sam sposÛb jak w úrodowisku lokalnym. Dog≥Íbnie przetestowano kaødy z wdroøonych segmentÛw i wszystko dzia≥a zgodnie z oczekiwaniami.
