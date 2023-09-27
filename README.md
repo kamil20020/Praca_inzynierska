@@ -218,7 +218,6 @@ Zdecydowano się na bazę danych NoSQL opartą na dokumentach, gdyż artykuły, 
     <img src="img/wybrane-technologie.png">
 </p>
 
-
 ## Diagram ERD bazy SQL:
 <p align="center">
     <img src="img/erd.png">
@@ -418,110 +417,110 @@ Schemat opinii:
 
 ##### Wprowadzenie danych osobowych:
 <p align="center">
-    <img src="img/screeny/rejestracja.png">
+    <img src="img/zrzuty-ekranu/rejestracja.png">
 </p>
 
 #### Dla najwazniejszych pól wejściowych przeprowadzana jest walidacja np. dla rejestracji:
 <p align="center">
-    <img src="img/screeny/rejestracja-walidacja.png">
+    <img src="img/zrzuty-ekranu/rejestracja-walidacja.png">
 </p>
 
 ##### Akceptacja regulaminu:
 <p align="center">
-    <img src="img/screeny/rejestracja-regulamin.png">
+    <img src="img/zrzuty-ekranu/rejestracja-regulamin.png">
 </p>
 
 #### Został zaimplementowany system powiadomień informujący użytkownika o sukcesie albo wystąpieniu błędu. 
 
 ##### Np. przy pomyślnej rejestracji wyświetlany jest następujący komunikat:
 <p align="center">
-    <img src="img/screeny/powiadomienie-sukces.png">
+    <img src="img/zrzuty-ekranu/powiadomienie-sukces.png">
 </p>
 
 ##### Przykładowy komunikat o błędzie wyświetlany w sytuacji wprowadzenia już istniejącego pseudonimu:
 <p align="center">
-    <img src="img/screeny/powiadomienie-blad.png">
+    <img src="img/zrzuty-ekranu/powiadomienie-blad.png">
 </p>
 
 ##### Logowanie:
 <p align="center">
-    <img src="img/screeny/logowanie.png">
+    <img src="img/zrzuty-ekranu/logowanie.png">
 </p>
 
 ### Zalogowany użytkownik
 
 #### Dane użytkownika:
 <p align="center">
-    <img src="img/screeny/dane-uzytkownika.png">
+    <img src="img/zrzuty-ekranu/dane-uzytkownika.png">
 </p>
 
 #### Edycja danych użytkownika:
 <p align="center">
-    <img src="img/screeny/edycja-danych-uzytkownika.png">
+    <img src="img/zrzuty-ekranu/edycja-danych-uzytkownika.png">
 </p>
 
 #### Zmiana hasła:
 <p align="center">
-    <img src="img/screeny/zmiana-hasla.png">
+    <img src="img/zrzuty-ekranu/zmiana-hasla.png">
 </p>
 
 #### Wyszukiwanie artykułów:
 
 ##### Kryteria wyszukiwania
 <p align="center">
-    <img src="img/screeny/wyszukiwanie-artykulow-kryteria.png">
+    <img src="img/zrzuty-ekranu/wyszukiwanie-artykulow-kryteria.png">
 </p>
 
 #### Wyniki wyszukiwania:
 <p align="center">
-    <img src="img/screeny/wyszukiwanie-artykulow-wyniki.png">
+    <img src="img/zrzuty-ekranu/wyszukiwanie-artykulow-wyniki.png">
 </p>
 
 ### Tworzenie / Edycja artykułu:
 
 #### Wybór kategorii technologii:
 <p align="center">
-    <img src="img/screeny/tworzenie-artykulu-kategoria-technologii.png">
+    <img src="img/zrzuty-ekranu/tworzenie-artykulu-kategoria-technologii.png">
 </p>
 
 #### Wybór technologii należącej do wybranej kategorii:
 <p align="center">
-    <img src="img/screeny/tworzenie-artykulu-technologia.png">
+    <img src="img/zrzuty-ekranu/tworzenie-artykulu-technologia.png">
 </p>
 
 #### Tworzenie treści artykułu:
 <p align="center">
-    <img src="img/screeny/tworzenie-artykulu-zawartosc.png">
+    <img src="img/zrzuty-ekranu/tworzenie-artykulu-zawartosc.png">
 </p>
 
 #### Widok artykułu:
 <p align="center">
-    <img src="img/screeny/widok-artykulu.png">
+    <img src="img/zrzuty-ekranu/widok-artykulu.png">
 </p>
 
 #### Wygląd bloku kodu artykułu:
 <p align="center">
-    <img src="img/screeny/artykul-blok-kodu.png">
+    <img src="img/zrzuty-ekranu/artykul-blok-kodu.png">
 </p>
 
 #### Artykuł widziany przez autora:
 <p align="center">
-    <img src="img/screeny/utworzony-artykul.png">
+    <img src="img/zrzuty-ekranu/utworzony-artykul.png">
 </p>
 
 #### Usunięcie artykułu:
 <p align="center">
-    <img src="img/screeny/usuniecie-artykulu.png">
+    <img src="img/zrzuty-ekranu/usuniecie-artykulu.png">
 </p>
 
 #### Sekcja komentarzy:
 <p align="center">
-    <img src="img/screeny/komentarze.png">
+    <img src="img/zrzuty-ekranu/komentarze.png">
 </p>
 
 #### Sekcja z opiniami:
 <p align="center">
-    <img src="img/screeny/opinie.png">
+    <img src="img/zrzuty-ekranu/opinie.png">
 </p>
 
 ### Recenzent
@@ -530,54 +529,54 @@ Schemat opinii:
 
 ##### Ustawiona dostępność
 <p align="center">
-    <img src="img/screeny/ustawiona-obecnosc.png">
+    <img src="img/zrzuty-ekranu/ustawiona-obecnosc.png">
 </p>
 
 ##### Ustawienie niedostępności:
 <p align="center">
-    <img src="img/screeny/ustawienie-nieobecnosci.png">
+    <img src="img/zrzuty-ekranu/ustawienie-nieobecnosci.png">
 </p>
 
 ##### Ustawiona niedostępność:
 <p align="center">
-    <img src="img/screeny/ustawiona-nieobecnosc.png">
+    <img src="img/zrzuty-ekranu/ustawiona-nieobecnosc.png">
 </p>
 
 #### Weryfikacja artykułów:
 
 ##### Artykuły przypisane recenzentowi do weryfikacji:
 <p align="center">
-    <img src="img/screeny/weryfikacja-artykulow.png">
+    <img src="img/zrzuty-ekranu/weryfikacja-artykulow.png">
 </p>
 
 ##### Widok weryfikacji:
 <p align="center">
-    <img src="img/screeny/weryfikacja-artykulu-1.png">
+    <img src="img/zrzuty-ekranu/weryfikacja-artykulu-1.png">
 </p>
 
 ##### Formularz weryfikacji:
 <p align="center">
-    <img src="img/screeny/weryfikacja-artykulu-2.png">
+    <img src="img/zrzuty-ekranu/weryfikacja-artykulu-2.png">
 </p>
 
 ##### Widok akceptacji artykułu widziany przez autora artykułu:
 <p align="center">
-    <img src="img/screeny/weryfikacja-artykulu-pozytywna-odpowiedz.png">
+    <img src="img/zrzuty-ekranu/weryfikacja-artykulu-pozytywna-odpowiedz.png">
 </p>
 
 ##### Widok odrzucenia artykułu widziany przez autora artykułu:
 <p align="center">
-    <img src="img/screeny/weryfikacja-artykulu-negatywna-odpowiedz.png">
+    <img src="img/zrzuty-ekranu/weryfikacja-artykulu-negatywna-odpowiedz.png">
 </p>
 
 #### Administrator
 
 ##### Wyszukiwanie użytkowników:
 <p align="center">
-    <img src="img/screeny/wyszukiwarka-uzytkownikow.png">
+    <img src="img/zrzuty-ekranu/wyszukiwarka-uzytkownikow.png">
 </p>
 
 ##### Zarządzanie danymi użytkownika:
 <p align="center">
-    <img src="img/screeny/zarzadzanie-danymi-uzytkownika.png">
+    <img src="img/zrzuty-ekranu/zarzadzanie-danymi-uzytkownika.png">
 </p>
