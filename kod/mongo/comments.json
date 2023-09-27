@@ -1,0 +1,185 @@
+[{
+  "_id": {
+    "$oid": "6362292ce38eda665a7f9a86"
+  },
+  "articleId": {
+    "$oid": "63622917e38eda665a7f9a85"
+  },
+  "authorId": 27,
+  "content": "Dobry artykuł",
+  "creationDate": {
+    "$date": "2022-11-02T08:24:12.633Z"
+  },
+  "modificationDate": {
+    "$date": "2022-11-02T08:24:12.633Z"
+  },
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.CommentEntity"
+},
+{
+  "_id": {
+    "$oid": "63622931e38eda665a7f9a87"
+  },
+  "articleId": {
+    "$oid": "63622917e38eda665a7f9a85"
+  },
+  "parentCommentId": {
+    "$oid": "6362292ce38eda665a7f9a86"
+  },
+  "authorId": 27,
+  "content": "aa",
+  "creationDate": {
+    "$date": "2022-11-02T08:24:17.581Z"
+  },
+  "modificationDate": {
+    "$date": "2022-11-02T08:24:17.581Z"
+  },
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.CommentEntity"
+},
+{
+  "_id": {
+    "$oid": "638e6e866cf51072492c8a3f"
+  },
+  "articleId": {
+    "$oid": "638a8f7aa41dca478bf37fed"
+  },
+  "authorId": 42,
+  "content": "Dobry artykuł122",
+  "creationDate": {
+    "$date": "2022-12-05T22:19:50.322Z"
+  },
+  "modificationDate": {
+    "$date": "2022-12-05T22:19:50.322Z"
+  },
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.CommentEntity"
+},
+{
+  "_id": {
+    "$oid": "639116e059eb6b3a4ad54d08"
+  },
+  "articleId": {
+    "$oid": "638a8f7aa41dca478bf37fed"
+  },
+  "parentCommentId": {
+    "$oid": "638e6e866cf51072492c8a3f"
+  },
+  "authorId": 42,
+  "content": "aaaaa11",
+  "creationDate": {
+    "$date": "2022-12-07T22:42:40.324Z"
+  },
+  "modificationDate": {
+    "$date": "2022-12-07T22:42:40.324Z"
+  },
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.CommentEntity"
+},
+{
+  "_id": {
+    "$oid": "6391173f59eb6b3a4ad54d09"
+  },
+  "articleId": {
+    "$oid": "638a8f7aa41dca478bf37fed"
+  },
+  "parentCommentId": {
+    "$oid": "638e6e866cf51072492c8a3f"
+  },
+  "authorId": 30,
+  "content": "aa",
+  "creationDate": {
+    "$date": "2022-12-07T22:44:15.940Z"
+  },
+  "modificationDate": {
+    "$date": "2022-12-07T22:44:15.940Z"
+  },
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.CommentEntity"
+},
+{
+  "_id": {
+    "$oid": "6392636076908122d4b9fdef"
+  },
+  "articleId": {
+    "$oid": "6391195fafa6bb0ab87cbda3"
+  },
+  "authorId": 42,
+  "content": "aa",
+  "creationDate": {
+    "$date": "2022-12-08T22:21:20.367Z"
+  },
+  "modificationDate": {
+    "$date": "2022-12-08T22:21:20.368Z"
+  },
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.CommentEntity"
+},
+{
+  "_id": {
+    "$oid": "6398e8c5d636c56258d1b26b"
+  },
+  "articleId": {
+    "$oid": "638a8f7aa41dca478bf37fed"
+  },
+  "authorId": 42,
+  "content": "Można by było jeszcze coś dodać o wersjach",
+  "creationDate": {
+    "$date": "2022-12-13T21:04:05.110Z"
+  },
+  "modificationDate": {
+    "$date": "2022-12-13T21:04:05.110Z"
+  },
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.CommentEntity"
+},
+{
+  "_id": {
+    "$oid": "6398e8cad636c56258d1b26c"
+  },
+  "articleId": {
+    "$oid": "638a8f7aa41dca478bf37fed"
+  },
+  "parentCommentId": {
+    "$oid": "6398e8c5d636c56258d1b26b"
+  },
+  "authorId": 42,
+  "content": "11",
+  "creationDate": {
+    "$date": "2022-12-13T21:04:10.930Z"
+  },
+  "modificationDate": {
+    "$date": "2022-12-13T21:04:10.930Z"
+  },
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.CommentEntity"
+},
+{
+  "_id": {
+    "$oid": "6398ec20378a233e74c8d66f"
+  },
+  "articleId": {
+    "$oid": "638a8f7aa41dca478bf37fed"
+  },
+  "authorId": 28,
+  "content": "Dobry artykuł",
+  "creationDate": {
+    "$date": "2022-12-13T21:18:24.422Z"
+  },
+  "modificationDate": {
+    "$date": "2022-12-13T21:18:24.422Z"
+  },
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.CommentEntity"
+},
+{
+  "_id": {
+    "$oid": "63c94347e9af69136ff5cb52"
+  },
+  "articleId": {
+    "$oid": "638a8f7aa41dca478bf37fed"
+  },
+  "parentCommentId": {
+    "$oid": "6398ec20378a233e74c8d66f"
+  },
+  "authorId": 45,
+  "content": "Zgadzam się",
+  "creationDate": {
+    "$date": "2023-01-19T13:19:03.770Z"
+  },
+  "modificationDate": {
+    "$date": "2023-01-19T13:19:03.770Z"
+  },
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.CommentEntity"
+}]

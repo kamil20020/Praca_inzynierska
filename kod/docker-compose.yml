@@ -1,0 +1,95 @@
+version: '3.9'
+services:
+  postgresdb:
+    container_name: inzynierka-postgresdb
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: programming_technologies
+      POSTGRES_USER: programming_technologies
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./postgres/:/docker-entrypoint-initdb.d/
+    ports:
+      - "5434:5432"
+
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@mail.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgresdb 
+
+  mongodb:
+    container_name: inzynierka-mongodb
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: technologie-it
+      MONGO_INITDB_ROOT_USERNAME: programming_technologies
+      MONGO_INITDB_ROOT_PASSWORD: mongodb
+    volumes:
+      - ./mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+  keycloak:
+    container_name: inzynierka-keycloak
+    build: ./keycloak
+    restart: always
+    environment:
+      KC_DB_URL: jdbc:postgresql://postgresdb/programming_technologies
+      KC_DB_USERNAME: programming_technologies
+      KC_DB_PASSWORD: postgres
+    volumes:
+      - ./keycloak/realm.json:/opt/keycloak/data/import/realm.json
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresdb
+
+  backend:
+    container_name: inzynierka-backend
+    build: ./backend
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresdb/programming_technologies
+      SPRING_DATASOURCE_USERNAME: programming_technologies
+      SPRING_DATASOURCE_PASSWORD: postgres
+
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_DATA_MONGODB_DATABASE: technologie-it
+      SPRING_DATA_MONGODB_USERNAME: programming_technologies
+      SPRING_DATA_MONGODB_PASSWORD: mongodb
+      SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE: admin
+
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_UR: http://keycloak/realms/Programming_technologies/protocol/openid-connect/certs
+      FRONTEND_URL: http://frontend
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "9000:9000"
+    depends_on:
+      - postgresdb
+      - mongodb
+      - keycloak
+  
+  frontend:
+    container_name: inzynierka-frontend
+    restart: always
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile-dev
+    environment:
+      REACT_APP_API: http://backend
+      REACT_APP_KEYCLOAK_URL: http://keycloak
+    ports:
+      - "3000:3000"
+    depends_on:
+      - keycloak
+      - backend

@@ -1,0 +1,35 @@
+{
+   "$jsonSchema":{
+      "bsonType":"object",
+      "title":"comments",
+      "required":[
+         "author_id",
+         "content",
+         "creationDate",
+         "modificationDate"
+      ],
+      "properties":{
+         "_id":{
+            "bsonType":"objectId"
+         },
+         "author_id":{
+            "bsonType":"int"
+         },
+         "content":{
+            "bsonType":"string"
+         },
+         "creationDate":{
+            "bsonType":"timestamp"
+         },
+         "modificationDate":{
+            "bsonType":"timestamp"
+         },
+         "comments":{
+            "bsonType":"array",
+            "items":{
+               "bsonType":"object"
+            }
+         }
+      }
+   }
+}

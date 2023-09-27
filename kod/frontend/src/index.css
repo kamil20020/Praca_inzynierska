@@ -1,0 +1,27 @@
+html, body{
+  height: 100%;
+}
+
+#root{
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+}
+
+.tree-node-text:hover{
+  cursor: pointer;
+  color: #168AF4;
+}
+
+* {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -o-user-select: none;
+  user-select: none;
+}

@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "639271358c5f5e6eaf655d54"
+  },
+  "authorId": 42,
+  "articleId": {
+    "$oid": "6391195fafa6bb0ab87cbda3"
+  },
+  "rating": 4,
+  "content": "11131",
+  "creationDate": {
+    "$date": "2022-12-08T23:20:21.467Z"
+  },
+  "modificationDate": {
+    "$date": "2022-12-13T22:25:35.589Z"
+  },
+  "acceptances": [],
+  "positiveAcceptancesCount": 0,
+  "negativeAcceptancesCount": 0,
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.OpinionEntity"
+},
+{
+  "_id": {
+    "$oid": "6398fca96e902940c1dec810"
+  },
+  "authorId": 28,
+  "articleId": {
+    "$oid": "638a8f7aa41dca478bf37fed"
+  },
+  "rating": 3,
+  "content": "Generalnie artykuł dobry, ale brakuje trochę informacji o autorach tej technologii",
+  "creationDate": {
+    "$date": "2022-12-13T22:28:57.790Z"
+  },
+  "modificationDate": {
+    "$date": "2023-01-19T18:07:19.590Z"
+  },
+  "acceptances": [
+    {
+      "authorId": 42,
+      "value": 1
+    },
+    {
+      "authorId": 30,
+      "value": 1
+    }
+  ],
+  "positiveAcceptancesCount": 2,
+  "negativeAcceptancesCount": 0,
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.OpinionEntity"
+},
+{
+  "_id": {
+    "$oid": "639ad0c0207391722e0984ef"
+  },
+  "authorId": 30,
+  "articleId": {
+    "$oid": "638a8f7aa41dca478bf37fed"
+  },
+  "rating": 4,
+  "content": "Dobry artykuł, ale dosyć krótki",
+  "creationDate": {
+    "$date": "2022-12-15T07:46:08.672Z"
+  },
+  "modificationDate": {
+    "$date": "2023-01-19T18:07:28.873Z"
+  },
+  "acceptances": [],
+  "positiveAcceptancesCount": 0,
+  "negativeAcceptancesCount": 0,
+  "_class": "pl.edu.pwr.programming_technologies.model.entity.OpinionEntity"
+}]
