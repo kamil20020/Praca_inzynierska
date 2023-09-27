@@ -411,9 +411,9 @@ Schemat opinii:
 
 ## Zrzuty ekranu:
 
-### Rejestracja składa się z dwóch etapów: wprowadzenia danych osobowych oraz zaakceptowania regulaminu.
+### Niezalogowany użytkownik
 
-#### Niezalogowany użytkownik
+#### Rejestracja składa się z dwóch etapów: wprowadzenia danych osobowych oraz zaakceptowania regulaminu.
 
 ##### Wprowadzenie danych osobowych:
 <p align="center">
