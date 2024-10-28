@@ -94,12 +94,8 @@ INSERT INTO public.USER_INACCESSIBILITES (user_inaccessibility_id, user_id, to_d
 
 -- ASSIGNED ARTICLES
 
-INSERT INTO public.article_verifications (article_verification_id, article_id, status, verification_feedback, assignment_date, author_id) VALUES (1, '634308ab8f35533467caa4f7', 'CREATED', null, '2016-06-22 19:10:25', 27);
-INSERT INTO public.article_verifications (article_verification_id, article_id, status, verification_feedback, assignment_date, author_id) VALUES (2, '634c890c3e2b8f0d8e9bf0bf', 'ACCEPTED', 'Dobry artykuł', '2016-06-23 20:22:05', 27);
-INSERT INTO public.article_verifications (article_verification_id, article_id, status, verification_feedback, assignment_date, author_id) VALUES (3, '634c89f072680b479e895e73', 'REJECTED', 'Niezbyt czytelne rysunki', '2016-06-24 21:35:35', 27);
-INSERT INTO public.article_verifications (article_verification_id, article_id, status, verification_feedback, assignment_date, author_id) VALUES (4, '634d4fe8e3b3865a407e21a9', 'ACCEPTED', null, '2016-07-12 16:10:15', 31);
-INSERT INTO public.article_verifications (article_verification_id, article_id, status, verification_feedback, assignment_date, author_id) VALUES (5, '634d5039d0014e43af55039f', 'CREATED', null, '2016-08-03 15:22:05', 31);
-INSERT INTO public.article_verifications (article_verification_id, article_id, status, verification_feedback, assignment_date, author_id) VALUES (6, '634d50dc03c5a429785680e8', 'ACCEPTED', 'Dobrze opisane zagadnienie', '2016-09-27 12:42:45', 30);
-INSERT INTO public.article_verifications (article_verification_id, article_id, status, verification_feedback, assignment_date, author_id) VALUES (7, '634d514f674a404a848eca3b', 'REJECTED', 'Opisano zbyt przestarzałą wersję technologii', '2017-02-20 18:31:14', 30);
-INSERT INTO public.article_verifications (article_verification_id, article_id, status, verification_feedback, assignment_date, author_id) VALUES (8, '634d517880a75e7dec043d86', 'EXPIRED', null, '2018-08-16 23:56:08', 30);
+INSERT INTO public.article_verifications (article_verification_id, article_id, status, verification_feedback, assignment_date, author_id) VALUES (1, '63911d03dccaef2aa3de4178', 'CREATED', null, '2016-06-22 19:10:25', 27);
+INSERT INTO public.article_verifications (article_verification_id, article_id, status, verification_feedback, assignment_date, author_id) VALUES (2, '638a8f7aa41dca478bf37fed', 'ACCEPTED', 'Dobry artykuł', '2016-06-23 20:22:05', 27);
+INSERT INTO public.article_verifications (article_verification_id, article_id, status, verification_feedback, assignment_date, author_id) VALUES (3, '6391195fafa6bb0ab87cbda3', 'REJECTED', 'Niezbyt czytelne rysunki', '2016-06-24 21:35:35', 27);
+INSERT INTO public.article_verifications (article_verification_id, article_id, status, verification_feedback, assignment_date, author_id) VALUES (8, '63911dcc04388f5578fcbce4', 'EXPIRED', null, '2018-08-16 23:56:08', 30);
 
