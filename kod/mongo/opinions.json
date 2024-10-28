@@ -2,7 +2,7 @@
   "_id": {
     "$oid": "639271358c5f5e6eaf655d54"
   },
-  "authorId": 42,
+  "authorId": 27,
   "articleId": {
     "$oid": "6391195fafa6bb0ab87cbda3"
   },
@@ -37,7 +37,7 @@
   },
   "acceptances": [
     {
-      "authorId": 42,
+      "authorId": 33,
       "value": 1
     },
     {
