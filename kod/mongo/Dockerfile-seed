@@ -1,0 +1,4 @@
+FROM mongo
+COPY . .
+RUN chmod +x import.sh
+CMD ["sh", "-c", "./import.sh"]
