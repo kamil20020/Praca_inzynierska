@@ -1,7 +1,7 @@
 # Praca inżynierska (12.2022)
 
 Proponowanym sposobem na uruchomienie aplikacji jest odpalenie komendy `docker-compose up` w folderze kod.
-Po uruchomieniu kontenerów, aplikacja kliencka będzie dostępna pod adresem http://localhost:3000.
+Po uruchomieniu kontenerów, aplikacja kliencka będzie dostępna pod adresem http://localhost:3000. 
 
 Przy starcie aplikacji ładowane są do bazy danych przykładowe dane m.in. następujące konta użytkowników:
 | Login 		| Hasło       | Role                              							|
