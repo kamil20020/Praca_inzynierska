@@ -42,7 +42,7 @@
   "articleId": {
     "$oid": "638a8f7aa41dca478bf37fed"
   },
-  "authorId": 42,
+  "authorId": 28,
   "content": "Dobry artykuł122",
   "creationDate": {
     "$date": "2022-12-05T22:19:50.322Z"
@@ -62,7 +62,7 @@
   "parentCommentId": {
     "$oid": "638e6e866cf51072492c8a3f"
   },
-  "authorId": 42,
+  "authorId": 28,
   "content": "aaaaa11",
   "creationDate": {
     "$date": "2022-12-07T22:42:40.324Z"
@@ -82,7 +82,7 @@
   "parentCommentId": {
     "$oid": "638e6e866cf51072492c8a3f"
   },
-  "authorId": 30,
+  "authorId": 29,
   "content": "aa",
   "creationDate": {
     "$date": "2022-12-07T22:44:15.940Z"
@@ -99,7 +99,7 @@
   "articleId": {
     "$oid": "6391195fafa6bb0ab87cbda3"
   },
-  "authorId": 42,
+  "authorId": 29,
   "content": "aa",
   "creationDate": {
     "$date": "2022-12-08T22:21:20.367Z"
@@ -116,7 +116,7 @@
   "articleId": {
     "$oid": "638a8f7aa41dca478bf37fed"
   },
-  "authorId": 42,
+  "authorId": 31,
   "content": "Można by było jeszcze coś dodać o wersjach",
   "creationDate": {
     "$date": "2022-12-13T21:04:05.110Z"
@@ -136,7 +136,7 @@
   "parentCommentId": {
     "$oid": "6398e8c5d636c56258d1b26b"
   },
-  "authorId": 42,
+  "authorId": 31,
   "content": "11",
   "creationDate": {
     "$date": "2022-12-13T21:04:10.930Z"
@@ -173,7 +173,7 @@
   "parentCommentId": {
     "$oid": "6398ec20378a233e74c8d66f"
   },
-  "authorId": 45,
+  "authorId": 30,
   "content": "Zgadzam się",
   "creationDate": {
     "$date": "2023-01-19T13:19:03.770Z"
