@@ -24,7 +24,7 @@ services:
     ports:
       - "5050:80"
     depends_on:
-      - postgresdb 
+      - postgresdb
 
   mongodb:
     container_name: inzynierka-mongodb
@@ -38,6 +38,15 @@ services:
       - ./mongo-data:/data/db
     ports:
       - "27017:27017"
+
+  mongodb-seed:
+    container_name: inzynierka-mongodb-seed
+    build:
+        context: ./mongo
+        dockerfile: Dockerfile-seed
+    restart: always
+    depends_on:
+      - mongodb
 
   keycloak:
     container_name: inzynierka-keycloak
