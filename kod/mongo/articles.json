@@ -6,7 +6,7 @@
   "technologyId": 1,
   "title": "Podstawy Javy",
   "content": "<p>1. JVM</p>\n<p>Kod napisany w tym języku jest kompilowany do kodu bajtowego, kt&oacute;ry to następnie jest wykonywany przez maszynę wirtualną. Dodatkowo używana maszyna wirtualna sprawia, że język ten jest wieloplatformowy.</p>\n<p>2. JRE i JDK</p>\n<p>Można wyr&oacute;żnić dwie wersje udostępnianego zestawu klas i narzędzi:</p>\n<ul>\n<li>JRE (Java Runtime Environment) - udostępnia kod bajtowy wszystkich klas standardowych i JVM do ich uruchamiania,</li>\n<li>JDK (Java Development Kit) - udostępnia to co w przypadku JRE, ale dodatkowo zapewnia źr&oacute;dła tych klas oraz narzędzia: kompilator, kompresor i debugger</li>\n</ul>\n<p>3. Pakiety i moduły</p>\n<p>W Javie kod jest grupowany w pakiety, kt&oacute;rych nazwy odwzierciedlają drzewo katalog&oacute;w. Dodatkowo pakiety mogą być grupowane w moduły, kt&oacute;rych nazwą jest najczęściej odwr&oacute;cona nazwa domenowa. Moduły zapewniaja m.in. r&oacute;wnież dodatkową hermetyzację, np. poprzez udostępnianie tylko niekt&oacute;rych pakiet&oacute;w.</p>\n<p>4. Przykład programu</p>\n<p>Poniżej znajduje się kod napisany w Javie, kt&oacute;ry w pętli dla liczb od 0 do 9 wypisuje te liczby, kt&oacute;re są podzielne przez 2.</p>\n<pre class=\"language-java\"><code>public class Main{\n    \n\tpublic static void main(String[] args) {\n\t    \n\t    for(int i=0; i &lt; 10; i++){\n\t        \n\t        if(i % 2 == 0){\n\t         \n\t            System.out.println(i);   \n\t        }\n\t    }\n\t}\n}\n</code></pre>\n<p>5. Zastosowania</p>\n<p>Z powodu na używaną maszynę wirtualną, programy napisane w Javie mogą być uruchomione na praktycznie wszystkich urządzeniach, co prowadzi do tego, że zastosowania tego języka mogą być bardzo rozległe. Przede wszystkim język jest wykorzystywany w aplikacjach Webowych jako backend oraz aplikacjach mobilnych. W przypadku zastosowań biznesowych język jest wykorzystywany przede wszystkim w rozwiązaniach wysokopoziomowych przez korporacje i duże firmy. Język ten z powodu używanej maszyny wirtualnej jest wolniejszy niż np. C++, dlatego też jest najchętniej wykorzystywany w aplikacjach wysokopoziomowych.</p>\n<ul>\n<li>Platforma&nbsp;\n<ul>\n<li>Mobilne</li>\n<li>Web</li>\n</ul>\n</li>\n<li>Wysokopoziomowe rozwiązania</li>\n<li>Korporacyjne aplikacje</li>\n</ul>\n<p>6. Wersje</p>\n<ul>\n<li>1.0 - 1996</li>\n<li>2.0 - grudzień 1998 - 1999</li>\n<li>...</li>\n<li>9.0 - wrzesień 2017</li>\n<li>11.0 - wrzesień 2018</li>\n<li>15.0 - wrzesień 2020</li>\n<li>17.0 - wrzesień 2021</li>\n</ul>\n<p>7. Linki</p>\n<ul>\n<li>[1]&nbsp;<a href=\"https://docs.oracle.com/en/java/\">https://docs.oracle.com/en/java/</a> - oficjalna dokumentacja</li>\n</ul>",
-  "status": "EDITED",
+  "status": "PUBLISHED",
   "creationDate": {
     "$date": "2022-12-02T23:51:22.768Z"
   },
@@ -24,7 +24,7 @@
   "technologyId": 10,
   "title": "Prosty HTML",
   "content": "<p>aa</p>",
-  "status": "EDITED",
+  "status": "REFUSED",
   "creationDate": {
     "$date": "2022-12-07T22:53:19.367Z"
   },
@@ -42,7 +42,7 @@
   "technologyId": 7,
   "title": "Python dla początkujących",
   "content": "<p>aa</p>",
-  "status": "EDITED",
+  "status": "NEW",
   "creationDate": {
     "$date": "2022-12-07T23:08:51.067Z"
   },
@@ -59,7 +59,7 @@
   "technologyId": 19,
   "title": "Spring - prosty framework",
   "content": "<p>aa1</p>",
-  "status": "EDITED",
+  "status": "EXPIRED_VERIFICATION",
   "creationDate": {
     "$date": "2022-12-07T23:12:12.256Z"
   },
