@@ -1,3 +1,3 @@
-mongoimport --uri=mongodb://programming_technologies:mongodb@mongodb/technologie-it --authenticationDatabase=admin --collection=articles --type=json --file=/mongo/articles.json
-mongoimport --uri=mongodb://programming_technologies:mongodb@mongodb/technologie-it --authenticationDatabase=admin --collection=comments --type=json --file=/mongo/comments.json
-mongoimport --uri=mongodb://programming_technologies:mongodb@mongodb/technologie-it --authenticationDatabase=admin --collection=opinions --type=json --file=/mongo/opinions.json
+mongoimport --uri="mongodb://programming_technologies:mongodb@mongodb/technologie-it?authSource=admin" --collection=articles --file=./articles.json --jsonArray
+mongoimport --uri="mongodb://programming_technologies:mongodb@mongodb/technologie-it?authSource=admin" --collection=comments --file=./comments.json --jsonArray
+mongoimport --uri="mongodb://programming_technologies:mongodb@mongodb/technologie-it?authSource=admin" --collection=opinions --file=./opinions.json --jsonArray
